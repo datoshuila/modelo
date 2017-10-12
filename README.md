@@ -1,5 +1,7 @@
 # Modelo de datos
 
+![Modelo de datos del Sistema de Información Regional](/img/SIR_HUILA.png)
+
 Actualizado el 12 de Octubre de 2017. Disponible en formato [DBM](/E-R_SIR.dbm), [SQL](/SIR_HUILA.sql), y [PNG](/img/SIR_HUILA.png).
 
 El Sistema de Información Regional condensa toda la información estadística y espacial del Departamento del Huila en Colombia. Mediante este modelo de datos, se busca cimentar las bases conceptuales de la base de datos del Sistema de Información. 
@@ -27,5 +29,3 @@ El modelo se encuentra en su versión 0.1 con un total de 16 esquemas y uno púb
 El número total de tablas en el modelo es de 254.
 
 El programa con el que corre este archivo se llama “[pgmodeler](https://pgmodeler.com.br/)”. Este software de código abierto es un modelador de bases de datos para PostgreSQL y tiene las bondades de exportar automáticamente el modelo a una base de datos (PostgreSQL), un archivo de base de datos (SQL) o imágenes del modelo (PNG). Cuando se exporta en un archivo SQL, el número de líneas de código es superior a 8538. Cada columna, tabla y schema se encuentra comentado con el propósito de tener un diccionario automático con cada versión del modelo.
-
-![Modelo de datos del Sistema de Información Regional](/img/SIR_HUILA.png)
