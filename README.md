@@ -1,4 +1,4 @@
-# Modelo de datos
+# Modelo de datos 0.1
 
 ![Modelo de datos del Sistema de Información Regional](/img/SIR_HUILA.png)
 
@@ -28,6 +28,6 @@ El modelo se encuentra en su versión 0.1 con un total de 16 esquemas y uno púb
 
 El número total de tablas en el modelo es de 254.
 
-El programa con el que corre este archivo se llama “[pgmodeler](https://pgmodeler.com.br/)”. Este software de código abierto es un modelador de bases de datos para PostgreSQL y tiene las bondades de exportar automáticamente el modelo a una base de datos (PostgreSQL), un archivo de base de datos (SQL) o imágenes del modelo (PNG), entre muchas otras. 
+El programa con el que corre el modelo es “[pgmodeler](https://pgmodeler.com.br/)”. Este software de código abierto es un modelador de bases de datos para PostgreSQL y tiene las bondades de exportar automáticamente el modelo a una base de datos (PostgreSQL), un archivo de base de datos (SQL) o imágenes del modelo (PNG), entre muchas otras. 
 
 La versión en SQL tiene 8538 líneas de código. Cada columna, tabla y schema se encuentra comentada bajo el comando "COMMENT ON" con el propósito de tener un diccionario automático de datos con cada versión del modelo.
