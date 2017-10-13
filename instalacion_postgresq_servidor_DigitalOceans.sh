@@ -9,7 +9,7 @@ apt-cache search postgres
 
 sudo -u postgres psql postgres
 
-# pass: postgres_123@
+# pass: 
 
 # crear un usuario 
 sudo -u postgres createuser -D -A -P sir_huila
