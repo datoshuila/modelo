@@ -3,9 +3,14 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="1932,119" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,2117" last-zoom="0.6"
 	 default-owner="postgres">
-<database name="SIR_HUILA">
+<role name="sir_huila"
+      password="}d9-2#p{'L">
+</role>
+
+<database name="sir_huila_datos">
+	<role name="sir_huila"/>
 </database>
 
 <tag name="Agropecuario">
@@ -21,7 +26,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 </schema>
 
 <textbox name="text_agropecuario" font-size="9">
-	<position x="60" y="0"/>
+	<position x="2220" y="80"/>
 	<comment><![CDATA[AREA COSECHADA, SEMBRADA, PRODUCCIÓN, COSTOS DE PRODUCCIÓN, RENDIMIENTO PARA CULTIVOS  
 POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 </textbox>
@@ -34,7 +39,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 <table name="area_cosechada" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
 	<comment><![CDATA[Tabla que almacenará el área cosechada, sembrada, producción, costos de producción, área plantada, área cosechada, rendimiento por cultivos en los diferentes municipios del departamento.]]></comment>
-	<position x="500" y="40"/>
+	<position x="2440" y="140"/>
 	<column name="arco_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro, ademas es autoincrementable.]]></comment>
@@ -104,18 +109,18 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacenamiento  los tipos de cultivos que puedan existir]]></comment>
-	<position x="40" y="80"/>
+	<position x="2100" y="140"/>
 	<column name="cul_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada cultivo.]]></comment>
 	</column>
-	<column name="cul_nombre">
-		<type name="character varying" length="100"/>
-		<comment><![CDATA[Nombres del cultivo]]></comment>
-	</column>
 	<column name="cul_tipo">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea a la tabla tipo_cultivo]]></comment>
+	</column>
+	<column name="cul_nombre">
+		<type name="character varying" length="100"/>
+		<comment><![CDATA[Nombres del cultivo]]></comment>
 	</column>
 	<column name="cul_fechaRegistro" not-null="true">
 		<type name="timestamp" length="0"/>
@@ -134,7 +139,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipos de cultivos que pueden existir en el sistema]]></comment>
-	<position x="60" y="200"/>
+	<position x="2120" y="260"/>
 	<column name="tcul_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de tipo de cultivo.]]></comment>
@@ -150,9 +155,9 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="municipio">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sir_huila"/>
 	<comment><![CDATA[Almacenamiento de los datos de los municipios del departamento]]></comment>
-	<position x="1520" y="500"/>
+	<position x="1500" y="480"/>
 	<column name="mun_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada municipio, en si es el código DANE.]]></comment>
@@ -161,16 +166,60 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="40"/>
 		<comment><![CDATA[Nombre del municipio]]></comment>
 	</column>
+	<column name="mun_codDepartamento" not-null="true">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Código del departamento al que pertenece cada Municipio]]></comment>
+	</column>
 	<constraint name="municipio_pk" type="pk-constr" table="public.municipio">
 		<columns names="mun_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[mun_codigo•mun_nombre•mun_codDepartamento⸣
+41006•Acevedo•41⸣
+41013•Agrado•41⸣
+41016•Aipe•41⸣
+41020•Algeciras•41⸣
+41026•Altamira•41⸣
+41078•Baraya•41⸣
+41132•Campoalegre•41⸣
+41206•Colombia•41⸣
+41244•Elias•41⸣
+41298•Garzón•41⸣
+41306•Gigante•41⸣
+41319•Guadalupe•41⸣
+41349•Hobo•41⸣
+41357•Iquira•41⸣
+41359•Isnos•41⸣
+41378•La Argentina•41⸣
+41396•La Plata•41⸣
+41483•Nátaga•41⸣
+41001•Neiva•41⸣
+41503•Oporapa•41⸣
+41518•Paicol•41⸣
+41524•Palermo•41⸣
+41530•Palestina•41⸣
+41548•Pital•41⸣
+41551•Pitalito•41⸣
+41615•Rivera•41⸣
+41660•Saladoblanco•41⸣
+41668•San Agustín•41⸣
+41676•Santa Maria•41⸣
+41770•Suaza•41⸣
+41791•Tarqui•41⸣
+41799•Tello•41⸣
+41801•Teruel•41⸣
+41797•Tesalia•41⸣
+41807•Timaná•41⸣
+41872•Villavieja•41⸣
+41885•Yaguará•41]]>
+	</initial-data>
 </table>
 
 <table name="infraestructura_produccion_piscicola" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los la infraestructura de producción piscicola por municipios]]></comment>
-	<position x="60" y="440"/>
+	<position x="2120" y="500"/>
 	<column name="ipp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única del tipo de infraestructura.]]></comment>
@@ -216,7 +265,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de estanques para peces.]]></comment>
-	<position x="60" y="620"/>
+	<position x="2140" y="680"/>
 	<column name="est_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única del tipo de estanque.]]></comment>
@@ -234,7 +283,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena las diferentes tipo de razas de  peces.]]></comment>
-	<position x="60" y="920"/>
+	<position x="2120" y="940"/>
 	<column name="rpez_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada tipo de raza.]]></comment>
@@ -252,7 +301,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Producción piscicola en diferente tipos de  estanques según raza de peces.]]></comment>
-	<position x="40" y="740"/>
+	<position x="2100" y="760"/>
 	<column name="prop_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro de producción.]]></comment>
@@ -295,7 +344,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <textbox name="detalle_produccion_piscicola" font-size="12">
-	<position x="80" y="380"/>
+	<position x="2080" y="420"/>
 	<comment><![CDATA[PRODUCCIÓN PISCICOLA POR MUNICIPIOS,
  TIPOS DE ESTANQUE, TIPO DE RAZA
 ]]></comment>
@@ -305,7 +354,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Sacrificio de ganado por sexo, tipo de ganado y municipio del departamento.]]></comment>
-	<position x="560" y="320"/>
+	<position x="2520" y="400"/>
 	<column name="sg_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -348,7 +397,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <textbox name="text_sacrificio_ganado_bovino" font-size="12">
-	<position x="520" y="520"/>
+	<position x="2480" y="580"/>
 	<comment><![CDATA[SACRIFICIO DE GANADO PORCINO Y BOVINO
 POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 </textbox>
@@ -365,7 +414,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de ganado.]]></comment>
-	<position x="600" y="560"/>
+	<position x="2520" y="640"/>
 	<column name="tgan_codigo" not-null="true" sequence="&quot;Agropecuario&quot;.&quot;sec_tipoGanado&quot;">
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada tipo de ganado.]]></comment>
@@ -383,18 +432,18 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena las diferentes razas de ganado que puedan existir, ya sea porcinos o bovinos.]]></comment>
-	<position x="580" y="640"/>
+	<position x="2500" y="720"/>
 	<column name="rgan_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada raza de ganado.]]></comment>
 	</column>
-	<column name="rgan_nombre">
-		<type name="character varying" length="50"/>
-		<comment><![CDATA[Nombre de la raza de ganado.]]></comment>
-	</column>
 	<column name="rgan_tipoGanado" not-null="true">
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[Llave foránea que donde se obtiene los tipos de ganado.]]></comment>
+	</column>
+	<column name="rgan_nombre">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Nombre de la raza de ganado.]]></comment>
 	</column>
 	<column name="rgan_acronimo">
 		<type name="character varying" length="3"/>
@@ -409,7 +458,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena el inventario del ganado bovino por edades y sexo en los diferentes municipios del departamento.]]></comment>
-	<position x="560" y="800"/>
+	<position x="2500" y="840"/>
 	<column name="invgb_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -447,7 +496,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de explotación pecuaria que puedan existir.]]></comment>
-	<position x="500" y="1180"/>
+	<position x="2100" y="1060"/>
 	<column name="texp_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada tipo de explotación.]]></comment>
@@ -465,7 +514,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena en inventario de ganado bovino y porcino con respecto al tipo de explotación (lechera, carne, doble propósito, criá tecnificada, ceba tecnificada, etc) de cada municipio del departamento.]]></comment>
-	<position x="500" y="1000"/>
+	<position x="2480" y="1060"/>
 	<column name="exra_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de registro.]]></comment>
@@ -499,7 +548,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Datos de la producción lechera por municipio del departamento.]]></comment>
-	<position x="980" y="40"/>
+	<position x="2860" y="160"/>
 	<column name="prol_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -530,7 +579,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 </table>
 
 <textbox name="label_inventario_explotacion_bovino_porcinos" font-size="12">
-	<position x="480" y="960"/>
+	<position x="2500" y="1000"/>
 	<comment><![CDATA[INVENTARIO EXPLOTACIÓN RAZO y/o 
 CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 </textbox>
@@ -539,7 +588,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Inventario del ganado porcino con respecto a la edad  en los diferentes municipios del departamento.]]></comment>
-	<position x="960" y="820"/>
+	<position x="2840" y="780"/>
 	<column name="invgp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -573,7 +622,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Datos respecto a la producción de lechones en los diferentes municipios del departamento.]]></comment>
-	<position x="40" y="1080"/>
+	<position x="2100" y="1140"/>
 	<column name="ppor_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -607,7 +656,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Es el inventario de otras especies pecuarias por municipio en el departamento.]]></comment>
-	<position x="960" y="980"/>
+	<position x="2840" y="1080"/>
 	<column name="invos_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -637,7 +686,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[producción de miel y numero de colmenas por municipio en el departamento]]></comment>
-	<position x="1040" y="620"/>
+	<position x="2840" y="640"/>
 	<column name="api_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -672,7 +721,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Coberturas de vacunación en menores de 1 año por biológicos según municipios en el departamento.]]></comment>
-	<position x="1980" y="80"/>
+	<position x="20" y="3300"/>
 	<column name="vabi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -692,9 +741,9 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 		<type name="character varying" length="20"/>
 		<comment><![CDATA[Edad de los menores vacunados.]]></comment>
 	</column>
-	<column name="vabi_codVirus">
+	<column name="vabi_codBiologicos">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla virus]]></comment>
+		<comment><![CDATA[Llave foránea que apunta a la tabla biologicos.]]></comment>
 	</column>
 	<column name="vabi_vacunados">
 		<type name="integer" length="0"/>
@@ -709,36 +758,21 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	</constraint>
 </table>
 
-<table name="virus" hide-ext-attribs="true">
+<table name="biologicos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de virus]]></comment>
-	<position x="1980" y="240"/>
-	<column name="vir_codigo" not-null="true">
+	<position x="20" y="3460"/>
+	<column name="bio_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
-	<column name="vir_nombre" not-null="true">
+	<column name="bio_nombre" not-null="true">
 		<type name="character varying" length="50"/>
-		<comment><![CDATA[Nombre del virus.]]></comment>
+		<comment><![CDATA[Nombre del Biologico.]]></comment>
 	</column>
-	<constraint name="virus_pk" type="pk-constr" table="&quot;Salud&quot;.virus">
-		<columns names="vir_codigo" ref-type="src-columns"/>
-	</constraint>
-</table>
-
-<table name="tipo_poblacion">
-	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
-	<position x="2000" y="320"/>
-	<column name="tpo_codigo" not-null="true">
-		<type name="smallserial" length="0"/>
-	</column>
-	<column name="tpo_nombre">
-		<type name="character varying" length="100"/>
-	</column>
-	<constraint name="tipo_poblacion_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_poblacion">
-		<columns names="tpo_codigo" ref-type="src-columns"/>
+	<constraint name="virus_pk" type="pk-constr" table="&quot;Salud&quot;.biologicos">
+		<columns names="bio_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -746,7 +780,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Defunciones  por área,sexo y tipo de defunción  por municipio de ocurrencia en el departamento ]]></comment>
-	<position x="2440" y="80"/>
+	<position x="480" y="3300"/>
 	<column name="def_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -796,13 +830,20 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<constraint name="area_defuncion_pk" type="pk-constr" table="public.area">
 		<columns names="are_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[are_codigo•are_nombre⸣
+1•Urbana⸣
+2•Rural⸣
+3•Rural disperso⸣
+4•Centro poblado]]>
+	</initial-data>
 </table>
 
 <table name="tipo_defuncion">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[ Almacena los diferentes tipos de defunción.]]></comment>
-	<position x="2440" y="220"/>
+	<position x="480" y="3440"/>
 	<column name="tdef_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -817,16 +858,16 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 </table>
 
 <textbox name="text_defuncion" font-size="12">
-	<position x="2440" y="20"/>
+	<position x="0" y="3200"/>
 	<comment><![CDATA[DEFUNCIONES POR AREA, SEXO Y TIPO SEGÚN MUNICIPIO 
 DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </textbox>
 
 <table name="desnutricion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sir_huila"/>
 	<comment><![CDATA[situación nutricional en menores de cinco años por municipios en el departamento.]]></comment>
-	<position x="1980" y="420"/>
+	<position x="20" y="3640"/>
 	<column name="dnut_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -872,7 +913,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Nacimientos por área y sexo según municipio de ocurrencia en el departamento]]></comment>
-	<position x="1980" y="620"/>
+	<position x="20" y="3840"/>
 	<column name="nac_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -906,7 +947,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[principales causas de mortalidad en el departamento]]></comment>
-	<position x="2420" y="380"/>
+	<position x="460" y="3620"/>
 	<column name="pmort_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -928,24 +969,30 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="principales_morbilidad">
+<table name="principales_morbilidad" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2440" y="520"/>
+	<comment><![CDATA[principales causas de morbilidad por tipo consulta  en el departamento.]]></comment>
+	<position x="480" y="3740"/>
 	<column name="pmor_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="pmor_anio" not-null="true">
-		<type name="character varying" length="4"/>
-	</column>
-	<column name="pmor_nombre">
-		<type name="character varying" length="250"/>
-	</column>
-	<column name="pmor_atenciones">
-		<type name="integer" length="0"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
 	<column name="pmor_tipoConsulta">
 		<type name="smallint" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_consulta.]]></comment>
+	</column>
+	<column name="pmor_nombre">
+		<type name="character varying" length="250"/>
+		<comment><![CDATA[Nombre de la causa de mortalidad.]]></comment>
+	</column>
+	<column name="pmor_atenciones">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de atenciones por consulta externa.]]></comment>
 	</column>
 	<constraint name="principales_morbilidad_pk" type="pk-constr" table="&quot;Salud&quot;.principales_morbilidad">
 		<columns names="pmor_codigo" ref-type="src-columns"/>
@@ -955,12 +1002,15 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="tipo_consulta">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2440" y="660"/>
+	<comment><![CDATA[Almacena las diferentes tipo de consultas medicas (urgencias, externas, hospitalización, etc)]]></comment>
+	<position x="480" y="3880"/>
 	<column name="tcon_codigo" not-null="true">
 		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="tcon_nombre">
 		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre de la consulta medica.]]></comment>
 	</column>
 	<constraint name="tipo_consulta_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_consulta">
 		<columns names="tcon_codigo" ref-type="src-columns"/>
@@ -970,7 +1020,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="adopciones">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2000" y="740"/>
+	<position x="40" y="3960"/>
 	<column name="ado_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -988,10 +1038,10 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="huerfanos">
+<table name="huerfanos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2440" y="760"/>
+	<position x="480" y="3980"/>
 	<column name="huer_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -1009,27 +1059,19 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="cobertura_aseguramiento" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2000" y="860"/>
+	<comment><![CDATA[Cobertura y aseguramiento a los regimenes subsidiado y contributivo por municipios]]></comment>
+	<position x="40" y="4080"/>
 	<column name="coas_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
-	</column>
-	<column name="coas_codMunicipio">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="coas_anio" not-null="true">
-		<type name="smallint" length="4"/>
-	</column>
-	<column name="coas_poblacionTotal">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="coas_poblacionSisben">
-		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="coas_codTipoPoblacionCesada">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_poblacion_censada]]></comment>
 	</column>
 	<column name="coas_numPersonas">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Cantidad de la población listada en determinada categoría.]]></comment>
 	</column>
 	<column name="coas_numListadosCensales">
 		<type name="integer" length="0"/>
@@ -1037,15 +1079,22 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</column>
 	<column name="coas_totalAfiliadosSubsidiado">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Total afiliados con  régimen subsdiado.]]></comment>
 	</column>
 	<column name="coas_totalAfiliadosContributivo">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Total afiliados régimen contributivo]]></comment>
 	</column>
 	<column name="coas_porcentajeCobeturaSubsidiado">
 		<type name="double precision" length="0"/>
+		<comment><![CDATA[Porcentaje de cobertura de afiliación de régimen subsidiado.]]></comment>
 	</column>
 	<column name="coas_porcentajeSGSSS">
 		<type name="double precision" length="0"/>
+		<comment><![CDATA[Co AFIL SGSSS ]]></comment>
+	</column>
+	<column name="coas_codPoblacionSensadaMunicipio" not-null="true">
+		<type name="bigint" length="0"/>
 	</column>
 	<constraint name="cobertura_aseguramiento_pk" type="pk-constr" table="&quot;Salud&quot;.cobertura_aseguramiento">
 		<columns names="coas_codigo" ref-type="src-columns"/>
@@ -1055,27 +1104,33 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="tipo_poblacion_censada">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2460" y="900"/>
+	<comment><![CDATA[Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)]]></comment>
+	<position x="500" y="4120"/>
 	<column name="tpoce_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="tpoce_nombre" not-null="true">
 		<type name="character varying" length="100"/>
+		<comment><![CDATA[Nombre de la población censada.]]></comment>
 	</column>
 	<constraint name="poblacion_censales_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_poblacion_censada">
 		<columns names="tpoce_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="casos_VHI-sida">
+<table name="casos_VHI-sida" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2860" y="200"/>
+	<comment><![CDATA[Casos de VIH-SIDA]]></comment>
+	<position x="920" y="3440"/>
 	<column name="cvih_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="cvih_anio" not-null="true">
-		<type name="date" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
 	<column name="cvih_numCasos">
 		<type name="integer" length="0"/>
@@ -1088,51 +1143,67 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="vih_genero">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2880" y="60"/>
+	<comment><![CDATA[Número de casos de vih por genero.]]></comment>
+	<position x="920" y="3280"/>
 	<column name="vihg_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="vihg_anio" not-null="true">
-		<type name="date" length="0"/>
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
 	<column name="vihg_genero" not-null="true">
 		<type name="integer" length="10"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla genero.]]></comment>
 	</column>
 	<column name="vihg_numeroCasos" not-null="true">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de casos]]></comment>
 	</column>
 	<constraint name="vih_genero_pk" type="pk-constr" table="&quot;Salud&quot;.vih_genero">
 		<columns names="vihg_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="vih_viaTransmision">
+<table name="vih_viaTransmision" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2860" y="300"/>
+	<comment><![CDATA[Vias de transmision de VIH.]]></comment>
+	<position x="900" y="3520"/>
 	<column name="vihvia_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="vihvia_anio" not-null="true">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio]]></comment>
 	</column>
 	<column name="vihvia_codTipoTransmision" not-null="true">
 		<type name="smallint" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla vias de trasmisión.]]></comment>
+	</column>
+	<column name="vihvia_numeroCasos">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de casos registrados por cada tipo de transmisión]]></comment>
 	</column>
 	<constraint name="vih_viaTransmision_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
 		<columns names="vihvia_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="tipo_transmision" hide-ext-attribs="true">
+<table name="tipo_transmision">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2860" y="440"/>
+	<comment><![CDATA[Tabla que contiene el nombre de los tipos de trasmision.]]></comment>
+	<position x="900" y="3660"/>
 	<column name="ttrans_codigo" not-null="true">
 		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="ttrans_nombre" not-null="true">
 		<type name="character varying" length="100"/>
+		<comment><![CDATA[tipos de trasmisión.]]></comment>
 	</column>
 	<constraint name="tipo_transmision_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_transmision">
 		<columns names="ttrans_codigo" ref-type="src-columns"/>
@@ -1152,19 +1223,34 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="genero_pk" type="pk-constr" table="public.genero">
 		<columns names="gen_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[gen_codigo•gen_nombre⸣
+1•Hombre⸣
+2•Mujer]]>
+	</initial-data>
 </table>
 
-<table name="vih_clasificacion">
+<table name="vih_casos_clasificacion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2840" y="540"/>
+	<comment><![CDATA[Tabla que contiene la calsificación de VIH.]]></comment>
+	<position x="900" y="3760"/>
 	<column name="vihcla_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="vihcla_anio" not-null="true">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla anio.]]></comment>
 	</column>
-	<constraint name="vih_clasificacion_pk" type="pk-constr" table="&quot;Salud&quot;.vih_clasificacion">
+	<column name="vihcla_codClasificacion">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta al tipo de clasificación del VIH]]></comment>
+	</column>
+	<column name="vihcla_numeroCasos">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="vih_casos_clasificacion_pk" type="pk-constr" table="&quot;Salud&quot;.vih_casos_clasificacion">
 		<columns names="vihcla_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -1172,22 +1258,27 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="dengue" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<comment><![CDATA[tabla casos de dengue clasico y grave]]></comment>
-	<position x="2020" y="1180"/>
+	<comment><![CDATA[Dengue clásico y dengue grave confirmado por laboratorio, por municipios.]]></comment>
+	<position x="440" y="4440"/>
 	<column name="den_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="den_codMunicipio">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="den_anio">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
 	<column name="den_clasico">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Casos confirmados de dengue clásico]]></comment>
 	</column>
 	<column name="den_grave">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Casos confirmados de dengue grave]]></comment>
 	</column>
 	<constraint name="dengue_pk" type="pk-constr" table="&quot;Salud&quot;.dengue">
 		<columns names="den_codigo" ref-type="src-columns"/>
@@ -1197,66 +1288,85 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="hospitalizacion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2820" y="660"/>
+	<comment><![CDATA[Información sobre el numero de camas, dias camas disponibles, dias camas ocupadas, porcentaje ocupacional, dias estancia egresos, promedio dia estancia y giros de camas por municipios.]]></comment>
+	<position x="880" y="4020"/>
 	<column name="hos_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="hos_codMunicipio">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="hos_anio" not-null="true">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
 	<column name="hos_num_camas">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero de camas]]></comment>
 	</column>
 	<column name="hos_num_egresos">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero de egresos por hospitalización]]></comment>
 	</column>
 	<column name="hos_dias_camas_disponibles">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Número dias camas disponibles]]></comment>
 	</column>
 	<column name="hos_dias_camas_ocupadas">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Número dias camas ocupadas]]></comment>
 	</column>
 	<column name="hos_porc_ocupacional">
 		<type name="double precision" length="0"/>
+		<comment><![CDATA[Porcentanje de ocupación de las camas]]></comment>
 	</column>
 	<column name="hos_dias_estancia_egresos">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Días de estancia de los egresados por hospitalización]]></comment>
 	</column>
 	<column name="hos_giros_camas">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Giros de las camas]]></comment>
 	</column>
 	<column name="hos_promedio_estancia">
 		<type name="double precision" length="0"/>
+		<comment><![CDATA[Promedio de la estancia]]></comment>
 	</column>
 	<constraint name="hospitalizacion_pk" type="pk-constr" table="&quot;Salud&quot;.hospitalizacion">
 		<columns names="hos_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="Tuberculosis">
+<table name="Tuberculosis" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2440" y="1100"/>
+	<comment><![CDATA[Incidencia de la tuberculosis de todas las formas por municipios en el departamento]]></comment>
+	<position x="620" y="4300"/>
 	<column name="tub_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="tub_codMunicipio">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="tub_anio" not-null="true">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
 	<column name="tub_poblacion">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de habitantes por municipio]]></comment>
 	</column>
 	<column name="tub_incidencia">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Casos de tuberculosis en los municipios]]></comment>
 	</column>
 	<column name="tub_tasa_habitantes">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Relación de casos presentados por cada 1000 habitantes]]></comment>
 	</column>
 	<constraint name="tuberculosis_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;Tuberculosis&quot;">
 		<columns names="tub_codigo" ref-type="src-columns"/>
@@ -1266,24 +1376,31 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="organismos_salud" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2880" y="860"/>
+	<comment><![CDATA[Organismos de salud y número de camas por municipios en el departamento.]]></comment>
+	<position x="920" y="4240"/>
 	<column name="orsa_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="orsa_codMunicipio">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="orsa_anio" not-null="true">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio]]></comment>
 	</column>
 	<column name="orsa_num_camas">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de camas por municipio]]></comment>
 	</column>
 	<column name="orsa_codTipo_organismos_salud">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_orsa]]></comment>
 	</column>
 	<column name="orsa_num_organismos_salud">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de organismos de salud]]></comment>
 	</column>
 	<constraint name="organismos_salud_pk" type="pk-constr" table="&quot;Salud&quot;.organismos_salud">
 		<columns names="orsa_codigo" ref-type="src-columns"/>
@@ -1293,12 +1410,15 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="tipo_orsa">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="postgres"/>
-	<position x="2900" y="1060"/>
+	<comment><![CDATA[Almacena las diferentes tipos de organismos de salud (ESE Hospitales, Centros de salud, Puestos de salud, Clinicas, IPS, etc...)]]></comment>
+	<position x="920" y="4420"/>
 	<column name="tp_orsa_codigo" not-null="true">
 		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="tipo_nombre_orsa">
 		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre del tipo de organismo de salud]]></comment>
 	</column>
 	<constraint name="tipo_orsa_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_orsa">
 		<columns names="tp_orsa_codigo" ref-type="src-columns"/>
@@ -1310,11 +1430,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<comment><![CDATA[Esquema educación.]]></comment>
 </schema>
 
-<table name="instituciones_Educativas" hide-ext-attribs="true">
+<table name="instituciones_educativas" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento]]></comment>
-	<position x="80" y="1340"/>
+	<position x="60" y="1540"/>
 	<column name="ine_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1339,11 +1459,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla area.]]></comment>
 	</column>
-	<column name="ine_num_instituciones_oficiales">
+	<column name="ine_num_instituciones">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Numero de instituciones, centros educativos y sedes.]]></comment>
 	</column>
-	<constraint name="intituciones_educativas_pk" type="pk-constr" table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;">
+	<constraint name="intituciones_educativas_pk" type="pk-constr" table="&quot;Educacion&quot;.instituciones_educativas">
 		<columns names="ine_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -1352,7 +1472,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de planteles educativos, instituciones,centros y sedes]]></comment>
-	<position x="80" y="1480"/>
+	<position x="60" y="1680"/>
 	<column name="tpe_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1370,7 +1490,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[matriculas por niveles, areas, instituciones en los municipios del departamento.]]></comment>
-	<position x="560" y="1320"/>
+	<position x="540" y="1520"/>
 	<column name="mat_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1382,14 +1502,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<column name="mat_anio">
 		<type name="smallint" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
-	</column>
-	<column name="mat_poblacion_escolar">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla poblaccion_escolar.]]></comment>
-	</column>
-	<column name="mat_num_poblacion_escolar">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Número de población.]]></comment>
 	</column>
 	<column name="mat_tipo_institucion">
 		<type name="integer" length="0"/>
@@ -1424,7 +1536,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de educación (basico, prescolar, primaria,etc...)]]></comment>
-	<position x="580" y="1520"/>
+	<position x="520" y="1720"/>
 	<column name="tpne_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1442,7 +1554,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferentes tipos de instituciones (oficiales, no oficiales)]]></comment>
-	<position x="60" y="1560"/>
+	<position x="40" y="1760"/>
 	<column name="tpin_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1460,7 +1572,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tipos de rangos de la poblacion escolar 5, 6-10, 11-16 años, adultos.]]></comment>
-	<position x="580" y="1600"/>
+	<position x="520" y="1800"/>
 	<column name="pes_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1478,7 +1590,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los grados de los diferentes niveles educativos]]></comment>
-	<position x="580" y="1680"/>
+	<position x="520" y="1880"/>
 	<column name="gra_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1496,7 +1608,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Desempeño de los 30 primeros establecimientos educativos por puestos y municipios según pruebas icfes en el departamento  ]]></comment>
-	<position x="60" y="1640"/>
+	<position x="40" y="1840"/>
 	<column name="cies_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1530,7 +1642,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Indice de desempeño en la prueba]]></comment>
 	</column>
 	<column name="cies_categoria">
-		<type name="character varying" length="2"/>
+		<type name="character varying" length="50"/>
 		<comment><![CDATA[Categoria a la que pertence la institución por desempeño]]></comment>
 	</column>
 	<constraint name="Clasificacion_icfes_establecimeintos_educativos_pk" type="pk-constr" table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;">
@@ -1542,7 +1654,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Comportamiento de los alumnos en cuanto a aprobados, reprobados, desertores por municipios en el departamento del huila.]]></comment>
-	<position x="60" y="1820"/>
+	<position x="20" y="2100"/>
 	<column name="coal_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1571,6 +1683,21 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de estudiantes desertores]]></comment>
 	</column>
+	<column name="coal_porce_aprobados">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Prcentanje de estudiantes aprobados]]></comment>
+	</column>
+	<column name="coal_porce_reprobados">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Porcentaje estudiantes reprobados]]></comment>
+	</column>
+	<column name="coal_porce_estudiantes desertores">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="coal_porce_traslados">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Porcentaje de estudiantes trasladados]]></comment>
+	</column>
 	<constraint name="comportamiento_alumnos_pk" type="pk-constr" table="&quot;Educacion&quot;.comportamiento_alumnos">
 		<columns names="coal_codigo" ref-type="src-columns"/>
 	</constraint>
@@ -1580,7 +1707,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.]]></comment>
-	<position x="560" y="1760"/>
+	<position x="540" y="1960"/>
 	<column name="dau_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1626,7 +1753,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes niveles de educación superior.]]></comment>
-	<position x="560" y="1960"/>
+	<position x="540" y="2160"/>
 	<column name="nes_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1644,7 +1771,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de los diferentes programas de las universidades.]]></comment>
-	<position x="80" y="1980"/>
+	<position x="20" y="2340"/>
 	<column name="pro_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1662,7 +1789,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes universidades.]]></comment>
-	<position x="80" y="2060"/>
+	<position x="20" y="2460"/>
 	<column name="uni_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1680,7 +1807,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes categorias de personas que tiene la universidad.]]></comment>
-	<position x="540" y="2040"/>
+	<position x="520" y="2240"/>
 	<column name="cpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1698,7 +1825,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Planta de personal del sistema educativo por municipios en el departamento.]]></comment>
-	<position x="960" y="1320"/>
+	<position x="940" y="1520"/>
 	<column name="ddo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1728,7 +1855,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes categorias de directivos y docentes en el departamento.]]></comment>
-	<position x="960" y="1460"/>
+	<position x="940" y="1660"/>
 	<column name="cdd_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1746,7 +1873,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Información de la cantida y el valor de los creditos del icetex por año y lineas de credito.]]></comment>
-	<position x="980" y="1540"/>
+	<position x="960" y="1740"/>
 	<column name="ice_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1780,7 +1907,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes lineas de credito que tiene el ICETEX.]]></comment>
-	<position x="980" y="1680"/>
+	<position x="960" y="1880"/>
 	<column name="lic_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1798,7 +1925,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes estadosdel crédito en el ICETEX.]]></comment>
-	<position x="980" y="1760"/>
+	<position x="960" y="1960"/>
 	<column name="esc_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1825,6 +1952,208 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="anio_pk" type="pk-constr" table="public.anio">
 		<columns names="ani_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[ani_codigo•ani_nombre⸣
+1•1990⸣
+2•1991⸣
+3•1992⸣
+4•1993⸣
+5•1994⸣
+6•1995⸣
+7•1996⸣
+8•1997⸣
+9•1998⸣
+10•1999⸣
+11•2000⸣
+12•2001⸣
+13•2002⸣
+14•2003⸣
+15•2004⸣
+16•2005⸣
+17•2006⸣
+18•2007⸣
+19•2008⸣
+20•2009⸣
+21•2010⸣
+22•2011⸣
+23•2012⸣
+24•2013⸣
+25•2014⸣
+26•2015⸣
+27•2016⸣
+28•2017⸣
+29•2018⸣
+30•2019⸣
+31•2020⸣
+32•2021⸣
+33•2022⸣
+34•2023⸣
+35•2024⸣
+36•2025⸣
+37•2026⸣
+38•2027⸣
+39•2028⸣
+40•2029⸣
+41•2030⸣
+42•2031⸣
+43•2032⸣
+44•2033⸣
+45•2034⸣
+46•2035⸣
+47•2036⸣
+48•2037⸣
+49•2038⸣
+50•2039⸣
+51•2040⸣
+52•2041⸣
+53•2042⸣
+54•2043⸣
+55•2044⸣
+56•2045⸣
+57•2046⸣
+58•2047⸣
+59•2048⸣
+60•2049⸣
+61•2050⸣
+62•2051⸣
+63•2052⸣
+64•2053⸣
+65•2054⸣
+66•2055⸣
+67•2056⸣
+68•2057⸣
+69•2058⸣
+70•2059⸣
+71•2060⸣
+72•2061⸣
+73•2062⸣
+74•2063⸣
+75•2064⸣
+76•2065⸣
+77•2066⸣
+78•2067⸣
+79•2068⸣
+80•2069⸣
+81•2070⸣
+82•2071⸣
+83•2072⸣
+84•2073⸣
+85•2074⸣
+86•2075⸣
+87•2076⸣
+88•2077⸣
+89•2078⸣
+90•2079⸣
+91•2080⸣
+92•2081⸣
+93•2082⸣
+94•2083⸣
+95•2084⸣
+96•2085⸣
+97•2086⸣
+98•2087⸣
+99•2088⸣
+100•2089⸣
+101•2090⸣
+102•2091⸣
+103•2092⸣
+104•2093⸣
+105•2094⸣
+106•2095⸣
+107•2096⸣
+108•2097⸣
+109•2098⸣
+110•2099⸣
+111•2100⸣
+112•2101⸣
+113•2102⸣
+114•2103⸣
+115•2104⸣
+116•2105⸣
+117•2106⸣
+118•2107⸣
+119•2108⸣
+120•2109⸣
+121•2110⸣
+122•2111⸣
+123•2112⸣
+124•2113⸣
+125•2114⸣
+126•2115⸣
+127•2116⸣
+128•2117⸣
+129•2118⸣
+130•2119⸣
+131•2120⸣
+132•2121⸣
+133•2122⸣
+134•2123⸣
+135•2124⸣
+136•2125⸣
+137•2126⸣
+138•2127⸣
+139•2128⸣
+140•2129⸣
+141•2130⸣
+142•2131⸣
+143•2132⸣
+144•2133⸣
+145•2134⸣
+146•2135⸣
+147•2136⸣
+148•2137⸣
+149•2138⸣
+150•2139⸣
+151•2140⸣
+152•2141⸣
+153•2142⸣
+154•2143⸣
+155•2144⸣
+156•2145⸣
+157•2146⸣
+158•2147⸣
+159•2148⸣
+160•2149⸣
+161•2150⸣
+162•2151⸣
+163•2152⸣
+164•2153⸣
+165•2154⸣
+166•2155⸣
+167•2156⸣
+168•2157⸣
+169•2158⸣
+170•2159⸣
+171•2160⸣
+172•2161⸣
+173•2162⸣
+174•2163⸣
+175•2164⸣
+176•2165⸣
+177•2166⸣
+178•2167⸣
+179•2168⸣
+180•2169⸣
+181•2170⸣
+182•2171⸣
+183•2172⸣
+184•2173⸣
+185•2174⸣
+186•2175⸣
+187•2176⸣
+188•2177⸣
+189•2178⸣
+190•2179⸣
+191•2180⸣
+192•2181⸣
+193•2182⸣
+194•2183⸣
+195•2184⸣
+196•2185⸣
+197•2186⸣
+198•2187⸣
+199•2188]]>
+	</initial-data>
 </table>
 
 <table name="mes" hide-ext-attribs="true">
@@ -1840,6 +2169,21 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="mes_pk" type="pk-constr" table="public.mes">
 		<columns names="mes_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[mes_codigo•mes_nombre⸣
+1•Enero⸣
+2•Febrero⸣
+3•Marzo⸣
+4•Abril⸣
+5•Mayo⸣
+6•Junio⸣
+7•Julio⸣
+8•Agosto⸣
+9•Septiembre⸣
+10•Octubre⸣
+11•Noviembre⸣
+12•Diciembre]]>
+	</initial-data>
 </table>
 
 <table name="dia" hide-ext-attribs="true">
@@ -1870,13 +2214,20 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="semestre_pk" type="pk-constr" table="public.semestre">
 		<columns names="sem_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[sem_codigo•sem_nombre⸣
+1•I⸣
+2•II⸣
+3•III⸣
+4•IV]]>
+	</initial-data>
 </table>
 
 <table name="icfes" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que recoge información acerca de las icfes en el departamento y el pais (alumnos, materias, puntaje promedio y desviacion estandar).]]></comment>
-	<position x="960" y="1840"/>
+	<position x="940" y="2040"/>
 	<column name="icf_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1914,7 +2265,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las diferentes materias vistas por los estuadiantes de colegios y evaluadas por el icfes.]]></comment>
-	<position x="960" y="1980"/>
+	<position x="940" y="2180"/>
 	<column name="mate_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1931,7 +2282,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="alcance" hide-ext-attribs="true">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<comment><![CDATA[Tabla que gaurda la informacion de si es a nivel departamental o nacional]]></comment>
+	<comment><![CDATA[Tabla que guarda la informacion de si es a nivel departamental o nacional]]></comment>
 	<position x="1480" y="1180"/>
 	<column name="alc_codigo" not-null="true">
 		<type name="serial" length="0"/>
@@ -1944,6 +2295,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="alcance_pk" type="pk-constr" table="public.alcance">
 		<columns names="alc_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[alc_codigo•alc_nombre⸣
+1•Nacional⸣
+2•Departamental]]>
+	</initial-data>
 </table>
 
 <schema name="cifras macro economicas" rect-visible="true" fill-color="#aa0000">
@@ -1955,7 +2311,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacenamiento los diferentes tipos de bancos]]></comment>
-	<position x="2000" y="1400"/>
+	<position x="2120" y="1400"/>
 	<column name="ban_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -1973,7 +2329,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Cantidad de bancos existentes por municipios n el departamento. FUENTE: Superintendencia Financiera de Colombia.]]></comment>
-	<position x="2380" y="1420"/>
+	<position x="2500" y="1420"/>
 	<column name="bmun_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2004,7 +2360,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Captación de bancos por municipio]]></comment>
-	<position x="2000" y="1500"/>
+	<position x="2120" y="1500"/>
 	<column name="caba_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -2034,7 +2390,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacena los diferenctes tipo de transacciones(Depositos, cuentas de ahorro, etc).]]></comment>
-	<position x="2000" y="1620"/>
+	<position x="2120" y="1620"/>
 	<column name="ttran_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Código unico del tipo de transacción bancaria]]></comment>
@@ -2052,7 +2408,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Captaciones por establecimiento de crédito y municipios en el departamento]]></comment>
-	<position x="2380" y="1600"/>
+	<position x="2500" y="1600"/>
 	<column name="cap_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de tipo de captación.]]></comment>
@@ -2086,7 +2442,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacenamiento los diferentes tipos de establecimientos bancarios.
 ]]></comment>
-	<position x="2380" y="1720"/>
+	<position x="2500" y="1720"/>
 	<column name="tes_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2104,7 +2460,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipo de créditos por las entidades bancarias]]></comment>
-	<position x="2000" y="1880"/>
+	<position x="2120" y="1880"/>
 	<column name="tcre_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2122,7 +2478,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Cartera de bancos por municipios]]></comment>
-	<position x="2000" y="1980"/>
+	<position x="2120" y="1980"/>
 	<column name="carb_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -2147,7 +2503,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Cartera por tipo de establecimiento de credito y municipios en el departamento. FUENTE: Superintendencia Financiera de Colombia]]></comment>
-	<position x="2380" y="1820"/>
+	<position x="2500" y="1820"/>
 	<column name="cart_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2178,7 +2534,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Comercio exterior, exportaciones e importaciones registradas en el departamento. FUENTE: Informes de Coyuntura Económica Regional del Huila - ICER]]></comment>
-	<position x="2380" y="2000"/>
+	<position x="2500" y="2000"/>
 	<column name="comex_codigo" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -2202,7 +2558,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="cervecerias">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<comment><![CDATA[Nombre y codigos de cervecerias. FUENTE: Secretaría de Hacienda Departamental.]]></comment>
+	<comment><![CDATA[Nombre y códigos de cervecerías. FUENTE: Secretaría de Hacienda Departamental.]]></comment>
 	<position x="1460" y="1380"/>
 	<column name="cerv_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
@@ -2215,13 +2571,25 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="cervecerias_pk" type="pk-constr" table="public.cervecerias">
 		<columns names="cerv_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[cerv_codigo•cerv_nombre⸣
+1•Cerveza Extranjera⸣
+2•Cerveza Cerveunion⸣
+3•Bavaria⸣
+4•Cerveza del Valle⸣
+5•Cerveza Colon S.A.⸣
+6•Artesana BEER Company S.A.⸣
+7•Cerveceria BBC S.A.⸣
+8•Artesanos de Cervezas S.A.S.⸣
+9•Jairo Rafael Oñate Carvajal]]>
+	</initial-data>
 </table>
 
 <table name="consumo_cerveza">
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Consumo de cerveza por cerveceria, años y mes en el departamento]]></comment>
-	<position x="2780" y="1560"/>
+	<position x="2900" y="1560"/>
 	<column name="cocer_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2253,7 +2621,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Consumo de cigarrillos nacionales y extrangeros en el departamento. FUENTE: Secretaría de Hacienda Departamental]]></comment>
-	<position x="2800" y="1720"/>
+	<position x="2920" y="1720"/>
 	<column name="coci_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2296,13 +2664,21 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="tipo_combustible_pk" type="pk-constr" table="public.tipo_combustible">
 		<columns names="tcom_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[tcom_codigo•tcom_nombre⸣
+1•Gasolina⸣
+2•Gasolina extra⸣
+3•Gasolina corriente⸣
+4•ACPM⸣
+5•Gas Natural]]>
+	</initial-data>
 </table>
 
 <table name="consumo_combustible">
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Consumo de tipos de combustibles por meses en el departamento. FUENTE: Secretaría de Hacienda Departamental]]></comment>
-	<position x="2780" y="1960"/>
+	<position x="2900" y="1960"/>
 	<column name="cocom_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2332,7 +2708,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="tipo_licor">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<comment><![CDATA[Almacenamiento de los diferentes tipo de licores(nacionales, extranjeros, etc).]]></comment>
+	<comment><![CDATA[Almacenamiento de los diferentes tipo de licores (nacionales, extranjeros, etc).]]></comment>
 	<position x="1460" y="1480"/>
 	<column name="tli_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
@@ -2345,12 +2721,21 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="tipo_licor_pk" type="pk-constr" table="public.tipo_licor">
 		<columns names="tli_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[tli_codigo•tli_nombre⸣
+1•Nacional⸣
+2•Extranjero⸣
+3•Departamental⸣
+4•Vino Nacional⸣
+5•Vino Extranjero⸣
+6•Licor Extranjero]]>
+	</initial-data>
 </table>
 
 <table name="consumo_licor">
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<comment><![CDATA[Consumo de licores y vinos extranjeros, número de botellas, año y mes en el departamento]]></comment>
-	<position x="2380" y="2140"/>
+	<position x="2500" y="2140"/>
 	<column name="coli_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -2377,7 +2762,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Cotización del dólar, tasa de cambio oficial - compra]]></comment>
-	<position x="2780" y="2120"/>
+	<position x="2900" y="2120"/>
 	<column name="cotd_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Código único de cada registro]]></comment>
@@ -2407,7 +2792,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Desagregado de captaciones por entidades de crédito en el departamento. FUENTE: Superintendencia Financiera de Colombia.]]></comment>
-	<position x="2000" y="1720"/>
+	<position x="2120" y="1720"/>
 	<column name="caen_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -2435,7 +2820,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Desagregado de cartera por entidades de credito en el departamento. FUENTE: Superintendencia Financiera de Colombia.]]></comment>
-	<position x="2000" y="2140"/>
+	<position x="2120" y="2140"/>
 	<column name="dce_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Código único para cada registro de la tabla]]></comment>
@@ -2469,7 +2854,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Descripción de sectores de producción(Agropecuario, minero, industrial,etc)]]></comment>
-	<position x="2400" y="2380"/>
+	<position x="2520" y="2380"/>
 	<column name="secpro" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -2485,7 +2870,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Conjunto de actividades economicas(Pesca, minas, hoteles, etc).]]></comment>
-	<position x="2400" y="2480"/>
+	<position x="2520" y="2480"/>
 	<column name="acec_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave  primaria de la tabla]]></comment>
@@ -2503,7 +2888,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Exportaciones e importaciones no tradicionales registradas por clasificación CIIU en el departamento]]></comment>
-	<position x="2760" y="2280"/>
+	<position x="2880" y="2280"/>
 	<column name="expim_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2537,7 +2922,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que albergará los tipos de comercio internacional(importaciones, exportaciones,etc).]]></comment>
-	<position x="2020" y="2560"/>
+	<position x="2140" y="2560"/>
 	<column name="tcin_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2555,7 +2940,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Conjunto de petroleras que operan en el departamento]]></comment>
-	<position x="2000" y="2280"/>
+	<position x="2120" y="2280"/>
 	<column name="pet_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -2571,7 +2956,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Producción fiscalizada de petroleo por empresa en el departamento. FUENTE: Agencia Nacional de Hidrocarburos.]]></comment>
-	<position x="2000" y="2380"/>
+	<position x="2120" y="2380"/>
 	<column name="propet_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2605,7 +2990,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;cifras macro economicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Valores de la Unidad Real (UVR) en el ulltimo día del mes, variación anual, mensual y diaria por meses. FUENTE : Banco de la República.]]></comment>
-	<position x="2760" y="2420"/>
+	<position x="2880" y="2420"/>
 	<column name="uvr_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2647,7 +3032,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla de los programas con mayor demanda a nivel nacional y departamental]]></comment>
-	<position x="80" y="2160"/>
+	<position x="60" y="2560"/>
 	<column name="tpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -2676,7 +3061,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la oferta educativa del sena]]></comment>
-	<position x="520" y="2120"/>
+	<position x="500" y="2320"/>
 	<column name="sen_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2713,7 +3098,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos niveles de formación del sena.]]></comment>
-	<position x="960" y="2140"/>
+	<position x="940" y="2340"/>
 	<column name="nfs_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2731,7 +3116,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sectores economicos a los cuales se enfoca la oferta educativa del sena]]></comment>
-	<position x="980" y="2220"/>
+	<position x="960" y="2420"/>
 	<column name="sec_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2749,7 +3134,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[matriculas por niveles, origen departamental,municipal, genero, nivel de educación superior]]></comment>
-	<position x="80" y="2300"/>
+	<position x="460" y="2500"/>
 	<column name="matu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2795,7 +3180,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="public"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los departamentos en el país.]]></comment>
-	<position x="1480" y="860"/>
+	<position x="1500" y="860"/>
 	<column name="dep_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -2806,6 +3191,42 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="departamento_pk" type="pk-constr" table="public.departamento">
 		<columns names="dep_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[dep_codigo•dep_nombre⸣
+91•Amazonas⸣
+5•Antioquia⸣
+81•Arauca⸣
+8•Atlántico⸣
+11•Bogota D.C⸣
+13•Bolivar⸣
+15•Boyacá⸣
+17•Caldas⸣
+18•Caquetá⸣
+85•Casanare⸣
+19•Cauca⸣
+20•Cesar⸣
+27•Chocó⸣
+23•Córdoba⸣
+25•Cundinamarca⸣
+94•Guainía⸣
+95•Guaviare⸣
+41•Huila⸣
+44•La Guajira⸣
+47•Magdalena⸣
+50•Meta⸣
+52•Nariño⸣
+54•Norte de Santander⸣
+86•Putumayo⸣
+63•Quindio⸣
+66•Risaralda⸣
+88•San Andrés⸣
+68•Santander⸣
+70•Sucre⸣
+73•Tolima⸣
+76•Valle del Cauca⸣
+97•Vaupés⸣
+99•Vichada]]>
+	</initial-data>
 </table>
 
 <schema name="Cultura" rect-visible="true" fill-color="#ab0d09">
@@ -2817,7 +3238,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el flujo de turistas en el parque arqueologico de San Agustin, alto de los idolos y museos.]]></comment>
-	<position x="60" y="2520"/>
+	<position x="1380" y="3460"/>
 	<column name="tpmu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2855,7 +3276,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el tipo de turista que visita un parque, museo, etc...]]></comment>
-	<position x="480" y="2520"/>
+	<position x="1800" y="3460"/>
 	<column name="ttu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2873,7 +3294,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de parques y museos.]]></comment>
-	<position x="480" y="2620"/>
+	<position x="1800" y="3560"/>
 	<column name="pam_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2891,7 +3312,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los ingresos a los centros turisticos de comfamiliar]]></comment>
-	<position x="80" y="2660"/>
+	<position x="1400" y="3600"/>
 	<column name="ictc_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2921,7 +3342,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de centros turisticos de comfamiliar.]]></comment>
-	<position x="480" y="2720"/>
+	<position x="1800" y="3660"/>
 	<column name="cet_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2938,7 +3359,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="instalaciones depor_recreativas" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
-	<position x="80" y="2780"/>
+	<position x="1400" y="3720"/>
 	<column name="idr_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2972,7 +3393,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los tipos de instalaciones deportivas y recreativas.]]></comment>
-	<position x="480" y="2800"/>
+	<position x="1800" y="3740"/>
 	<column name="inde_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2990,7 +3411,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres y años de las reinas del bambuco, departamental y nacional.]]></comment>
-	<position x="440" y="2900"/>
+	<position x="1760" y="3840"/>
 	<column name="reb_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3019,7 +3440,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la infoemación de la capacidad hotelera en el departamento]]></comment>
-	<position x="80" y="2920"/>
+	<position x="1400" y="3860"/>
 	<column name="cah_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3057,7 +3478,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los hoteles en el departamento.]]></comment>
-	<position x="460" y="3040"/>
+	<position x="1780" y="3980"/>
 	<column name="hot_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3075,7 +3496,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la información de los escenarios culturales, deportivos y grupos culturalesen el departamento]]></comment>
-	<position x="80" y="3080"/>
+	<position x="1400" y="4020"/>
 	<column name="egcd_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3112,7 +3533,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el tipo de escenarios culturales y deportivos en el departamento.]]></comment>
-	<position x="460" y="3120"/>
+	<position x="1780" y="4060"/>
 	<column name="esc_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3130,7 +3551,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el tipo de grupos culturales en el departamento.]]></comment>
-	<position x="460" y="3200"/>
+	<position x="1780" y="4140"/>
 	<column name="gcu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3148,7 +3569,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la cantidad de bibliotecas en el departamento.]]></comment>
-	<position x="760" y="2520"/>
+	<position x="2080" y="3460"/>
 	<column name="bib_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3178,7 +3599,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene si es naturaleza publica o privada]]></comment>
-	<position x="760" y="2660"/>
+	<position x="2080" y="3600"/>
 	<column name="nat_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3196,7 +3617,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos sitios turisticos del departamento por municipio.]]></comment>
-	<position x="760" y="2760"/>
+	<position x="2080" y="3700"/>
 	<column name="iat_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3221,7 +3642,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sitios turisticos en el departamento.]]></comment>
-	<position x="780" y="2880"/>
+	<position x="2100" y="3820"/>
 	<column name="sit_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3239,7 +3660,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos monumentos de la ciudad de Neiva.]]></comment>
-	<position x="760" y="2960"/>
+	<position x="2080" y="3900"/>
 	<column name="imo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3265,7 +3686,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los monumentos en la ciudad de Neiva.]]></comment>
-	<position x="780" y="3060"/>
+	<position x="2100" y="4000"/>
 	<column name="mon_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3283,7 +3704,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los museos del departamento]]></comment>
-	<position x="760" y="3140"/>
+	<position x="2080" y="4080"/>
 	<column name="mus_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -3320,7 +3741,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Cultura&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las diferentes nacionalidades de una persona]]></comment>
-	<position x="60" y="3240"/>
+	<position x="1380" y="4180"/>
 	<column name="nac_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3343,7 +3764,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Calidad de vida&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el coeficiente GINI, pobreza, pobreza extrema por departamentos]]></comment>
-	<position x="2000" y="2700"/>
+	<position x="80" y="2720"/>
 	<column name="dcv_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3377,7 +3798,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Calidad de vida&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la pobreza monetaria del departamento del huila]]></comment>
-	<position x="2000" y="2840"/>
+	<position x="40" y="2880"/>
 	<column name="pmo_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3404,7 +3825,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Construccion" rect-visible="true" fill-color="#65f90a">
-	<role name="postgres"/>
+	<role name="sir_huila"/>
 	<comment><![CDATA[Esquema construcción]]></comment>
 </schema>
 
@@ -3412,7 +3833,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Construccion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el area aprobada destinada a proyectos de vivienda]]></comment>
-	<position x="2360" y="2700"/>
+	<position x="4120" y="1760"/>
 	<column name="adv_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3445,7 +3866,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Construccion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que dice si es una vivienda de interes social o no]]></comment>
-	<position x="2360" y="2840"/>
+	<position x="4120" y="1900"/>
 	<column name="tvi_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3477,11 +3898,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="Licencias" hide-ext-attribs="true">
+<table name="licencias" hide-ext-attribs="true">
 	<schema name="&quot;Construccion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de licencias aprobadas para construcción.]]></comment>
-	<position x="2660" y="2700"/>
+	<position x="4420" y="1760"/>
 	<column name="lic_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3510,7 +3931,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Área de construcción.]]></comment>
 	</column>
-	<constraint name="licencias_pk" type="pk-constr" table="&quot;Construccion&quot;.&quot;Licencias&quot;">
+	<constraint name="licencias_pk" type="pk-constr" table="&quot;Construccion&quot;.licencias">
 		<columns names="lic_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -3519,7 +3940,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Construccion&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de predios, area construida, valor catastral de la propiedad inmueble gravada y no gravada por zonas en el departamento.]]></comment>
-	<position x="2660" y="2860"/>
+	<position x="4420" y="1920"/>
 	<column name="cat_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3570,7 +3991,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Finanzas publicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la evaluacción del desempeño fiscal]]></comment>
-	<position x="3380" y="60"/>
+	<position x="3400" y="1460"/>
 	<column name="def_codigo" not-null="true">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3620,7 +4041,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Finanzas publicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los entornos de desarrollo]]></comment>
-	<position x="3380" y="260"/>
+	<position x="3400" y="1660"/>
 	<column name="end_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3638,7 +4059,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Finanzas publicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la evaluacción del desempeño fiscal]]></comment>
-	<position x="3720" y="60"/>
+	<position x="3740" y="1460"/>
 	<column name="defi_codigo" not-null="true">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3692,7 +4113,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Finanzas publicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el recaudo de los impuestos por combustible]]></comment>
-	<position x="3720" y="260"/>
+	<position x="3740" y="1660"/>
 	<column name="imp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3722,7 +4143,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Finanzas publicas&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los distintos impuestos que recauda el departamento.]]></comment>
-	<position x="3380" y="340"/>
+	<position x="3400" y="1740"/>
 	<column name="tpim_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3745,7 +4166,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la evolución del salario minimo en Colombia.]]></comment>
-	<position x="3380" y="560"/>
+	<position x="3400" y="160"/>
 	<column name="sam_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3771,7 +4192,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los indicadores de mercado laboral por departamentos y Bogotá D.C.]]></comment>
-	<position x="3380" y="700"/>
+	<position x="3400" y="300"/>
 	<column name="iml_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3829,7 +4250,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene información de los indicadores laborales por numero de personas en el departamento del Huila.]]></comment>
-	<position x="3700" y="520"/>
+	<position x="3720" y="120"/>
 	<column name="ilph_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3851,7 +4272,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos indicadores laborales que se miden en el departamento del Huila.]]></comment>
-	<position x="3720" y="600"/>
+	<position x="3740" y="200"/>
 	<column name="ilh_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3869,7 +4290,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la información de datos de los pensionados de la adinistracion departamental]]></comment>
-	<position x="3760" y="700"/>
+	<position x="3780" y="300"/>
 	<column name="dpad_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3903,7 +4324,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre por entidades de la administración central, desencetralizada, empresa economia mixta del departamento del Huila.]]></comment>
-	<position x="3740" y="840"/>
+	<position x="3760" y="440"/>
 	<column name="ende_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3921,7 +4342,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Pensionados por clases en las entidades de la admon central departamental]]></comment>
-	<position x="3380" y="940"/>
+	<position x="3400" y="540"/>
 	<column name="cead_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3939,7 +4360,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el tipo de mepresa clasificandola por numero de trabajadores.]]></comment>
-	<position x="3380" y="1040"/>
+	<position x="3400" y="640"/>
 	<column name="tet_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3948,13 +4369,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="300"/>
 		<comment><![CDATA[Rango de numero de trabajadores por el que se clasifican las empresas]]></comment>
 	</column>
+	<constraint name="tipo_empresa_porNum_trabajadores_pk" type="pk-constr" table="&quot;Empleo&quot;.&quot;tipo_empresa_porNum_trabajadores&quot;">
+		<columns names="tet_codigo" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="tipo_trabajadores_porSalario" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la clasificacion de trabajadores por los distintos rangos salariales.]]></comment>
-	<position x="3860" y="940"/>
+	<position x="3880" y="540"/>
 	<column name="tts_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3972,7 +4396,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabjadores teniendo en cuenta el tamañao de las empresas.]]></comment>
-	<position x="3740" y="1040"/>
+	<position x="3760" y="640"/>
 	<column name="ttem_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4001,7 +4425,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla que contiene si es de sector oficial o privado]]></comment>
-	<position x="3380" y="1120"/>
+	<position x="3400" y="720"/>
 	<column name="sect_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4019,7 +4443,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabajadores clasificados de acuerdo a su nivel salarial.]]></comment>
-	<position x="3380" y="1220"/>
+	<position x="3400" y="820"/>
 	<column name="tns_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4049,7 +4473,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabajadores clasificados de acuerdo a su nivel salarial.]]></comment>
-	<position x="3760" y="1160"/>
+	<position x="3780" y="760"/>
 	<column name="tans_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4083,7 +4507,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabjadores afiliados a comfamiliar teniendo en cuenta el tamañao de las empresas.]]></comment>
-	<position x="3780" y="1300"/>
+	<position x="3800" y="900"/>
 	<column name="tate_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4112,7 +4536,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintas clasificaciones de empresas (grande, mediana, microempresa, pequeña)]]></comment>
-	<position x="3380" y="1340"/>
+	<position x="3400" y="940"/>
 	<column name="temp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4130,7 +4554,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de empresas asistidas por tipo de empresa.]]></comment>
-	<position x="4180" y="520"/>
+	<position x="4200" y="120"/>
 	<column name="apee_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4156,7 +4580,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas colocadas por nivel de preparación.]]></comment>
-	<position x="4160" y="620"/>
+	<position x="4180" y="220"/>
 	<column name="apep_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4181,7 +4605,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas vacantes por nivel de preparación vacantes.]]></comment>
-	<position x="4180" y="840"/>
+	<position x="4200" y="440"/>
 	<column name="apev_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4207,7 +4631,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas inscritas en la agencia publica de empleo del SENA.]]></comment>
-	<position x="4200" y="1080"/>
+	<position x="4220" y="680"/>
 	<column name="apei_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4229,7 +4653,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Niveles de preparación que usa el servicio publico de empleo del SENA.]]></comment>
-	<position x="3860" y="1440"/>
+	<position x="3880" y="1040"/>
 	<column name="npae_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4247,7 +4671,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Niveles de preparación usados por el servicio publico de empleo de comfamiliar.]]></comment>
-	<position x="3380" y="1440"/>
+	<position x="3400" y="1040"/>
 	<column name="npse_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4265,7 +4689,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas colocadas por nivel de preparación comfamiliar.]]></comment>
-	<position x="4160" y="720"/>
+	<position x="4180" y="320"/>
 	<column name="spep_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4291,7 +4715,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas vacantes por nivel de preparación vacantes comfamiliar.]]></comment>
-	<position x="4180" y="960"/>
+	<position x="4200" y="560"/>
 	<column name="spev_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4317,7 +4741,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas inscritas en el servicio publico de empleo de comfamiliar]]></comment>
-	<position x="4200" y="1180"/>
+	<position x="4220" y="780"/>
 	<column name="spei_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4339,7 +4763,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las ocupaciones poco dinámicas con exceso de inscritos en el departamento]]></comment>
-	<position x="4180" y="1280"/>
+	<position x="4200" y="880"/>
 	<column name="oei_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4368,7 +4792,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla que contiene las diferentes ocupaciones de oferta de empleo en la agencia publica de empleo y el servicio publico de empleo]]></comment>
-	<position x="4320" y="1440"/>
+	<position x="4340" y="1040"/>
 	<column name="ocup_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4385,7 +4809,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de afiliados a las eps por el regimen contriubutivo y subsidiado.]]></comment>
-	<position x="3380" y="1540"/>
+	<position x="3400" y="1140"/>
 	<column name="aeps_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4419,7 +4843,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el tipo de regimen (contributivo, subsidiado)]]></comment>
-	<position x="3680" y="1560"/>
+	<position x="3700" y="1160"/>
 	<column name="tre_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4437,7 +4861,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las distintas eps en el departamento.]]></comment>
-	<position x="3980" y="1540"/>
+	<position x="4000" y="1140"/>
 	<column name="eps_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4455,7 +4879,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Numero de concejales y fucnionarios de las acaldias.]]></comment>
-	<position x="4360" y="1540"/>
+	<position x="4380" y="1140"/>
 	<column name="fca_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4485,7 +4909,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de funcionarios por cada entidad del departamento.]]></comment>
-	<position x="3380" y="1680"/>
+	<position x="3400" y="1280"/>
 	<column name="fed_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4515,7 +4939,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre por entidades de la administración central, desencetralizada, empresa economia mixta del municipio del neiva.]]></comment>
-	<position x="3740" y="1660"/>
+	<position x="3760" y="1260"/>
 	<column name="enne_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4533,7 +4957,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Empleo&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de funcionarios por cada entidad de Neiva.]]></comment>
-	<position x="4060" y="1660"/>
+	<position x="4080" y="1260"/>
 	<column name="fen_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4580,13 +5004,69 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="actividad_economica_pk" type="pk-constr" table="public.actividad_economica">
 		<columns names="ace_codigo" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[ace_codigo•ace_nombre⸣
+1•Comercio⸣
+2•Alimentos⸣
+3•Servicios⸣
+4•Confecciones⸣
+5•Artesanias⸣
+6•Metalmecanica⸣
+7•Muebles en Madera⸣
+8•Prefabricados⸣
+9•Calzado⸣
+10•Marroquineria⸣
+11•Juegos Artificiales⸣
+12•AGRICULTURA⸣
+13•Cultivo de café⸣
+14•Cultivo de otros productos agrícolas⸣
+15•Producción pecuaria y caza incluyendo las actividades veterinarias⸣
+16•Silvicultura⸣
+17•Pesca⸣
+18•EXPLOTACION DE MINAS Y CANTERAS⸣
+19•Extracción de carbón⸣
+20•Extracción de petróleo crudo y de gas natural; actividades de servicios relacionadas con la extracción de petróleo y de gas⸣
+21•Extracción de minerales metáliferos⸣
+22•Extracción de minerales no metálicos⸣
+23•INDUSTRIA MANUFACTURERA⸣
+24•SUMINISTRO DE ELECTRICIDAD⸣
+25•Generación⸣
+26•Fabricación de gas; distribución de combustibles gaseosos por tuberías; suministro de vapor y agua caliente⸣
+27•Captación⸣
+28•Eliminación de desperdicios y aguas residuales⸣
+29•CONSTRUCCION⸣
+30•Construcción de edificaciones completas y de partes de edificaciones;  acondicionamiento de edificaciones⸣
+31•Construcción de obras de ingeniería civil⸣
+32•COMERCIO⸣
+33•Comercio⸣
+34•Mantenimiento y reparación de vehículos automotores; reparación de efectos personales y enseres domésticos⸣
+35•Hoteles⸣
+36•TRANSPORTE⸣
+37•Transporte por vía terrestre⸣
+38•Transporte por vía acuática⸣
+39•Transporte por vía aérea⸣
+40•Actividades complementarias y auxiliares al transporte; actividades de agencias de viajes⸣
+41•Correo y telecomunicaciones⸣
+42•ESTABLECIMIENTOS FINANCIEROS⸣
+43•Intermediación financiera⸣
+44•Actividades inmobiliarias y alquiler de vivienda⸣
+45•Actividades de servicios a las empresas excepto servicios financieros e inmobiliarios⸣
+46•ACTIVIDADES DE SERVICIOS SOCIALES⸣
+47•Administración pública y defensa; seguridad social de afiliación obligatoria⸣
+48•Educación de mercado⸣
+49•Educación de no mercado⸣
+50•Servicios sociales y de salud de mercado⸣
+51•Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de mercado⸣
+52•Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de no mercado⸣
+53•Hogares privados con servicio doméstico]]>
+	</initial-data>
 </table>
 
 <table name="microempresas" hide-ext-attribs="true">
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el número de microempresas por actividad económica en el departamento.]]></comment>
-	<position x="3380" y="1820"/>
+	<position x="4060" y="1460"/>
 	<column name="mic_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4615,7 +5095,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de sociedades por tipo de sociedad , estado y capital autorizado.]]></comment>
-	<position x="3380" y="1940"/>
+	<position x="4060" y="1580"/>
 	<column name="soc_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4649,7 +5129,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los distintos tipos de sociedades (anonima, asociativa, limitada...).]]></comment>
-	<position x="3740" y="1840"/>
+	<position x="4420" y="1480"/>
 	<column name="tso_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4667,7 +5147,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos estados que tienen las sociedades (cosntituidas, depuradas, disueltas y reformadas).]]></comment>
-	<position x="3720" y="1940"/>
+	<position x="4400" y="1580"/>
 	<column name="ess_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4690,7 +5170,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;PIB&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el PIB a precios constantes por departamento.]]></comment>
-	<position x="3380" y="2100"/>
+	<position x="3380" y="1880"/>
 	<column name="pde_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4732,7 +5212,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;PIB&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el PIB por habitantes a precios corrientes]]></comment>
-	<position x="3780" y="2120"/>
+	<position x="3780" y="1900"/>
 	<column name="pha_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4763,7 +5243,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el consumo y los usuarios de energia por sectores]]></comment>
-	<position x="4100" y="1820"/>
+	<position x="4780" y="140"/>
 	<column name="seo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4797,7 +5277,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos sectores en los que esta clasificado el servicio de energia]]></comment>
-	<position x="4480" y="1820"/>
+	<position x="5160" y="140"/>
 	<column name="ses_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4815,7 +5295,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el consumo y usuarios del servicio de gas en alacanos.]]></comment>
-	<position x="4100" y="1960"/>
+	<position x="4780" y="280"/>
 	<column name="sga_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4853,7 +5333,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos tipos de servicio de gas (residencial, oficial, industrial, etc...)]]></comment>
-	<position x="4480" y="1920"/>
+	<position x="5160" y="240"/>
 	<column name="tsg_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4871,7 +5351,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las tarifas de alcanos]]></comment>
-	<position x="4100" y="2120"/>
+	<position x="4780" y="440"/>
 	<column name="taga_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4909,7 +5389,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los criterios a tener en cuenta en el servicio delgas ( estratos y rangos).]]></comment>
-	<position x="4480" y="2000"/>
+	<position x="5160" y="320"/>
 	<column name="crg_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4927,7 +5407,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los conceptos por los cuales el servicio de gas tarifa.]]></comment>
-	<position x="4480" y="2080"/>
+	<position x="5160" y="400"/>
 	<column name="cog_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4945,7 +5425,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las unidades por las que se tarifa ($/factura, $/m3, %).]]></comment>
-	<position x="4480" y="2160"/>
+	<position x="5160" y="480"/>
 	<column name="ung_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -4963,7 +5443,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el consumo y usuarios del servicio de gas en surgas.]]></comment>
-	<position x="4100" y="2260"/>
+	<position x="4780" y="580"/>
 	<column name="sgs_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5001,7 +5481,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las tarifas de alcanos]]></comment>
-	<position x="4500" y="2240"/>
+	<position x="5180" y="560"/>
 	<column name="tags_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5031,7 +5511,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de acueducto en las cabeceras de los municipios.]]></comment>
-	<position x="4100" y="2420"/>
+	<position x="4780" y="740"/>
 	<column name="acu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5065,7 +5545,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de las entidades encargadas del servicio de acueducto en los municipios.]]></comment>
-	<position x="4460" y="2380"/>
+	<position x="5140" y="700"/>
 	<column name="ena_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5083,7 +5563,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de acueducto en las cabeceras de los municipios.]]></comment>
-	<position x="4460" y="2460"/>
+	<position x="5140" y="780"/>
 	<column name="acc_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5117,7 +5597,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de alcantarillado en las cabeceras de los municipios.]]></comment>
-	<position x="4080" y="2560"/>
+	<position x="4760" y="880"/>
 	<column name="alc_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5151,7 +5631,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sitios de descarga del alcantarillado en los municipios.]]></comment>
-	<position x="4460" y="2600"/>
+	<position x="5140" y="920"/>
 	<column name="dal_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5169,7 +5649,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de alcantarillado en las cabeceras de los municipios.]]></comment>
-	<position x="4080" y="2700"/>
+	<position x="4760" y="1020"/>
 	<column name="als_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5202,7 +5682,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla que contiene los nombres de los diferentes tipos de sistema de alcantarillado (sanitario, pluvial, combiando).]]></comment>
-	<position x="4460" y="2700"/>
+	<position x="5140" y="1020"/>
 	<column name="tsal_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5220,7 +5700,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el número de suscriptores del servicio de aseo.]]></comment>
-	<position x="4080" y="2840"/>
+	<position x="4760" y="1160"/>
 	<column name="ase_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5270,7 +5750,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene datos de barrido, limpieza y disposición final de los residuos.]]></comment>
-	<position x="4460" y="2780"/>
+	<position x="5140" y="1100"/>
 	<column name="lim_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5308,7 +5788,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los lugares de disposición final de residuos solidos.]]></comment>
-	<position x="4460" y="2920"/>
+	<position x="5140" y="1240"/>
 	<column name="ldr_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[lugar_diposicion_residuos]]></comment>
@@ -5326,7 +5806,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la fuente de captación y conducción del sistema de acueducto en las cabeceras de los municipios en el departamento.]]></comment>
-	<position x="4100" y="3040"/>
+	<position x="4780" y="1360"/>
 	<column name="fca_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5368,7 +5848,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las fuentes de cpatación de los servicios de acueducto y alcantarillado.]]></comment>
-	<position x="4460" y="3020"/>
+	<position x="5140" y="1340"/>
 	<column name="fue_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5386,7 +5866,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los tipos de captación.]]></comment>
-	<position x="4460" y="3120"/>
+	<position x="5140" y="1440"/>
 	<column name="tica_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5404,7 +5884,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene información de lo medidores y el agua producida.]]></comment>
-	<position x="4100" y="3200"/>
+	<position x="4780" y="1520"/>
 	<column name="medi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5438,7 +5918,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la cantidad de agua facturada por m3/año]]></comment>
-	<position x="4460" y="3220"/>
+	<position x="5140" y="1540"/>
 	<column name="afa_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5468,7 +5948,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene informacción de tratamiento, tanques de almacenamiento y redes de distribución del sistema de acueducto]]></comment>
-	<position x="4460" y="3340"/>
+	<position x="5140" y="1660"/>
 	<column name="tra_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5518,7 +5998,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Servicios publicos&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el tipo de planta de tratamiento.]]></comment>
-	<position x="4100" y="3400"/>
+	<position x="4780" y="1720"/>
 	<column name="tpla_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5541,7 +6021,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabala que contiene la información de los alcaldes elegidos por voto popular en los municipios del departamento del Huila.]]></comment>
-	<position x="3220" y="2340"/>
+	<position x="20" y="680"/>
 	<column name="aev_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5575,7 +6055,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los distintos periodos electorales.]]></comment>
-	<position x="3560" y="2300"/>
+	<position x="360" y="640"/>
 	<column name="pel_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5593,7 +6073,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los alcaldes del departamento]]></comment>
-	<position x="3560" y="2400"/>
+	<position x="360" y="740"/>
 	<column name="ald_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5611,7 +6091,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los diferentes partidos politicos o movimientos.]]></comment>
-	<position x="3220" y="2480"/>
+	<position x="20" y="820"/>
 	<column name="pam_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5647,7 +6127,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene información acerca del documento de identidad (primera vez, duplicado, rectificación...)]]></comment>
-	<position x="3220" y="2580"/>
+	<position x="20" y="920"/>
 	<column name="sdi_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5656,13 +6136,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="100"/>
 		<comment><![CDATA[Nombre de la solicitud del documento.]]></comment>
 	</column>
+	<constraint name="solicitud_documento_id_pk" type="pk-constr" table="&quot;Electorales&quot;.solicitud_documento_id">
+		<columns names="sdi_codigo" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="documentos_identidad" hide-ext-attribs="true">
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene información sobre los documentos de identidad]]></comment>
-	<position x="3220" y="2640"/>
+	<position x="20" y="980"/>
 	<column name="did_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5696,7 +6179,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene información sobre el escrutinio]]></comment>
-	<position x="3520" y="2580"/>
+	<position x="320" y="920"/>
 	<column name="decr_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5730,7 +6213,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los tipos de votación (gobernacion, alcaldia, consejo, asamblea...)]]></comment>
-	<position x="3620" y="2720"/>
+	<position x="420" y="1060"/>
 	<column name="tvo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5748,7 +6231,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el resultado de votaciones]]></comment>
-	<position x="3240" y="2780"/>
+	<position x="40" y="1120"/>
 	<column name="vot_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5782,7 +6265,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="delitos_meses_fiscalias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
-	<position x="2000" y="3060"/>
+	<position x="0" y="140"/>
 	<column name="dmf_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5812,7 +6295,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los diferentes delitos]]></comment>
-	<position x="2360" y="3060"/>
+	<position x="360" y="140"/>
 	<column name="del_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5829,7 +6312,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="delitos_fiscalias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
-	<position x="2000" y="3180"/>
+	<position x="0" y="260"/>
 	<column name="def_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5859,7 +6342,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las fiscalias]]></comment>
-	<position x="2360" y="3160"/>
+	<position x="360" y="240"/>
 	<column name="fis_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5877,7 +6360,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las fiscalias]]></comment>
-	<position x="2360" y="3260"/>
+	<position x="360" y="340"/>
 	<column name="orga_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5894,7 +6377,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="investigaciones_personerias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
-	<position x="2000" y="3300"/>
+	<position x="0" y="380"/>
 	<column name="ipe_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5924,7 +6407,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los distritos de policia.]]></comment>
-	<position x="2360" y="3340"/>
+	<position x="360" y="420"/>
 	<column name="dpo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5942,7 +6425,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el número de delitos por distrito de policia]]></comment>
-	<position x="2680" y="3060"/>
+	<position x="680" y="140"/>
 	<column name="ddp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5971,7 +6454,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="delitos_meses_distritos_policia" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
-	<position x="2680" y="3200"/>
+	<position x="680" y="280"/>
 	<column name="dmdp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6000,7 +6483,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="visitas_personerias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
-	<position x="2680" y="3320"/>
+	<position x="680" y="400"/>
 	<column name="vipe_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6030,7 +6513,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las quejas o denuncias (señalamiento, maltrato, toruras...)]]></comment>
-	<position x="2000" y="3420"/>
+	<position x="0" y="500"/>
 	<column name="qde_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6048,7 +6531,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el número de quejas y denuncias en las personerias.]]></comment>
-	<position x="2680" y="3320"/>
+	<position x="680" y="400"/>
 	<column name="pqd_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6082,7 +6565,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="viviendas_con_sevicios_publicos" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
-	<position x="3040" y="2940"/>
+	<position x="1600" y="2820"/>
 	<column name="vsp_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6116,7 +6599,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los servicios publicos]]></comment>
-	<position x="3420" y="2940"/>
+	<position x="1980" y="2820"/>
 	<column name="tspu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6134,7 +6617,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los estratos]]></comment>
-	<position x="3420" y="3020"/>
+	<position x="1980" y="2900"/>
 	<column name="est_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6151,7 +6634,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="viviendas_por_estrato" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
-	<position x="3040" y="3080"/>
+	<position x="1600" y="2960"/>
 	<column name="vpes_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6181,7 +6664,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que incluye la población por tipo de seguridad social.]]></comment>
-	<position x="3040" y="3200"/>
+	<position x="1600" y="3080"/>
 	<column name="pss_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6211,7 +6694,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los tipos de salud ]]></comment>
-	<position x="3420" y="3100"/>
+	<position x="1980" y="2980"/>
 	<column name="ssi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6229,7 +6712,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los rangos de puntaje del sisben]]></comment>
-	<position x="3420" y="3180"/>
+	<position x="1980" y="3060"/>
 	<column name="pus_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6247,7 +6730,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por puntaje del sisben]]></comment>
-	<position x="3040" y="3320"/>
+	<position x="1600" y="3200"/>
 	<column name="pps_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6295,7 +6778,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por edades del sisben]]></comment>
-	<position x="3040" y="3320"/>
+	<position x="1600" y="3200"/>
 	<column name="ped_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6325,7 +6808,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los niveles educativos alcanzados.]]></comment>
-	<position x="3420" y="3260"/>
+	<position x="1980" y="3140"/>
 	<column name="nies_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6343,7 +6826,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por nivel educativo alcanzado.]]></comment>
-	<position x="3380" y="3340"/>
+	<position x="1940" y="3220"/>
 	<column name="pnes_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6373,7 +6856,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por sexo en el sisben.]]></comment>
-	<position x="3700" y="2940"/>
+	<position x="2260" y="2820"/>
 	<column name="pgsi_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6403,7 +6886,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por tipo de documento en el sisben.]]></comment>
-	<position x="3700" y="3080"/>
+	<position x="2260" y="2960"/>
 	<column name="ptds_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6433,7 +6916,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por tipo de vivienda y zonas.]]></comment>
-	<position x="3700" y="3200"/>
+	<position x="2260" y="3080"/>
 	<column name="pvz_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6467,7 +6950,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por tenencia de vivienda]]></comment>
-	<position x="3700" y="3340"/>
+	<position x="2260" y="3220"/>
 	<column name="ptv_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6497,7 +6980,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;SISBEN&quot;"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres del tipo de tenencia de vivienda]]></comment>
-	<position x="3040" y="3440"/>
+	<position x="1600" y="3320"/>
 	<column name="tv_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6519,7 +7002,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="densidad_poblacion" hide-ext-attribs="true">
 	<schema name="poblacion"/>
 	<role name="postgres"/>
-	<position x="1120" y="2520"/>
+	<position x="460" y="2740"/>
 	<column name="depo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6561,7 +7044,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los diferentes tipos de hogares.]]></comment>
-	<position x="1420" y="2540"/>
+	<position x="760" y="2760"/>
 	<column name="tho_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6579,7 +7062,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de hogares desplazados por tipo.]]></comment>
-	<position x="1700" y="2540"/>
+	<position x="1040" y="2760"/>
 	<column name="hod_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6609,7 +7092,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los diferentes tipos de población desplazada.]]></comment>
-	<position x="1120" y="2680"/>
+	<position x="460" y="2900"/>
 	<column name="tpde_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6627,7 +7110,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas desplazadas por tipo.]]></comment>
-	<position x="1420" y="2640"/>
+	<position x="760" y="2860"/>
 	<column name="pood_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6657,7 +7140,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene los nombres de las diferentes tipos de etnias.]]></comment>
-	<position x="1700" y="2660"/>
+	<position x="1140" y="2900"/>
 	<column name="tet_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6675,7 +7158,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas por etnia en los muncipios]]></comment>
-	<position x="1120" y="2760"/>
+	<position x="460" y="2980"/>
 	<column name="poet_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6705,7 +7188,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene el numero poblacion NBI (Necesidades Basicas Insatisfechas) y el porcentaje segun DANE.]]></comment>
-	<position x="1420" y="2760"/>
+	<position x="900" y="2980"/>
 	<column name="nbi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6735,7 +7218,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla que contiene la poblacion por grupos quinquenales por edad.]]></comment>
-	<position x="1120" y="2880"/>
+	<position x="460" y="3100"/>
 	<column name="pgq_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6765,7 +7248,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabla que contiene la población por sexo.]]></comment>
-	<position x="1420" y="2880"/>
+	<position x="760" y="3100"/>
 	<column name="poge_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6795,7 +7278,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla que contiene la proyección de la población en el departamento 2010-2020.]]></comment>
-	<position x="1720" y="2880"/>
+	<position x="1060" y="3100"/>
 	<column name="pyp_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6818,6 +7301,170 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</column>
 	<constraint name="poblacion_poyeccion_pk" type="pk-constr" table="poblacion.poblacion_proyeccion">
 		<columns names="pyp_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="poblacion_censada_municipio">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="postgres"/>
+	<position x="40" y="4340"/>
+	<column name="psm_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="psm_codMunicipio" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="psm_anio" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="psm_poblacionTotal">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="psm_poblacionSisben">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="poblacion_sensada_municipio_pk" type="pk-constr" table="&quot;Salud&quot;.poblacion_censada_municipio">
+		<columns names="psm_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="vih_clasificacion" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Almacenamiento de la clasificación del VIH]]></comment>
+	<position x="880" y="3940"/>
+	<column name="vicla_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="vicla_nombre">
+		<type name="character varying" length="30"/>
+		<comment><![CDATA[Nombre de la clasificación del VIH]]></comment>
+	</column>
+	<constraint name="vih_clasificacion_pk" type="pk-constr" table="&quot;Salud&quot;.vih_clasificacion">
+		<columns names="vicla_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="poblacion_edad_escolar" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Número de personas en edad escolar]]></comment>
+	<position x="920" y="2540"/>
+	<column name="ped_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="ped_codMunicipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio,]]></comment>
+	</column>
+	<column name="ped_anio">
+		<type name="smallint" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="ped_poblacion_escolar">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla poblaccion_escolar.]]></comment>
+	</column>
+	<column name="ped_num_poblacion_escolar">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de población.]]></comment>
+	</column>
+	<constraint name="poblacion_edad_escolar_pk" type="pk-constr" table="&quot;Educacion&quot;.poblacion_edad_escolar">
+		<columns names="ped_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="Deportes" rect-visible="true" fill-color="#ff007f">
+	<role name="sir_huila"/>
+</schema>
+
+<table name="deporte">
+	<schema name="&quot;Deportes&quot;"/>
+	<role name="sir_huila"/>
+	<comment><![CDATA[Lista de deportes disponibles en el departamento del Huila]]></comment>
+	<position x="3400" y="2180"/>
+	<column name="dep_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Código único de cada deporte]]></comment>
+	</column>
+	<column name="dep_nombre" not-null="true">
+		<type name="character varying" length="100"/>
+		<comment><![CDATA[Nombre del deporte]]></comment>
+	</column>
+	<column name="dep_descripcion">
+		<type name="character" length="0"/>
+		<comment><![CDATA[Descripción del deporte]]></comment>
+	</column>
+	<column name="dep_desc_fuente">
+		<type name="character" length="0"/>
+		<comment><![CDATA[Fuente de la descripción del deporte mencionado]]></comment>
+	</column>
+</table>
+
+<table name="torneo">
+	<schema name="&quot;Deportes&quot;"/>
+	<role name="sir_huila"/>
+	<comment><![CDATA[Tabla de torneos del Huila]]></comment>
+	<position x="3780" y="2160"/>
+	<column name="tor_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Código único]]></comment>
+	</column>
+	<column name="tor_fecha_inicio" not-null="true">
+		<type name="date" length="0"/>
+		<comment><![CDATA[Fecha de inicio del torneo]]></comment>
+	</column>
+	<column name="tor_fecha_fin" not-null="true">
+		<type name="date" length="0"/>
+		<comment><![CDATA[Fecha de finalización del torneo]]></comment>
+	</column>
+	<column name="tor_codMunicipio" not-null="true">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Municipio en el que se desarrolló el torneo]]></comment>
+	</column>
+	<constraint name="tor_codigo_pk" type="pk-constr" table="&quot;Deportes&quot;.torneo">
+		<columns names="tor_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="Riesgos" rect-visible="true" fill-color="#00aa7f">
+	<role name="sir_huila"/>
+	<comment><![CDATA[Esquema de Riesgos]]></comment>
+</schema>
+
+<table name="desastres">
+	<schema name="&quot;Riesgos&quot;"/>
+	<role name="sir_huila"/>
+	<comment><![CDATA[Desastres naturales registrados]]></comment>
+	<position x="3400" y="2323"/>
+	<column name="des_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Código único de los desastres naturales]]></comment>
+	</column>
+	<column name="des_hora_inicio" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Hora de inicio del desastre]]></comment>
+	</column>
+	<column name="des_hora_fin" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Hora de finalización del desastre]]></comment>
+	</column>
+	<column name="des_codMunicipio" not-null="true">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Código del municipio en el que fue localizado el desastre]]></comment>
+	</column>
+	<column name="des_latitud" not-null="true">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Latitud geográfica de la ubicación del siniestro]]></comment>
+	</column>
+	<column name="des_longitud" not-null="true">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Longitud geográfica del desastre natural]]></comment>
+	</column>
+	<constraint name="des_codigo_pk" type="pk-constr" table="&quot;Riesgos&quot;.desastres">
+		<columns names="des_codigo" ref-type="src-columns"/>
+		<comment><![CDATA[Restricción de llave primaria]]></comment>
 	</constraint>
 </table>
 
@@ -6849,6 +7496,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Agropecuario&quot;.tipo_cultivo" table="&quot;Agropecuario&quot;.cultivo">
 	<columns names="cul_tipo" ref-type="src-columns"/>
 	<columns names="tcul_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_codDepartamento" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.departamento" table="public.municipio">
+	<columns names="mun_codDepartamento" ref-type="src-columns"/>
+	<columns names="dep_codigo" ref-type="dst-columns"/>
+		<comment><![CDATA[Llave foránea que lleva al Departamento al que pertenece para Municipio]]></comment>
 </constraint>
 
 <constraint name="fk_codTipoEstanque" type="fk-constr" comparison-type="MATCH FULL"
@@ -7008,9 +7662,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_vacunacion-codVirus" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.virus" table="&quot;Salud&quot;.vacunacion_biologicos">
-	<columns names="vabi_codVirus" ref-type="src-columns"/>
-	<columns names="vir_codigo" ref-type="dst-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.biologicos" table="&quot;Salud&quot;.vacunacion_biologicos">
+	<columns names="vabi_codBiologicos" ref-type="src-columns"/>
+	<columns names="bio_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_vacunacion_bio_anio" type="fk-constr" comparison-type="MATCH FULL"
@@ -7097,6 +7751,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="tcon_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_principlaes_morbilidad_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.principales_morbilidad">
+	<columns names="pmor_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_huerfnos-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.huerfanos">
 	<columns names="huer_codMunicipio" ref-type="src-columns"/>
@@ -7109,10 +7769,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="tpoce_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_cobertura_aseguramiento-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.cobertura_aseguramiento">
-	<columns names="coas_codMunicipio" ref-type="src-columns"/>
-	<columns names="mun_codigo" ref-type="dst-columns"/>
+<constraint name="fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.poblacion_censada_municipio" table="&quot;Salud&quot;.cobertura_aseguramiento">
+	<columns names="coas_codPoblacionSensadaMunicipio" ref-type="src-columns"/>
+	<columns names="psm_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_vih_sida_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;casos_VHI-sida&quot;">
+	<columns names="cvih_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_VIHgenego-genero" type="fk-constr" comparison-type="MATCH FULL"
@@ -7121,10 +7787,34 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="gen_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="vih_genero_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_genero">
+	<columns names="vihg_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_transmisionVIH-tipoTransmision" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_transmision" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
 	<columns names="vihvia_codTipoTransmision" ref-type="src-columns"/>
 	<columns names="ttrans_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_via_trasmision_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
+	<columns names="vihvia_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_vih_clasificacion_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_casos_clasificacion">
+	<columns names="vihcla_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_tipoClasificacionVIH" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.vih_clasificacion" table="&quot;Salud&quot;.vih_casos_clasificacion">
+	<columns names="vihcla_codClasificacion" ref-type="src-columns"/>
+	<columns names="vicla_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_dengue-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
@@ -7133,16 +7823,34 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_dengue_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.dengue">
+	<columns names="den_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_hospitalizacion-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.hospitalizacion">
 	<columns names="hos_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_hospitalizacion_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.hospitalizacion">
+	<columns names="hos_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_tuberculosis_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.&quot;Tuberculosis&quot;">
 	<columns names="tub_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_tuberculosis_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;Tuberculosis&quot;">
+	<columns names="tub_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_organismos_salud_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
@@ -7157,32 +7865,38 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="tp_orsa_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_organismos_salud_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.organismos_salud">
+	<columns names="orsa_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_intituciones_educativas_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.instituciones_educativas">
 	<columns names="ine_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_tp_plantel" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_plantel_educativo" table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_plantel_educativo" table="&quot;Educacion&quot;.instituciones_educativas">
 	<columns names="ine_tipo_plantel" ref-type="src-columns"/>
 	<columns names="tpe_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_area" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="&quot;Educacion&quot;.instituciones_educativas">
 	<columns names="ine_area" ref-type="src-columns"/>
 	<columns names="are_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.instituciones_educativas">
 	<columns names="ine_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.instituciones_educativas">
 	<columns names="ine_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -7191,12 +7905,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.matriculas">
 	<columns names="mat_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
-</constraint>
-
-<constraint name="fk_matriculas_poblacion_escolar" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.poblacion_escolar" table="&quot;Educacion&quot;.matriculas">
-	<columns names="mat_poblacion_escolar" ref-type="src-columns"/>
-	<columns names="pes_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_matriculas_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
@@ -7589,6 +8297,18 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="sem_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_matriculas_usco_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.matriculas_usco">
+	<columns names="matu_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_matiuclas_usco_genero" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.genero" table="&quot;Educacion&quot;.matriculas_usco">
+	<columns names="matu_genero" ref-type="src-columns"/>
+	<columns names="gen_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_pm_anio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Cultura&quot;.&quot;Turistas_parques_museo&quot;">
 	<columns names="tpmu_anio" ref-type="src-columns"/>
@@ -7830,21 +8550,27 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_licencias_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Construccion&quot;.&quot;Licencias&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Construccion&quot;.licencias">
 	<columns names="lic_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_licencias_alcance" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.alcance" table="&quot;Construccion&quot;.&quot;Licencias&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.alcance" table="&quot;Construccion&quot;.licencias">
 	<columns names="lic_alcance" ref-type="src-columns"/>
 	<columns names="alc_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_licencias_tipo_construccion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tipo_vivienda" table="&quot;Construccion&quot;.&quot;Licencias&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tipo_vivienda" table="&quot;Construccion&quot;.licencias">
 	<columns names="lic_tipo_vivienda" ref-type="src-columns"/>
 	<columns names="tco_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_licencias_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Construccion&quot;.licencias">
+	<columns names="lic_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_catastro_anio" type="fk-constr" comparison-type="MATCH FULL"
@@ -9023,12 +9749,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_nbi_tipo" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="poblacion.tipo_etnia" table="poblacion.poblacion_nbi">
-	<columns names="nbi_porcentaje_dane" ref-type="src-columns"/>
-	<columns names="tet_codigo" ref-type="dst-columns"/>
-</constraint>
-
 <constraint name="fk_quinque_anio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="poblacion.poblacion_grupos_quinquenales">
 	<columns names="pgq_anio" ref-type="src-columns"/>
@@ -9081,6 +9801,43 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="poblacion.poblacion_proyeccion">
 	<columns names="pyp_area" ref-type="src-columns"/>
 	<columns names="are_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_poblacionCesadaMunicipio_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.poblacion_censada_municipio">
+	<columns names="psm_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_edad_escolar_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.poblacion_edad_escolar">
+	<columns names="ped_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_edad_poblacion_escolar" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.poblacion_escolar" table="&quot;Educacion&quot;.poblacion_edad_escolar">
+	<columns names="ped_poblacion_escolar" ref-type="src-columns"/>
+	<columns names="pes_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_edad_escolar_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.poblacion_edad_escolar">
+	<columns names="ped_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_tor_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Deportes&quot;.torneo">
+	<columns names="tor_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Riesgos&quot;.desastres">
+	<columns names="des_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+		<comment><![CDATA[Llave foránea que conecta con el municipio]]></comment>
 </constraint>
 
 <relationship name="rel_area_cosechada_municipio" type="relfk"
@@ -9136,7 +9893,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_produccion_piscicola_tipo_estanque" type="relfk"
 	 src-table="&quot;Agropecuario&quot;.produccion_piscicola"
 	 dst-table="&quot;Agropecuario&quot;.tipo_estanque"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_produccion_piscicola_anio" type="relfk"
 	 src-table="&quot;Agropecuario&quot;.produccion_piscicola"
@@ -9215,7 +9976,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_vacunacion_biologicos_virus" type="relfk"
 	 src-table="&quot;Salud&quot;.vacunacion_biologicos"
-	 dst-table="&quot;Salud&quot;.virus"
+	 dst-table="&quot;Salud&quot;.biologicos"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_defunciones_municipio" type="relfk"
@@ -9273,11 +10034,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="&quot;Salud&quot;.tipo_poblacion_censada"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_cobertura_aseguramiento_municipio" type="relfk"
-	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
-	 dst-table="public.municipio"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_vih_genero_genero" type="relfk"
 	 src-table="&quot;Salud&quot;.vih_genero"
 	 dst-table="public.genero"
@@ -9314,38 +10070,33 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_municipio&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_tipo_plantel_educativo&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="&quot;Educacion&quot;.tipo_plantel_educativo"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_area&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="public.area"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_tipo_institucion&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="&quot;Educacion&quot;.tipo_institucion"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_anio&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;instituciones_Educativas&quot;"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_matriculas_municipio" type="relfk"
 	 src-table="&quot;Educacion&quot;.matriculas"
 	 dst-table="public.municipio"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_matriculas_poblacion_escolar" type="relfk"
-	 src-table="&quot;Educacion&quot;.matriculas"
-	 dst-table="&quot;Educacion&quot;.poblacion_escolar"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_matriculas_tipo_institucion" type="relfk"
@@ -9356,7 +10107,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_matriculas_tipo_nivel_educativo" type="relfk"
 	 src-table="&quot;Educacion&quot;.matriculas"
 	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_matriculas_grado" type="relfk"
 	 src-table="&quot;Educacion&quot;.matriculas"
@@ -9874,17 +10629,17 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Licencias_anio&quot;" type="relfk"
-	 src-table="&quot;Construccion&quot;.&quot;Licencias&quot;"
+	 src-table="&quot;Construccion&quot;.licencias"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Licencias_alcance&quot;" type="relfk"
-	 src-table="&quot;Construccion&quot;.&quot;Licencias&quot;"
+	 src-table="&quot;Construccion&quot;.licencias"
 	 dst-table="public.alcance"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Licencias_tipo_vivienda&quot;" type="relfk"
-	 src-table="&quot;Construccion&quot;.&quot;Licencias&quot;"
+	 src-table="&quot;Construccion&quot;.licencias"
 	 dst-table="public.tipo_vivienda"
 	 src-required="false" dst-required="false"/>
 
@@ -10856,21 +11611,24 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_poblacion_etnica_tipo_etnia" type="relfk"
 	 src-table="poblacion.poblacion_etnica"
 	 dst-table="poblacion.tipo_etnia"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_poblacion_nbi_anio" type="relfk"
 	 src-table="poblacion.poblacion_nbi"
 	 dst-table="public.anio"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="src-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_poblacion_nbi_municipio" type="relfk"
 	 src-table="poblacion.poblacion_nbi"
 	 dst-table="public.municipio"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_poblacion_nbi_tipo_etnia" type="relfk"
-	 src-table="poblacion.poblacion_nbi"
-	 dst-table="poblacion.tipo_etnia"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_poblacion_grupos_quinquenales_anio" type="relfk"
@@ -10966,6 +11724,111 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_principales_mortalidad_anio" type="relfk"
 	 src-table="&quot;Salud&quot;.principales_mortalidad"
 	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_principales_morbilidad_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.principales_morbilidad"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_dengue_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.dengue"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_hospitalizacion_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.hospitalizacion"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Tuberculosis_anio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;Tuberculosis&quot;"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_organismos_salud_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.organismos_salud"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_genero_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_genero"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_casos_VHI-sida_anio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;casos_VHI-sida&quot;"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_vih_viaTransmision_anio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_clasificacion_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_casos_clasificacion"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cobertura_aseguramiento_poblacion_sensada_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
+	 dst-table="&quot;Salud&quot;.poblacion_censada_municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_poblacion_censada_municipio_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.poblacion_censada_municipio"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_casos_clasificacion_vih_clasificacion" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_casos_clasificacion"
+	 dst-table="&quot;Salud&quot;.vih_clasificacion"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_usco_municipio" type="relfk"
+	 src-table="&quot;Educacion&quot;.matriculas_usco"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_usco_genero" type="relfk"
+	 src-table="&quot;Educacion&quot;.matriculas_usco"
+	 dst-table="public.genero"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_licencias_municipio" type="relfk"
+	 src-table="&quot;Construccion&quot;.licencias"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_municipio" type="relfk"
+	 src-table="&quot;Educacion&quot;.poblacion_edad_escolar"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_poblacion_escolar" type="relfk"
+	 src-table="&quot;Educacion&quot;.poblacion_edad_escolar"
+	 dst-table="&quot;Educacion&quot;.poblacion_escolar"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_anio" type="relfk"
+	 src-table="&quot;Educacion&quot;.poblacion_edad_escolar"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_torneo_municipio" type="relfk"
+	 src-table="&quot;Deportes&quot;.torneo"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_desastres_municipio" type="relfk"
+	 src-table="&quot;Riesgos&quot;.desastres"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_municipio_departamento" type="relfk"
+	 src-table="public.municipio"
+	 dst-table="public.departamento"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>

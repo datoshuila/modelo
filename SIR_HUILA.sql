@@ -4,12 +4,19 @@
 -- Project Site: pgmodeler.com.br
 -- Model Author: ---
 
+-- object: sir_huila | type: ROLE --
+-- DROP ROLE IF EXISTS sir_huila;
+CREATE ROLE sir_huila WITH 
+	UNENCRYPTED PASSWORD '}d9-2#p{'L';
+-- ddl-end --
+
 
 -- Database creation must be done outside an multicommand file.
 -- These commands were put in this file only for convenience.
--- -- object: "SIR_HUILA" | type: DATABASE --
--- -- DROP DATABASE IF EXISTS "SIR_HUILA";
--- CREATE DATABASE "SIR_HUILA"
+-- -- object: sir_huila_datos | type: DATABASE --
+-- -- DROP DATABASE IF EXISTS sir_huila_datos;
+-- CREATE DATABASE sir_huila_datos
+-- 	OWNER = sir_huila
 -- ;
 -- -- ddl-end --
 -- 
@@ -72,7 +79,7 @@ COMMENT ON SCHEMA "Calidad de vida" IS 'Esquema calidad de vida.';
 -- DROP SCHEMA IF EXISTS "Construccion" CASCADE;
 CREATE SCHEMA "Construccion";
 -- ddl-end --
-ALTER SCHEMA "Construccion" OWNER TO postgres;
+ALTER SCHEMA "Construccion" OWNER TO sir_huila;
 -- ddl-end --
 COMMENT ON SCHEMA "Construccion" IS 'Esquema construcción';
 -- ddl-end --
@@ -158,7 +165,23 @@ ALTER SCHEMA poblacion OWNER TO postgres;
 COMMENT ON SCHEMA poblacion IS 'Esquema población.';
 -- ddl-end --
 
-SET search_path TO pg_catalog,public,"Agropecuario","Salud","Educacion","cifras macro economicas","Cultura","Calidad de vida","Construccion","Finanzas publicas","Empleo","Movimeinto empresarial","PIB","Servicios publicos","Electorales","Justicia","SISBEN",poblacion;
+-- object: "Deportes" | type: SCHEMA --
+-- DROP SCHEMA IF EXISTS "Deportes" CASCADE;
+CREATE SCHEMA "Deportes";
+-- ddl-end --
+ALTER SCHEMA "Deportes" OWNER TO sir_huila;
+-- ddl-end --
+
+-- object: "Riesgos" | type: SCHEMA --
+-- DROP SCHEMA IF EXISTS "Riesgos" CASCADE;
+CREATE SCHEMA "Riesgos";
+-- ddl-end --
+ALTER SCHEMA "Riesgos" OWNER TO sir_huila;
+-- ddl-end --
+COMMENT ON SCHEMA "Riesgos" IS 'Esquema de Riesgos';
+-- ddl-end --
+
+SET search_path TO pg_catalog,public,"Agropecuario","Salud","Educacion","cifras macro economicas","Cultura","Calidad de vida","Construccion","Finanzas publicas","Empleo","Movimeinto empresarial","PIB","Servicios publicos","Electorales","Justicia","SISBEN",poblacion,"Deportes","Riesgos";
 -- ddl-end --
 
 -- object: "Agropecuario".area_cosechada | type: TABLE --
@@ -220,8 +243,8 @@ COMMENT ON COLUMN "Agropecuario".area_cosechada."arco_costoPromedioSostenimiento
 -- DROP TABLE IF EXISTS "Agropecuario".cultivo CASCADE;
 CREATE TABLE "Agropecuario".cultivo(
 	cul_codigo bigserial NOT NULL,
-	cul_nombre character varying(100),
 	cul_tipo integer,
+	cul_nombre character varying(100),
 	"cul_fechaRegistro" timestamp NOT NULL,
 	cul_descripcion character varying(250),
 	CONSTRAINT cultivo_pk PRIMARY KEY (cul_codigo)
@@ -232,9 +255,9 @@ COMMENT ON TABLE "Agropecuario".cultivo IS 'Almacenamiento  los tipos de cultivo
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".cultivo.cul_codigo IS 'Llave primaria para la identificación única de cada cultivo.';
 -- ddl-end --
-COMMENT ON COLUMN "Agropecuario".cultivo.cul_nombre IS 'Nombres del cultivo';
--- ddl-end --
 COMMENT ON COLUMN "Agropecuario".cultivo.cul_tipo IS 'Llave foránea a la tabla tipo_cultivo';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".cultivo.cul_nombre IS 'Nombres del cultivo';
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".cultivo."cul_fechaRegistro" IS 'Fecha de registro del cultivo en el sistema';
 -- ddl-end --
@@ -266,6 +289,7 @@ ALTER TABLE "Agropecuario".tipo_cultivo OWNER TO postgres;
 CREATE TABLE public.municipio(
 	mun_codigo bigserial NOT NULL,
 	mun_nombre character varying(40) NOT NULL,
+	"mun_codDepartamento" integer NOT NULL,
 	CONSTRAINT municipio_pk PRIMARY KEY (mun_codigo)
 
 );
@@ -276,7 +300,84 @@ COMMENT ON COLUMN public.municipio.mun_codigo IS 'Llave primaria para la identif
 -- ddl-end --
 COMMENT ON COLUMN public.municipio.mun_nombre IS 'Nombre del municipio';
 -- ddl-end --
-ALTER TABLE public.municipio OWNER TO postgres;
+COMMENT ON COLUMN public.municipio."mun_codDepartamento" IS 'Código del departamento al que pertenece cada Municipio';
+-- ddl-end --
+ALTER TABLE public.municipio OWNER TO sir_huila;
+-- ddl-end --
+
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41006', E'Acevedo', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41013', E'Agrado', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41016', E'Aipe', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41020', E'Algeciras', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41026', E'Altamira', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41078', E'Baraya', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41132', E'Campoalegre', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41206', E'Colombia', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41244', E'Elias', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41298', E'Garzón', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41306', E'Gigante', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41319', E'Guadalupe', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41349', E'Hobo', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41357', E'Iquira', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41359', E'Isnos', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41378', E'La Argentina', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41396', E'La Plata', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41483', E'Nátaga', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41001', E'Neiva', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41503', E'Oporapa', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41518', E'Paicol', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41524', E'Palermo', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41530', E'Palestina', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41548', E'Pital', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41551', E'Pitalito', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41615', E'Rivera', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41660', E'Saladoblanco', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41668', E'San Agustín', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41676', E'Santa Maria', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41770', E'Suaza', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41791', E'Tarqui', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41799', E'Tello', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41801', E'Teruel', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41797', E'Tesalia', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41807', E'Timaná', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41872', E'Villavieja', E'41');
+-- ddl-end --
+INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41885', E'Yaguará', E'41');
 -- ddl-end --
 
 -- object: "Agropecuario".infraestructura_produccion_piscicola | type: TABLE --
@@ -468,8 +569,8 @@ ALTER TABLE "Agropecuario".tipo_ganado OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Agropecuario".razas_ganado CASCADE;
 CREATE TABLE "Agropecuario".razas_ganado(
 	rgan_codigo smallserial NOT NULL,
-	rgan_nombre character varying(50),
 	"rgan_tipoGanado" smallint NOT NULL,
+	rgan_nombre character varying(50),
 	rgan_acronimo character varying(3),
 	CONSTRAINT razas_bovinos_pk PRIMARY KEY (rgan_codigo)
 
@@ -479,9 +580,9 @@ COMMENT ON TABLE "Agropecuario".razas_ganado IS 'Almacena las diferentes razas d
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".razas_ganado.rgan_codigo IS 'Llave primaria para la identificación única de cada raza de ganado.';
 -- ddl-end --
-COMMENT ON COLUMN "Agropecuario".razas_ganado.rgan_nombre IS 'Nombre de la raza de ganado.';
--- ddl-end --
 COMMENT ON COLUMN "Agropecuario".razas_ganado."rgan_tipoGanado" IS 'Llave foránea que donde se obtiene los tipos de ganado.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".razas_ganado.rgan_nombre IS 'Nombre de la raza de ganado.';
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".razas_ganado.rgan_acronimo IS 'Acrónimo del nombre de la raza de ganado.';
 -- ddl-end --
@@ -530,6 +631,12 @@ CREATE TABLE "Agropecuario".tipo_explotacion(
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Agropecuario".tipo_explotacion IS 'Almacena los diferentes tipos de explotación pecuaria que puedan existir.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".tipo_explotacion.texp_codigo IS 'Llave primaria para la identificación única de cada tipo de explotación.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".tipo_explotacion.texp_nombre IS 'Nombre del tipo de explotación.';
+-- ddl-end --
 ALTER TABLE "Agropecuario".tipo_explotacion OWNER TO postgres;
 -- ddl-end --
 
@@ -538,13 +645,27 @@ ALTER TABLE "Agropecuario".tipo_explotacion OWNER TO postgres;
 CREATE TABLE "Agropecuario".explotacion_raza(
 	exra_codigo bigserial NOT NULL,
 	"exra_codMunicipio" integer,
-	exra_anio character varying(4),
+	exra_anio integer,
 	"exra_codTipoExplotacion" smallint,
 	"exra_porcentajeExplotacion" double precision,
 	exra_raza_cruce character varying(10),
 	CONSTRAINT explotacion_bovina_pk PRIMARY KEY (exra_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Agropecuario".explotacion_raza IS 'Almacena en inventario de ganado bovino y porcino con respecto al tipo de explotación (lechera, carne, doble propósito, criá tecnificada, ceba tecnificada, etc) de cada municipio del departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".explotacion_raza.exra_codigo IS 'Llave primaria para la identificación única de registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".explotacion_raza."exra_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".explotacion_raza.exra_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".explotacion_raza."exra_codTipoExplotacion" IS 'Llave foránea que apunta a la tabla tipo_explotacion.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".explotacion_raza."exra_porcentajeExplotacion" IS 'Porcentaje de explotación con respecto al tipo de explotación en el municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".explotacion_raza.exra_raza_cruce IS 'Convención que se utiliza para especificar el cruce de razas, los acrónimos se almacenan en la tabla razas_ganado.';
 -- ddl-end --
 ALTER TABLE "Agropecuario".explotacion_raza OWNER TO postgres;
 -- ddl-end --
@@ -554,13 +675,27 @@ ALTER TABLE "Agropecuario".explotacion_raza OWNER TO postgres;
 CREATE TABLE "Agropecuario".produccion_leche(
 	prol_codigo bigserial NOT NULL,
 	"prol_codMunicipio" integer NOT NULL,
-	prol_anio character varying(4) NOT NULL,
+	prol_anio integer NOT NULL,
 	"prol_promedioLitrosDia" double precision,
 	"prol_promedioVacas" integer,
 	"prol_promedioLitrosAnio" double precision,
 	CONSTRAINT produccion_leche_pk PRIMARY KEY (prol_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Agropecuario".produccion_leche IS 'Datos de la producción lechera por municipio del departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_leche.prol_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_leche."prol_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_leche.prol_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_leche."prol_promedioLitrosDia" IS 'Promedio de litros al día que produce una vaca.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_leche."prol_promedioVacas" IS 'Número promedio de vacas de en ordeño.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_leche."prol_promedioLitrosAnio" IS 'Promedio de producción de leche al año en litros.';
 -- ddl-end --
 ALTER TABLE "Agropecuario".produccion_leche OWNER TO postgres;
 -- ddl-end --
@@ -570,13 +705,27 @@ ALTER TABLE "Agropecuario".produccion_leche OWNER TO postgres;
 CREATE TABLE "Agropecuario".inventario_ganado_porcino(
 	invgp_codigo bigserial NOT NULL,
 	"invgp_codMunicipio" integer,
-	invgp_anio character varying(4) NOT NULL,
+	invgp_anio integer NOT NULL,
 	invgp_lechones6 integer,
 	invgp_hembras6 integer,
 	invgp_machos6 integer,
 	CONSTRAINT inventario_ganado_porcino_pk PRIMARY KEY (invgp_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Agropecuario".inventario_ganado_porcino IS 'Inventario del ganado porcino con respecto a la edad  en los diferentes municipios del departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino."invgp_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_lechones6 IS 'Cantidad de lechones menores a 6 meses en el municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_hembras6 IS 'Cantidad de hembras mayores a 6 meses en el municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_machos6 IS 'Cantidad de machos mayores a 6 meses en el municipio.';
 -- ddl-end --
 ALTER TABLE "Agropecuario".inventario_ganado_porcino OWNER TO postgres;
 -- ddl-end --
@@ -586,13 +735,27 @@ ALTER TABLE "Agropecuario".inventario_ganado_porcino OWNER TO postgres;
 CREATE TABLE "Agropecuario".produccion_porcina(
 	ppor_codigo bigserial NOT NULL,
 	"ppor_codMunicipio" integer NOT NULL,
-	ppor_anio character varying(4) NOT NULL,
+	ppor_anio integer NOT NULL,
 	"ppor_promedioCamada" smallint,
 	"ppor_promedioDestete" smallint,
 	"ppor_promedioDiasDestete" smallint,
 	CONSTRAINT produccion_porcina_pk PRIMARY KEY (ppor_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Agropecuario".produccion_porcina IS 'Datos respecto a la producción de lechones en los diferentes municipios del departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_porcina.ppor_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_porcina."ppor_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_porcina.ppor_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_porcina."ppor_promedioCamada" IS 'Promedio de lechones por camada.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_porcina."ppor_promedioDestete" IS 'Promedio de lechones por destete.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".produccion_porcina."ppor_promedioDiasDestete" IS 'Promedio de días de destete de los lechones';
 -- ddl-end --
 ALTER TABLE "Agropecuario".produccion_porcina OWNER TO postgres;
 -- ddl-end --
@@ -602,12 +765,24 @@ ALTER TABLE "Agropecuario".produccion_porcina OWNER TO postgres;
 CREATE TABLE "Agropecuario".inventario_otras_especies(
 	invos_codigo bigserial NOT NULL,
 	"invos_codMunicipio" integer,
-	invos_anio character varying(4) NOT NULL,
+	invos_anio integer NOT NULL,
 	"invos_tipoGanado" smallint,
 	invos_cantidad integer,
 	CONSTRAINT inventario_otras_especies_pk PRIMARY KEY (invos_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Agropecuario".inventario_otras_especies IS 'Es el inventario de otras especies pecuarias por municipio en el departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_otras_especies.invos_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_otras_especies."invos_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_otras_especies.invos_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_otras_especies."invos_tipoGanado" IS 'Llave foránea que apunta a la tabla tipo_ganado.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".inventario_otras_especies.invos_cantidad IS 'Cantidad del tipo de ganado registrado.';
 -- ddl-end --
 ALTER TABLE "Agropecuario".inventario_otras_especies OWNER TO postgres;
 -- ddl-end --
@@ -617,14 +792,24 @@ ALTER TABLE "Agropecuario".inventario_otras_especies OWNER TO postgres;
 CREATE TABLE "Agropecuario".apicultura(
 	api_codigo bigserial NOT NULL,
 	"api_codMuniicipio" integer,
-	api_anio character varying(4) NOT NULL,
+	api_anio integer NOT NULL,
 	"api_numeroColmenas" integer,
 	api_produccion double precision,
 	CONSTRAINT apicultura_pk PRIMARY KEY (api_codigo)
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Agropecuario".apicultura IS 'producción de miel y numero de colmenas por municipio en el departamento';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".apicultura.api_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".apicultura."api_codMuniicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".apicultura.api_anio IS 'Llave foránea que  apunta a la tabla anio';
+-- ddl-end --
 COMMENT ON COLUMN "Agropecuario".apicultura."api_numeroColmenas" IS 'número de colmenas en el municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Agropecuario".apicultura.api_produccion IS 'Producción de la miel el kilogramos (kg) por municipio.';
 -- ddl-end --
 ALTER TABLE "Agropecuario".apicultura OWNER TO postgres;
 -- ddl-end --
@@ -634,41 +819,51 @@ ALTER TABLE "Agropecuario".apicultura OWNER TO postgres;
 CREATE TABLE "Salud".vacunacion_biologicos(
 	vabi_codigo bigserial NOT NULL,
 	"vabi_codMunicipio" integer,
-	vabi_anio character varying(4) NOT NULL,
+	vabi_anio integer NOT NULL,
 	"vabi_poblacionMeta" integer,
 	"vabi_edadPoblacion" character varying(20) NOT NULL,
-	"vabi_codVirus" integer,
+	"vabi_codBiologicos" integer,
 	vabi_vacunados integer,
 	vabi_cobertura double precision NOT NULL,
 	CONSTRAINT vacunacion_biologicos_pk PRIMARY KEY (vabi_codigo)
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Salud".vacunacion_biologicos IS 'Coberturas de vacunación en menores de 1 año por biológicos según municipios en el departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_codMunicipio" IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_poblacionMeta" IS 'Población menor de 1 año meta programática.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_edadPoblacion" IS 'Edad de los menores vacunados.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_codBiologicos" IS 'Llave foránea que apunta a la tabla biologicos.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_vacunados IS 'Cantidad de menores vacunados';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_cobertura IS 'Porcentaje de menores vacunados';
+-- ddl-end --
 ALTER TABLE "Salud".vacunacion_biologicos OWNER TO postgres;
 -- ddl-end --
 
--- object: "Salud".virus | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".virus CASCADE;
-CREATE TABLE "Salud".virus(
-	vir_codigo serial NOT NULL,
-	vir_nombre character varying(50) NOT NULL,
-	CONSTRAINT virus_pk PRIMARY KEY (vir_codigo)
+-- object: "Salud".biologicos | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".biologicos CASCADE;
+CREATE TABLE "Salud".biologicos(
+	bio_codigo serial NOT NULL,
+	bio_nombre character varying(50) NOT NULL,
+	CONSTRAINT virus_pk PRIMARY KEY (bio_codigo)
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".virus OWNER TO postgres;
+COMMENT ON TABLE "Salud".biologicos IS 'Almacena los diferentes tipos de virus';
 -- ddl-end --
-
--- object: "Salud".tipo_poblacion | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".tipo_poblacion CASCADE;
-CREATE TABLE "Salud".tipo_poblacion(
-	tpo_codigo smallserial NOT NULL,
-	tpo_nombre character varying(100),
-	CONSTRAINT tipo_poblacion_pk PRIMARY KEY (tpo_codigo)
-
-);
+COMMENT ON COLUMN "Salud".biologicos.bio_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_poblacion OWNER TO postgres;
+COMMENT ON COLUMN "Salud".biologicos.bio_nombre IS 'Nombre del Biologico.';
+-- ddl-end --
+ALTER TABLE "Salud".biologicos OWNER TO postgres;
 -- ddl-end --
 
 -- object: "Salud".defunciones | type: TABLE --
@@ -676,7 +871,7 @@ ALTER TABLE "Salud".tipo_poblacion OWNER TO postgres;
 CREATE TABLE "Salud".defunciones(
 	def_codigo bigserial NOT NULL,
 	"def_codMunicipio" integer,
-	def_anio character varying(4) NOT NULL,
+	def_anio integer NOT NULL,
 	"def_codTipoDefuncion" smallint,
 	"def_codAreaDefuncion" smallint,
 	def_genero integer NOT NULL,
@@ -684,6 +879,22 @@ CREATE TABLE "Salud".defunciones(
 	CONSTRAINT defunciones_fetales_pk PRIMARY KEY (def_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".defunciones IS 'Defunciones  por área,sexo y tipo de defunción  por municipio de ocurrencia en el departamento ';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones.def_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones."def_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones.def_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones."def_codTipoDefuncion" IS 'Llave foránea que apunta a la tabla tipo_defuncion.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones."def_codAreaDefuncion" IS 'Llave foránea que apunta a la tabla area.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones.def_genero IS 'Llave foránea que apunta a la tabla genero.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones."def_numeroCasos" IS 'Número de defunciones';
 -- ddl-end --
 ALTER TABLE "Salud".defunciones OWNER TO postgres;
 -- ddl-end --
@@ -699,7 +910,20 @@ CREATE TABLE public.area(
 -- ddl-end --
 COMMENT ON TABLE public.area IS 'Tabla que se refiere si pertenece a una zona urbana o rural, cabecera, rural disperso, centro poblado.';
 -- ddl-end --
+COMMENT ON COLUMN public.area.are_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN public.area.are_nombre IS 'Nombre del area.';
+-- ddl-end --
 ALTER TABLE public.area OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'1', E'Urbana');
+-- ddl-end --
+INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'2', E'Rural');
+-- ddl-end --
+INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'3', E'Rural disperso');
+-- ddl-end --
+INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'4', E'Centro poblado');
 -- ddl-end --
 
 -- object: "Salud".tipo_defuncion | type: TABLE --
@@ -711,6 +935,12 @@ CREATE TABLE "Salud".tipo_defuncion(
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Salud".tipo_defuncion IS ' Almacena los diferentes tipos de defunción.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_defuncion.tdef_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_defuncion.tdef_nombre IS 'Nombre del tipo de defunción.';
+-- ddl-end --
 ALTER TABLE "Salud".tipo_defuncion OWNER TO postgres;
 -- ddl-end --
 
@@ -719,7 +949,7 @@ ALTER TABLE "Salud".tipo_defuncion OWNER TO postgres;
 CREATE TABLE "Salud".desnutricion(
 	dnut_codigo bigserial NOT NULL,
 	"dnut_codMunicipio" integer,
-	dnut_anio character varying(4) NOT NULL,
+	dnut_anio integer NOT NULL,
 	"dnut_numGlobal" integer,
 	"dnut_porcentajeDesnuGlobal" double precision,
 	"dnut_numDesnCronica" integer,
@@ -730,7 +960,27 @@ CREATE TABLE "Salud".desnutricion(
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".desnutricion OWNER TO postgres;
+COMMENT ON TABLE "Salud".desnutricion IS 'situación nutricional en menores de cinco años por municipios en el departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion.dnut_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion.dnut_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_numGlobal" IS 'Número de niños con desnutrición global';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_porcentajeDesnuGlobal" IS 'Porcentaje de desnutrición global';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_numDesnCronica" IS 'Número de niños con desnutrición crónica.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_porcentajeDesnCronica" IS 'Porcentaje desnutrición crónica.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_numDesnAguda" IS 'Número de niños con desnutrición aguda.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion."dnut_porcentajeDesnAguda" IS 'Porcentaje de desnutrición aguda.';
+-- ddl-end --
+ALTER TABLE "Salud".desnutricion OWNER TO sir_huila;
 -- ddl-end --
 
 -- object: "Salud".nacimientos | type: TABLE --
@@ -738,13 +988,27 @@ ALTER TABLE "Salud".desnutricion OWNER TO postgres;
 CREATE TABLE "Salud".nacimientos(
 	nac_codigo bigserial NOT NULL,
 	"nac_codMunicipio" integer,
-	nac_anio character varying(4) NOT NULL,
+	nac_anio integer NOT NULL,
 	"nac_codArea" smallint,
 	nac_genero integer NOT NULL,
 	"nac_numeroCasos" integer,
 	CONSTRAINT nacimientos_pk PRIMARY KEY (nac_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".nacimientos IS 'Nacimientos por área y sexo según municipio de ocurrencia en el departamento';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".nacimientos.nac_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".nacimientos."nac_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".nacimientos.nac_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".nacimientos."nac_codArea" IS 'Llave foránea que apunta a la tabla area';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".nacimientos.nac_genero IS 'Llave foránea que apunta a la tabla genero';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".nacimientos."nac_numeroCasos" IS 'Numero de nacimeintos.';
 -- ddl-end --
 ALTER TABLE "Salud".nacimientos OWNER TO postgres;
 -- ddl-end --
@@ -753,12 +1017,22 @@ ALTER TABLE "Salud".nacimientos OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Salud".principales_mortalidad CASCADE;
 CREATE TABLE "Salud".principales_mortalidad(
 	pmort_codigo serial NOT NULL,
+	pmort_anio integer NOT NULL,
 	pmort_nombre character varying(250),
 	pmort_defunciones integer,
-	pmort_anio character varying(4) NOT NULL,
 	CONSTRAINT mortalidad_principales_pk PRIMARY KEY (pmort_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".principales_mortalidad IS 'principales causas de mortalidad en el departamento';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_nombre IS 'Nombre de la causa de mortalidad.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_defunciones IS 'Número de defunciones.';
 -- ddl-end --
 ALTER TABLE "Salud".principales_mortalidad OWNER TO postgres;
 -- ddl-end --
@@ -767,13 +1041,25 @@ ALTER TABLE "Salud".principales_mortalidad OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Salud".principales_morbilidad CASCADE;
 CREATE TABLE "Salud".principales_morbilidad(
 	pmor_codigo bigserial NOT NULL,
-	pmor_anio character varying(4) NOT NULL,
+	pmor_anio integer NOT NULL,
+	"pmor_tipoConsulta" smallint,
 	pmor_nombre character varying(250),
 	pmor_atenciones integer,
-	"pmor_tipoConsulta" smallint,
 	CONSTRAINT principales_morbilidad_pk PRIMARY KEY (pmor_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".principales_morbilidad IS 'principales causas de morbilidad por tipo consulta  en el departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad."pmor_tipoConsulta" IS 'Llave foránea que apunta a la tabla tipo_consulta.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_nombre IS 'Nombre de la causa de mortalidad.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_atenciones IS 'Número de atenciones por consulta externa.';
 -- ddl-end --
 ALTER TABLE "Salud".principales_morbilidad OWNER TO postgres;
 -- ddl-end --
@@ -786,6 +1072,12 @@ CREATE TABLE "Salud".tipo_consulta(
 	CONSTRAINT tipo_consulta_pk PRIMARY KEY (tcon_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_consulta IS 'Almacena las diferentes tipo de consultas medicas (urgencias, externas, hospitalización, etc)';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_consulta.tcon_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_consulta.tcon_nombre IS 'Nombre de la consulta medica.';
 -- ddl-end --
 ALTER TABLE "Salud".tipo_consulta OWNER TO postgres;
 -- ddl-end --
@@ -821,10 +1113,6 @@ ALTER TABLE "Salud".huerfanos OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Salud".cobertura_aseguramiento CASCADE;
 CREATE TABLE "Salud".cobertura_aseguramiento(
 	coas_codigo bigserial NOT NULL,
-	"coas_codMunicipio" integer,
-	coas_anio smallint NOT NULL,
-	"coas_poblacionTotal" integer,
-	"coas_poblacionSisben" integer,
 	"coas_codTipoPoblacionCesada" integer,
 	"coas_numPersonas" integer,
 	"coas_numListadosCensales" integer,
@@ -832,11 +1120,28 @@ CREATE TABLE "Salud".cobertura_aseguramiento(
 	"coas_totalAfiliadosContributivo" integer,
 	"coas_porcentajeCobeturaSubsidiado" double precision,
 	"coas_porcentajeSGSSS" double precision,
+	"coas_codPoblacionSensadaMunicipio" bigint NOT NULL,
 	CONSTRAINT cobertura_aseguramiento_pk PRIMARY KEY (coas_codigo)
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Salud".cobertura_aseguramiento IS 'Cobertura y aseguramiento a los regimenes subsidiado y contributivo por municipios';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento.coas_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_codTipoPoblacionCesada" IS 'Llave foránea que apunta a la tabla tipo_poblacion_censada';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_numPersonas" IS 'Cantidad de la población listada en determinada categoría.';
+-- ddl-end --
 COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_numListadosCensales" IS 'Total de SISBEN  1 y 2 mas listados censales';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_totalAfiliadosSubsidiado" IS 'Total afiliados con  régimen subsdiado.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_totalAfiliadosContributivo" IS 'Total afiliados régimen contributivo';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_porcentajeCobeturaSubsidiado" IS 'Porcentaje de cobertura de afiliación de régimen subsidiado.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_porcentajeSGSSS" IS 'Co AFIL SGSSS ';
 -- ddl-end --
 ALTER TABLE "Salud".cobertura_aseguramiento OWNER TO postgres;
 -- ddl-end --
@@ -850,6 +1155,12 @@ CREATE TABLE "Salud".tipo_poblacion_censada(
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Salud".tipo_poblacion_censada IS 'Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_poblacion_censada.tpoce_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_poblacion_censada.tpoce_nombre IS 'Nombre de la población censada.';
+-- ddl-end --
 ALTER TABLE "Salud".tipo_poblacion_censada OWNER TO postgres;
 -- ddl-end --
 
@@ -857,11 +1168,17 @@ ALTER TABLE "Salud".tipo_poblacion_censada OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Salud"."casos_VHI-sida" CASCADE;
 CREATE TABLE "Salud"."casos_VHI-sida"(
 	cvih_codigo bigserial NOT NULL,
-	cvih_anio date NOT NULL,
+	cvih_anio integer NOT NULL,
 	"cvih_numCasos" integer,
 	CONSTRAINT "casos_VHI-sida_pk" PRIMARY KEY (cvih_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud"."casos_VHI-sida" IS 'Casos de VIH-SIDA';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."casos_VHI-sida".cvih_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."casos_VHI-sida".cvih_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
 ALTER TABLE "Salud"."casos_VHI-sida" OWNER TO postgres;
 -- ddl-end --
@@ -870,12 +1187,22 @@ ALTER TABLE "Salud"."casos_VHI-sida" OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Salud".vih_genero CASCADE;
 CREATE TABLE "Salud".vih_genero(
 	vihg_codigo bigserial NOT NULL,
-	vihg_anio date NOT NULL,
+	vihg_anio integer NOT NULL,
 	vihg_genero integer NOT NULL,
 	"vihg_numeroCasos" integer NOT NULL,
 	CONSTRAINT vih_genero_pk PRIMARY KEY (vihg_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".vih_genero IS 'Número de casos de vih por genero.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_genero.vihg_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_genero.vihg_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_genero.vihg_genero IS 'Llave foránea que apunta a la tabla genero.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_genero."vihg_numeroCasos" IS 'Número de casos';
 -- ddl-end --
 ALTER TABLE "Salud".vih_genero OWNER TO postgres;
 -- ddl-end --
@@ -884,11 +1211,22 @@ ALTER TABLE "Salud".vih_genero OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Salud"."vih_viaTransmision" CASCADE;
 CREATE TABLE "Salud"."vih_viaTransmision"(
 	vihvia_codigo bigserial NOT NULL,
-	vihvia_anio character varying(4) NOT NULL,
+	vihvia_anio integer NOT NULL,
 	"vihvia_codTipoTransmision" smallint NOT NULL,
+	"vihvia_numeroCasos" integer,
 	CONSTRAINT "vih_viaTransmision_pk" PRIMARY KEY (vihvia_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud"."vih_viaTransmision" IS 'Vias de transmision de VIH.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."vih_viaTransmision".vihvia_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."vih_viaTransmision".vihvia_anio IS 'Llave foránea que apunta a la tabla anio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."vih_viaTransmision"."vihvia_codTipoTransmision" IS 'Llave foránea que apunta a la tabla vias de trasmisión.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."vih_viaTransmision"."vihvia_numeroCasos" IS 'Número de casos registrados por cada tipo de transmisión';
 -- ddl-end --
 ALTER TABLE "Salud"."vih_viaTransmision" OWNER TO postgres;
 -- ddl-end --
@@ -901,6 +1239,12 @@ CREATE TABLE "Salud".tipo_transmision(
 	CONSTRAINT tipo_transmision_pk PRIMARY KEY (ttrans_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_transmision IS 'Tabla que contiene el nombre de los tipos de trasmision.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_transmision.ttrans_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_transmision.ttrans_nombre IS 'tipos de trasmisión.';
 -- ddl-end --
 ALTER TABLE "Salud".tipo_transmision OWNER TO postgres;
 -- ddl-end --
@@ -917,16 +1261,31 @@ CREATE TABLE public.genero(
 ALTER TABLE public.genero OWNER TO postgres;
 -- ddl-end --
 
--- object: "Salud".vih_clasificacion | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".vih_clasificacion CASCADE;
-CREATE TABLE "Salud".vih_clasificacion(
+INSERT INTO public.genero (gen_codigo, gen_nombre) VALUES (E'1', E'Hombre');
+-- ddl-end --
+INSERT INTO public.genero (gen_codigo, gen_nombre) VALUES (E'2', E'Mujer');
+-- ddl-end --
+
+-- object: "Salud".vih_casos_clasificacion | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".vih_casos_clasificacion CASCADE;
+CREATE TABLE "Salud".vih_casos_clasificacion(
 	vihcla_codigo bigserial NOT NULL,
-	vihcla_anio character varying(4) NOT NULL,
-	CONSTRAINT vih_clasificacion_pk PRIMARY KEY (vihcla_codigo)
+	vihcla_anio integer NOT NULL,
+	"vihcla_codClasificacion" smallint,
+	"vihcla_numeroCasos" integer,
+	CONSTRAINT vih_casos_clasificacion_pk PRIMARY KEY (vihcla_codigo)
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".vih_clasificacion OWNER TO postgres;
+COMMENT ON TABLE "Salud".vih_casos_clasificacion IS 'Tabla que contiene la calsificación de VIH.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_clasificacion.vihcla_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_clasificacion.vihcla_anio IS 'Llave foranea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_clasificacion."vihcla_codClasificacion" IS 'Llave foránea que apunta al tipo de clasificación del VIH';
+-- ddl-end --
+ALTER TABLE "Salud".vih_casos_clasificacion OWNER TO postgres;
 -- ddl-end --
 
 -- object: "Salud".dengue | type: TABLE --
@@ -934,14 +1293,24 @@ ALTER TABLE "Salud".vih_clasificacion OWNER TO postgres;
 CREATE TABLE "Salud".dengue(
 	den_codigo bigserial NOT NULL,
 	"den_codMunicipio" integer,
-	den_anio character varying(4),
+	den_anio integer,
 	den_clasico integer,
 	den_grave integer,
 	CONSTRAINT dengue_pk PRIMARY KEY (den_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Salud".dengue IS 'tabla casos de dengue clasico y grave';
+COMMENT ON TABLE "Salud".dengue IS 'Dengue clásico y dengue grave confirmado por laboratorio, por municipios.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".dengue.den_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".dengue."den_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".dengue.den_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".dengue.den_clasico IS 'Casos confirmados de dengue clásico';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".dengue.den_grave IS 'Casos confirmados de dengue grave';
 -- ddl-end --
 ALTER TABLE "Salud".dengue OWNER TO postgres;
 -- ddl-end --
@@ -951,7 +1320,7 @@ ALTER TABLE "Salud".dengue OWNER TO postgres;
 CREATE TABLE "Salud".hospitalizacion(
 	hos_codigo bigserial NOT NULL,
 	"hos_codMunicipio" integer,
-	hos_anio character varying(4) NOT NULL,
+	hos_anio integer NOT NULL,
 	hos_num_camas integer,
 	hos_num_egresos integer,
 	hos_dias_camas_disponibles integer,
@@ -964,6 +1333,30 @@ CREATE TABLE "Salud".hospitalizacion(
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Salud".hospitalizacion IS 'Información sobre el numero de camas, dias camas disponibles, dias camas ocupadas, porcentaje ocupacional, dias estancia egresos, promedio dia estancia y giros de camas por municipios.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion."hos_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_num_camas IS 'Numero de camas';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_num_egresos IS 'Numero de egresos por hospitalización';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_dias_camas_disponibles IS 'Número dias camas disponibles';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_dias_camas_ocupadas IS 'Número dias camas ocupadas';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_porc_ocupacional IS 'Porcentanje de ocupación de las camas';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_dias_estancia_egresos IS 'Días de estancia de los egresados por hospitalización';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_giros_camas IS 'Giros de las camas';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".hospitalizacion.hos_promedio_estancia IS 'Promedio de la estancia';
+-- ddl-end --
 ALTER TABLE "Salud".hospitalizacion OWNER TO postgres;
 -- ddl-end --
 
@@ -972,13 +1365,27 @@ ALTER TABLE "Salud".hospitalizacion OWNER TO postgres;
 CREATE TABLE "Salud"."Tuberculosis"(
 	tub_codigo bigserial NOT NULL,
 	"tub_codMunicipio" integer,
-	tub_anio character varying(4) NOT NULL,
+	tub_anio integer NOT NULL,
 	tub_poblacion integer,
 	tub_incidencia integer,
 	tub_tasa_habitantes integer,
 	CONSTRAINT tuberculosis_pk PRIMARY KEY (tub_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud"."Tuberculosis" IS 'Incidencia de la tuberculosis de todas las formas por municipios en el departamento';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Tuberculosis".tub_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Tuberculosis"."tub_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Tuberculosis".tub_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Tuberculosis".tub_poblacion IS 'Número de habitantes por municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Tuberculosis".tub_incidencia IS 'Casos de tuberculosis en los municipios';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Tuberculosis".tub_tasa_habitantes IS 'Relación de casos presentados por cada 1000 habitantes';
 -- ddl-end --
 ALTER TABLE "Salud"."Tuberculosis" OWNER TO postgres;
 -- ddl-end --
@@ -988,13 +1395,27 @@ ALTER TABLE "Salud"."Tuberculosis" OWNER TO postgres;
 CREATE TABLE "Salud".organismos_salud(
 	orsa_codigo bigserial NOT NULL,
 	"orsa_codMunicipio" integer,
-	orsa_anio character varying(4) NOT NULL,
+	orsa_anio integer NOT NULL,
 	orsa_num_camas integer,
 	"orsa_codTipo_organismos_salud" integer,
 	orsa_num_organismos_salud integer,
 	CONSTRAINT organismos_salud_pk PRIMARY KEY (orsa_codigo)
 
 );
+-- ddl-end --
+COMMENT ON TABLE "Salud".organismos_salud IS 'Organismos de salud y número de camas por municipios en el departamento.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".organismos_salud.orsa_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".organismos_salud."orsa_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".organismos_salud.orsa_anio IS 'Llave foránea que apunta a la tabla anio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".organismos_salud.orsa_num_camas IS 'Número de camas por municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".organismos_salud."orsa_codTipo_organismos_salud" IS 'Llave foránea que apunta a la tabla tipo_orsa';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".organismos_salud.orsa_num_organismos_salud IS 'Número de organismos de salud';
 -- ddl-end --
 ALTER TABLE "Salud".organismos_salud OWNER TO postgres;
 -- ddl-end --
@@ -1008,40 +1429,46 @@ CREATE TABLE "Salud".tipo_orsa(
 
 );
 -- ddl-end --
+COMMENT ON TABLE "Salud".tipo_orsa IS 'Almacena las diferentes tipos de organismos de salud (ESE Hospitales, Centros de salud, Puestos de salud, Clinicas, IPS, etc...)';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_orsa.tp_orsa_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_orsa.tipo_nombre_orsa IS 'Nombre del tipo de organismo de salud';
+-- ddl-end --
 ALTER TABLE "Salud".tipo_orsa OWNER TO postgres;
 -- ddl-end --
 
--- object: "Educacion"."instituciones_Educativas" | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion"."instituciones_Educativas" CASCADE;
-CREATE TABLE "Educacion"."instituciones_Educativas"(
+-- object: "Educacion".instituciones_educativas | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".instituciones_educativas CASCADE;
+CREATE TABLE "Educacion".instituciones_educativas(
 	ine_codigo bigserial NOT NULL,
 	"ine_codMunicipio" integer,
 	ine_anio smallint NOT NULL,
 	ine_tipo_institucion integer,
 	ine_tipo_plantel integer,
 	ine_area integer,
-	ine_num_instituciones_oficiales integer,
+	ine_num_instituciones integer,
 	CONSTRAINT intituciones_educativas_pk PRIMARY KEY (ine_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion"."instituciones_Educativas" IS 'Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento';
+COMMENT ON TABLE "Educacion".instituciones_educativas IS 'Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas".ine_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas"."ine_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+COMMENT ON COLUMN "Educacion".instituciones_educativas."ine_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas".ine_anio IS 'Llave foránea que apunta a la tabla anio.';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas".ine_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas".ine_tipo_plantel IS 'Llave foránea que apunta a la tabla tipo_plantel_educativo.';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_tipo_plantel IS 'Llave foránea que apunta a la tabla tipo_plantel_educativo.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas".ine_area IS 'Llave foránea que apunta a la tabla area.';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_area IS 'Llave foránea que apunta a la tabla area.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."instituciones_Educativas".ine_num_instituciones_oficiales IS 'Numero de instituciones, centros educativos y sedes.';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_num_instituciones IS 'Numero de instituciones, centros educativos y sedes.';
 -- ddl-end --
-ALTER TABLE "Educacion"."instituciones_Educativas" OWNER TO postgres;
+ALTER TABLE "Educacion".instituciones_educativas OWNER TO postgres;
 -- ddl-end --
 
 -- object: "Educacion".tipo_plantel_educativo | type: TABLE --
@@ -1068,8 +1495,6 @@ CREATE TABLE "Educacion".matriculas(
 	mat_codigo bigserial NOT NULL,
 	"mat_codMunicipio" integer,
 	mat_anio smallint,
-	mat_poblacion_escolar integer,
-	mat_num_poblacion_escolar integer,
 	mat_tipo_institucion integer,
 	mat_tipo_nivel_educativo integer,
 	mat_grado integer,
@@ -1087,10 +1512,6 @@ COMMENT ON COLUMN "Educacion".matriculas.mat_codigo IS 'Llave primaria para la i
 COMMENT ON COLUMN "Educacion".matriculas."mat_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio,';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".matriculas.mat_anio IS 'Llave foránea que apunta a la tabla anio.';
--- ddl-end --
-COMMENT ON COLUMN "Educacion".matriculas.mat_poblacion_escolar IS 'Llave foránea que apunta a la tabla poblaccion_escolar.';
--- ddl-end --
-COMMENT ON COLUMN "Educacion".matriculas.mat_num_poblacion_escolar IS 'Número de población.';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".matriculas.mat_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion.';
 -- ddl-end --
@@ -1190,7 +1611,7 @@ CREATE TABLE "Educacion"."Clasificacion_icfes_estab_educativos"(
 	"cies_codMunicipio" integer,
 	cies_tipo_institucion integer,
 	cies_indice integer,
-	cies_categoria character varying(2),
+	cies_categoria character varying(50),
 	CONSTRAINT "Clasificacion_icfes_establecimeintos_educativos_pk" PRIMARY KEY (cies_codigo)
 
 );
@@ -1228,6 +1649,10 @@ CREATE TABLE "Educacion".comportamiento_alumnos(
 	coal_aprobados integer,
 	coal_reprobados integer,
 	coal_desertores integer,
+	coal_porce_aprobados double precision,
+	coal_porce_reprobados double precision,
+	"coal_porce_estudiantes desertores" double precision,
+	coal_porce_traslados double precision,
 	CONSTRAINT comportamiento_alumnos_pk PRIMARY KEY (coal_codigo)
 
 );
@@ -1247,6 +1672,12 @@ COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_aprobados IS 'Número 
 COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_reprobados IS 'Número de estudiantes reprobados';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_desertores IS 'Número de estudiantes desertores';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_porce_aprobados IS 'Prcentanje de estudiantes aprobados';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_porce_reprobados IS 'Porcentaje estudiantes reprobados';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_porce_traslados IS 'Porcentaje de estudiantes trasladados';
 -- ddl-end --
 ALTER TABLE "Educacion".comportamiento_alumnos OWNER TO postgres;
 -- ddl-end --
@@ -1485,6 +1916,405 @@ CREATE TABLE public.anio(
 ALTER TABLE public.anio OWNER TO postgres;
 -- ddl-end --
 
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'1', E'1990');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'2', E'1991');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'3', E'1992');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'4', E'1993');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'5', E'1994');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'6', E'1995');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'7', E'1996');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'8', E'1997');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'9', E'1998');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'10', E'1999');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'11', E'2000');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'12', E'2001');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'13', E'2002');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'14', E'2003');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'15', E'2004');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'16', E'2005');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'17', E'2006');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'18', E'2007');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'19', E'2008');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'20', E'2009');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'21', E'2010');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'22', E'2011');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'23', E'2012');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'24', E'2013');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'25', E'2014');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'26', E'2015');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'27', E'2016');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'28', E'2017');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'29', E'2018');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'30', E'2019');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'31', E'2020');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'32', E'2021');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'33', E'2022');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'34', E'2023');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'35', E'2024');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'36', E'2025');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'37', E'2026');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'38', E'2027');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'39', E'2028');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'40', E'2029');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'41', E'2030');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'42', E'2031');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'43', E'2032');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'44', E'2033');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'45', E'2034');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'46', E'2035');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'47', E'2036');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'48', E'2037');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'49', E'2038');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'50', E'2039');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'51', E'2040');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'52', E'2041');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'53', E'2042');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'54', E'2043');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'55', E'2044');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'56', E'2045');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'57', E'2046');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'58', E'2047');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'59', E'2048');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'60', E'2049');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'61', E'2050');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'62', E'2051');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'63', E'2052');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'64', E'2053');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'65', E'2054');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'66', E'2055');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'67', E'2056');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'68', E'2057');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'69', E'2058');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'70', E'2059');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'71', E'2060');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'72', E'2061');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'73', E'2062');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'74', E'2063');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'75', E'2064');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'76', E'2065');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'77', E'2066');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'78', E'2067');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'79', E'2068');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'80', E'2069');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'81', E'2070');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'82', E'2071');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'83', E'2072');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'84', E'2073');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'85', E'2074');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'86', E'2075');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'87', E'2076');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'88', E'2077');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'89', E'2078');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'90', E'2079');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'91', E'2080');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'92', E'2081');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'93', E'2082');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'94', E'2083');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'95', E'2084');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'96', E'2085');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'97', E'2086');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'98', E'2087');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'99', E'2088');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'100', E'2089');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'101', E'2090');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'102', E'2091');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'103', E'2092');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'104', E'2093');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'105', E'2094');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'106', E'2095');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'107', E'2096');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'108', E'2097');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'109', E'2098');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'110', E'2099');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'111', E'2100');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'112', E'2101');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'113', E'2102');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'114', E'2103');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'115', E'2104');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'116', E'2105');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'117', E'2106');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'118', E'2107');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'119', E'2108');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'120', E'2109');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'121', E'2110');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'122', E'2111');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'123', E'2112');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'124', E'2113');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'125', E'2114');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'126', E'2115');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'127', E'2116');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'128', E'2117');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'129', E'2118');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'130', E'2119');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'131', E'2120');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'132', E'2121');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'133', E'2122');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'134', E'2123');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'135', E'2124');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'136', E'2125');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'137', E'2126');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'138', E'2127');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'139', E'2128');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'140', E'2129');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'141', E'2130');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'142', E'2131');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'143', E'2132');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'144', E'2133');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'145', E'2134');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'146', E'2135');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'147', E'2136');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'148', E'2137');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'149', E'2138');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'150', E'2139');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'151', E'2140');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'152', E'2141');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'153', E'2142');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'154', E'2143');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'155', E'2144');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'156', E'2145');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'157', E'2146');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'158', E'2147');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'159', E'2148');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'160', E'2149');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'161', E'2150');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'162', E'2151');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'163', E'2152');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'164', E'2153');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'165', E'2154');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'166', E'2155');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'167', E'2156');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'168', E'2157');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'169', E'2158');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'170', E'2159');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'171', E'2160');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'172', E'2161');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'173', E'2162');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'174', E'2163');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'175', E'2164');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'176', E'2165');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'177', E'2166');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'178', E'2167');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'179', E'2168');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'180', E'2169');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'181', E'2170');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'182', E'2171');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'183', E'2172');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'184', E'2173');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'185', E'2174');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'186', E'2175');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'187', E'2176');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'188', E'2177');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'189', E'2178');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'190', E'2179');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'191', E'2180');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'192', E'2181');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'193', E'2182');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'194', E'2183');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'195', E'2184');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'196', E'2185');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'197', E'2186');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'198', E'2187');
+-- ddl-end --
+INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'199', E'2188');
+-- ddl-end --
+
 -- object: public.mes | type: TABLE --
 -- DROP TABLE IF EXISTS public.mes CASCADE;
 CREATE TABLE public.mes(
@@ -1495,6 +2325,31 @@ CREATE TABLE public.mes(
 );
 -- ddl-end --
 ALTER TABLE public.mes OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'1', E'Enero');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'2', E'Febrero');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'3', E'Marzo');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'4', E'Abril');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'5', E'Mayo');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'6', E'Junio');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'7', E'Julio');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'8', E'Agosto');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'9', E'Septiembre');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'10', E'Octubre');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'11', E'Noviembre');
+-- ddl-end --
+INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'12', E'Diciembre');
 -- ddl-end --
 
 -- object: public.dia | type: TABLE --
@@ -1519,6 +2374,15 @@ CREATE TABLE public.semestre(
 );
 -- ddl-end --
 ALTER TABLE public.semestre OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'1', E'I');
+-- ddl-end --
+INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'2', E'II');
+-- ddl-end --
+INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'3', E'III');
+-- ddl-end --
+INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'4', E'IV');
 -- ddl-end --
 
 -- object: "Educacion".icfes | type: TABLE --
@@ -1581,13 +2445,18 @@ CREATE TABLE public.alcance(
 
 );
 -- ddl-end --
-COMMENT ON TABLE public.alcance IS 'Tabla que gaurda la informacion de si es a nivel departamental o nacional';
+COMMENT ON TABLE public.alcance IS 'Tabla que guarda la informacion de si es a nivel departamental o nacional';
 -- ddl-end --
 COMMENT ON COLUMN public.alcance.alc_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
 COMMENT ON COLUMN public.alcance.alc_nombre IS 'Nombre que indica si es a nivel nacional o departamental';
 -- ddl-end --
 ALTER TABLE public.alcance OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.alcance (alc_codigo, alc_nombre) VALUES (E'1', E'Nacional');
+-- ddl-end --
+INSERT INTO public.alcance (alc_codigo, alc_nombre) VALUES (E'2', E'Departamental');
 -- ddl-end --
 
 -- object: "cifras macro economicas".banco | type: TABLE --
@@ -1823,13 +2692,32 @@ CREATE TABLE public.cervecerias(
 
 );
 -- ddl-end --
-COMMENT ON TABLE public.cervecerias IS 'Nombre y codigos de cervecerias. FUENTE: Secretaría de Hacienda Departamental.';
+COMMENT ON TABLE public.cervecerias IS 'Nombre y códigos de cervecerías. FUENTE: Secretaría de Hacienda Departamental.';
 -- ddl-end --
 COMMENT ON COLUMN public.cervecerias.cerv_codigo IS 'Llave primaria de la tabla';
 -- ddl-end --
 COMMENT ON COLUMN public.cervecerias.cerv_nombre IS 'Nombre de la cerveceria';
 -- ddl-end --
 ALTER TABLE public.cervecerias OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'1', E'Cerveza Extranjera');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'2', E'Cerveza Cerveunion');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'3', E'Bavaria');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'4', E'Cerveza del Valle');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'5', E'Cerveza Colon S.A.');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'6', E'Artesana BEER Company S.A.');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'7', E'Cerveceria BBC S.A.');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'8', E'Artesanos de Cervezas S.A.S.');
+-- ddl-end --
+INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'9', E'Jairo Rafael Oñate Carvajal');
 -- ddl-end --
 
 -- object: "cifras macro economicas".consumo_cerveza | type: TABLE --
@@ -1907,6 +2795,17 @@ COMMENT ON COLUMN public.tipo_combustible.tcom_nombre IS 'Nombre de combustible'
 ALTER TABLE public.tipo_combustible OWNER TO postgres;
 -- ddl-end --
 
+INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'1', E'Gasolina');
+-- ddl-end --
+INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'2', E'Gasolina extra');
+-- ddl-end --
+INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'3', E'Gasolina corriente');
+-- ddl-end --
+INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'4', E'ACPM');
+-- ddl-end --
+INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'5', E'Gas Natural');
+-- ddl-end --
+
 -- object: "cifras macro economicas".consumo_combustible | type: TABLE --
 -- DROP TABLE IF EXISTS "cifras macro economicas".consumo_combustible CASCADE;
 CREATE TABLE "cifras macro economicas".consumo_combustible(
@@ -1944,13 +2843,26 @@ CREATE TABLE public.tipo_licor(
 
 );
 -- ddl-end --
-COMMENT ON TABLE public.tipo_licor IS 'Almacenamiento de los diferentes tipo de licores(nacionales, extranjeros, etc).';
+COMMENT ON TABLE public.tipo_licor IS 'Almacenamiento de los diferentes tipo de licores (nacionales, extranjeros, etc).';
 -- ddl-end --
 COMMENT ON COLUMN public.tipo_licor.tli_codigo IS 'Llave principal de la tabla.';
 -- ddl-end --
 COMMENT ON COLUMN public.tipo_licor.tli_nombre IS 'Nombre del tipo de licor(extranjero, nacional, vino, etc).';
 -- ddl-end --
 ALTER TABLE public.tipo_licor OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'1', E'Nacional');
+-- ddl-end --
+INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'2', E'Extranjero');
+-- ddl-end --
+INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'3', E'Departamental');
+-- ddl-end --
+INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'4', E'Vino Nacional');
+-- ddl-end --
+INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'5', E'Vino Extranjero');
+-- ddl-end --
+INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'6', E'Licor Extranjero');
 -- ddl-end --
 
 -- object: "cifras macro economicas".consumo_licor | type: TABLE --
@@ -2357,6 +3269,73 @@ COMMENT ON TABLE public.departamento IS 'Tabla que contiene los nombres de los d
 COMMENT ON COLUMN public.departamento.dep_nombre IS 'Nombre de los departamentos en el país.';
 -- ddl-end --
 ALTER TABLE public.departamento OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'91', E'Amazonas');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'5', E'Antioquia');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'81', E'Arauca');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'8', E'Atlántico');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'11', E'Bogota D.C');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'13', E'Bolivar');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'15', E'Boyacá');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'17', E'Caldas');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'18', E'Caquetá');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'85', E'Casanare');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'19', E'Cauca');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'20', E'Cesar');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'27', E'Chocó');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'23', E'Córdoba');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'25', E'Cundinamarca');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'94', E'Guainía');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'95', E'Guaviare');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'41', E'Huila');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'44', E'La Guajira');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'47', E'Magdalena');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'50', E'Meta');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'52', E'Nariño');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'54', E'Norte de Santander');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'86', E'Putumayo');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'63', E'Quindio');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'66', E'Risaralda');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'88', E'San Andrés');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'68', E'Santander');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'70', E'Sucre');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'73', E'Tolima');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'76', E'Valle del Cauca');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'97', E'Vaupés');
+-- ddl-end --
+INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'99', E'Vichada');
 -- ddl-end --
 
 -- object: "Cultura"."Turistas_parques_museo" | type: TABLE --
@@ -2954,9 +3933,9 @@ COMMENT ON COLUMN public.tipo_vivienda.tco_nombre IS 'NOmbre, casa o apartamento
 ALTER TABLE public.tipo_vivienda OWNER TO postgres;
 -- ddl-end --
 
--- object: "Construccion"."Licencias" | type: TABLE --
--- DROP TABLE IF EXISTS "Construccion"."Licencias" CASCADE;
-CREATE TABLE "Construccion"."Licencias"(
+-- object: "Construccion".licencias | type: TABLE --
+-- DROP TABLE IF EXISTS "Construccion".licencias CASCADE;
+CREATE TABLE "Construccion".licencias(
 	lic_codigo bigserial NOT NULL,
 	lic_anio integer,
 	lic_alcance integer,
@@ -2968,23 +3947,23 @@ CREATE TABLE "Construccion"."Licencias"(
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Construccion"."Licencias" IS 'Tabla que contiene el numero de licencias aprobadas para construcción.';
+COMMENT ON TABLE "Construccion".licencias IS 'Tabla que contiene el numero de licencias aprobadas para construcción.';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias".lic_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Construccion".licencias.lic_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias".lic_anio IS 'Llave foránea que apunta a la tabla anio';
+COMMENT ON COLUMN "Construccion".licencias.lic_anio IS 'Llave foránea que apunta a la tabla anio';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias".lic_alcance IS 'Llave foránea que apunta a la tabla alcance.';
+COMMENT ON COLUMN "Construccion".licencias.lic_alcance IS 'Llave foránea que apunta a la tabla alcance.';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias"."lic_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio.';
+COMMENT ON COLUMN "Construccion".licencias."lic_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio.';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias".lic_tipo_vivienda IS 'Llave foránea que apunta a la tabal tipo_vivienda.';
+COMMENT ON COLUMN "Construccion".licencias.lic_tipo_vivienda IS 'Llave foránea que apunta a la tabal tipo_vivienda.';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias".lic_num_licencias IS 'Número de licencias.';
+COMMENT ON COLUMN "Construccion".licencias.lic_num_licencias IS 'Número de licencias.';
 -- ddl-end --
-COMMENT ON COLUMN "Construccion"."Licencias".lic_area_contruir IS 'Área de construcción.';
+COMMENT ON COLUMN "Construccion".licencias.lic_area_contruir IS 'Área de construcción.';
 -- ddl-end --
-ALTER TABLE "Construccion"."Licencias" OWNER TO postgres;
+ALTER TABLE "Construccion".licencias OWNER TO postgres;
 -- ddl-end --
 
 -- object: "Construccion".catastro | type: TABLE --
@@ -3357,7 +4336,9 @@ ALTER TABLE "Empleo"."clases_enLas_entidades_admon_central_deptal" OWNER TO post
 -- DROP TABLE IF EXISTS "Empleo"."tipo_empresa_porNum_trabajadores" CASCADE;
 CREATE TABLE "Empleo"."tipo_empresa_porNum_trabajadores"(
 	tet_codigo serial NOT NULL,
-	tet_rango character varying(300)
+	tet_rango character varying(300),
+	CONSTRAINT "tipo_empresa_porNum_trabajadores_pk" PRIMARY KEY (tet_codigo)
+
 );
 -- ddl-end --
 COMMENT ON TABLE "Empleo"."tipo_empresa_porNum_trabajadores" IS 'Tabla que contiene el tipo de mepresa clasificandola por numero de trabajadores.';
@@ -3948,6 +4929,113 @@ COMMENT ON COLUMN public.actividad_economica.ace_codigo IS 'Llave primaria para 
 COMMENT ON COLUMN public.actividad_economica.ace_nombre IS 'Nombre de la actividad econoconómica de la empresa.';
 -- ddl-end --
 ALTER TABLE public.actividad_economica OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'1', E'Comercio');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'2', E'Alimentos');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'3', E'Servicios');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'4', E'Confecciones');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'5', E'Artesanias');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'6', E'Metalmecanica');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'7', E'Muebles en Madera');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'8', E'Prefabricados');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'9', E'Calzado');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'10', E'Marroquineria');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'11', E'Juegos Artificiales');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'12', E'AGRICULTURA');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'13', E'Cultivo de café');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'14', E'Cultivo de otros productos agrícolas');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'15', E'Producción pecuaria y caza incluyendo las actividades veterinarias');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'16', E'Silvicultura');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'17', E'Pesca');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'18', E'EXPLOTACION DE MINAS Y CANTERAS');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'19', E'Extracción de carbón');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'20', E'Extracción de petróleo crudo y de gas natural; actividades de servicios relacionadas con la extracción de petróleo y de gas');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'21', E'Extracción de minerales metáliferos');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'22', E'Extracción de minerales no metálicos');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'23', E'INDUSTRIA MANUFACTURERA');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'24', E'SUMINISTRO DE ELECTRICIDAD');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'25', E'Generación');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'26', E'Fabricación de gas; distribución de combustibles gaseosos por tuberías; suministro de vapor y agua caliente');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'27', E'Captación');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'28', E'Eliminación de desperdicios y aguas residuales');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'29', E'CONSTRUCCION');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'30', E'Construcción de edificaciones completas y de partes de edificaciones;  acondicionamiento de edificaciones');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'31', E'Construcción de obras de ingeniería civil');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'32', E'COMERCIO');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'33', E'Comercio');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'34', E'Mantenimiento y reparación de vehículos automotores; reparación de efectos personales y enseres domésticos');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'35', E'Hoteles');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'36', E'TRANSPORTE');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'37', E'Transporte por vía terrestre');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'38', E'Transporte por vía acuática');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'39', E'Transporte por vía aérea');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'40', E'Actividades complementarias y auxiliares al transporte; actividades de agencias de viajes');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'41', E'Correo y telecomunicaciones');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'42', E'ESTABLECIMIENTOS FINANCIEROS');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'43', E'Intermediación financiera');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'44', E'Actividades inmobiliarias y alquiler de vivienda');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'45', E'Actividades de servicios a las empresas excepto servicios financieros e inmobiliarios');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'46', E'ACTIVIDADES DE SERVICIOS SOCIALES');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'47', E'Administración pública y defensa; seguridad social de afiliación obligatoria');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'48', E'Educación de mercado');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'49', E'Educación de no mercado');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'50', E'Servicios sociales y de salud de mercado');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'51', E'Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de mercado');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'52', E'Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de no mercado');
+-- ddl-end --
+INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'53', E'Hogares privados con servicio doméstico');
 -- ddl-end --
 
 -- object: "Movimeinto empresarial".microempresas | type: TABLE --
@@ -4907,7 +5995,9 @@ ALTER TABLE public.tipo_documento_id OWNER TO postgres;
 -- DROP TABLE IF EXISTS "Electorales".solicitud_documento_id CASCADE;
 CREATE TABLE "Electorales".solicitud_documento_id(
 	sdi_codigo serial NOT NULL,
-	sdi_nombre character varying(100)
+	sdi_nombre character varying(100),
+	CONSTRAINT solicitud_documento_id_pk PRIMARY KEY (sdi_codigo)
+
 );
 -- ddl-end --
 COMMENT ON TABLE "Electorales".solicitud_documento_id IS 'Tabla que contiene información acerca del documento de identidad (primera vez, duplicado, rectificación...)';
@@ -5968,6 +7058,142 @@ COMMENT ON COLUMN poblacion.poblacion_proyeccion.pyp_num_personas IS 'Proyecció
 ALTER TABLE poblacion.poblacion_proyeccion OWNER TO postgres;
 -- ddl-end --
 
+-- object: "Salud".poblacion_censada_municipio | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".poblacion_censada_municipio CASCADE;
+CREATE TABLE "Salud".poblacion_censada_municipio(
+	psm_codigo bigserial NOT NULL,
+	"psm_codMunicipio" smallint NOT NULL,
+	psm_anio smallint NOT NULL,
+	"psm_poblacionTotal" integer,
+	"psm_poblacionSisben" integer,
+	CONSTRAINT poblacion_sensada_municipio_pk PRIMARY KEY (psm_codigo)
+
+);
+-- ddl-end --
+ALTER TABLE "Salud".poblacion_censada_municipio OWNER TO postgres;
+-- ddl-end --
+
+-- object: "Salud".vih_clasificacion | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".vih_clasificacion CASCADE;
+CREATE TABLE "Salud".vih_clasificacion(
+	vicla_codigo smallserial NOT NULL,
+	vicla_nombre character varying(30),
+	CONSTRAINT vih_clasificacion_pk PRIMARY KEY (vicla_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".vih_clasificacion IS 'Almacenamiento de la clasificación del VIH';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_clasificacion.vicla_nombre IS 'Nombre de la clasificación del VIH';
+-- ddl-end --
+ALTER TABLE "Salud".vih_clasificacion OWNER TO postgres;
+-- ddl-end --
+
+-- object: "Educacion".poblacion_edad_escolar | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".poblacion_edad_escolar CASCADE;
+CREATE TABLE "Educacion".poblacion_edad_escolar(
+	ped_codigo bigserial NOT NULL,
+	"ped_codMunicipio" integer,
+	ped_anio smallint,
+	ped_poblacion_escolar integer,
+	ped_num_poblacion_escolar integer,
+	CONSTRAINT poblacion_edad_escolar_pk PRIMARY KEY (ped_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".poblacion_edad_escolar IS 'Número de personas en edad escolar';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".poblacion_edad_escolar.ped_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".poblacion_edad_escolar."ped_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio,';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".poblacion_edad_escolar.ped_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".poblacion_edad_escolar.ped_poblacion_escolar IS 'Llave foránea que apunta a la tabla poblaccion_escolar.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".poblacion_edad_escolar.ped_num_poblacion_escolar IS 'Número de población.';
+-- ddl-end --
+ALTER TABLE "Educacion".poblacion_edad_escolar OWNER TO postgres;
+-- ddl-end --
+
+-- object: "Deportes".deporte | type: TABLE --
+-- DROP TABLE IF EXISTS "Deportes".deporte CASCADE;
+CREATE TABLE "Deportes".deporte(
+	dep_codigo serial NOT NULL,
+	dep_nombre character varying(100) NOT NULL,
+	dep_descripcion character,
+	dep_desc_fuente character
+);
+-- ddl-end --
+COMMENT ON TABLE "Deportes".deporte IS 'Lista de deportes disponibles en el departamento del Huila';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".deporte.dep_codigo IS 'Código único de cada deporte';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".deporte.dep_nombre IS 'Nombre del deporte';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".deporte.dep_descripcion IS 'Descripción del deporte';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".deporte.dep_desc_fuente IS 'Fuente de la descripción del deporte mencionado';
+-- ddl-end --
+ALTER TABLE "Deportes".deporte OWNER TO sir_huila;
+-- ddl-end --
+
+-- object: "Deportes".torneo | type: TABLE --
+-- DROP TABLE IF EXISTS "Deportes".torneo CASCADE;
+CREATE TABLE "Deportes".torneo(
+	tor_codigo bigserial NOT NULL,
+	tor_fecha_inicio date NOT NULL,
+	tor_fecha_fin date NOT NULL,
+	"tor_codMunicipio" integer NOT NULL,
+	CONSTRAINT tor_codigo_pk PRIMARY KEY (tor_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Deportes".torneo IS 'Tabla de torneos del Huila';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".torneo.tor_codigo IS 'Código único';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".torneo.tor_fecha_inicio IS 'Fecha de inicio del torneo';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".torneo.tor_fecha_fin IS 'Fecha de finalización del torneo';
+-- ddl-end --
+COMMENT ON COLUMN "Deportes".torneo."tor_codMunicipio" IS 'Municipio en el que se desarrolló el torneo';
+-- ddl-end --
+ALTER TABLE "Deportes".torneo OWNER TO sir_huila;
+-- ddl-end --
+
+-- object: "Riesgos".desastres | type: TABLE --
+-- DROP TABLE IF EXISTS "Riesgos".desastres CASCADE;
+CREATE TABLE "Riesgos".desastres(
+	des_codigo serial NOT NULL,
+	des_hora_inicio timestamp NOT NULL,
+	des_hora_fin timestamp NOT NULL,
+	"des_codMunicipio" integer NOT NULL,
+	des_latitud double precision NOT NULL,
+	des_longitud double precision NOT NULL,
+	CONSTRAINT des_codigo_pk PRIMARY KEY (des_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Riesgos".desastres IS 'Desastres naturales registrados';
+-- ddl-end --
+COMMENT ON COLUMN "Riesgos".desastres.des_codigo IS 'Código único de los desastres naturales';
+-- ddl-end --
+COMMENT ON COLUMN "Riesgos".desastres.des_hora_inicio IS 'Hora de inicio del desastre';
+-- ddl-end --
+COMMENT ON COLUMN "Riesgos".desastres.des_hora_fin IS 'Hora de finalización del desastre';
+-- ddl-end --
+COMMENT ON COLUMN "Riesgos".desastres."des_codMunicipio" IS 'Código del municipio en el que fue localizado el desastre';
+-- ddl-end --
+COMMENT ON COLUMN "Riesgos".desastres.des_latitud IS 'Latitud geográfica de la ubicación del siniestro';
+-- ddl-end --
+COMMENT ON COLUMN "Riesgos".desastres.des_longitud IS 'Longitud geográfica del desastre natural';
+-- ddl-end --
+COMMENT ON CONSTRAINT des_codigo_pk ON "Riesgos".desastres  IS 'Restricción de llave primaria';
+-- ddl-end --
+ALTER TABLE "Riesgos".desastres OWNER TO sir_huila;
+-- ddl-end --
+
 -- object: "fk_codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Agropecuario".area_cosechada DROP CONSTRAINT IF EXISTS "fk_codMunicipio" CASCADE;
 ALTER TABLE "Agropecuario".area_cosechada ADD CONSTRAINT "fk_codMunicipio" FOREIGN KEY ("arco_codMunicipio")
@@ -6000,6 +7226,13 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE "Agropecuario".cultivo DROP CONSTRAINT IF EXISTS "fk_codTipoCultivo" CASCADE;
 ALTER TABLE "Agropecuario".cultivo ADD CONSTRAINT "fk_codTipoCultivo" FOREIGN KEY (cul_tipo)
 REFERENCES "Agropecuario".tipo_cultivo (tcul_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_codDepartamento" | type: CONSTRAINT --
+-- ALTER TABLE public.municipio DROP CONSTRAINT IF EXISTS "fk_codDepartamento" CASCADE;
+ALTER TABLE public.municipio ADD CONSTRAINT "fk_codDepartamento" FOREIGN KEY ("mun_codDepartamento")
+REFERENCES public.departamento (dep_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6108,10 +7341,24 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_explotacion_tipo_anio | type: CONSTRAINT --
+-- ALTER TABLE "Agropecuario".explotacion_raza DROP CONSTRAINT IF EXISTS fk_explotacion_tipo_anio CASCADE;
+ALTER TABLE "Agropecuario".explotacion_raza ADD CONSTRAINT fk_explotacion_tipo_anio FOREIGN KEY (exra_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_produccionLechera-CodMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Agropecuario".produccion_leche DROP CONSTRAINT IF EXISTS "fk_produccionLechera-CodMunicipio" CASCADE;
 ALTER TABLE "Agropecuario".produccion_leche ADD CONSTRAINT "fk_produccionLechera-CodMunicipio" FOREIGN KEY ("prol_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_producion_leche_anio | type: CONSTRAINT --
+-- ALTER TABLE "Agropecuario".produccion_leche DROP CONSTRAINT IF EXISTS fk_producion_leche_anio CASCADE;
+ALTER TABLE "Agropecuario".produccion_leche ADD CONSTRAINT fk_producion_leche_anio FOREIGN KEY (prol_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6122,10 +7369,24 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_inventario_ganado_porcino_anio | type: CONSTRAINT --
+-- ALTER TABLE "Agropecuario".inventario_ganado_porcino DROP CONSTRAINT IF EXISTS fk_inventario_ganado_porcino_anio CASCADE;
+ALTER TABLE "Agropecuario".inventario_ganado_porcino ADD CONSTRAINT fk_inventario_ganado_porcino_anio FOREIGN KEY (invgp_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_produccionPorcicola-codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Agropecuario".produccion_porcina DROP CONSTRAINT IF EXISTS "fk_produccionPorcicola-codMunicipio" CASCADE;
 ALTER TABLE "Agropecuario".produccion_porcina ADD CONSTRAINT "fk_produccionPorcicola-codMunicipio" FOREIGN KEY ("ppor_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_produccion_porc_anio | type: CONSTRAINT --
+-- ALTER TABLE "Agropecuario".produccion_porcina DROP CONSTRAINT IF EXISTS fk_produccion_porc_anio CASCADE;
+ALTER TABLE "Agropecuario".produccion_porcina ADD CONSTRAINT fk_produccion_porc_anio FOREIGN KEY (ppor_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6143,6 +7404,13 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_apicultura_anio | type: CONSTRAINT --
+-- ALTER TABLE "Agropecuario".apicultura DROP CONSTRAINT IF EXISTS fk_apicultura_anio CASCADE;
+ALTER TABLE "Agropecuario".apicultura ADD CONSTRAINT fk_apicultura_anio FOREIGN KEY (api_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_vacunacion-codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".vacunacion_biologicos DROP CONSTRAINT IF EXISTS "fk_vacunacion-codMunicipio" CASCADE;
 ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT "fk_vacunacion-codMunicipio" FOREIGN KEY ("vabi_codMunicipio")
@@ -6152,8 +7420,15 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- object: "fk_vacunacion-codVirus" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".vacunacion_biologicos DROP CONSTRAINT IF EXISTS "fk_vacunacion-codVirus" CASCADE;
-ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT "fk_vacunacion-codVirus" FOREIGN KEY ("vabi_codVirus")
-REFERENCES "Salud".virus (vir_codigo) MATCH FULL
+ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT "fk_vacunacion-codVirus" FOREIGN KEY ("vabi_codBiologicos")
+REFERENCES "Salud".biologicos (bio_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vacunacion_bio_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vacunacion_biologicos DROP CONSTRAINT IF EXISTS fk_vacunacion_bio_anio CASCADE;
+ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT fk_vacunacion_bio_anio FOREIGN KEY (vabi_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6185,10 +7460,24 @@ REFERENCES public.genero (gen_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_defunciones_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".defunciones DROP CONSTRAINT IF EXISTS fk_defunciones_anio CASCADE;
+ALTER TABLE "Salud".defunciones ADD CONSTRAINT fk_defunciones_anio FOREIGN KEY (def_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_desnutricion-codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".desnutricion DROP CONSTRAINT IF EXISTS "fk_desnutricion-codMunicipio" CASCADE;
 ALTER TABLE "Salud".desnutricion ADD CONSTRAINT "fk_desnutricion-codMunicipio" FOREIGN KEY ("dnut_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: pk_desnutricion_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".desnutricion DROP CONSTRAINT IF EXISTS pk_desnutricion_anio CASCADE;
+ALTER TABLE "Salud".desnutricion ADD CONSTRAINT pk_desnutricion_anio FOREIGN KEY (dnut_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6213,10 +7502,31 @@ REFERENCES public.genero (gen_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_naciemintos_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".nacimientos DROP CONSTRAINT IF EXISTS fk_naciemintos_anio CASCADE;
+ALTER TABLE "Salud".nacimientos ADD CONSTRAINT fk_naciemintos_anio FOREIGN KEY (nac_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_principales_mortalidad_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".principales_mortalidad DROP CONSTRAINT IF EXISTS fk_principales_mortalidad_anio CASCADE;
+ALTER TABLE "Salud".principales_mortalidad ADD CONSTRAINT fk_principales_mortalidad_anio FOREIGN KEY (pmort_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_morbilidad-tipoConsulta" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".principales_morbilidad DROP CONSTRAINT IF EXISTS "fk_morbilidad-tipoConsulta" CASCADE;
 ALTER TABLE "Salud".principales_morbilidad ADD CONSTRAINT "fk_morbilidad-tipoConsulta" FOREIGN KEY ("pmor_tipoConsulta")
 REFERENCES "Salud".tipo_consulta (tcon_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_principlaes_morbilidad_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".principales_morbilidad DROP CONSTRAINT IF EXISTS fk_principlaes_morbilidad_anio CASCADE;
+ALTER TABLE "Salud".principales_morbilidad ADD CONSTRAINT fk_principlaes_morbilidad_anio FOREIGN KEY (pmor_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6234,10 +7544,17 @@ REFERENCES "Salud".tipo_poblacion_censada (tpoce_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: "fk_cobertura_aseguramiento-codMunicipio" | type: CONSTRAINT --
--- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS "fk_cobertura_aseguramiento-codMunicipio" CASCADE;
-ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT "fk_cobertura_aseguramiento-codMunicipio" FOREIGN KEY ("coas_codMunicipio")
-REFERENCES public.municipio (mun_codigo) MATCH FULL
+-- object: "fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS "fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" CASCADE;
+ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT "fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" FOREIGN KEY ("coas_codPoblacionSensadaMunicipio")
+REFERENCES "Salud".poblacion_censada_municipio (psm_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vih_sida_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."casos_VHI-sida" DROP CONSTRAINT IF EXISTS fk_vih_sida_anio CASCADE;
+ALTER TABLE "Salud"."casos_VHI-sida" ADD CONSTRAINT fk_vih_sida_anio FOREIGN KEY (cvih_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6248,10 +7565,38 @@ REFERENCES public.genero (gen_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: vih_genero_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_genero DROP CONSTRAINT IF EXISTS vih_genero_anio CASCADE;
+ALTER TABLE "Salud".vih_genero ADD CONSTRAINT vih_genero_anio FOREIGN KEY (vihg_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_transmisionVIH-tipoTransmision" | type: CONSTRAINT --
 -- ALTER TABLE "Salud"."vih_viaTransmision" DROP CONSTRAINT IF EXISTS "fk_transmisionVIH-tipoTransmision" CASCADE;
 ALTER TABLE "Salud"."vih_viaTransmision" ADD CONSTRAINT "fk_transmisionVIH-tipoTransmision" FOREIGN KEY ("vihvia_codTipoTransmision")
 REFERENCES "Salud".tipo_transmision (ttrans_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_via_trasmision_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."vih_viaTransmision" DROP CONSTRAINT IF EXISTS fk_via_trasmision_anio CASCADE;
+ALTER TABLE "Salud"."vih_viaTransmision" ADD CONSTRAINT fk_via_trasmision_anio FOREIGN KEY (vihvia_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vih_clasificacion_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_casos_clasificacion DROP CONSTRAINT IF EXISTS fk_vih_clasificacion_anio CASCADE;
+ALTER TABLE "Salud".vih_casos_clasificacion ADD CONSTRAINT fk_vih_clasificacion_anio FOREIGN KEY (vihcla_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_tipoClasificacionVIH" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_casos_clasificacion DROP CONSTRAINT IF EXISTS "fk_tipoClasificacionVIH" CASCADE;
+ALTER TABLE "Salud".vih_casos_clasificacion ADD CONSTRAINT "fk_tipoClasificacionVIH" FOREIGN KEY ("vihcla_codClasificacion")
+REFERENCES "Salud".vih_clasificacion (vicla_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6262,6 +7607,13 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_dengue_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".dengue DROP CONSTRAINT IF EXISTS fk_dengue_anio CASCADE;
+ALTER TABLE "Salud".dengue ADD CONSTRAINT fk_dengue_anio FOREIGN KEY (den_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_hospitalizacion-codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".hospitalizacion DROP CONSTRAINT IF EXISTS "fk_hospitalizacion-codMunicipio" CASCADE;
 ALTER TABLE "Salud".hospitalizacion ADD CONSTRAINT "fk_hospitalizacion-codMunicipio" FOREIGN KEY ("hos_codMunicipio")
@@ -6269,10 +7621,24 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_hospitalizacion_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".hospitalizacion DROP CONSTRAINT IF EXISTS fk_hospitalizacion_anio CASCADE;
+ALTER TABLE "Salud".hospitalizacion ADD CONSTRAINT fk_hospitalizacion_anio FOREIGN KEY (hos_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_tuberculosis_codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Salud"."Tuberculosis" DROP CONSTRAINT IF EXISTS "fk_tuberculosis_codMunicipio" CASCADE;
 ALTER TABLE "Salud"."Tuberculosis" ADD CONSTRAINT "fk_tuberculosis_codMunicipio" FOREIGN KEY ("tub_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_tuberculosis_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."Tuberculosis" DROP CONSTRAINT IF EXISTS fk_tuberculosis_anio CASCADE;
+ALTER TABLE "Salud"."Tuberculosis" ADD CONSTRAINT fk_tuberculosis_anio FOREIGN KEY (tub_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6290,37 +7656,44 @@ REFERENCES "Salud".tipo_orsa (tp_orsa_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_organismos_salud_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".organismos_salud DROP CONSTRAINT IF EXISTS fk_organismos_salud_anio CASCADE;
+ALTER TABLE "Salud".organismos_salud ADD CONSTRAINT fk_organismos_salud_anio FOREIGN KEY (orsa_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_intituciones_educativas_codMunicipio" | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."instituciones_Educativas" DROP CONSTRAINT IF EXISTS "fk_intituciones_educativas_codMunicipio" CASCADE;
-ALTER TABLE "Educacion"."instituciones_Educativas" ADD CONSTRAINT "fk_intituciones_educativas_codMunicipio" FOREIGN KEY ("ine_codMunicipio")
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS "fk_intituciones_educativas_codMunicipio" CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT "fk_intituciones_educativas_codMunicipio" FOREIGN KEY ("ine_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_tp_plantel | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."instituciones_Educativas" DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tp_plantel CASCADE;
-ALTER TABLE "Educacion"."instituciones_Educativas" ADD CONSTRAINT fk_instituciones_educativas_tp_plantel FOREIGN KEY (ine_tipo_plantel)
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tp_plantel CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tp_plantel FOREIGN KEY (ine_tipo_plantel)
 REFERENCES "Educacion".tipo_plantel_educativo (tpe_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_area | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."instituciones_Educativas" DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_area CASCADE;
-ALTER TABLE "Educacion"."instituciones_Educativas" ADD CONSTRAINT fk_instituciones_educativas_area FOREIGN KEY (ine_area)
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_area CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_area FOREIGN KEY (ine_area)
 REFERENCES public.area (are_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_tipo_institucion | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."instituciones_Educativas" DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tipo_institucion CASCADE;
-ALTER TABLE "Educacion"."instituciones_Educativas" ADD CONSTRAINT fk_instituciones_educativas_tipo_institucion FOREIGN KEY (ine_tipo_institucion)
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tipo_institucion CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tipo_institucion FOREIGN KEY (ine_tipo_institucion)
 REFERENCES "Educacion".tipo_institucion (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_anio | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."instituciones_Educativas" DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_anio CASCADE;
-ALTER TABLE "Educacion"."instituciones_Educativas" ADD CONSTRAINT fk_instituciones_educativas_anio FOREIGN KEY (ine_anio)
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_anio CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_anio FOREIGN KEY (ine_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
@@ -6329,13 +7702,6 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE "Educacion".matriculas DROP CONSTRAINT IF EXISTS "fk_matriculas_codMunicipio" CASCADE;
 ALTER TABLE "Educacion".matriculas ADD CONSTRAINT "fk_matriculas_codMunicipio" FOREIGN KEY ("mat_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: fk_matriculas_poblacion_escolar | type: CONSTRAINT --
--- ALTER TABLE "Educacion".matriculas DROP CONSTRAINT IF EXISTS fk_matriculas_poblacion_escolar CASCADE;
-ALTER TABLE "Educacion".matriculas ADD CONSTRAINT fk_matriculas_poblacion_escolar FOREIGN KEY (mat_poblacion_escolar)
-REFERENCES "Educacion".poblacion_escolar (pes_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6794,6 +8160,20 @@ REFERENCES public.semestre (sem_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: "fk_matriculas_usco_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".matriculas_usco DROP CONSTRAINT IF EXISTS "fk_matriculas_usco_codMunicipio" CASCADE;
+ALTER TABLE "Educacion".matriculas_usco ADD CONSTRAINT "fk_matriculas_usco_codMunicipio" FOREIGN KEY ("matu_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_matiuclas_usco_genero | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".matriculas_usco DROP CONSTRAINT IF EXISTS fk_matiuclas_usco_genero CASCADE;
+ALTER TABLE "Educacion".matriculas_usco ADD CONSTRAINT fk_matiuclas_usco_genero FOREIGN KEY (matu_genero)
+REFERENCES public.genero (gen_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: fk_pm_anio | type: CONSTRAINT --
 -- ALTER TABLE "Cultura"."Turistas_parques_museo" DROP CONSTRAINT IF EXISTS fk_pm_anio CASCADE;
 ALTER TABLE "Cultura"."Turistas_parques_museo" ADD CONSTRAINT fk_pm_anio FOREIGN KEY (tpmu_anio)
@@ -7075,23 +8455,30 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_licencias_anio | type: CONSTRAINT --
--- ALTER TABLE "Construccion"."Licencias" DROP CONSTRAINT IF EXISTS fk_licencias_anio CASCADE;
-ALTER TABLE "Construccion"."Licencias" ADD CONSTRAINT fk_licencias_anio FOREIGN KEY (lic_anio)
+-- ALTER TABLE "Construccion".licencias DROP CONSTRAINT IF EXISTS fk_licencias_anio CASCADE;
+ALTER TABLE "Construccion".licencias ADD CONSTRAINT fk_licencias_anio FOREIGN KEY (lic_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_licencias_alcance | type: CONSTRAINT --
--- ALTER TABLE "Construccion"."Licencias" DROP CONSTRAINT IF EXISTS fk_licencias_alcance CASCADE;
-ALTER TABLE "Construccion"."Licencias" ADD CONSTRAINT fk_licencias_alcance FOREIGN KEY (lic_alcance)
+-- ALTER TABLE "Construccion".licencias DROP CONSTRAINT IF EXISTS fk_licencias_alcance CASCADE;
+ALTER TABLE "Construccion".licencias ADD CONSTRAINT fk_licencias_alcance FOREIGN KEY (lic_alcance)
 REFERENCES public.alcance (alc_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_licencias_tipo_construccion | type: CONSTRAINT --
--- ALTER TABLE "Construccion"."Licencias" DROP CONSTRAINT IF EXISTS fk_licencias_tipo_construccion CASCADE;
-ALTER TABLE "Construccion"."Licencias" ADD CONSTRAINT fk_licencias_tipo_construccion FOREIGN KEY (lic_tipo_vivienda)
+-- ALTER TABLE "Construccion".licencias DROP CONSTRAINT IF EXISTS fk_licencias_tipo_construccion CASCADE;
+ALTER TABLE "Construccion".licencias ADD CONSTRAINT fk_licencias_tipo_construccion FOREIGN KEY (lic_tipo_vivienda)
 REFERENCES public.tipo_vivienda (tco_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_licencias_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Construccion".licencias DROP CONSTRAINT IF EXISTS "fk_licencias_codMunicipio" CASCADE;
+ALTER TABLE "Construccion".licencias ADD CONSTRAINT "fk_licencias_codMunicipio" FOREIGN KEY ("lic_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -8467,13 +9854,6 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_nbi_tipo | type: CONSTRAINT --
--- ALTER TABLE poblacion.poblacion_nbi DROP CONSTRAINT IF EXISTS fk_nbi_tipo CASCADE;
-ALTER TABLE poblacion.poblacion_nbi ADD CONSTRAINT fk_nbi_tipo FOREIGN KEY (nbi_porcentaje_dane)
-REFERENCES poblacion.tipo_etnia (tet_codigo) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
 -- object: fk_quinque_anio | type: CONSTRAINT --
 -- ALTER TABLE poblacion.poblacion_grupos_quinquenales DROP CONSTRAINT IF EXISTS fk_quinque_anio CASCADE;
 ALTER TABLE poblacion.poblacion_grupos_quinquenales ADD CONSTRAINT fk_quinque_anio FOREIGN KEY (pgq_anio)
@@ -8534,6 +9914,48 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE poblacion.poblacion_proyeccion DROP CONSTRAINT IF EXISTS fk_poblacioon_proyeccion_area CASCADE;
 ALTER TABLE poblacion.poblacion_proyeccion ADD CONSTRAINT fk_poblacioon_proyeccion_area FOREIGN KEY (pyp_area)
 REFERENCES public.area (are_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_poblacionCesadaMunicipio_anio" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".poblacion_censada_municipio DROP CONSTRAINT IF EXISTS "fk_poblacionCesadaMunicipio_anio" CASCADE;
+ALTER TABLE "Salud".poblacion_censada_municipio ADD CONSTRAINT "fk_poblacionCesadaMunicipio_anio" FOREIGN KEY (psm_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_edad_escolar_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".poblacion_edad_escolar DROP CONSTRAINT IF EXISTS fk_edad_escolar_municipio CASCADE;
+ALTER TABLE "Educacion".poblacion_edad_escolar ADD CONSTRAINT fk_edad_escolar_municipio FOREIGN KEY ("ped_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_edad_poblacion_escolar | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".poblacion_edad_escolar DROP CONSTRAINT IF EXISTS fk_edad_poblacion_escolar CASCADE;
+ALTER TABLE "Educacion".poblacion_edad_escolar ADD CONSTRAINT fk_edad_poblacion_escolar FOREIGN KEY (ped_poblacion_escolar)
+REFERENCES "Educacion".poblacion_escolar (pes_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_edad_escolar_anio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".poblacion_edad_escolar DROP CONSTRAINT IF EXISTS fk_edad_escolar_anio CASCADE;
+ALTER TABLE "Educacion".poblacion_edad_escolar ADD CONSTRAINT fk_edad_escolar_anio FOREIGN KEY (ped_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_tor_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Deportes".torneo DROP CONSTRAINT IF EXISTS fk_tor_municipio CASCADE;
+ALTER TABLE "Deportes".torneo ADD CONSTRAINT fk_tor_municipio FOREIGN KEY ("tor_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Riesgos".desastres DROP CONSTRAINT IF EXISTS "fk_codMunicipio" CASCADE;
+ALTER TABLE "Riesgos".desastres ADD CONSTRAINT "fk_codMunicipio" FOREIGN KEY ("des_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
