@@ -3,14 +3,15 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,2117" last-zoom="0.6"
-	 default-owner="postgres">
-<role name="sir_huila"
-      password="}d9-2#p{'L">
+<dbmodel pgmodeler-ver="0.9.0" last-position="4,1599" last-zoom="0.9"
+	 default-owner="sirhuila">
+<role name="sirhuila"
+      encrypted="true"
+      password="}d9-2#p{L">
 </role>
 
-<database name="sir_huila_datos">
-	<role name="sir_huila"/>
+<database name="sirhuila">
+	<role name="sirhuila"/>
 </database>
 
 <tag name="Agropecuario">
@@ -32,12 +33,13 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 </textbox>
 
 <schema name="Agropecuario" rect-visible="true" fill-color="#9bfff0">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema agropecuario.]]></comment>
 </schema>
 
 <table name="area_cosechada" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que almacenará el área cosechada, sembrada, producción, costos de producción, área plantada, área cosechada, rendimiento por cultivos en los diferentes municipios del departamento.]]></comment>
 	<position x="2440" y="140"/>
 	<column name="arco_codigo" not-null="true">
@@ -107,7 +109,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="cultivo" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento  los tipos de cultivos que puedan existir]]></comment>
 	<position x="2100" y="140"/>
 	<column name="cul_codigo" not-null="true">
@@ -137,7 +139,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_cultivo">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipos de cultivos que pueden existir en el sistema]]></comment>
 	<position x="2120" y="260"/>
 	<column name="tcul_codigo" not-null="true">
@@ -155,9 +157,9 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="municipio">
 	<schema name="public"/>
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de los datos de los municipios del departamento]]></comment>
-	<position x="1500" y="480"/>
+	<position x="1500" y="520"/>
 	<column name="mun_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada municipio, en si es el código DANE.]]></comment>
@@ -173,51 +175,11 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	<constraint name="municipio_pk" type="pk-constr" table="public.municipio">
 		<columns names="mun_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[mun_codigo•mun_nombre•mun_codDepartamento⸣
-41006•Acevedo•41⸣
-41013•Agrado•41⸣
-41016•Aipe•41⸣
-41020•Algeciras•41⸣
-41026•Altamira•41⸣
-41078•Baraya•41⸣
-41132•Campoalegre•41⸣
-41206•Colombia•41⸣
-41244•Elias•41⸣
-41298•Garzón•41⸣
-41306•Gigante•41⸣
-41319•Guadalupe•41⸣
-41349•Hobo•41⸣
-41357•Iquira•41⸣
-41359•Isnos•41⸣
-41378•La Argentina•41⸣
-41396•La Plata•41⸣
-41483•Nátaga•41⸣
-41001•Neiva•41⸣
-41503•Oporapa•41⸣
-41518•Paicol•41⸣
-41524•Palermo•41⸣
-41530•Palestina•41⸣
-41548•Pital•41⸣
-41551•Pitalito•41⸣
-41615•Rivera•41⸣
-41660•Saladoblanco•41⸣
-41668•San Agustín•41⸣
-41676•Santa Maria•41⸣
-41770•Suaza•41⸣
-41791•Tarqui•41⸣
-41799•Tello•41⸣
-41801•Teruel•41⸣
-41797•Tesalia•41⸣
-41807•Timaná•41⸣
-41872•Villavieja•41⸣
-41885•Yaguará•41]]>
-	</initial-data>
 </table>
 
 <table name="infraestructura_produccion_piscicola" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los la infraestructura de producción piscicola por municipios]]></comment>
 	<position x="2120" y="500"/>
 	<column name="ipp_codigo" not-null="true">
@@ -263,7 +225,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_estanque" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de estanques para peces.]]></comment>
 	<position x="2140" y="680"/>
 	<column name="est_codigo" not-null="true">
@@ -281,7 +243,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="raza_peces">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipo de razas de  peces.]]></comment>
 	<position x="2120" y="940"/>
 	<column name="rpez_codigo" not-null="true">
@@ -299,7 +261,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="produccion_piscicola" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Producción piscicola en diferente tipos de  estanques según raza de peces.]]></comment>
 	<position x="2100" y="760"/>
 	<column name="prop_codigo" not-null="true">
@@ -352,7 +314,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 
 <table name="sacrificio_ganado" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Sacrificio de ganado por sexo, tipo de ganado y municipio del departamento.]]></comment>
 	<position x="2520" y="400"/>
 	<column name="sg_codigo" not-null="true">
@@ -412,7 +374,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 
 <table name="tipo_ganado" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de ganado.]]></comment>
 	<position x="2520" y="640"/>
 	<column name="tgan_codigo" not-null="true" sequence="&quot;Agropecuario&quot;.&quot;sec_tipoGanado&quot;">
@@ -430,7 +392,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 
 <table name="razas_ganado" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes razas de ganado que puedan existir, ya sea porcinos o bovinos.]]></comment>
 	<position x="2500" y="720"/>
 	<column name="rgan_codigo" not-null="true">
@@ -456,7 +418,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 
 <table name="inventario_ganado_bovino" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena el inventario del ganado bovino por edades y sexo en los diferentes municipios del departamento.]]></comment>
 	<position x="2500" y="840"/>
 	<column name="invgb_codigo" not-null="true">
@@ -494,7 +456,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 
 <table name="tipo_explotacion" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de explotación pecuaria que puedan existir.]]></comment>
 	<position x="2100" y="1060"/>
 	<column name="texp_codigo" not-null="true">
@@ -512,7 +474,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 
 <table name="explotacion_raza" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena en inventario de ganado bovino y porcino con respecto al tipo de explotación (lechera, carne, doble propósito, criá tecnificada, ceba tecnificada, etc) de cada municipio del departamento.]]></comment>
 	<position x="2480" y="1060"/>
 	<column name="exra_codigo" not-null="true">
@@ -546,7 +508,7 @@ POR SEXO, PESO EN PIE Y MUNICIPIO DEL DEPARTAMENTO]]></comment>
 
 <table name="produccion_leche" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Datos de la producción lechera por municipio del departamento.]]></comment>
 	<position x="2860" y="160"/>
 	<column name="prol_codigo" not-null="true">
@@ -586,7 +548,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="inventario_ganado_porcino" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Inventario del ganado porcino con respecto a la edad  en los diferentes municipios del departamento.]]></comment>
 	<position x="2840" y="780"/>
 	<column name="invgp_codigo" not-null="true">
@@ -620,7 +582,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="produccion_porcina" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Datos respecto a la producción de lechones en los diferentes municipios del departamento.]]></comment>
 	<position x="2100" y="1140"/>
 	<column name="ppor_codigo" not-null="true">
@@ -654,7 +616,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="inventario_otras_especies">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Es el inventario de otras especies pecuarias por municipio en el departamento.]]></comment>
 	<position x="2840" y="1080"/>
 	<column name="invos_codigo" not-null="true">
@@ -684,7 +646,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="apicultura" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[producción de miel y numero de colmenas por municipio en el departamento]]></comment>
 	<position x="2840" y="640"/>
 	<column name="api_codigo" not-null="true">
@@ -713,13 +675,13 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 </table>
 
 <schema name="Salud" rect-visible="true" fill-color="#ff0000">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema salud.]]></comment>
 </schema>
 
 <table name="vacunacion_biologicos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Coberturas de vacunación en menores de 1 año por biológicos según municipios en el departamento.]]></comment>
 	<position x="20" y="3300"/>
 	<column name="vabi_codigo" not-null="true">
@@ -760,7 +722,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="biologicos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de virus]]></comment>
 	<position x="20" y="3460"/>
 	<column name="bio_codigo" not-null="true">
@@ -778,7 +740,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="defunciones" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Defunciones  por área,sexo y tipo de defunción  por municipio de ocurrencia en el departamento ]]></comment>
 	<position x="480" y="3300"/>
 	<column name="def_codigo" not-null="true">
@@ -816,9 +778,9 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 
 <table name="area" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que se refiere si pertenece a una zona urbana o rural, cabecera, rural disperso, centro poblado.]]></comment>
-	<position x="1520" y="600"/>
+	<position x="1520" y="640"/>
 	<column name="are_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -830,18 +792,11 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<constraint name="area_defuncion_pk" type="pk-constr" table="public.area">
 		<columns names="are_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[are_codigo•are_nombre⸣
-1•Urbana⸣
-2•Rural⸣
-3•Rural disperso⸣
-4•Centro poblado]]>
-	</initial-data>
 </table>
 
 <table name="tipo_defuncion">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[ Almacena los diferentes tipos de defunción.]]></comment>
 	<position x="480" y="3440"/>
 	<column name="tdef_codigo" not-null="true">
@@ -865,7 +820,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="desnutricion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[situación nutricional en menores de cinco años por municipios en el departamento.]]></comment>
 	<position x="20" y="3640"/>
 	<column name="dnut_codigo" not-null="true">
@@ -911,7 +866,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="nacimientos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Nacimientos por área y sexo según municipio de ocurrencia en el departamento]]></comment>
 	<position x="20" y="3840"/>
 	<column name="nac_codigo" not-null="true">
@@ -945,7 +900,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="principales_mortalidad" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[principales causas de mortalidad en el departamento]]></comment>
 	<position x="460" y="3620"/>
 	<column name="pmort_codigo" not-null="true">
@@ -971,7 +926,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="principales_morbilidad" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[principales causas de morbilidad por tipo consulta  en el departamento.]]></comment>
 	<position x="480" y="3740"/>
 	<column name="pmor_codigo" not-null="true">
@@ -1001,7 +956,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_consulta">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipo de consultas medicas (urgencias, externas, hospitalización, etc)]]></comment>
 	<position x="480" y="3880"/>
 	<column name="tcon_codigo" not-null="true">
@@ -1019,7 +974,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="adopciones">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="40" y="3960"/>
 	<column name="ado_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
@@ -1040,7 +995,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="huerfanos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="480" y="3980"/>
 	<column name="huer_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
@@ -1058,7 +1013,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="cobertura_aseguramiento" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Cobertura y aseguramiento a los regimenes subsidiado y contributivo por municipios]]></comment>
 	<position x="40" y="4080"/>
 	<column name="coas_codigo" not-null="true">
@@ -1103,7 +1058,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_poblacion_censada">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)]]></comment>
 	<position x="500" y="4120"/>
 	<column name="tpoce_codigo" not-null="true">
@@ -1121,7 +1076,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="casos_VHI-sida" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Casos de VIH-SIDA]]></comment>
 	<position x="920" y="3440"/>
 	<column name="cvih_codigo" not-null="true">
@@ -1142,7 +1097,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="vih_genero">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Número de casos de vih por genero.]]></comment>
 	<position x="920" y="3280"/>
 	<column name="vihg_codigo" not-null="true">
@@ -1168,7 +1123,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="vih_viaTransmision" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Vias de transmision de VIH.]]></comment>
 	<position x="900" y="3520"/>
 	<column name="vihvia_codigo" not-null="true">
@@ -1194,7 +1149,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_transmision">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los tipos de trasmision.]]></comment>
 	<position x="900" y="3660"/>
 	<column name="ttrans_codigo" not-null="true">
@@ -1212,8 +1167,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="genero" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1520" y="400"/>
+	<role name="sirhuila"/>
+	<position x="1520" y="440"/>
 	<column name="gen_codigo" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -1223,16 +1178,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="genero_pk" type="pk-constr" table="public.genero">
 		<columns names="gen_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[gen_codigo•gen_nombre⸣
-1•Hombre⸣
-2•Mujer]]>
-	</initial-data>
 </table>
 
 <table name="vih_casos_clasificacion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la calsificación de VIH.]]></comment>
 	<position x="900" y="3760"/>
 	<column name="vihcla_codigo" not-null="true">
@@ -1257,7 +1207,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="dengue" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Dengue clásico y dengue grave confirmado por laboratorio, por municipios.]]></comment>
 	<position x="440" y="4440"/>
 	<column name="den_codigo" not-null="true">
@@ -1287,7 +1237,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="hospitalizacion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Información sobre el numero de camas, dias camas disponibles, dias camas ocupadas, porcentaje ocupacional, dias estancia egresos, promedio dia estancia y giros de camas por municipios.]]></comment>
 	<position x="880" y="4020"/>
 	<column name="hos_codigo" not-null="true">
@@ -1341,7 +1291,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="Tuberculosis" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Incidencia de la tuberculosis de todas las formas por municipios en el departamento]]></comment>
 	<position x="620" y="4300"/>
 	<column name="tub_codigo" not-null="true">
@@ -1375,7 +1325,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="organismos_salud" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Organismos de salud y número de camas por municipios en el departamento.]]></comment>
 	<position x="920" y="4240"/>
 	<column name="orsa_codigo" not-null="true">
@@ -1409,7 +1359,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_orsa">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipos de organismos de salud (ESE Hospitales, Centros de salud, Puestos de salud, Clinicas, IPS, etc...)]]></comment>
 	<position x="920" y="4420"/>
 	<column name="tp_orsa_codigo" not-null="true">
@@ -1426,15 +1376,15 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Educacion" rect-visible="true" fill-color="#005500">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema educación.]]></comment>
 </schema>
 
 <table name="instituciones_educativas" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento]]></comment>
-	<position x="60" y="1540"/>
+	<position x="40" y="1403"/>
 	<column name="ine_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1470,9 +1420,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_plantel_educativo" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de planteles educativos, instituciones,centros y sedes]]></comment>
-	<position x="60" y="1680"/>
+	<position x="40" y="1543"/>
 	<column name="tpe_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1488,9 +1438,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="matriculas" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[matriculas por niveles, areas, instituciones en los municipios del departamento.]]></comment>
-	<position x="540" y="1520"/>
+	<position x="520" y="1383"/>
 	<column name="mat_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1534,9 +1484,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_nivel_educativo" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de educación (basico, prescolar, primaria,etc...)]]></comment>
-	<position x="520" y="1720"/>
+	<position x="480" y="1583"/>
 	<column name="tpne_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1552,9 +1502,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_institucion" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de instituciones (oficiales, no oficiales)]]></comment>
-	<position x="40" y="1760"/>
+	<position x="20" y="1623"/>
 	<column name="tpin_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1570,9 +1520,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_escolar" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[tipos de rangos de la poblacion escolar 5, 6-10, 11-16 años, adultos.]]></comment>
-	<position x="520" y="1800"/>
+	<position x="500" y="1663"/>
 	<column name="pes_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1588,9 +1538,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="grado" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los grados de los diferentes niveles educativos]]></comment>
-	<position x="520" y="1880"/>
+	<position x="500" y="1743"/>
 	<column name="gra_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1604,11 +1554,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="Clasificacion_icfes_estab_educativos" hide-ext-attribs="true">
+<table name="clasificacion_icfes_estab_educativos" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Desempeño de los 30 primeros establecimientos educativos por puestos y municipios según pruebas icfes en el departamento  ]]></comment>
-	<position x="40" y="1840"/>
+	<position x="20" y="1703"/>
 	<column name="cies_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1638,23 +1588,23 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_institucion]]></comment>
 	</column>
 	<column name="cies_indice">
-		<type name="integer" length="0"/>
+		<type name="double precision" length="0"/>
 		<comment><![CDATA[Indice de desempeño en la prueba]]></comment>
 	</column>
 	<column name="cies_categoria">
 		<type name="character varying" length="50"/>
 		<comment><![CDATA[Categoria a la que pertence la institución por desempeño]]></comment>
 	</column>
-	<constraint name="Clasificacion_icfes_establecimeintos_educativos_pk" type="pk-constr" table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;">
+	<constraint name="Clasificacion_icfes_establecimeintos_educativos_pk" type="pk-constr" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
 		<columns names="cies_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="comportamiento_alumnos" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Comportamiento de los alumnos en cuanto a aprobados, reprobados, desertores por municipios en el departamento del huila.]]></comment>
-	<position x="20" y="2100"/>
+	<position x="0" y="1963"/>
 	<column name="coal_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1705,9 +1655,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="datos_universidades" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.]]></comment>
-	<position x="540" y="1960"/>
+	<position x="480" y="1843"/>
 	<column name="dau_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1749,29 +1699,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="nivel_educacion_superior" hide-ext-attribs="true">
-	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
-	<comment><![CDATA[Almacena los nombres de las diferentes niveles de educación superior.]]></comment>
-	<position x="540" y="2160"/>
-	<column name="nes_codigo" not-null="true">
-		<type name="serial" length="0"/>
-		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
-	</column>
-	<column name="nes_nombre" not-null="true">
-		<type name="character varying" length="150"/>
-		<comment><![CDATA[Nombre de los distintos niveles de educación superior.]]></comment>
-	</column>
-	<constraint name="nivel_educacion_superior_pk" type="pk-constr" table="&quot;Educacion&quot;.nivel_educacion_superior">
-		<columns names="nes_codigo" ref-type="src-columns"/>
-	</constraint>
-</table>
-
 <table name="programa" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de los diferentes programas de las universidades.]]></comment>
-	<position x="20" y="2340"/>
+	<position x="0" y="2203"/>
 	<column name="pro_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1787,9 +1719,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="universidad" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes universidades.]]></comment>
-	<position x="20" y="2460"/>
+	<position x="0" y="2323"/>
 	<column name="uni_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1803,11 +1735,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="categoria_personalU" hide-ext-attribs="true">
+<table name="categoria_personal" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes categorias de personas que tiene la universidad.]]></comment>
-	<position x="520" y="2240"/>
+	<position x="480" y="2063"/>
 	<column name="cpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1816,16 +1748,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="150"/>
 		<comment><![CDATA[Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.]]></comment>
 	</column>
-	<constraint name="categoria_personalU_pk" type="pk-constr" table="&quot;Educacion&quot;.&quot;categoria_personalU&quot;">
+	<constraint name="categoria_personalU_pk" type="pk-constr" table="&quot;Educacion&quot;.categoria_personal">
 		<columns names="cpu_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="directivos_docentes" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Planta de personal del sistema educativo por municipios en el departamento.]]></comment>
-	<position x="940" y="1520"/>
+	<position x="920" y="1383"/>
 	<column name="ddo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1853,9 +1785,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="categoria_directivo_docente" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes categorias de directivos y docentes en el departamento.]]></comment>
-	<position x="940" y="1660"/>
+	<position x="920" y="1523"/>
 	<column name="cdd_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1871,9 +1803,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="icetex" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Información de la cantida y el valor de los creditos del icetex por año y lineas de credito.]]></comment>
-	<position x="960" y="1740"/>
+	<position x="940" y="1603"/>
 	<column name="ice_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1895,7 +1827,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Número de creditos.]]></comment>
 	</column>
 	<column name="ice_valor_credito">
-		<type name="integer" length="0"/>
+		<type name="double precision" length="0"/>
 		<comment><![CDATA[Valor de los creditos.]]></comment>
 	</column>
 	<constraint name="icetex_pk" type="pk-constr" table="&quot;Educacion&quot;.icetex">
@@ -1905,9 +1837,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="linea_credito" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes lineas de credito que tiene el ICETEX.]]></comment>
-	<position x="960" y="1880"/>
+	<position x="940" y="1743"/>
 	<column name="lic_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1923,9 +1855,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="estado_credito" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes estadosdel crédito en el ICETEX.]]></comment>
-	<position x="960" y="1960"/>
+	<position x="940" y="1823"/>
 	<column name="esc_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1941,8 +1873,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="anio" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1520" y="680"/>
+	<role name="sirhuila"/>
+	<position x="1520" y="740"/>
 	<column name="ani_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -1952,214 +1884,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="anio_pk" type="pk-constr" table="public.anio">
 		<columns names="ani_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[ani_codigo•ani_nombre⸣
-1•1990⸣
-2•1991⸣
-3•1992⸣
-4•1993⸣
-5•1994⸣
-6•1995⸣
-7•1996⸣
-8•1997⸣
-9•1998⸣
-10•1999⸣
-11•2000⸣
-12•2001⸣
-13•2002⸣
-14•2003⸣
-15•2004⸣
-16•2005⸣
-17•2006⸣
-18•2007⸣
-19•2008⸣
-20•2009⸣
-21•2010⸣
-22•2011⸣
-23•2012⸣
-24•2013⸣
-25•2014⸣
-26•2015⸣
-27•2016⸣
-28•2017⸣
-29•2018⸣
-30•2019⸣
-31•2020⸣
-32•2021⸣
-33•2022⸣
-34•2023⸣
-35•2024⸣
-36•2025⸣
-37•2026⸣
-38•2027⸣
-39•2028⸣
-40•2029⸣
-41•2030⸣
-42•2031⸣
-43•2032⸣
-44•2033⸣
-45•2034⸣
-46•2035⸣
-47•2036⸣
-48•2037⸣
-49•2038⸣
-50•2039⸣
-51•2040⸣
-52•2041⸣
-53•2042⸣
-54•2043⸣
-55•2044⸣
-56•2045⸣
-57•2046⸣
-58•2047⸣
-59•2048⸣
-60•2049⸣
-61•2050⸣
-62•2051⸣
-63•2052⸣
-64•2053⸣
-65•2054⸣
-66•2055⸣
-67•2056⸣
-68•2057⸣
-69•2058⸣
-70•2059⸣
-71•2060⸣
-72•2061⸣
-73•2062⸣
-74•2063⸣
-75•2064⸣
-76•2065⸣
-77•2066⸣
-78•2067⸣
-79•2068⸣
-80•2069⸣
-81•2070⸣
-82•2071⸣
-83•2072⸣
-84•2073⸣
-85•2074⸣
-86•2075⸣
-87•2076⸣
-88•2077⸣
-89•2078⸣
-90•2079⸣
-91•2080⸣
-92•2081⸣
-93•2082⸣
-94•2083⸣
-95•2084⸣
-96•2085⸣
-97•2086⸣
-98•2087⸣
-99•2088⸣
-100•2089⸣
-101•2090⸣
-102•2091⸣
-103•2092⸣
-104•2093⸣
-105•2094⸣
-106•2095⸣
-107•2096⸣
-108•2097⸣
-109•2098⸣
-110•2099⸣
-111•2100⸣
-112•2101⸣
-113•2102⸣
-114•2103⸣
-115•2104⸣
-116•2105⸣
-117•2106⸣
-118•2107⸣
-119•2108⸣
-120•2109⸣
-121•2110⸣
-122•2111⸣
-123•2112⸣
-124•2113⸣
-125•2114⸣
-126•2115⸣
-127•2116⸣
-128•2117⸣
-129•2118⸣
-130•2119⸣
-131•2120⸣
-132•2121⸣
-133•2122⸣
-134•2123⸣
-135•2124⸣
-136•2125⸣
-137•2126⸣
-138•2127⸣
-139•2128⸣
-140•2129⸣
-141•2130⸣
-142•2131⸣
-143•2132⸣
-144•2133⸣
-145•2134⸣
-146•2135⸣
-147•2136⸣
-148•2137⸣
-149•2138⸣
-150•2139⸣
-151•2140⸣
-152•2141⸣
-153•2142⸣
-154•2143⸣
-155•2144⸣
-156•2145⸣
-157•2146⸣
-158•2147⸣
-159•2148⸣
-160•2149⸣
-161•2150⸣
-162•2151⸣
-163•2152⸣
-164•2153⸣
-165•2154⸣
-166•2155⸣
-167•2156⸣
-168•2157⸣
-169•2158⸣
-170•2159⸣
-171•2160⸣
-172•2161⸣
-173•2162⸣
-174•2163⸣
-175•2164⸣
-176•2165⸣
-177•2166⸣
-178•2167⸣
-179•2168⸣
-180•2169⸣
-181•2170⸣
-182•2171⸣
-183•2172⸣
-184•2173⸣
-185•2174⸣
-186•2175⸣
-187•2176⸣
-188•2177⸣
-189•2178⸣
-190•2179⸣
-191•2180⸣
-192•2181⸣
-193•2182⸣
-194•2183⸣
-195•2184⸣
-196•2185⸣
-197•2186⸣
-198•2187⸣
-199•2188]]>
-	</initial-data>
 </table>
 
 <table name="mes" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1500" y="980"/>
+	<role name="sirhuila"/>
+	<position x="1500" y="1020"/>
 	<column name="mes_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -2169,27 +1899,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="mes_pk" type="pk-constr" table="public.mes">
 		<columns names="mes_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[mes_codigo•mes_nombre⸣
-1•Enero⸣
-2•Febrero⸣
-3•Marzo⸣
-4•Abril⸣
-5•Mayo⸣
-6•Junio⸣
-7•Julio⸣
-8•Agosto⸣
-9•Septiembre⸣
-10•Octubre⸣
-11•Noviembre⸣
-12•Diciembre]]>
-	</initial-data>
 </table>
 
 <table name="dia" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1500" y="780"/>
+	<role name="sirhuila"/>
+	<position x="1500" y="820"/>
 	<column name="dia_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -2203,8 +1918,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="semestre" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1500" y="1080"/>
+	<role name="sirhuila"/>
+	<position x="1500" y="1100"/>
 	<column name="sem_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -2214,20 +1929,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="semestre_pk" type="pk-constr" table="public.semestre">
 		<columns names="sem_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[sem_codigo•sem_nombre⸣
-1•I⸣
-2•II⸣
-3•III⸣
-4•IV]]>
-	</initial-data>
 </table>
 
 <table name="icfes" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que recoge información acerca de las icfes en el departamento y el pais (alumnos, materias, puntaje promedio y desviacion estandar).]]></comment>
-	<position x="940" y="2040"/>
+	<position x="920" y="1903"/>
 	<column name="icf_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2249,11 +1957,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Llave foránea que apunta a la tabla materias.]]></comment>
 	</column>
 	<column name="icf_puntaje_prom">
-		<type name="integer" length="0"/>
+		<type name="double precision" length="0"/>
 		<comment><![CDATA[EL puntaje promedio]]></comment>
 	</column>
 	<column name="icf_desviacion_est">
-		<type name="integer" length="0"/>
+		<type name="double precision" length="0"/>
 		<comment><![CDATA[La desviación estándar]]></comment>
 	</column>
 	<constraint name="icfes_pk" type="pk-constr" table="&quot;Educacion&quot;.icfes">
@@ -2263,14 +1971,14 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="materias" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las diferentes materias vistas por los estuadiantes de colegios y evaluadas por el icfes.]]></comment>
-	<position x="940" y="2180"/>
+	<position x="920" y="2043"/>
 	<column name="mate_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
-	<column name="mat_nombre" not-null="true">
+	<column name="mate_nombre" not-null="true">
 		<type name="character varying" length="150"/>
 		<comment><![CDATA[Nombre de la materia ]]></comment>
 	</column>
@@ -2281,9 +1989,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="alcance" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que guarda la informacion de si es a nivel departamental o nacional]]></comment>
-	<position x="1480" y="1180"/>
+	<position x="1480" y="1200"/>
 	<column name="alc_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2295,21 +2003,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="alcance_pk" type="pk-constr" table="public.alcance">
 		<columns names="alc_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[alc_codigo•alc_nombre⸣
-1•Nacional⸣
-2•Departamental]]>
-	</initial-data>
 </table>
 
 <schema name="cifras macro economicas" rect-visible="true" fill-color="#aa0000">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema crifras macro economicas]]></comment>
 </schema>
 
 <table name="banco">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento los diferentes tipos de bancos]]></comment>
 	<position x="2120" y="1400"/>
 	<column name="ban_codigo" not-null="true">
@@ -2327,7 +2030,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="bancos_municipios">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Cantidad de bancos existentes por municipios n el departamento. FUENTE: Superintendencia Financiera de Colombia.]]></comment>
 	<position x="2500" y="1420"/>
 	<column name="bmun_codigo" not-null="true">
@@ -2358,7 +2061,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="captaciones_bancos" hide-ext-attribs="true">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Captación de bancos por municipio]]></comment>
 	<position x="2120" y="1500"/>
 	<column name="caba_codigo" not-null="true">
@@ -2388,7 +2091,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_transaccion">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferenctes tipo de transacciones(Depositos, cuentas de ahorro, etc).]]></comment>
 	<position x="2120" y="1620"/>
 	<column name="ttran_codigo" not-null="true">
@@ -2406,7 +2109,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="captaciones" hide-ext-attribs="true">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Captaciones por establecimiento de crédito y municipios en el departamento]]></comment>
 	<position x="2500" y="1600"/>
 	<column name="cap_codigo" not-null="true">
@@ -2439,7 +2142,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_establecimiento">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento los diferentes tipos de establecimientos bancarios.
 ]]></comment>
 	<position x="2500" y="1720"/>
@@ -2458,7 +2161,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_credito">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipo de créditos por las entidades bancarias]]></comment>
 	<position x="2120" y="1880"/>
 	<column name="tcre_codigo" not-null="true">
@@ -2476,7 +2179,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="cartera_municipios">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Cartera de bancos por municipios]]></comment>
 	<position x="2120" y="1980"/>
 	<column name="carb_codigo" not-null="true">
@@ -2501,7 +2204,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="cartera">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Cartera por tipo de establecimiento de credito y municipios en el departamento. FUENTE: Superintendencia Financiera de Colombia]]></comment>
 	<position x="2500" y="1820"/>
 	<column name="cart_codigo" not-null="true">
@@ -2532,7 +2235,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="comercio_exterior">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Comercio exterior, exportaciones e importaciones registradas en el departamento. FUENTE: Informes de Coyuntura Económica Regional del Huila - ICER]]></comment>
 	<position x="2500" y="2000"/>
 	<column name="comex_codigo" not-null="true">
@@ -2557,9 +2260,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="cervecerias">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Nombre y códigos de cervecerías. FUENTE: Secretaría de Hacienda Departamental.]]></comment>
-	<position x="1460" y="1380"/>
+	<position x="1460" y="1400"/>
 	<column name="cerv_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2571,23 +2274,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="cervecerias_pk" type="pk-constr" table="public.cervecerias">
 		<columns names="cerv_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[cerv_codigo•cerv_nombre⸣
-1•Cerveza Extranjera⸣
-2•Cerveza Cerveunion⸣
-3•Bavaria⸣
-4•Cerveza del Valle⸣
-5•Cerveza Colon S.A.⸣
-6•Artesana BEER Company S.A.⸣
-7•Cerveceria BBC S.A.⸣
-8•Artesanos de Cervezas S.A.S.⸣
-9•Jairo Rafael Oñate Carvajal]]>
-	</initial-data>
 </table>
 
 <table name="consumo_cerveza">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Consumo de cerveza por cerveceria, años y mes en el departamento]]></comment>
 	<position x="2900" y="1560"/>
 	<column name="cocer_codigo" not-null="true">
@@ -2619,7 +2310,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="consumo_cigarrillos">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Consumo de cigarrillos nacionales y extrangeros en el departamento. FUENTE: Secretaría de Hacienda Departamental]]></comment>
 	<position x="2920" y="1720"/>
 	<column name="coci_codigo" not-null="true">
@@ -2650,9 +2341,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_combustible">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Nombres de los tipos de combustibles que puedan existir]]></comment>
-	<position x="1460" y="1280"/>
+	<position x="1460" y="1300"/>
 	<column name="tcom_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria de la tabla]]></comment>
@@ -2664,19 +2355,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="tipo_combustible_pk" type="pk-constr" table="public.tipo_combustible">
 		<columns names="tcom_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[tcom_codigo•tcom_nombre⸣
-1•Gasolina⸣
-2•Gasolina extra⸣
-3•Gasolina corriente⸣
-4•ACPM⸣
-5•Gas Natural]]>
-	</initial-data>
 </table>
 
 <table name="consumo_combustible">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Consumo de tipos de combustibles por meses en el departamento. FUENTE: Secretaría de Hacienda Departamental]]></comment>
 	<position x="2900" y="1960"/>
 	<column name="cocom_codigo" not-null="true">
@@ -2707,9 +2390,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_licor">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipo de licores (nacionales, extranjeros, etc).]]></comment>
-	<position x="1460" y="1480"/>
+	<position x="1460" y="1500"/>
 	<column name="tli_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave principal de la tabla.]]></comment>
@@ -2721,19 +2404,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="tipo_licor_pk" type="pk-constr" table="public.tipo_licor">
 		<columns names="tli_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[tli_codigo•tli_nombre⸣
-1•Nacional⸣
-2•Extranjero⸣
-3•Departamental⸣
-4•Vino Nacional⸣
-5•Vino Extranjero⸣
-6•Licor Extranjero]]>
-	</initial-data>
 </table>
 
 <table name="consumo_licor">
 	<schema name="&quot;cifras macro economicas&quot;"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Consumo de licores y vinos extranjeros, número de botellas, año y mes en el departamento]]></comment>
 	<position x="2500" y="2140"/>
 	<column name="coli_codigo" not-null="true">
@@ -2760,7 +2435,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="cotizacion_dolar">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Cotización del dólar, tasa de cambio oficial - compra]]></comment>
 	<position x="2900" y="2120"/>
 	<column name="cotd_codigo" not-null="true">
@@ -2790,7 +2465,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="captaciones_entidadesBancarias">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Desagregado de captaciones por entidades de crédito en el departamento. FUENTE: Superintendencia Financiera de Colombia.]]></comment>
 	<position x="2120" y="1720"/>
 	<column name="caen_codigo" not-null="true">
@@ -2818,7 +2493,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="desagregado_cartera_entidades" hide-ext-attribs="true">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Desagregado de cartera por entidades de credito en el departamento. FUENTE: Superintendencia Financiera de Colombia.]]></comment>
 	<position x="2120" y="2140"/>
 	<column name="dce_codigo" not-null="true">
@@ -2852,7 +2527,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="sector_productor">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Descripción de sectores de producción(Agropecuario, minero, industrial,etc)]]></comment>
 	<position x="2520" y="2380"/>
 	<column name="secpro" not-null="true">
@@ -2868,7 +2543,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="actividad_economica_sec">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Conjunto de actividades economicas(Pesca, minas, hoteles, etc).]]></comment>
 	<position x="2520" y="2480"/>
 	<column name="acec_codigo" not-null="true">
@@ -2886,7 +2561,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="exportaciones_importaciones" hide-ext-attribs="true">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Exportaciones e importaciones no tradicionales registradas por clasificación CIIU en el departamento]]></comment>
 	<position x="2880" y="2280"/>
 	<column name="expim_codigo" not-null="true">
@@ -2920,7 +2595,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_comercioInternacional" hide-ext-attribs="true">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que albergará los tipos de comercio internacional(importaciones, exportaciones,etc).]]></comment>
 	<position x="2140" y="2560"/>
 	<column name="tcin_codigo" not-null="true">
@@ -2938,7 +2613,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="petrolera">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Conjunto de petroleras que operan en el departamento]]></comment>
 	<position x="2120" y="2280"/>
 	<column name="pet_codigo" not-null="true">
@@ -2954,7 +2629,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="produccion_petroleo">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Producción fiscalizada de petroleo por empresa en el departamento. FUENTE: Agencia Nacional de Hidrocarburos.]]></comment>
 	<position x="2120" y="2380"/>
 	<column name="propet_codigo" not-null="true">
@@ -2988,7 +2663,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="UVR">
 	<schema name="&quot;cifras macro economicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Valores de la Unidad Real (UVR) en el ulltimo día del mes, variación anual, mensual y diaria por meses. FUENTE : Banco de la República.]]></comment>
 	<position x="2880" y="2420"/>
 	<column name="uvr_codigo" not-null="true">
@@ -3030,9 +2705,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="top_programas_universitarios" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla de los programas con mayor demanda a nivel nacional y departamental]]></comment>
-	<position x="60" y="2560"/>
+	<position x="40" y="2423"/>
 	<column name="tpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -3059,35 +2734,40 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="sena" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la oferta educativa del sena]]></comment>
-	<position x="500" y="2320"/>
+	<position x="440" y="2203"/>
 	<column name="sen_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
-	</column>
-	<column name="sen_codMunicipio">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="sen_anio">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
-	<column name="sen_nivel_formacion_sena">
+	<column name="sen_codMunicipio">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla nivel_formacion_sena]]></comment>
-	</column>
-	<column name="sen_genero">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla genero]]></comment>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="sen_sector_economico">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foranea que apunta a la tabla sector_economico]]></comment>
 	</column>
-	<column name="sen_num_oferta">
+	<column name="sen_nivel_formacion_sena">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla nivel_formacion_sena]]></comment>
+	</column>
+	<column name="sen_num_cursos">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[numero de cursos ]]></comment>
+	</column>
+	<column name="sen_num_aprendicesHombres">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de aprendices Hombres]]></comment>
+	</column>
+	<column name="sen_num_aprendicesMujeres">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de aprendices Mujeres.]]></comment>
 	</column>
 	<constraint name="sena_pk" type="pk-constr" table="&quot;Educacion&quot;.sena">
 		<columns names="sen_codigo" ref-type="src-columns"/>
@@ -3096,9 +2776,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="nivel_formacion_sena" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos niveles de formación del sena.]]></comment>
-	<position x="940" y="2340"/>
+	<position x="920" y="2203"/>
 	<column name="nfs_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3112,11 +2792,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="sector_economico" hide-ext-attribs="true">
+<table name="sector_economico_sena" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sectores economicos a los cuales se enfoca la oferta educativa del sena]]></comment>
-	<position x="960" y="2420"/>
+	<position x="940" y="2283"/>
 	<column name="sec_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3125,16 +2805,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="200"/>
 		<comment><![CDATA[Nombre del sector económico]]></comment>
 	</column>
-	<constraint name="sector_economico_pk" type="pk-constr" table="&quot;Educacion&quot;.sector_economico">
+	<constraint name="sector_economico_pk" type="pk-constr" table="&quot;Educacion&quot;.sector_economico_sena">
 		<columns names="sec_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="matriculas_usco" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[matriculas por niveles, origen departamental,municipal, genero, nivel de educación superior]]></comment>
-	<position x="460" y="2500"/>
+	<position x="440" y="2363"/>
 	<column name="matu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3178,9 +2858,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="departamento">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los departamentos en el país.]]></comment>
-	<position x="1500" y="860"/>
+	<position x="1500" y="900"/>
 	<column name="dep_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -3191,52 +2871,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="departamento_pk" type="pk-constr" table="public.departamento">
 		<columns names="dep_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[dep_codigo•dep_nombre⸣
-91•Amazonas⸣
-5•Antioquia⸣
-81•Arauca⸣
-8•Atlántico⸣
-11•Bogota D.C⸣
-13•Bolivar⸣
-15•Boyacá⸣
-17•Caldas⸣
-18•Caquetá⸣
-85•Casanare⸣
-19•Cauca⸣
-20•Cesar⸣
-27•Chocó⸣
-23•Córdoba⸣
-25•Cundinamarca⸣
-94•Guainía⸣
-95•Guaviare⸣
-41•Huila⸣
-44•La Guajira⸣
-47•Magdalena⸣
-50•Meta⸣
-52•Nariño⸣
-54•Norte de Santander⸣
-86•Putumayo⸣
-63•Quindio⸣
-66•Risaralda⸣
-88•San Andrés⸣
-68•Santander⸣
-70•Sucre⸣
-73•Tolima⸣
-76•Valle del Cauca⸣
-97•Vaupés⸣
-99•Vichada]]>
-	</initial-data>
 </table>
 
 <schema name="Cultura" rect-visible="true" fill-color="#ab0d09">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema de cultura y turismo]]></comment>
 </schema>
 
 <table name="Turistas_parques_museo" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el flujo de turistas en el parque arqueologico de San Agustin, alto de los idolos y museos.]]></comment>
 	<position x="1380" y="3460"/>
 	<column name="tpmu_codigo" not-null="true">
@@ -3274,7 +2918,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_turista">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el tipo de turista que visita un parque, museo, etc...]]></comment>
 	<position x="1800" y="3460"/>
 	<column name="ttu_codigo" not-null="true">
@@ -3292,7 +2936,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="parque_museo">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de parques y museos.]]></comment>
 	<position x="1800" y="3560"/>
 	<column name="pam_codigo" not-null="true">
@@ -3310,7 +2954,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="ingresos_centros_turisticos_comfamiliar" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los ingresos a los centros turisticos de comfamiliar]]></comment>
 	<position x="1400" y="3600"/>
 	<column name="ictc_codigo" not-null="true">
@@ -3340,7 +2984,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="centro_turistico" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de centros turisticos de comfamiliar.]]></comment>
 	<position x="1800" y="3660"/>
 	<column name="cet_codigo" not-null="true">
@@ -3358,7 +3002,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="instalaciones depor_recreativas" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="1400" y="3720"/>
 	<column name="idr_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
@@ -3391,7 +3035,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="instalacion_de_re" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los tipos de instalaciones deportivas y recreativas.]]></comment>
 	<position x="1800" y="3740"/>
 	<column name="inde_codigo" not-null="true">
@@ -3409,7 +3053,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="Reinas_bambuco" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres y años de las reinas del bambuco, departamental y nacional.]]></comment>
 	<position x="1760" y="3840"/>
 	<column name="reb_codigo" not-null="true">
@@ -3438,7 +3082,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="capacidad_hotelera" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la infoemación de la capacidad hotelera en el departamento]]></comment>
 	<position x="1400" y="3860"/>
 	<column name="cah_codigo" not-null="true">
@@ -3476,7 +3120,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="hotel" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los hoteles en el departamento.]]></comment>
 	<position x="1780" y="3980"/>
 	<column name="hot_codigo" not-null="true">
@@ -3494,7 +3138,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="escenarios_grupos" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la información de los escenarios culturales, deportivos y grupos culturalesen el departamento]]></comment>
 	<position x="1400" y="4020"/>
 	<column name="egcd_codigo" not-null="true">
@@ -3531,7 +3175,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_escenario" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el tipo de escenarios culturales y deportivos en el departamento.]]></comment>
 	<position x="1780" y="4060"/>
 	<column name="esc_codigo" not-null="true">
@@ -3549,7 +3193,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="grupos_culturales" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el tipo de grupos culturales en el departamento.]]></comment>
 	<position x="1780" y="4140"/>
 	<column name="gcu_codigo" not-null="true">
@@ -3567,7 +3211,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="bibliotecas" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la cantidad de bibliotecas en el departamento.]]></comment>
 	<position x="2080" y="3460"/>
 	<column name="bib_codigo" not-null="true">
@@ -3597,7 +3241,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="naturaleza_pu_pr">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene si es naturaleza publica o privada]]></comment>
 	<position x="2080" y="3600"/>
 	<column name="nat_codigo" not-null="true">
@@ -3615,7 +3259,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="inventario_atractivos_turisticos" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos sitios turisticos del departamento por municipio.]]></comment>
 	<position x="2080" y="3700"/>
 	<column name="iat_codigo" not-null="true">
@@ -3640,7 +3284,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="sitios_turisticos" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sitios turisticos en el departamento.]]></comment>
 	<position x="2100" y="3820"/>
 	<column name="sit_codigo" not-null="true">
@@ -3658,7 +3302,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="inventario_monumentos" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos monumentos de la ciudad de Neiva.]]></comment>
 	<position x="2080" y="3900"/>
 	<column name="imo_codigo" not-null="true">
@@ -3684,7 +3328,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="monumentos" hide-ext-attribs="true">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los monumentos en la ciudad de Neiva.]]></comment>
 	<position x="2100" y="4000"/>
 	<column name="mon_codigo" not-null="true">
@@ -3702,7 +3346,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="museos">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los museos del departamento]]></comment>
 	<position x="2080" y="4080"/>
 	<column name="mus_codigo" not-null="true">
@@ -3739,7 +3383,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="nacionalidad">
 	<schema name="&quot;Cultura&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las diferentes nacionalidades de una persona]]></comment>
 	<position x="1380" y="4180"/>
 	<column name="nac_codigo" not-null="true">
@@ -3756,13 +3400,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Calidad de vida" rect-visible="true" fill-color="#3b0000">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema calidad de vida.]]></comment>
 </schema>
 
 <table name="datos_calidad_vida" hide-ext-attribs="true">
 	<schema name="&quot;Calidad de vida&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el coeficiente GINI, pobreza, pobreza extrema por departamentos]]></comment>
 	<position x="80" y="2720"/>
 	<column name="dcv_codigo" not-null="true">
@@ -3796,7 +3440,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="pobreza_monetaria">
 	<schema name="&quot;Calidad de vida&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la pobreza monetaria del departamento del huila]]></comment>
 	<position x="40" y="2880"/>
 	<column name="pmo_codigo" not-null="true">
@@ -3825,13 +3469,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Construccion" rect-visible="true" fill-color="#65f90a">
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema construcción]]></comment>
 </schema>
 
 <table name="area_destinada_vivienda" hide-ext-attribs="true">
 	<schema name="&quot;Construccion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el area aprobada destinada a proyectos de vivienda]]></comment>
 	<position x="4120" y="1760"/>
 	<column name="adv_codigo" not-null="true">
@@ -3864,7 +3508,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_interes_social" hide-ext-attribs="true">
 	<schema name="&quot;Construccion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que dice si es una vivienda de interes social o no]]></comment>
 	<position x="4120" y="1900"/>
 	<column name="tvi_codigo" not-null="true">
@@ -3882,7 +3526,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_vivienda" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que indica si es una casa, apartamento o cualquier tipo de construcción.]]></comment>
 	<position x="1500" y="1780"/>
 	<column name="tco_codigo" not-null="true">
@@ -3900,7 +3544,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="licencias" hide-ext-attribs="true">
 	<schema name="&quot;Construccion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de licencias aprobadas para construcción.]]></comment>
 	<position x="4420" y="1760"/>
 	<column name="lic_codigo" not-null="true">
@@ -3938,7 +3582,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="catastro" hide-ext-attribs="true">
 	<schema name="&quot;Construccion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de predios, area construida, valor catastral de la propiedad inmueble gravada y no gravada por zonas en el departamento.]]></comment>
 	<position x="4420" y="1920"/>
 	<column name="cat_codigo" not-null="true">
@@ -3983,13 +3627,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Finanzas publicas" rect-visible="true" fill-color="#182e09">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema finanzas públicas.]]></comment>
 </schema>
 
 <table name="evaluacion_desempeño_fiscal_departamentos" hide-ext-attribs="true">
 	<schema name="&quot;Finanzas publicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la evaluacción del desempeño fiscal]]></comment>
 	<position x="3400" y="1460"/>
 	<column name="def_codigo" not-null="true">
@@ -4039,7 +3683,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="entorno_desarrollo" hide-ext-attribs="true">
 	<schema name="&quot;Finanzas publicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los entornos de desarrollo]]></comment>
 	<position x="3400" y="1660"/>
 	<column name="end_codigo" not-null="true">
@@ -4057,7 +3701,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="evaluacion_desempeño_fiscal_municipios" hide-ext-attribs="true">
 	<schema name="&quot;Finanzas publicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la evaluacción del desempeño fiscal]]></comment>
 	<position x="3740" y="1460"/>
 	<column name="defi_codigo" not-null="true">
@@ -4111,7 +3755,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="impuestos" hide-ext-attribs="true">
 	<schema name="&quot;Finanzas publicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el recaudo de los impuestos por combustible]]></comment>
 	<position x="3740" y="1660"/>
 	<column name="imp_codigo" not-null="true">
@@ -4141,7 +3785,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_impuesto" hide-ext-attribs="true">
 	<schema name="&quot;Finanzas publicas&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los distintos impuestos que recauda el departamento.]]></comment>
 	<position x="3400" y="1740"/>
 	<column name="tpim_codigo" not-null="true">
@@ -4158,13 +3802,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Empleo" rect-visible="true" fill-color="#00ff00">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema empleo.]]></comment>
 </schema>
 
 <table name="salario_minimo">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la evolución del salario minimo en Colombia.]]></comment>
 	<position x="3400" y="160"/>
 	<column name="sam_codigo" not-null="true">
@@ -4190,7 +3834,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="indicadores_mercado_laboral_porcentajes" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los indicadores de mercado laboral por departamentos y Bogotá D.C.]]></comment>
 	<position x="3400" y="300"/>
 	<column name="iml_codigo" not-null="true">
@@ -4248,7 +3892,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="indicadores_laborales_numero_personas" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información de los indicadores laborales por numero de personas en el departamento del Huila.]]></comment>
 	<position x="3720" y="120"/>
 	<column name="ilph_codigo" not-null="true">
@@ -4270,7 +3914,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="indicadores_laborales_huila">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos indicadores laborales que se miden en el departamento del Huila.]]></comment>
 	<position x="3740" y="200"/>
 	<column name="ilh_codigo" not-null="true">
@@ -4288,7 +3932,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="datos_pensionados_administracion_departamental" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la información de datos de los pensionados de la adinistracion departamental]]></comment>
 	<position x="3780" y="300"/>
 	<column name="dpad_codigo" not-null="true">
@@ -4322,7 +3966,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="entidades_departamento">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre por entidades de la administración central, desencetralizada, empresa economia mixta del departamento del Huila.]]></comment>
 	<position x="3760" y="440"/>
 	<column name="ende_codigo" not-null="true">
@@ -4340,7 +3984,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="clases_enLas_entidades_admon_central_deptal">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Pensionados por clases en las entidades de la admon central departamental]]></comment>
 	<position x="3400" y="540"/>
 	<column name="cead_codigo" not-null="true">
@@ -4358,7 +4002,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_empresa_porNum_trabajadores">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el tipo de mepresa clasificandola por numero de trabajadores.]]></comment>
 	<position x="3400" y="640"/>
 	<column name="tet_codigo" not-null="true">
@@ -4376,7 +4020,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_trabajadores_porSalario" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la clasificacion de trabajadores por los distintos rangos salariales.]]></comment>
 	<position x="3880" y="540"/>
 	<column name="tts_codigo" not-null="true">
@@ -4394,7 +4038,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="trabajadores_tamanio_empresa" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabjadores teniendo en cuenta el tamañao de las empresas.]]></comment>
 	<position x="3760" y="640"/>
 	<column name="ttem_codigo" not-null="true">
@@ -4423,7 +4067,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="sector">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene si es de sector oficial o privado]]></comment>
 	<position x="3400" y="720"/>
 	<column name="sect_codigo" not-null="true">
@@ -4441,7 +4085,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="trabajadores_nivel_salarial" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabajadores clasificados de acuerdo a su nivel salarial.]]></comment>
 	<position x="3400" y="820"/>
 	<column name="tns_codigo" not-null="true">
@@ -4471,7 +4115,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="trabajadores_afiliados_nivel_salarial_comfamiliar" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabajadores clasificados de acuerdo a su nivel salarial.]]></comment>
 	<position x="3780" y="760"/>
 	<column name="tans_codigo" not-null="true">
@@ -4505,7 +4149,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="trabajadores_afiliados_tamanio_empresa_comfamiliar" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de trabjadores afiliados a comfamiliar teniendo en cuenta el tamañao de las empresas.]]></comment>
 	<position x="3800" y="900"/>
 	<column name="tate_codigo" not-null="true">
@@ -4534,7 +4178,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_empresa">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintas clasificaciones de empresas (grande, mediana, microempresa, pequeña)]]></comment>
 	<position x="3400" y="940"/>
 	<column name="temp_codigo" not-null="true">
@@ -4552,7 +4196,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="agencia_publica_empleo_empAsistidas" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de empresas asistidas por tipo de empresa.]]></comment>
 	<position x="4200" y="120"/>
 	<column name="apee_codigo" not-null="true">
@@ -4578,7 +4222,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="agencia_publica_empleo_personasColocadas" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas colocadas por nivel de preparación.]]></comment>
 	<position x="4180" y="220"/>
 	<column name="apep_codigo" not-null="true">
@@ -4603,7 +4247,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="agencia_publica_empleo_personasVacantes" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas vacantes por nivel de preparación vacantes.]]></comment>
 	<position x="4200" y="440"/>
 	<column name="apev_codigo" not-null="true">
@@ -4629,7 +4273,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="agencia_publica_empleo_persoInscritas" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas inscritas en la agencia publica de empleo del SENA.]]></comment>
 	<position x="4220" y="680"/>
 	<column name="apei_codigo" not-null="true">
@@ -4651,7 +4295,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="nivel_preparacion_agencia_empleo_sena">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Niveles de preparación que usa el servicio publico de empleo del SENA.]]></comment>
 	<position x="3880" y="1040"/>
 	<column name="npae_codigo" not-null="true">
@@ -4669,7 +4313,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="nivel_preparacion_servicio_empleo_comfamiliar">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Niveles de preparación usados por el servicio publico de empleo de comfamiliar.]]></comment>
 	<position x="3400" y="1040"/>
 	<column name="npse_codigo" not-null="true">
@@ -4687,7 +4331,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="servicio_publico_empleo_personasColocadas" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas colocadas por nivel de preparación comfamiliar.]]></comment>
 	<position x="4180" y="320"/>
 	<column name="spep_codigo" not-null="true">
@@ -4713,7 +4357,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="servico_publico_empleo_personasVacantes" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas vacantes por nivel de preparación vacantes comfamiliar.]]></comment>
 	<position x="4200" y="560"/>
 	<column name="spev_codigo" not-null="true">
@@ -4739,7 +4383,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="servicio_publico_empleo_persoInscritas" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas inscritas en el servicio publico de empleo de comfamiliar]]></comment>
 	<position x="4220" y="780"/>
 	<column name="spei_codigo" not-null="true">
@@ -4761,7 +4405,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="ocupaciones_exceso_inscritos">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las ocupaciones poco dinámicas con exceso de inscritos en el departamento]]></comment>
 	<position x="4200" y="880"/>
 	<column name="oei_codigo" not-null="true">
@@ -4790,7 +4434,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="ocupacion">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene las diferentes ocupaciones de oferta de empleo en la agencia publica de empleo y el servicio publico de empleo]]></comment>
 	<position x="4340" y="1040"/>
 	<column name="ocup_codigo" not-null="true">
@@ -4807,7 +4451,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="afiliados_eps" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de afiliados a las eps por el regimen contriubutivo y subsidiado.]]></comment>
 	<position x="3400" y="1140"/>
 	<column name="aeps_codigo" not-null="true">
@@ -4841,7 +4485,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_regimen">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el tipo de regimen (contributivo, subsidiado)]]></comment>
 	<position x="3700" y="1160"/>
 	<column name="tre_codigo" not-null="true">
@@ -4859,7 +4503,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="empresa_prestadora_salud">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las distintas eps en el departamento.]]></comment>
 	<position x="4000" y="1140"/>
 	<column name="eps_codigo" not-null="true">
@@ -4877,7 +4521,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="funcionarios_consejales_alcaldias" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Numero de concejales y fucnionarios de las acaldias.]]></comment>
 	<position x="4380" y="1140"/>
 	<column name="fca_codigo" not-null="true">
@@ -4907,7 +4551,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="funcionarios_entidades_departamento" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de funcionarios por cada entidad del departamento.]]></comment>
 	<position x="3400" y="1280"/>
 	<column name="fed_codigo" not-null="true">
@@ -4937,7 +4581,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="entidades_neiva">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre por entidades de la administración central, desencetralizada, empresa economia mixta del municipio del neiva.]]></comment>
 	<position x="3760" y="1260"/>
 	<column name="enne_codigo" not-null="true">
@@ -4955,7 +4599,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="funcionarios_entidades_neiva" hide-ext-attribs="true">
 	<schema name="&quot;Empleo&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de funcionarios por cada entidad de Neiva.]]></comment>
 	<position x="4080" y="1260"/>
 	<column name="fen_codigo" not-null="true">
@@ -4984,13 +4628,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Movimeinto empresarial" rect-visible="true" fill-color="#500079">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema movimiento empresarial]]></comment>
 </schema>
 
 <table name="actividad_economica">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las distintas actividades económicas de una empresa.]]></comment>
 	<position x="1460" y="1580"/>
 	<column name="ace_codigo" not-null="true">
@@ -5004,67 +4648,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="actividad_economica_pk" type="pk-constr" table="public.actividad_economica">
 		<columns names="ace_codigo" ref-type="src-columns"/>
 	</constraint>
-	<initial-data>
-<![CDATA[ace_codigo•ace_nombre⸣
-1•Comercio⸣
-2•Alimentos⸣
-3•Servicios⸣
-4•Confecciones⸣
-5•Artesanias⸣
-6•Metalmecanica⸣
-7•Muebles en Madera⸣
-8•Prefabricados⸣
-9•Calzado⸣
-10•Marroquineria⸣
-11•Juegos Artificiales⸣
-12•AGRICULTURA⸣
-13•Cultivo de café⸣
-14•Cultivo de otros productos agrícolas⸣
-15•Producción pecuaria y caza incluyendo las actividades veterinarias⸣
-16•Silvicultura⸣
-17•Pesca⸣
-18•EXPLOTACION DE MINAS Y CANTERAS⸣
-19•Extracción de carbón⸣
-20•Extracción de petróleo crudo y de gas natural; actividades de servicios relacionadas con la extracción de petróleo y de gas⸣
-21•Extracción de minerales metáliferos⸣
-22•Extracción de minerales no metálicos⸣
-23•INDUSTRIA MANUFACTURERA⸣
-24•SUMINISTRO DE ELECTRICIDAD⸣
-25•Generación⸣
-26•Fabricación de gas; distribución de combustibles gaseosos por tuberías; suministro de vapor y agua caliente⸣
-27•Captación⸣
-28•Eliminación de desperdicios y aguas residuales⸣
-29•CONSTRUCCION⸣
-30•Construcción de edificaciones completas y de partes de edificaciones;  acondicionamiento de edificaciones⸣
-31•Construcción de obras de ingeniería civil⸣
-32•COMERCIO⸣
-33•Comercio⸣
-34•Mantenimiento y reparación de vehículos automotores; reparación de efectos personales y enseres domésticos⸣
-35•Hoteles⸣
-36•TRANSPORTE⸣
-37•Transporte por vía terrestre⸣
-38•Transporte por vía acuática⸣
-39•Transporte por vía aérea⸣
-40•Actividades complementarias y auxiliares al transporte; actividades de agencias de viajes⸣
-41•Correo y telecomunicaciones⸣
-42•ESTABLECIMIENTOS FINANCIEROS⸣
-43•Intermediación financiera⸣
-44•Actividades inmobiliarias y alquiler de vivienda⸣
-45•Actividades de servicios a las empresas excepto servicios financieros e inmobiliarios⸣
-46•ACTIVIDADES DE SERVICIOS SOCIALES⸣
-47•Administración pública y defensa; seguridad social de afiliación obligatoria⸣
-48•Educación de mercado⸣
-49•Educación de no mercado⸣
-50•Servicios sociales y de salud de mercado⸣
-51•Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de mercado⸣
-52•Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de no mercado⸣
-53•Hogares privados con servicio doméstico]]>
-	</initial-data>
 </table>
 
 <table name="microempresas" hide-ext-attribs="true">
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el número de microempresas por actividad económica en el departamento.]]></comment>
 	<position x="4060" y="1460"/>
 	<column name="mic_codigo" not-null="true">
@@ -5093,7 +4681,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="sociedades" hide-ext-attribs="true">
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de sociedades por tipo de sociedad , estado y capital autorizado.]]></comment>
 	<position x="4060" y="1580"/>
 	<column name="soc_codigo" not-null="true">
@@ -5127,7 +4715,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_sociedad">
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los distintos tipos de sociedades (anonima, asociativa, limitada...).]]></comment>
 	<position x="4420" y="1480"/>
 	<column name="tso_codigo" not-null="true">
@@ -5145,7 +4733,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="estado_sociedad">
 	<schema name="&quot;Movimeinto empresarial&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos estados que tienen las sociedades (cosntituidas, depuradas, disueltas y reformadas).]]></comment>
 	<position x="4400" y="1580"/>
 	<column name="ess_codigo" not-null="true">
@@ -5162,13 +4750,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="PIB" rect-visible="true" fill-color="#5a5406">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema PIB]]></comment>
 </schema>
 
 <table name="pib_departamental_precios_constantes" hide-ext-attribs="true">
 	<schema name="&quot;PIB&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el PIB a precios constantes por departamento.]]></comment>
 	<position x="3380" y="1880"/>
 	<column name="pde_codigo" not-null="true">
@@ -5210,7 +4798,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="pib_x_habitantes" hide-ext-attribs="true">
 	<schema name="&quot;PIB&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el PIB por habitantes a precios corrientes]]></comment>
 	<position x="3780" y="1900"/>
 	<column name="pha_codigo" not-null="true">
@@ -5235,13 +4823,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Servicios publicos" rect-visible="true" fill-color="#180dc0">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema servicios publicos]]></comment>
 </schema>
 
 <table name="servicio_energia" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el consumo y los usuarios de energia por sectores]]></comment>
 	<position x="4780" y="140"/>
 	<column name="seo_codigo" not-null="true">
@@ -5275,7 +4863,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="sector_servico">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos sectores en los que esta clasificado el servicio de energia]]></comment>
 	<position x="5160" y="140"/>
 	<column name="ses_codigo" not-null="true">
@@ -5293,7 +4881,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="servicio_gas_alcanos" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el consumo y usuarios del servicio de gas en alacanos.]]></comment>
 	<position x="4780" y="280"/>
 	<column name="sga_codigo" not-null="true">
@@ -5331,7 +4919,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_servicio" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos tipos de servicio de gas (residencial, oficial, industrial, etc...)]]></comment>
 	<position x="5160" y="240"/>
 	<column name="tsg_codigo" not-null="true">
@@ -5349,7 +4937,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tarifas_gas_alcanos" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las tarifas de alcanos]]></comment>
 	<position x="4780" y="440"/>
 	<column name="taga_codigo" not-null="true">
@@ -5387,7 +4975,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="criterio_gas" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los criterios a tener en cuenta en el servicio delgas ( estratos y rangos).]]></comment>
 	<position x="5160" y="320"/>
 	<column name="crg_codigo" not-null="true">
@@ -5405,7 +4993,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="concepto_gas" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los conceptos por los cuales el servicio de gas tarifa.]]></comment>
 	<position x="5160" y="400"/>
 	<column name="cog_codigo" not-null="true">
@@ -5423,7 +5011,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="unidad_gas" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las unidades por las que se tarifa ($/factura, $/m3, %).]]></comment>
 	<position x="5160" y="480"/>
 	<column name="ung_codigo" not-null="true">
@@ -5441,7 +5029,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="servicio_gas_surgas" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el consumo y usuarios del servicio de gas en surgas.]]></comment>
 	<position x="4780" y="580"/>
 	<column name="sgs_codigo" not-null="true">
@@ -5479,7 +5067,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tarifas_gas_surgas" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las tarifas de alcanos]]></comment>
 	<position x="5180" y="560"/>
 	<column name="tags_codigo" not-null="true">
@@ -5509,7 +5097,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="acueducto" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de acueducto en las cabeceras de los municipios.]]></comment>
 	<position x="4780" y="740"/>
 	<column name="acu_codigo" not-null="true">
@@ -5543,7 +5131,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="entidad_acueducto" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de las entidades encargadas del servicio de acueducto en los municipios.]]></comment>
 	<position x="5140" y="700"/>
 	<column name="ena_codigo" not-null="true">
@@ -5561,7 +5149,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="acueducto_cobertura" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de acueducto en las cabeceras de los municipios.]]></comment>
 	<position x="5140" y="780"/>
 	<column name="acc_codigo" not-null="true">
@@ -5595,7 +5183,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="alcantarillado" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de alcantarillado en las cabeceras de los municipios.]]></comment>
 	<position x="4760" y="880"/>
 	<column name="alc_codigo" not-null="true">
@@ -5629,7 +5217,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="descarga_alcantarillado" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sitios de descarga del alcantarillado en los municipios.]]></comment>
 	<position x="5140" y="920"/>
 	<column name="dal_codigo" not-null="true">
@@ -5647,7 +5235,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="alcantarillado_sistema" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las generalidades del sistema de alcantarillado en las cabeceras de los municipios.]]></comment>
 	<position x="4760" y="1020"/>
 	<column name="als_codigo" not-null="true">
@@ -5680,7 +5268,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_sistema_alcantarillado" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene los nombres de los diferentes tipos de sistema de alcantarillado (sanitario, pluvial, combiando).]]></comment>
 	<position x="5140" y="1020"/>
 	<column name="tsal_codigo" not-null="true">
@@ -5698,7 +5286,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="aseo" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el número de suscriptores del servicio de aseo.]]></comment>
 	<position x="4760" y="1160"/>
 	<column name="ase_codigo" not-null="true">
@@ -5748,7 +5336,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="Limpieza" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene datos de barrido, limpieza y disposición final de los residuos.]]></comment>
 	<position x="5140" y="1100"/>
 	<column name="lim_codigo" not-null="true">
@@ -5786,7 +5374,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="lugar_disposicion_residuos">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los lugares de disposición final de residuos solidos.]]></comment>
 	<position x="5140" y="1240"/>
 	<column name="ldr_codigo" not-null="true">
@@ -5804,7 +5392,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="fuente_captacion" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la fuente de captación y conducción del sistema de acueducto en las cabeceras de los municipios en el departamento.]]></comment>
 	<position x="4780" y="1360"/>
 	<column name="fca_codigo" not-null="true">
@@ -5846,7 +5434,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="fuente">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las fuentes de cpatación de los servicios de acueducto y alcantarillado.]]></comment>
 	<position x="5140" y="1340"/>
 	<column name="fue_codigo" not-null="true">
@@ -5864,7 +5452,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_captacion">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los tipos de captación.]]></comment>
 	<position x="5140" y="1440"/>
 	<column name="tica_codigo" not-null="true">
@@ -5882,7 +5470,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="medidores">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información de lo medidores y el agua producida.]]></comment>
 	<position x="4780" y="1520"/>
 	<column name="medi_codigo" not-null="true">
@@ -5916,7 +5504,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="agua_facturada" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la cantidad de agua facturada por m3/año]]></comment>
 	<position x="5140" y="1540"/>
 	<column name="afa_codigo" not-null="true">
@@ -5946,7 +5534,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tratamiento_acueducto" hide-ext-attribs="true">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene informacción de tratamiento, tanques de almacenamiento y redes de distribución del sistema de acueducto]]></comment>
 	<position x="5140" y="1660"/>
 	<column name="tra_codigo" not-null="true">
@@ -5996,7 +5584,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_planta">
 	<schema name="&quot;Servicios publicos&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el tipo de planta de tratamiento.]]></comment>
 	<position x="4780" y="1720"/>
 	<column name="tpla_codigo" not-null="true">
@@ -6013,13 +5601,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Electorales" rect-visible="true" fill-color="#ead720">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema electorales.]]></comment>
 </schema>
 
 <table name="alcaldes_elegidos_xvoto" hide-ext-attribs="true">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabala que contiene la información de los alcaldes elegidos por voto popular en los municipios del departamento del Huila.]]></comment>
 	<position x="20" y="680"/>
 	<column name="aev_codigo" not-null="true">
@@ -6053,7 +5641,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="periodo_electoral">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos periodos electorales.]]></comment>
 	<position x="360" y="640"/>
 	<column name="pel_codigo" not-null="true">
@@ -6071,7 +5659,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="alcaldes">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los alcaldes del departamento]]></comment>
 	<position x="360" y="740"/>
 	<column name="ald_codigo" not-null="true">
@@ -6089,7 +5677,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="partido_movimiento">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los diferentes partidos politicos o movimientos.]]></comment>
 	<position x="20" y="820"/>
 	<column name="pam_codigo" not-null="true">
@@ -6107,7 +5695,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_documento_id" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los distintos docuemntos de identidad.]]></comment>
 	<position x="1500" y="1700"/>
 	<column name="tdi_codigo" not-null="true">
@@ -6125,7 +5713,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="solicitud_documento_id">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información acerca del documento de identidad (primera vez, duplicado, rectificación...)]]></comment>
 	<position x="20" y="920"/>
 	<column name="sdi_codigo" not-null="true">
@@ -6143,7 +5731,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="documentos_identidad" hide-ext-attribs="true">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información sobre los documentos de identidad]]></comment>
 	<position x="20" y="980"/>
 	<column name="did_codigo" not-null="true">
@@ -6177,7 +5765,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="datos_escrutinio" hide-ext-attribs="true">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información sobre el escrutinio]]></comment>
 	<position x="320" y="920"/>
 	<column name="decr_codigo" not-null="true">
@@ -6211,7 +5799,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_votacion" hide-ext-attribs="true">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los tipos de votación (gobernacion, alcaldia, consejo, asamblea...)]]></comment>
 	<position x="420" y="1060"/>
 	<column name="tvo_codigo" not-null="true">
@@ -6229,7 +5817,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="votaciones" hide-ext-attribs="true">
 	<schema name="&quot;Electorales&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el resultado de votaciones]]></comment>
 	<position x="40" y="1120"/>
 	<column name="vot_codigo" not-null="true">
@@ -6258,14 +5846,14 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Justicia" rect-visible="true" fill-color="#2e4624">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema justicia.]]></comment>
 </schema>
 
 <table name="delitos_meses_fiscalias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
-	<position x="0" y="140"/>
+	<role name="sirhuila"/>
+	<position x="0" y="160"/>
 	<column name="dmf_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6293,9 +5881,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="delitos" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los diferentes delitos]]></comment>
-	<position x="360" y="140"/>
+	<position x="360" y="160"/>
 	<column name="del_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6311,8 +5899,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="delitos_fiscalias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
-	<position x="0" y="260"/>
+	<role name="sirhuila"/>
+	<position x="0" y="280"/>
 	<column name="def_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6340,9 +5928,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="fiscalias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las fiscalias]]></comment>
-	<position x="360" y="240"/>
+	<position x="360" y="260"/>
 	<column name="fis_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6358,9 +5946,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="organismos" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las fiscalias]]></comment>
-	<position x="360" y="340"/>
+	<position x="360" y="360"/>
 	<column name="orga_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6376,8 +5964,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="investigaciones_personerias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
-	<position x="0" y="380"/>
+	<role name="sirhuila"/>
+	<position x="0" y="400"/>
 	<column name="ipe_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6405,9 +5993,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="distritos_policia" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los distritos de policia.]]></comment>
-	<position x="360" y="420"/>
+	<position x="360" y="440"/>
 	<column name="dpo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6423,9 +6011,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="delitos_distritos_policia" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el número de delitos por distrito de policia]]></comment>
-	<position x="680" y="140"/>
+	<position x="680" y="160"/>
 	<column name="ddp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6453,8 +6041,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="delitos_meses_distritos_policia" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
-	<position x="680" y="280"/>
+	<role name="sirhuila"/>
+	<position x="680" y="300"/>
 	<column name="dmdp_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6482,7 +6070,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="visitas_personerias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="680" y="400"/>
 	<column name="vipe_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
@@ -6511,9 +6099,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="quejas_denuncias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de las quejas o denuncias (señalamiento, maltrato, toruras...)]]></comment>
-	<position x="0" y="500"/>
+	<position x="0" y="520"/>
 	<column name="qde_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6529,9 +6117,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="personeria_quejas_denuncias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el número de quejas y denuncias en las personerias.]]></comment>
-	<position x="680" y="400"/>
+	<position x="680" y="420"/>
 	<column name="pqd_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6558,13 +6146,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="SISBEN" rect-visible="true" fill-color="#cea444">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema SISBEN.]]></comment>
 </schema>
 
 <table name="viviendas_con_sevicios_publicos" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="1600" y="2820"/>
 	<column name="vsp_codigo" not-null="true">
 		<type name="serial" length="0"/>
@@ -6597,7 +6185,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_servicio_publico" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los servicios publicos]]></comment>
 	<position x="1980" y="2820"/>
 	<column name="tspu_codigo" not-null="true">
@@ -6615,7 +6203,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="estratos" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los estratos]]></comment>
 	<position x="1980" y="2900"/>
 	<column name="est_codigo" not-null="true">
@@ -6633,7 +6221,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="viviendas_por_estrato" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="1600" y="2960"/>
 	<column name="vpes_codigo" not-null="true">
 		<type name="serial" length="0"/>
@@ -6662,7 +6250,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_sisben_seguridad_social" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que incluye la población por tipo de seguridad social.]]></comment>
 	<position x="1600" y="3080"/>
 	<column name="pss_codigo" not-null="true">
@@ -6692,7 +6280,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="salud_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los tipos de salud ]]></comment>
 	<position x="1980" y="2980"/>
 	<column name="ssi_codigo" not-null="true">
@@ -6710,7 +6298,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="puntaje_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los rangos de puntaje del sisben]]></comment>
 	<position x="1980" y="3060"/>
 	<column name="pus_codigo" not-null="true">
@@ -6728,7 +6316,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_puntaje_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por puntaje del sisben]]></comment>
 	<position x="1600" y="3200"/>
 	<column name="pps_codigo" not-null="true">
@@ -6758,7 +6346,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="edades_rangos" hide-ext-attribs="true">
 	<schema name="public"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los rangos de edades en el sisben]]></comment>
 	<position x="1500" y="1860"/>
 	<column name="edr_codigo" not-null="true">
@@ -6776,7 +6364,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_edades_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por edades del sisben]]></comment>
 	<position x="1600" y="3200"/>
 	<column name="ped_codigo" not-null="true">
@@ -6806,7 +6394,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="nivel_esducativo_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los niveles educativos alcanzados.]]></comment>
 	<position x="1980" y="3140"/>
 	<column name="nies_codigo" not-null="true">
@@ -6824,7 +6412,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_nivel_educativo_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por nivel educativo alcanzado.]]></comment>
 	<position x="1940" y="3220"/>
 	<column name="pnes_codigo" not-null="true">
@@ -6854,7 +6442,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_genero_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por sexo en el sisben.]]></comment>
 	<position x="2260" y="2820"/>
 	<column name="pgsi_codigo" not-null="true">
@@ -6884,7 +6472,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_tipo_documento_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por tipo de documento en el sisben.]]></comment>
 	<position x="2260" y="2960"/>
 	<column name="ptds_codigo" not-null="true">
@@ -6914,7 +6502,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_vivienda_zona_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por tipo de vivienda y zonas.]]></comment>
 	<position x="2260" y="3080"/>
 	<column name="pvz_codigo" not-null="true">
@@ -6948,7 +6536,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_tenencia_vivienda_sisben" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por tenencia de vivienda]]></comment>
 	<position x="2260" y="3220"/>
 	<column name="ptv_codigo" not-null="true">
@@ -6978,7 +6566,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tenencia_vivienda" hide-ext-attribs="true">
 	<schema name="&quot;SISBEN&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres del tipo de tenencia de vivienda]]></comment>
 	<position x="1600" y="3320"/>
 	<column name="tv_codigo" not-null="true">
@@ -6995,13 +6583,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="poblacion" rect-visible="true" fill-color="#550000">
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema población.]]></comment>
 </schema>
 
 <table name="densidad_poblacion" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="460" y="2740"/>
 	<column name="depo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
@@ -7042,7 +6630,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_hogares">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los diferentes tipos de hogares.]]></comment>
 	<position x="760" y="2760"/>
 	<column name="tho_codigo" not-null="true">
@@ -7060,7 +6648,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="hogares_desplazados" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de hogares desplazados por tipo.]]></comment>
 	<position x="1040" y="2760"/>
 	<column name="hod_codigo" not-null="true">
@@ -7090,7 +6678,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_poblacion_desplazada" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los diferentes tipos de población desplazada.]]></comment>
 	<position x="460" y="2900"/>
 	<column name="tpde_codigo" not-null="true">
@@ -7108,7 +6696,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_desplazada" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas desplazadas por tipo.]]></comment>
 	<position x="760" y="2860"/>
 	<column name="pood_codigo" not-null="true">
@@ -7138,7 +6726,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="tipo_etnia" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de las diferentes tipos de etnias.]]></comment>
 	<position x="1140" y="2900"/>
 	<column name="tet_codigo" not-null="true">
@@ -7156,7 +6744,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_etnica" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas por etnia en los muncipios]]></comment>
 	<position x="460" y="2980"/>
 	<column name="poet_codigo" not-null="true">
@@ -7186,7 +6774,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_nbi" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero poblacion NBI (Necesidades Basicas Insatisfechas) y el porcentaje segun DANE.]]></comment>
 	<position x="900" y="2980"/>
 	<column name="nbi_codigo" not-null="true">
@@ -7216,7 +6804,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_grupos_quinquenales" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene la poblacion por grupos quinquenales por edad.]]></comment>
 	<position x="460" y="3100"/>
 	<column name="pgq_codigo" not-null="true">
@@ -7246,7 +6834,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_genero" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por sexo.]]></comment>
 	<position x="760" y="3100"/>
 	<column name="poge_codigo" not-null="true">
@@ -7276,7 +6864,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_proyeccion" hide-ext-attribs="true">
 	<schema name="poblacion"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene la proyección de la población en el departamento 2010-2020.]]></comment>
 	<position x="1060" y="3100"/>
 	<column name="pyp_codigo" not-null="true">
@@ -7306,7 +6894,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_censada_municipio">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<position x="40" y="4340"/>
 	<column name="psm_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
@@ -7330,7 +6918,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="vih_clasificacion" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de la clasificación del VIH]]></comment>
 	<position x="880" y="3940"/>
 	<column name="vicla_codigo" not-null="true">
@@ -7347,9 +6935,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="poblacion_edad_escolar" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
-	<role name="postgres"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Número de personas en edad escolar]]></comment>
-	<position x="920" y="2540"/>
+	<position x="900" y="2403"/>
 	<column name="ped_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -7376,12 +6964,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Deportes" rect-visible="true" fill-color="#ff007f">
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 </schema>
 
 <table name="deporte">
 	<schema name="&quot;Deportes&quot;"/>
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Lista de deportes disponibles en el departamento del Huila]]></comment>
 	<position x="3400" y="2180"/>
 	<column name="dep_codigo" not-null="true">
@@ -7404,7 +6992,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <table name="torneo">
 	<schema name="&quot;Deportes&quot;"/>
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla de torneos del Huila]]></comment>
 	<position x="3780" y="2160"/>
 	<column name="tor_codigo" not-null="true">
@@ -7429,15 +7017,15 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </table>
 
 <schema name="Riesgos" rect-visible="true" fill-color="#00aa7f">
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Esquema de Riesgos]]></comment>
 </schema>
 
 <table name="desastres">
 	<schema name="&quot;Riesgos&quot;"/>
-	<role name="sir_huila"/>
+	<role name="sirhuila"/>
 	<comment><![CDATA[Desastres naturales registrados]]></comment>
-	<position x="3400" y="2323"/>
+	<position x="3400" y="2320"/>
 	<column name="des_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Código único de los desastres naturales]]></comment>
@@ -7938,25 +7526,25 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_Clasificacion_icfes_estab_educa_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
 	<columns names="cies_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_Clasificacion_icfes_estab_edu_tp_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
 	<columns names="cies_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_clas_icfes_estab_edu_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
 	<columns names="cies_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_cla_icfes_estab_educa_semestre" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.semestre" table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.semestre" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
 	<columns names="cies_semestre" ref-type="src-columns"/>
 	<columns names="sem_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -7986,9 +7574,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_datos_universidades_nedusuperior" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.nivel_educacion_superior" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.datos_universidades">
 	<columns names="dau_nivel_educacion_superior" ref-type="src-columns"/>
-	<columns names="nes_codigo" ref-type="dst-columns"/>
+	<columns names="tpne_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_programa" type="fk-constr" comparison-type="MATCH FULL"
@@ -7998,7 +7586,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_datos_universidades_categoria_personalU" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.&quot;categoria_personalU&quot;" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.categoria_personal" table="&quot;Educacion&quot;.datos_universidades">
 	<columns names="dau_categoria_personalU" ref-type="src-columns"/>
 	<columns names="cpu_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -8249,14 +7837,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_sena_genero" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.genero" table="&quot;Educacion&quot;.sena">
-	<columns names="sen_genero" ref-type="src-columns"/>
-	<columns names="gen_codigo" ref-type="dst-columns"/>
-</constraint>
-
 <constraint name="fk_sena_sector_eco" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.sector_economico" table="&quot;Educacion&quot;.sena">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.sector_economico_sena" table="&quot;Educacion&quot;.sena">
 	<columns names="sen_sector_economico" ref-type="src-columns"/>
 	<columns names="sec_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -10129,22 +9711,22 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_municipio&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;"
+	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_tipo_institucion&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;"
+	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
 	 dst-table="&quot;Educacion&quot;.tipo_institucion"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_anio&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;"
+	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_semestre&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.&quot;Clasificacion_icfes_estab_educativos&quot;"
+	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
 	 dst-table="public.semestre"
 	 src-required="false" dst-required="false"/>
 
@@ -10168,11 +9750,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="&quot;Educacion&quot;.universidad"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_datos_universidades_nivel_educacion_superior" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
-	 dst-table="&quot;Educacion&quot;.nivel_educacion_superior"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_datos_universidades_programa" type="relfk"
 	 src-table="&quot;Educacion&quot;.datos_universidades"
 	 dst-table="&quot;Educacion&quot;.programa"
@@ -10180,7 +9757,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="&quot;rel_datos_universidades_categoria_personalU&quot;" type="relfk"
 	 src-table="&quot;Educacion&quot;.datos_universidades"
-	 dst-table="&quot;Educacion&quot;.&quot;categoria_personalU&quot;"
+	 dst-table="&quot;Educacion&quot;.categoria_personal"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_genero" type="relfk"
@@ -10388,14 +9965,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_sena_genero" type="relfk"
-	 src-table="&quot;Educacion&quot;.sena"
-	 dst-table="public.genero"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_sena_sector_economico" type="relfk"
 	 src-table="&quot;Educacion&quot;.sena"
-	 dst-table="&quot;Educacion&quot;.sector_economico"
+	 dst-table="&quot;Educacion&quot;.sector_economico_sena"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_sena_nivel_formacion_sena" type="relfk"
@@ -11829,6 +11401,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_municipio_departamento" type="relfk"
 	 src-table="public.municipio"
 	 dst-table="public.departamento"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_datos_universidades_tipo_nivel_educativo" type="relfk"
+	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
