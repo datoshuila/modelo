@@ -1,0 +1,54 @@
+ace_codigo,ace_nombre
+1,Comercio 
+2,Alimentos 
+3,Servicios 
+4,Confecciones 
+5,Artesanias 
+6,Metalmecanica 
+7,Muebles en Madera 
+8,Prefabricados 
+9,Calzado 
+10,Marroquineria 
+11,Juegos Artificiales 
+12,"AGRICULTURA, GANADERIA, CAZA, SILVICULTURA Y PESCA"
+13,Cultivo de café
+14,Cultivo de otros productos agrícolas
+15,Producción pecuaria y caza incluyendo las actividades veterinarias
+16,"Silvicultura, extracción de madera y actividades conexas"
+17,"Pesca, produccion de peces en criaderos y granjas piscícolas; actividades de servicios relacionadas con la pesca"
+18,EXPLOTACION DE MINAS Y CANTERAS
+19,"Extracción de carbón, carbón lignítico y turba"
+20,"Extracción de petróleo crudo y de gas natural; actividades de servicios relacionadas con la extracción de petróleo y de gas, excepto las actividades de prospección; extracción de minerales de uranio y de torio"
+21,Extracción de minerales metáliferos
+22,Extracción de minerales no metálicos
+23,INDUSTRIA MANUFACTURERA
+24,"SUMINISTRO DE ELECTRICIDAD, GAS Y AGUA"
+25,"Generación, captación y distribución de energía eléctrica"
+26,Fabricación de gas; distribución de combustibles gaseosos por tuberías; suministro de vapor y agua caliente
+27,"Captación, depuración y distribución de agua"
+28,"Eliminación de desperdicios y aguas residuales, saneamiento y actividades similares"
+29,CONSTRUCCION
+30,Construcción de edificaciones completas y de partes de edificaciones;  acondicionamiento de edificaciones
+31,Construcción de obras de ingeniería civil
+32,"COMERCIO, REPARACIÓN, RESTAURANTES Y HOTELES"
+33,Comercio
+34,Mantenimiento y reparación de vehículos automotores; reparación de efectos personales y enseres domésticos
+35,"Hoteles, restaurantes, bares y similares"
+36,"TRANSPORTE, ALMACENAMIENTO Y COMUNICACIONES"
+37,Transporte por vía terrestre
+38,Transporte por vía acuática
+39,Transporte por vía aérea
+40,Actividades complementarias y auxiliares al transporte; actividades de agencias de viajes
+41,Correo y telecomunicaciones
+42,"ESTABLECIMIENTOS FINANCIEROS, SEGUROS, ACTIVIDADES INMOBILIARIAS Y SERVICIOS A LAS EMPRESAS"
+43,Intermediación financiera
+44,Actividades inmobiliarias y alquiler de vivienda
+45,Actividades de servicios a las empresas excepto servicios financieros e inmobiliarios
+46,"ACTIVIDADES DE SERVICIOS SOCIALES, COMUNALES Y PERSONALES"
+47,Administración pública y defensa; seguridad social de afiliación obligatoria
+48,Educación de mercado
+49,Educación de no mercado
+50,Servicios sociales y de salud de mercado
+51,Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de mercado
+52,Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de no mercado
+53,Hogares privados con servicio doméstico

@@ -1,0 +1,89 @@
+pro_codigo,pro_nombre
+1,Administración de Empresas - Diurna
+2,Administración de Empresas - Nocturna 
+3,Administración de Empresas – Garzón
+4,Administración de Empresas - La Plata
+5,Administración de Empresas - La Pitalito
+6,Contaduría Pública - Diurna
+7,Contaduría Pública - Nocturna
+8,Contaduría Pública – Garzón 
+9,Contaduría Pública - La Plata
+10,Contaduría Pública - Pitalito
+11,Administración Financiera - Ciclo Profesional
+12,Tecnología en Administración Financiera
+13,Medicina 
+14,Enfermería
+15,Ingeniería Agrícola - Neiva
+16,Ingeniería Agrícola – Garzón
+17,Ingeniería Agrícola - La Plata
+18,Ingeniería Agrícola - Pitalito
+19,Ingeniería de Petróleos 
+20,Ingeniería Civil
+21,Ingeniería Electrónica 
+22,Ingeniería de Desarrollo de Software - Neiva
+23,Tecnología en Desarrollo de Software - Neiva
+24,Tecnología en Desarrollo de Software-Pitalito
+25,Tecnología en Obras Civiles
+26,Tecnología en Obras Civiles- Garzón
+27,Lic. en Educ. Bás. Con Énfasis en Ciencias Naturales y Educ. Ambiental - Neiva
+28,Lic. en Educ. Bás. Con Énfasis en humanidades y lengua Castellana
+29,"Lic. en Educ. Bás. Con Énfasis en Humanidades, Lengua Extranjera - Neiva"
+30,Lic. en Matemáticas - Neiva
+31,Lic. en Educ. Bás. Con Énfasis en Educ. Artística y Cultural
+32,"Lic. en Educ. Bás. Con Énfasis en Educ. Física, Recreación y Deportes "
+33,Lic. en Pedagogía Infantil
+34,Psicología - Neiva
+35,Comunicación Social y Periodísmo
+36,Comunicación Social y Periodísmo- Pitalito
+37,Matemáticas Aplicada - Neiva
+38,Tecnología en Acuicultura Continental - Neiva
+39,Lic. en Física - Neiva
+40,Ciencias Políticas
+41,Derecho  Diurna- Neiva
+42,Derecho Nocturna- Neiva
+43,Derecho Nocturna- Pitalito
+44,Ingeniería de Sistemas
+45,Ingeniería Industrial
+46,Ingeniería Civil
+47,Técnico Profesional en Fútbol
+48,Especialización Gerencia de la Salud Ocupacional 
+49,Especialización Gerencia de la Calidad y Auditoría en Salud 
+50,Especialización en Alta Gerencia 
+51,Especialización en Gerencia de Mercadeo estratégico
+52,Especialización en Gerencia Tributaria
+53,Especialización en Epidemiologia
+54,Especialización en Enfermería -Cuidado Crítico 
+55,Especialización en Enfermería en Nefrológica y Urológica
+56,Especializaciones clinicas equivalentes a maestrías
+57,Especialización en Anestesiología y Reanimación 
+58,Especialización en Cirugía General
+59,Especialización en Medicina Interna 
+60,Especialización en Ginecoobstetricia
+61,Especialización en Pediatría 
+62,Especialización en Ingeniería Ambiental 
+63,Maestría en Ecología y Gestión de Ecosistemas Estratégicos
+64,Maestría en Ingeniría y Gestión Ambiental
+65,Especialización en Creatividad y Comunicación para la Docencia
+66,Especialización en Integración educativa para la Discapacidad
+67,Especialización en Pedagogía de la Expresión Lúdica
+68,Maestría en Educación área de profundización: Diseño Gestión y Evaluación Curricular
+69,Maestría en Educación área de profundización: Docencia e investigacion universitaria
+70,Maestría en Educación Física 
+71,Maestría en Conflicto Territorio y Cultura 
+72,Maestría en Educacion y Cultura para La Paz
+73,Esp. en Pedagogía Sitémica y de los Sitemas Dinámicos
+74,Maestría en Didáctica del Inglés
+75,Maestría en derecho público
+76,Técnico en fútbol
+77,Bienestar Universitario
+78,Departamento de idiomas
+79,Adminstración BAncaria y Financiera
+80,Adminstración Comercial
+81,Adminstración de Empresas Agro
+82,Adminstración Turística
+83,"Mercadeo, Publicidad y Ventas"
+84,Negocios Internacionales
+85,Medicina Veterinaria y Zootecnia
+86,Ingeniería Ambiental
+87,Gerencia de sistemas Integrados de calidad
+88,Economía
