@@ -15,6 +15,7 @@ for path in "${array[@]}"; do   # The quotes are necessary here
 		# list name of file: ${file##*/} this regular expression takes the last element after splitting by "/"
 		# list name of table (without .csv): $(cut -d "." -f 1 <<< "${file##*/}") this regular expression takes the first element after splitting by "."
 		# nrow=$(cat $file | wc -l)
+		
 		table=$(cut -d "." -f 1 <<< "${file##*/}")
 		nrow=$(( $(cat "$file" | wc -l) - 1 ))
     	if [ $nrow -eq 0 ]; then
@@ -34,3 +35,6 @@ for path in "${array[@]}"; do   # The quotes are necessary here
 		fi
     done
 done
+
+# Delete: psql -h 192.81.217.193 -d sirhuila -U postgres -c "DELETE FROM \"Educacion\".\"comportamiento_alumnos\";"
+# Upload: psql -h 192.81.217.193 -d sirhuila -U postgres -c "\copy \"Educacion\".\"comportamiento_alumnos\" FROM '/home/camilo/Dropbox/1. Proyectos/Gob. Huila/SIR/modelo/csv/dependientes/Educacion/comportamiento_alumnos.csv' DELIMITER ',' CSV HEADER;"
