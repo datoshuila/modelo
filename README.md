@@ -2,7 +2,7 @@
 
 ![Modelo de datos del Sistema de Información Regional](/img/sirhuila.png)
 
-Actualizado el 20 de Octubre de 2017. Disponible en formato [DBM](/E-R_SIR.dbm), [SQL](/script/sirhuila.sql), y [PNG](/img/sirhuila.png).
+Actualizado el 16 de Noviembre de 2017. Disponible en formato [DBM](/sirhuila.dbm), [SQL](/script/sirhuila.sql), y [PNG](/img/sirhuila.png).
 
 El Sistema de Información Regional condensa toda la información estadística y espacial del Departamento del Huila en Colombia. Mediante este modelo de datos, se busca cimentar las bases conceptuales de la base de datos del Sistema de Información. 
 
