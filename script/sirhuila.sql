@@ -4,19 +4,29 @@
 -- Project Site: pgmodeler.com.br
 -- Model Author: ---
 
--- object: sir_huila | type: ROLE --
--- DROP ROLE IF EXISTS sir_huila;
-CREATE ROLE sir_huila WITH 
-	UNENCRYPTED PASSWORD '}d9-2#p{'L';
+-- object: sirhuila | type: ROLE --
+-- DROP ROLE IF EXISTS sirhuila;
+CREATE ROLE sirhuila WITH 
+	CREATEDB
+	INHERIT
+	LOGIN
+	ENCRYPTED PASSWORD '}d9-2#p{L';
+-- ddl-end --
+
+-- object: analytics | type: ROLE --
+-- DROP ROLE IF EXISTS analytics;
+CREATE ROLE analytics WITH 
+	LOGIN
+	ENCRYPTED PASSWORD 'sirhuila.123_';
 -- ddl-end --
 
 
 -- Database creation must be done outside an multicommand file.
 -- These commands were put in this file only for convenience.
--- -- object: sir_huila_datos | type: DATABASE --
--- -- DROP DATABASE IF EXISTS sir_huila_datos;
--- CREATE DATABASE sir_huila_datos
--- 	OWNER = sir_huila
+-- -- object: sirhuila | type: DATABASE --
+-- -- DROP DATABASE IF EXISTS sirhuila;
+-- CREATE DATABASE sirhuila
+-- 	OWNER = sirhuila
 -- ;
 -- -- ddl-end --
 -- 
@@ -25,7 +35,7 @@ CREATE ROLE sir_huila WITH
 -- DROP SCHEMA IF EXISTS "Agropecuario" CASCADE;
 CREATE SCHEMA "Agropecuario";
 -- ddl-end --
-ALTER SCHEMA "Agropecuario" OWNER TO postgres;
+ALTER SCHEMA "Agropecuario" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Agropecuario" IS 'Esquema agropecuario.';
 -- ddl-end --
@@ -34,7 +44,7 @@ COMMENT ON SCHEMA "Agropecuario" IS 'Esquema agropecuario.';
 -- DROP SCHEMA IF EXISTS "Salud" CASCADE;
 CREATE SCHEMA "Salud";
 -- ddl-end --
-ALTER SCHEMA "Salud" OWNER TO postgres;
+ALTER SCHEMA "Salud" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Salud" IS 'Esquema salud.';
 -- ddl-end --
@@ -43,7 +53,7 @@ COMMENT ON SCHEMA "Salud" IS 'Esquema salud.';
 -- DROP SCHEMA IF EXISTS "Educacion" CASCADE;
 CREATE SCHEMA "Educacion";
 -- ddl-end --
-ALTER SCHEMA "Educacion" OWNER TO postgres;
+ALTER SCHEMA "Educacion" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Educacion" IS 'Esquema educación.';
 -- ddl-end --
@@ -52,7 +62,7 @@ COMMENT ON SCHEMA "Educacion" IS 'Esquema educación.';
 -- DROP SCHEMA IF EXISTS "cifras macro economicas" CASCADE;
 CREATE SCHEMA "cifras macro economicas";
 -- ddl-end --
-ALTER SCHEMA "cifras macro economicas" OWNER TO postgres;
+ALTER SCHEMA "cifras macro economicas" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "cifras macro economicas" IS 'Esquema crifras macro economicas';
 -- ddl-end --
@@ -61,7 +71,7 @@ COMMENT ON SCHEMA "cifras macro economicas" IS 'Esquema crifras macro economicas
 -- DROP SCHEMA IF EXISTS "Cultura" CASCADE;
 CREATE SCHEMA "Cultura";
 -- ddl-end --
-ALTER SCHEMA "Cultura" OWNER TO postgres;
+ALTER SCHEMA "Cultura" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Cultura" IS 'Esquema de cultura y turismo';
 -- ddl-end --
@@ -70,7 +80,7 @@ COMMENT ON SCHEMA "Cultura" IS 'Esquema de cultura y turismo';
 -- DROP SCHEMA IF EXISTS "Calidad de vida" CASCADE;
 CREATE SCHEMA "Calidad de vida";
 -- ddl-end --
-ALTER SCHEMA "Calidad de vida" OWNER TO postgres;
+ALTER SCHEMA "Calidad de vida" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Calidad de vida" IS 'Esquema calidad de vida.';
 -- ddl-end --
@@ -79,7 +89,7 @@ COMMENT ON SCHEMA "Calidad de vida" IS 'Esquema calidad de vida.';
 -- DROP SCHEMA IF EXISTS "Construccion" CASCADE;
 CREATE SCHEMA "Construccion";
 -- ddl-end --
-ALTER SCHEMA "Construccion" OWNER TO sir_huila;
+ALTER SCHEMA "Construccion" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Construccion" IS 'Esquema construcción';
 -- ddl-end --
@@ -88,7 +98,7 @@ COMMENT ON SCHEMA "Construccion" IS 'Esquema construcción';
 -- DROP SCHEMA IF EXISTS "Finanzas publicas" CASCADE;
 CREATE SCHEMA "Finanzas publicas";
 -- ddl-end --
-ALTER SCHEMA "Finanzas publicas" OWNER TO postgres;
+ALTER SCHEMA "Finanzas publicas" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Finanzas publicas" IS 'Esquema finanzas públicas.';
 -- ddl-end --
@@ -97,7 +107,7 @@ COMMENT ON SCHEMA "Finanzas publicas" IS 'Esquema finanzas públicas.';
 -- DROP SCHEMA IF EXISTS "Empleo" CASCADE;
 CREATE SCHEMA "Empleo";
 -- ddl-end --
-ALTER SCHEMA "Empleo" OWNER TO postgres;
+ALTER SCHEMA "Empleo" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Empleo" IS 'Esquema empleo.';
 -- ddl-end --
@@ -106,7 +116,7 @@ COMMENT ON SCHEMA "Empleo" IS 'Esquema empleo.';
 -- DROP SCHEMA IF EXISTS "Movimeinto empresarial" CASCADE;
 CREATE SCHEMA "Movimeinto empresarial";
 -- ddl-end --
-ALTER SCHEMA "Movimeinto empresarial" OWNER TO postgres;
+ALTER SCHEMA "Movimeinto empresarial" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Movimeinto empresarial" IS 'Esquema movimiento empresarial';
 -- ddl-end --
@@ -115,7 +125,7 @@ COMMENT ON SCHEMA "Movimeinto empresarial" IS 'Esquema movimiento empresarial';
 -- DROP SCHEMA IF EXISTS "PIB" CASCADE;
 CREATE SCHEMA "PIB";
 -- ddl-end --
-ALTER SCHEMA "PIB" OWNER TO postgres;
+ALTER SCHEMA "PIB" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "PIB" IS 'Esquema PIB';
 -- ddl-end --
@@ -124,7 +134,7 @@ COMMENT ON SCHEMA "PIB" IS 'Esquema PIB';
 -- DROP SCHEMA IF EXISTS "Servicios publicos" CASCADE;
 CREATE SCHEMA "Servicios publicos";
 -- ddl-end --
-ALTER SCHEMA "Servicios publicos" OWNER TO postgres;
+ALTER SCHEMA "Servicios publicos" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Servicios publicos" IS 'Esquema servicios publicos';
 -- ddl-end --
@@ -133,7 +143,7 @@ COMMENT ON SCHEMA "Servicios publicos" IS 'Esquema servicios publicos';
 -- DROP SCHEMA IF EXISTS "Electorales" CASCADE;
 CREATE SCHEMA "Electorales";
 -- ddl-end --
-ALTER SCHEMA "Electorales" OWNER TO postgres;
+ALTER SCHEMA "Electorales" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Electorales" IS 'Esquema electorales.';
 -- ddl-end --
@@ -142,7 +152,7 @@ COMMENT ON SCHEMA "Electorales" IS 'Esquema electorales.';
 -- DROP SCHEMA IF EXISTS "Justicia" CASCADE;
 CREATE SCHEMA "Justicia";
 -- ddl-end --
-ALTER SCHEMA "Justicia" OWNER TO postgres;
+ALTER SCHEMA "Justicia" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Justicia" IS 'Esquema justicia.';
 -- ddl-end --
@@ -151,7 +161,7 @@ COMMENT ON SCHEMA "Justicia" IS 'Esquema justicia.';
 -- DROP SCHEMA IF EXISTS "SISBEN" CASCADE;
 CREATE SCHEMA "SISBEN";
 -- ddl-end --
-ALTER SCHEMA "SISBEN" OWNER TO postgres;
+ALTER SCHEMA "SISBEN" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "SISBEN" IS 'Esquema SISBEN.';
 -- ddl-end --
@@ -160,7 +170,7 @@ COMMENT ON SCHEMA "SISBEN" IS 'Esquema SISBEN.';
 -- DROP SCHEMA IF EXISTS poblacion CASCADE;
 CREATE SCHEMA poblacion;
 -- ddl-end --
-ALTER SCHEMA poblacion OWNER TO postgres;
+ALTER SCHEMA poblacion OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA poblacion IS 'Esquema población.';
 -- ddl-end --
@@ -169,14 +179,14 @@ COMMENT ON SCHEMA poblacion IS 'Esquema población.';
 -- DROP SCHEMA IF EXISTS "Deportes" CASCADE;
 CREATE SCHEMA "Deportes";
 -- ddl-end --
-ALTER SCHEMA "Deportes" OWNER TO sir_huila;
+ALTER SCHEMA "Deportes" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Riesgos" | type: SCHEMA --
 -- DROP SCHEMA IF EXISTS "Riesgos" CASCADE;
 CREATE SCHEMA "Riesgos";
 -- ddl-end --
-ALTER SCHEMA "Riesgos" OWNER TO sir_huila;
+ALTER SCHEMA "Riesgos" OWNER TO sirhuila;
 -- ddl-end --
 COMMENT ON SCHEMA "Riesgos" IS 'Esquema de Riesgos';
 -- ddl-end --
@@ -238,6 +248,8 @@ COMMENT ON COLUMN "Agropecuario".area_cosechada."arco_costoPromedioEstablecimien
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".area_cosechada."arco_costoPromedioSostenimiento" IS 'Costo promedio de sostenimiento del cultivo expresado en pesos por hectárea ($/Has)';
 -- ddl-end --
+ALTER TABLE "Agropecuario".area_cosechada OWNER TO sirhuila;
+-- ddl-end --
 
 -- object: "Agropecuario".cultivo | type: TABLE --
 -- DROP TABLE IF EXISTS "Agropecuario".cultivo CASCADE;
@@ -263,7 +275,7 @@ COMMENT ON COLUMN "Agropecuario".cultivo."cul_fechaRegistro" IS 'Fecha de regist
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".cultivo.cul_descripcion IS 'Texto que puede dar una breve descripción del cultivo.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".cultivo OWNER TO postgres;
+ALTER TABLE "Agropecuario".cultivo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".tipo_cultivo | type: TABLE --
@@ -281,7 +293,7 @@ COMMENT ON COLUMN "Agropecuario".tipo_cultivo.tcul_codigo IS 'Llave primaria par
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".tipo_cultivo.tcul_nombre IS 'Nombres del tipo de cultivo, en si, es para  saber si es transitorio o permanentes.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".tipo_cultivo OWNER TO postgres;
+ALTER TABLE "Agropecuario".tipo_cultivo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.municipio | type: TABLE --
@@ -302,82 +314,7 @@ COMMENT ON COLUMN public.municipio.mun_nombre IS 'Nombre del municipio';
 -- ddl-end --
 COMMENT ON COLUMN public.municipio."mun_codDepartamento" IS 'Código del departamento al que pertenece cada Municipio';
 -- ddl-end --
-ALTER TABLE public.municipio OWNER TO sir_huila;
--- ddl-end --
-
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41006', E'Acevedo', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41013', E'Agrado', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41016', E'Aipe', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41020', E'Algeciras', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41026', E'Altamira', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41078', E'Baraya', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41132', E'Campoalegre', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41206', E'Colombia', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41244', E'Elias', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41298', E'Garzón', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41306', E'Gigante', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41319', E'Guadalupe', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41349', E'Hobo', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41357', E'Iquira', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41359', E'Isnos', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41378', E'La Argentina', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41396', E'La Plata', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41483', E'Nátaga', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41001', E'Neiva', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41503', E'Oporapa', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41518', E'Paicol', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41524', E'Palermo', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41530', E'Palestina', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41548', E'Pital', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41551', E'Pitalito', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41615', E'Rivera', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41660', E'Saladoblanco', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41668', E'San Agustín', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41676', E'Santa Maria', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41770', E'Suaza', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41791', E'Tarqui', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41799', E'Tello', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41801', E'Teruel', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41797', E'Tesalia', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41807', E'Timaná', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41872', E'Villavieja', E'41');
--- ddl-end --
-INSERT INTO public.municipio (mun_codigo, mun_nombre, "mun_codDepartamento") VALUES (E'41885', E'Yaguará', E'41');
+ALTER TABLE public.municipio OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".infraestructura_produccion_piscicola | type: TABLE --
@@ -416,7 +353,7 @@ COMMENT ON COLUMN "Agropecuario".infraestructura_produccion_piscicola.ipp_desocu
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".infraestructura_produccion_piscicola."ipp_areaEspejo" IS 'Total del área de espejo del estanque.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".infraestructura_produccion_piscicola OWNER TO postgres;
+ALTER TABLE "Agropecuario".infraestructura_produccion_piscicola OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".tipo_estanque | type: TABLE --
@@ -434,7 +371,7 @@ COMMENT ON COLUMN "Agropecuario".tipo_estanque.est_codigo IS 'Llave primaria par
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".tipo_estanque.est_nombre IS 'Nombre del tipo de estanque.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".tipo_estanque OWNER TO postgres;
+ALTER TABLE "Agropecuario".tipo_estanque OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".raza_peces | type: TABLE --
@@ -452,7 +389,7 @@ COMMENT ON COLUMN "Agropecuario".raza_peces.rpez_codigo IS 'Llave primaria para 
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".raza_peces.rpez_nombre IS 'Nombre de la raza del pescado.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".raza_peces OWNER TO postgres;
+ALTER TABLE "Agropecuario".raza_peces OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".produccion_piscicola | type: TABLE --
@@ -491,7 +428,7 @@ COMMENT ON COLUMN "Agropecuario".produccion_piscicola."prop_alevinosCosechados" 
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".produccion_piscicola."prop_pesoPromedioUnidad" IS 'Peso promedio del peso del pez en gramos.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".produccion_piscicola OWNER TO postgres;
+ALTER TABLE "Agropecuario".produccion_piscicola OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".sacrificio_ganado | type: TABLE --
@@ -530,7 +467,7 @@ COMMENT ON COLUMN "Agropecuario".sacrificio_ganado."sg_pesoTotalHembras" IS 'Pes
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".sacrificio_ganado."sg_totalSacrificio" IS 'Total del numero de cabezas sacrificadas, tanto de machos como de hembras.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".sacrificio_ganado OWNER TO postgres;
+ALTER TABLE "Agropecuario".sacrificio_ganado OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario"."sec_tipoGanado" | type: SEQUENCE --
@@ -562,7 +499,7 @@ COMMENT ON COLUMN "Agropecuario".tipo_ganado.tgan_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".tipo_ganado.tgan_nombre IS 'Nombre del tipo de ganado.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".tipo_ganado OWNER TO postgres;
+ALTER TABLE "Agropecuario".tipo_ganado OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".razas_ganado | type: TABLE --
@@ -586,7 +523,7 @@ COMMENT ON COLUMN "Agropecuario".razas_ganado.rgan_nombre IS 'Nombre de la raza 
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".razas_ganado.rgan_acronimo IS 'Acrónimo del nombre de la raza de ganado.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".razas_ganado OWNER TO postgres;
+ALTER TABLE "Agropecuario".razas_ganado OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".inventario_ganado_bovino | type: TABLE --
@@ -619,7 +556,7 @@ COMMENT ON COLUMN "Agropecuario".inventario_ganado_bovino.invgb_cant24 IS 'Canti
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".inventario_ganado_bovino.invgb_sexo IS 'Sexo del animal';
 -- ddl-end --
-ALTER TABLE "Agropecuario".inventario_ganado_bovino OWNER TO postgres;
+ALTER TABLE "Agropecuario".inventario_ganado_bovino OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".tipo_explotacion | type: TABLE --
@@ -637,7 +574,7 @@ COMMENT ON COLUMN "Agropecuario".tipo_explotacion.texp_codigo IS 'Llave primaria
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".tipo_explotacion.texp_nombre IS 'Nombre del tipo de explotación.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".tipo_explotacion OWNER TO postgres;
+ALTER TABLE "Agropecuario".tipo_explotacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".explotacion_raza | type: TABLE --
@@ -667,7 +604,7 @@ COMMENT ON COLUMN "Agropecuario".explotacion_raza."exra_porcentajeExplotacion" I
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".explotacion_raza.exra_raza_cruce IS 'Convención que se utiliza para especificar el cruce de razas, los acrónimos se almacenan en la tabla razas_ganado.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".explotacion_raza OWNER TO postgres;
+ALTER TABLE "Agropecuario".explotacion_raza OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".produccion_leche | type: TABLE --
@@ -697,7 +634,7 @@ COMMENT ON COLUMN "Agropecuario".produccion_leche."prol_promedioVacas" IS 'Núme
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".produccion_leche."prol_promedioLitrosAnio" IS 'Promedio de producción de leche al año en litros.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".produccion_leche OWNER TO postgres;
+ALTER TABLE "Agropecuario".produccion_leche OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".inventario_ganado_porcino | type: TABLE --
@@ -727,7 +664,7 @@ COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_hembras6 IS 'Ca
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".inventario_ganado_porcino.invgp_machos6 IS 'Cantidad de machos mayores a 6 meses en el municipio.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".inventario_ganado_porcino OWNER TO postgres;
+ALTER TABLE "Agropecuario".inventario_ganado_porcino OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".produccion_porcina | type: TABLE --
@@ -757,7 +694,7 @@ COMMENT ON COLUMN "Agropecuario".produccion_porcina."ppor_promedioDestete" IS 'P
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".produccion_porcina."ppor_promedioDiasDestete" IS 'Promedio de días de destete de los lechones';
 -- ddl-end --
-ALTER TABLE "Agropecuario".produccion_porcina OWNER TO postgres;
+ALTER TABLE "Agropecuario".produccion_porcina OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".inventario_otras_especies | type: TABLE --
@@ -784,7 +721,7 @@ COMMENT ON COLUMN "Agropecuario".inventario_otras_especies."invos_tipoGanado" IS
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".inventario_otras_especies.invos_cantidad IS 'Cantidad del tipo de ganado registrado.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".inventario_otras_especies OWNER TO postgres;
+ALTER TABLE "Agropecuario".inventario_otras_especies OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Agropecuario".apicultura | type: TABLE --
@@ -811,7 +748,7 @@ COMMENT ON COLUMN "Agropecuario".apicultura."api_numeroColmenas" IS 'número de 
 -- ddl-end --
 COMMENT ON COLUMN "Agropecuario".apicultura.api_produccion IS 'Producción de la miel el kilogramos (kg) por municipio.';
 -- ddl-end --
-ALTER TABLE "Agropecuario".apicultura OWNER TO postgres;
+ALTER TABLE "Agropecuario".apicultura OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".vacunacion_biologicos | type: TABLE --
@@ -845,7 +782,7 @@ COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_vacunados IS 'Cantidad de m
 -- ddl-end --
 COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_cobertura IS 'Porcentaje de menores vacunados';
 -- ddl-end --
-ALTER TABLE "Salud".vacunacion_biologicos OWNER TO postgres;
+ALTER TABLE "Salud".vacunacion_biologicos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".biologicos | type: TABLE --
@@ -863,7 +800,7 @@ COMMENT ON COLUMN "Salud".biologicos.bio_codigo IS 'Llave primaria para la ident
 -- ddl-end --
 COMMENT ON COLUMN "Salud".biologicos.bio_nombre IS 'Nombre del Biologico.';
 -- ddl-end --
-ALTER TABLE "Salud".biologicos OWNER TO postgres;
+ALTER TABLE "Salud".biologicos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".defunciones | type: TABLE --
@@ -896,7 +833,7 @@ COMMENT ON COLUMN "Salud".defunciones.def_genero IS 'Llave foránea que apunta a
 -- ddl-end --
 COMMENT ON COLUMN "Salud".defunciones."def_numeroCasos" IS 'Número de defunciones';
 -- ddl-end --
-ALTER TABLE "Salud".defunciones OWNER TO postgres;
+ALTER TABLE "Salud".defunciones OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.area | type: TABLE --
@@ -914,16 +851,7 @@ COMMENT ON COLUMN public.area.are_codigo IS 'Llave primaria para la identificaci
 -- ddl-end --
 COMMENT ON COLUMN public.area.are_nombre IS 'Nombre del area.';
 -- ddl-end --
-ALTER TABLE public.area OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'1', E'Urbana');
--- ddl-end --
-INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'2', E'Rural');
--- ddl-end --
-INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'3', E'Rural disperso');
--- ddl-end --
-INSERT INTO public.area (are_codigo, are_nombre) VALUES (E'4', E'Centro poblado');
+ALTER TABLE public.area OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".tipo_defuncion | type: TABLE --
@@ -941,7 +869,7 @@ COMMENT ON COLUMN "Salud".tipo_defuncion.tdef_codigo IS 'Llave primaria para la 
 -- ddl-end --
 COMMENT ON COLUMN "Salud".tipo_defuncion.tdef_nombre IS 'Nombre del tipo de defunción.';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_defuncion OWNER TO postgres;
+ALTER TABLE "Salud".tipo_defuncion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".desnutricion | type: TABLE --
@@ -980,7 +908,7 @@ COMMENT ON COLUMN "Salud".desnutricion."dnut_numDesnAguda" IS 'Número de niños
 -- ddl-end --
 COMMENT ON COLUMN "Salud".desnutricion."dnut_porcentajeDesnAguda" IS 'Porcentaje de desnutrición aguda.';
 -- ddl-end --
-ALTER TABLE "Salud".desnutricion OWNER TO sir_huila;
+ALTER TABLE "Salud".desnutricion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".nacimientos | type: TABLE --
@@ -1010,7 +938,7 @@ COMMENT ON COLUMN "Salud".nacimientos.nac_genero IS 'Llave foránea que apunta a
 -- ddl-end --
 COMMENT ON COLUMN "Salud".nacimientos."nac_numeroCasos" IS 'Numero de nacimeintos.';
 -- ddl-end --
-ALTER TABLE "Salud".nacimientos OWNER TO postgres;
+ALTER TABLE "Salud".nacimientos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".principales_mortalidad | type: TABLE --
@@ -1034,7 +962,7 @@ COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_nombre IS 'Nombre de la c
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_defunciones IS 'Número de defunciones.';
 -- ddl-end --
-ALTER TABLE "Salud".principales_mortalidad OWNER TO postgres;
+ALTER TABLE "Salud".principales_mortalidad OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".principales_morbilidad | type: TABLE --
@@ -1061,7 +989,7 @@ COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_nombre IS 'Nombre de la ca
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_atenciones IS 'Número de atenciones por consulta externa.';
 -- ddl-end --
-ALTER TABLE "Salud".principales_morbilidad OWNER TO postgres;
+ALTER TABLE "Salud".principales_morbilidad OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".tipo_consulta | type: TABLE --
@@ -1079,7 +1007,7 @@ COMMENT ON COLUMN "Salud".tipo_consulta.tcon_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Salud".tipo_consulta.tcon_nombre IS 'Nombre de la consulta medica.';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_consulta OWNER TO postgres;
+ALTER TABLE "Salud".tipo_consulta OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".adopciones | type: TABLE --
@@ -1093,7 +1021,7 @@ CREATE TABLE "Salud".adopciones(
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".adopciones OWNER TO postgres;
+ALTER TABLE "Salud".adopciones OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".huerfanos | type: TABLE --
@@ -1106,7 +1034,7 @@ CREATE TABLE "Salud".huerfanos(
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".huerfanos OWNER TO postgres;
+ALTER TABLE "Salud".huerfanos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".cobertura_aseguramiento | type: TABLE --
@@ -1143,7 +1071,7 @@ COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_porcentajeCobeturaSubsid
 -- ddl-end --
 COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_porcentajeSGSSS" IS 'Co AFIL SGSSS ';
 -- ddl-end --
-ALTER TABLE "Salud".cobertura_aseguramiento OWNER TO postgres;
+ALTER TABLE "Salud".cobertura_aseguramiento OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".tipo_poblacion_censada | type: TABLE --
@@ -1161,7 +1089,7 @@ COMMENT ON COLUMN "Salud".tipo_poblacion_censada.tpoce_codigo IS 'Llave primaria
 -- ddl-end --
 COMMENT ON COLUMN "Salud".tipo_poblacion_censada.tpoce_nombre IS 'Nombre de la población censada.';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_poblacion_censada OWNER TO postgres;
+ALTER TABLE "Salud".tipo_poblacion_censada OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud"."casos_VHI-sida" | type: TABLE --
@@ -1180,7 +1108,7 @@ COMMENT ON COLUMN "Salud"."casos_VHI-sida".cvih_codigo IS 'Llave primaria para l
 -- ddl-end --
 COMMENT ON COLUMN "Salud"."casos_VHI-sida".cvih_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-ALTER TABLE "Salud"."casos_VHI-sida" OWNER TO postgres;
+ALTER TABLE "Salud"."casos_VHI-sida" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".vih_genero | type: TABLE --
@@ -1204,7 +1132,7 @@ COMMENT ON COLUMN "Salud".vih_genero.vihg_genero IS 'Llave foránea que apunta a
 -- ddl-end --
 COMMENT ON COLUMN "Salud".vih_genero."vihg_numeroCasos" IS 'Número de casos';
 -- ddl-end --
-ALTER TABLE "Salud".vih_genero OWNER TO postgres;
+ALTER TABLE "Salud".vih_genero OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud"."vih_viaTransmision" | type: TABLE --
@@ -1228,7 +1156,7 @@ COMMENT ON COLUMN "Salud"."vih_viaTransmision"."vihvia_codTipoTransmision" IS 'L
 -- ddl-end --
 COMMENT ON COLUMN "Salud"."vih_viaTransmision"."vihvia_numeroCasos" IS 'Número de casos registrados por cada tipo de transmisión';
 -- ddl-end --
-ALTER TABLE "Salud"."vih_viaTransmision" OWNER TO postgres;
+ALTER TABLE "Salud"."vih_viaTransmision" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".tipo_transmision | type: TABLE --
@@ -1246,7 +1174,7 @@ COMMENT ON COLUMN "Salud".tipo_transmision.ttrans_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Salud".tipo_transmision.ttrans_nombre IS 'tipos de trasmisión.';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_transmision OWNER TO postgres;
+ALTER TABLE "Salud".tipo_transmision OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.genero | type: TABLE --
@@ -1258,12 +1186,7 @@ CREATE TABLE public.genero(
 
 );
 -- ddl-end --
-ALTER TABLE public.genero OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.genero (gen_codigo, gen_nombre) VALUES (E'1', E'Hombre');
--- ddl-end --
-INSERT INTO public.genero (gen_codigo, gen_nombre) VALUES (E'2', E'Mujer');
+ALTER TABLE public.genero OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".vih_casos_clasificacion | type: TABLE --
@@ -1285,7 +1208,7 @@ COMMENT ON COLUMN "Salud".vih_casos_clasificacion.vihcla_anio IS 'Llave foranea 
 -- ddl-end --
 COMMENT ON COLUMN "Salud".vih_casos_clasificacion."vihcla_codClasificacion" IS 'Llave foránea que apunta al tipo de clasificación del VIH';
 -- ddl-end --
-ALTER TABLE "Salud".vih_casos_clasificacion OWNER TO postgres;
+ALTER TABLE "Salud".vih_casos_clasificacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".dengue | type: TABLE --
@@ -1312,7 +1235,7 @@ COMMENT ON COLUMN "Salud".dengue.den_clasico IS 'Casos confirmados de dengue cl�
 -- ddl-end --
 COMMENT ON COLUMN "Salud".dengue.den_grave IS 'Casos confirmados de dengue grave';
 -- ddl-end --
-ALTER TABLE "Salud".dengue OWNER TO postgres;
+ALTER TABLE "Salud".dengue OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".hospitalizacion | type: TABLE --
@@ -1357,7 +1280,7 @@ COMMENT ON COLUMN "Salud".hospitalizacion.hos_giros_camas IS 'Giros de las camas
 -- ddl-end --
 COMMENT ON COLUMN "Salud".hospitalizacion.hos_promedio_estancia IS 'Promedio de la estancia';
 -- ddl-end --
-ALTER TABLE "Salud".hospitalizacion OWNER TO postgres;
+ALTER TABLE "Salud".hospitalizacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud"."Tuberculosis" | type: TABLE --
@@ -1387,7 +1310,7 @@ COMMENT ON COLUMN "Salud"."Tuberculosis".tub_incidencia IS 'Casos de tuberculosi
 -- ddl-end --
 COMMENT ON COLUMN "Salud"."Tuberculosis".tub_tasa_habitantes IS 'Relación de casos presentados por cada 1000 habitantes';
 -- ddl-end --
-ALTER TABLE "Salud"."Tuberculosis" OWNER TO postgres;
+ALTER TABLE "Salud"."Tuberculosis" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".organismos_salud | type: TABLE --
@@ -1417,7 +1340,7 @@ COMMENT ON COLUMN "Salud".organismos_salud."orsa_codTipo_organismos_salud" IS 'L
 -- ddl-end --
 COMMENT ON COLUMN "Salud".organismos_salud.orsa_num_organismos_salud IS 'Número de organismos de salud';
 -- ddl-end --
-ALTER TABLE "Salud".organismos_salud OWNER TO postgres;
+ALTER TABLE "Salud".organismos_salud OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".tipo_orsa | type: TABLE --
@@ -1435,7 +1358,7 @@ COMMENT ON COLUMN "Salud".tipo_orsa.tp_orsa_codigo IS 'Llave primaria para la id
 -- ddl-end --
 COMMENT ON COLUMN "Salud".tipo_orsa.tipo_nombre_orsa IS 'Nombre del tipo de organismo de salud';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_orsa OWNER TO postgres;
+ALTER TABLE "Salud".tipo_orsa OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".instituciones_educativas | type: TABLE --
@@ -1468,7 +1391,7 @@ COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_area IS 'Llave forán
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_num_instituciones IS 'Numero de instituciones, centros educativos y sedes.';
 -- ddl-end --
-ALTER TABLE "Educacion".instituciones_educativas OWNER TO postgres;
+ALTER TABLE "Educacion".instituciones_educativas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".tipo_plantel_educativo | type: TABLE --
@@ -1486,7 +1409,7 @@ COMMENT ON COLUMN "Educacion".tipo_plantel_educativo.tpe_codigo IS 'Llave primar
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".tipo_plantel_educativo.tpe_nombre IS 'Nombre del tipo de plantel educativo';
 -- ddl-end --
-ALTER TABLE "Educacion".tipo_plantel_educativo OWNER TO postgres;
+ALTER TABLE "Educacion".tipo_plantel_educativo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".matriculas | type: TABLE --
@@ -1500,7 +1423,6 @@ CREATE TABLE "Educacion".matriculas(
 	mat_grado integer,
 	mat_area integer,
 	mat_num_matriculas integer,
-	mat_porce_cobertura double precision,
 	CONSTRAINT matriculas_pk PRIMARY KEY (mat_codigo)
 
 );
@@ -1523,9 +1445,7 @@ COMMENT ON COLUMN "Educacion".matriculas.mat_area IS 'Llave foránea que apunta 
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".matriculas.mat_num_matriculas IS 'Numero matriculas en los municipios.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".matriculas.mat_porce_cobertura IS 'Porcentaje de cobertura en matriculas';
--- ddl-end --
-ALTER TABLE "Educacion".matriculas OWNER TO postgres;
+ALTER TABLE "Educacion".matriculas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".tipo_nivel_educativo | type: TABLE --
@@ -1543,7 +1463,7 @@ COMMENT ON COLUMN "Educacion".tipo_nivel_educativo.tpne_codigo IS 'Llave primari
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".tipo_nivel_educativo.tpne_nombre IS 'Nombre del tipo de nivel educativo';
 -- ddl-end --
-ALTER TABLE "Educacion".tipo_nivel_educativo OWNER TO postgres;
+ALTER TABLE "Educacion".tipo_nivel_educativo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".tipo_institucion | type: TABLE --
@@ -1561,7 +1481,7 @@ COMMENT ON COLUMN "Educacion".tipo_institucion.tpin_codigo IS 'Llave primaria pa
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".tipo_institucion.tpin_nombre IS 'Nombre del tipo de plantel educativo';
 -- ddl-end --
-ALTER TABLE "Educacion".tipo_institucion OWNER TO postgres;
+ALTER TABLE "Educacion".tipo_institucion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".poblacion_escolar | type: TABLE --
@@ -1579,7 +1499,7 @@ COMMENT ON COLUMN "Educacion".poblacion_escolar.pes_codigo IS 'Llave primaria pa
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".poblacion_escolar.pes_nombre IS 'Rangos de la poblacion escolar 5, 6-10, 11-16 años, adultos.';
 -- ddl-end --
-ALTER TABLE "Educacion".poblacion_escolar OWNER TO postgres;
+ALTER TABLE "Educacion".poblacion_escolar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".grado | type: TABLE --
@@ -1597,12 +1517,12 @@ COMMENT ON COLUMN "Educacion".grado.gra_codigo IS 'Llave primaria para la identi
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".grado.gra_nombre IS 'Grados de los niveles educativos.';
 -- ddl-end --
-ALTER TABLE "Educacion".grado OWNER TO postgres;
+ALTER TABLE "Educacion".grado OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion"."Clasificacion_icfes_estab_educativos" | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion"."Clasificacion_icfes_estab_educativos" CASCADE;
-CREATE TABLE "Educacion"."Clasificacion_icfes_estab_educativos"(
+-- object: "Educacion".clasificacion_icfes_estab_educativos | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".clasificacion_icfes_estab_educativos CASCADE;
+CREATE TABLE "Educacion".clasificacion_icfes_estab_educativos(
 	cies_codigo serial NOT NULL,
 	cies_anio smallint NOT NULL,
 	cies_semestre smallint,
@@ -1610,33 +1530,33 @@ CREATE TABLE "Educacion"."Clasificacion_icfes_estab_educativos"(
 	cies_institucion_educativa character varying(250),
 	"cies_codMunicipio" integer,
 	cies_tipo_institucion integer,
-	cies_indice integer,
+	cies_indice double precision,
 	cies_categoria character varying(50),
 	CONSTRAINT "Clasificacion_icfes_establecimeintos_educativos_pk" PRIMARY KEY (cies_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion"."Clasificacion_icfes_estab_educativos" IS 'Desempeño de los 30 primeros establecimientos educativos por puestos y municipios según pruebas icfes en el departamento  ';
+COMMENT ON TABLE "Educacion".clasificacion_icfes_estab_educativos IS 'Desempeño de los 30 primeros establecimientos educativos por puestos y municipios según pruebas icfes en el departamento  ';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_anio IS 'Llave foránea que apunta a la tabla anio.';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_semestre IS 'Llave foránea que apunta a la tabla semestre.';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_semestre IS 'Llave foránea que apunta a la tabla semestre.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_puesto IS 'Puesto que ocupa la institución educativa.';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_puesto IS 'Puesto que ocupa la institución educativa.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_institucion_educativa IS 'Nombre de la institución educativa';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_institucion_educativa IS 'Nombre de la institución educativa';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos"."cies_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos."cies_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_indice IS 'Indice de desempeño en la prueba';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_indice IS 'Indice de desempeño en la prueba';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."Clasificacion_icfes_estab_educativos".cies_categoria IS 'Categoria a la que pertence la institución por desempeño';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_categoria IS 'Categoria a la que pertence la institución por desempeño';
 -- ddl-end --
-ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" OWNER TO postgres;
+ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".comportamiento_alumnos | type: TABLE --
@@ -1649,9 +1569,10 @@ CREATE TABLE "Educacion".comportamiento_alumnos(
 	coal_aprobados integer,
 	coal_reprobados integer,
 	coal_desertores integer,
+	coal_traslados integer,
 	coal_porce_aprobados double precision,
 	coal_porce_reprobados double precision,
-	"coal_porce_estudiantes desertores" double precision,
+	coal_porce_desertores double precision,
 	coal_porce_traslados double precision,
 	CONSTRAINT comportamiento_alumnos_pk PRIMARY KEY (coal_codigo)
 
@@ -1673,18 +1594,20 @@ COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_reprobados IS 'Número
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_desertores IS 'Número de estudiantes desertores';
 -- ddl-end --
+COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_traslados IS 'Numero de personas trasladadas';
+-- ddl-end --
 COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_porce_aprobados IS 'Prcentanje de estudiantes aprobados';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_porce_reprobados IS 'Porcentaje estudiantes reprobados';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".comportamiento_alumnos.coal_porce_traslados IS 'Porcentaje de estudiantes trasladados';
 -- ddl-end --
-ALTER TABLE "Educacion".comportamiento_alumnos OWNER TO postgres;
+ALTER TABLE "Educacion".comportamiento_alumnos OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".datos_universidades | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".datos_universidades CASCADE;
-CREATE TABLE "Educacion".datos_universidades(
+-- object: "Educacion".docentes_universidades | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".docentes_universidades CASCADE;
+CREATE TABLE "Educacion".docentes_universidades(
 	dau_codigo bigserial NOT NULL,
 	dau_anio smallint NOT NULL,
 	dau_universidad integer,
@@ -1694,49 +1617,31 @@ CREATE TABLE "Educacion".datos_universidades(
 	"dau_categoria_personalU" integer,
 	dau_genero integer,
 	"dau_num_personalU" integer,
-	CONSTRAINT datos_universidades_pk PRIMARY KEY (dau_codigo)
+	CONSTRAINT docentes_universidades_pk PRIMARY KEY (dau_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".datos_universidades IS 'Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.';
+COMMENT ON TABLE "Educacion".docentes_universidades IS 'Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_anio IS 'Llave foránea que apunta a la tabla anio.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_universidad IS 'Llave foránea que apunta a la tabla universidad.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_universidad IS 'Llave foránea que apunta a la tabla universidad.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_semestre IS 'Llave foránea que apunta a la tabla semestre.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_semestre IS 'Llave foránea que apunta a la tabla semestre.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_nivel_educacion_superior IS 'Llave foránea que apunta a la tabla nivel_educacion_superior.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_nivel_educacion_superior IS 'Llave foránea que apunta a la tabla nivel_educacion_superior.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_programa IS 'Llave foránea que apunta a la tabla programa.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_programa IS 'Llave foránea que apunta a la tabla programa.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades."dau_categoria_personalU" IS 'Llave foránea que apunta a la tabla categoria_personalU.';
+COMMENT ON COLUMN "Educacion".docentes_universidades."dau_categoria_personalU" IS 'Llave foránea que apunta a la tabla categoria_personalU.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades.dau_genero IS 'Llave foránea que apunta a la tabla genero.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dau_genero IS 'Llave foránea que apunta a la tabla genero.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".datos_universidades."dau_num_personalU" IS 'Número de personas inscritas, matriculadas, docentes, egresados, graduados.';
+COMMENT ON COLUMN "Educacion".docentes_universidades."dau_num_personalU" IS 'Número de personas inscritas, matriculadas, docentes, egresados, graduados.';
 -- ddl-end --
-ALTER TABLE "Educacion".datos_universidades OWNER TO postgres;
--- ddl-end --
-
--- object: "Educacion".nivel_educacion_superior | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".nivel_educacion_superior CASCADE;
-CREATE TABLE "Educacion".nivel_educacion_superior(
-	nes_codigo serial NOT NULL,
-	nes_nombre character varying(150) NOT NULL,
-	CONSTRAINT nivel_educacion_superior_pk PRIMARY KEY (nes_codigo)
-
-);
--- ddl-end --
-COMMENT ON TABLE "Educacion".nivel_educacion_superior IS 'Almacena los nombres de las diferentes niveles de educación superior.';
--- ddl-end --
-COMMENT ON COLUMN "Educacion".nivel_educacion_superior.nes_codigo IS 'Llave primaria para la identificación única de cada registro.';
--- ddl-end --
-COMMENT ON COLUMN "Educacion".nivel_educacion_superior.nes_nombre IS 'Nombre de los distintos niveles de educación superior.';
--- ddl-end --
-ALTER TABLE "Educacion".nivel_educacion_superior OWNER TO postgres;
+ALTER TABLE "Educacion".docentes_universidades OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".programa | type: TABLE --
@@ -1754,7 +1659,7 @@ COMMENT ON COLUMN "Educacion".programa.pro_codigo IS 'Llave primaria para la ide
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".programa.pro_nombre IS 'Nombre de los distintos programas de las universidades.';
 -- ddl-end --
-ALTER TABLE "Educacion".programa OWNER TO postgres;
+ALTER TABLE "Educacion".programa OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".universidad | type: TABLE --
@@ -1772,25 +1677,25 @@ COMMENT ON COLUMN "Educacion".universidad.uni_codigo IS 'Llave primaria para la 
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".universidad.uni_nombre IS 'Nombre de las distintas universidades en el departamento';
 -- ddl-end --
-ALTER TABLE "Educacion".universidad OWNER TO postgres;
+ALTER TABLE "Educacion".universidad OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion"."categoria_personalU" | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion"."categoria_personalU" CASCADE;
-CREATE TABLE "Educacion"."categoria_personalU"(
+-- object: "Educacion".categoria_personal | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".categoria_personal CASCADE;
+CREATE TABLE "Educacion".categoria_personal(
 	cpu_codigo serial NOT NULL,
 	cpu_nombre character varying(150) NOT NULL,
 	CONSTRAINT "categoria_personalU_pk" PRIMARY KEY (cpu_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion"."categoria_personalU" IS 'Almacena los nombres de las diferentes categorias de personas que tiene la universidad.';
+COMMENT ON TABLE "Educacion".categoria_personal IS 'Almacena los nombres de las diferentes categorias de personas que tiene la universidad.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."categoria_personalU".cpu_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".categoria_personal.cpu_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion"."categoria_personalU".cpu_nombre IS 'Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.';
+COMMENT ON COLUMN "Educacion".categoria_personal.cpu_nombre IS 'Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.';
 -- ddl-end --
-ALTER TABLE "Educacion"."categoria_personalU" OWNER TO postgres;
+ALTER TABLE "Educacion".categoria_personal OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".directivos_docentes | type: TABLE --
@@ -1817,7 +1722,7 @@ COMMENT ON COLUMN "Educacion".directivos_docentes.ddo_categoria_directivo_docent
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".directivos_docentes.ddo_num_directivo_docente IS 'Número de personas de la planta del sistema educativo.';
 -- ddl-end --
-ALTER TABLE "Educacion".directivos_docentes OWNER TO postgres;
+ALTER TABLE "Educacion".directivos_docentes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".categoria_directivo_docente | type: TABLE --
@@ -1835,7 +1740,7 @@ COMMENT ON COLUMN "Educacion".categoria_directivo_docente.cdd_codigo IS 'Llave p
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".categoria_directivo_docente.cdd_nombre IS 'Nombre de las distintas categorias de directivos y docentes.';
 -- ddl-end --
-ALTER TABLE "Educacion".categoria_directivo_docente OWNER TO postgres;
+ALTER TABLE "Educacion".categoria_directivo_docente OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".icetex | type: TABLE --
@@ -1846,7 +1751,7 @@ CREATE TABLE "Educacion".icetex(
 	ice_linea_credito integer,
 	ice_estado_credito integer,
 	ice_num_credito integer,
-	ice_valor_credito integer,
+	ice_valor_credito double precision,
 	CONSTRAINT icetex_pk PRIMARY KEY (ice_codigo)
 
 );
@@ -1865,7 +1770,7 @@ COMMENT ON COLUMN "Educacion".icetex.ice_num_credito IS 'Número de creditos.';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".icetex.ice_valor_credito IS 'Valor de los creditos.';
 -- ddl-end --
-ALTER TABLE "Educacion".icetex OWNER TO postgres;
+ALTER TABLE "Educacion".icetex OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".linea_credito | type: TABLE --
@@ -1883,7 +1788,7 @@ COMMENT ON COLUMN "Educacion".linea_credito.lic_codigo IS 'Llave primaria para l
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".linea_credito.lic_nombre IS 'Nombre de las distintas lineas de crédito.';
 -- ddl-end --
-ALTER TABLE "Educacion".linea_credito OWNER TO postgres;
+ALTER TABLE "Educacion".linea_credito OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".estado_credito | type: TABLE --
@@ -1901,7 +1806,7 @@ COMMENT ON COLUMN "Educacion".estado_credito.esc_codigo IS 'Llave primaria para 
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".estado_credito.esc_nombre IS 'Nombre de los distintos estado del crédito en el ICETEX.';
 -- ddl-end --
-ALTER TABLE "Educacion".estado_credito OWNER TO postgres;
+ALTER TABLE "Educacion".estado_credito OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.anio | type: TABLE --
@@ -1913,406 +1818,7 @@ CREATE TABLE public.anio(
 
 );
 -- ddl-end --
-ALTER TABLE public.anio OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'1', E'1990');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'2', E'1991');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'3', E'1992');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'4', E'1993');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'5', E'1994');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'6', E'1995');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'7', E'1996');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'8', E'1997');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'9', E'1998');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'10', E'1999');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'11', E'2000');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'12', E'2001');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'13', E'2002');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'14', E'2003');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'15', E'2004');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'16', E'2005');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'17', E'2006');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'18', E'2007');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'19', E'2008');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'20', E'2009');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'21', E'2010');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'22', E'2011');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'23', E'2012');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'24', E'2013');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'25', E'2014');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'26', E'2015');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'27', E'2016');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'28', E'2017');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'29', E'2018');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'30', E'2019');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'31', E'2020');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'32', E'2021');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'33', E'2022');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'34', E'2023');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'35', E'2024');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'36', E'2025');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'37', E'2026');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'38', E'2027');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'39', E'2028');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'40', E'2029');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'41', E'2030');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'42', E'2031');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'43', E'2032');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'44', E'2033');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'45', E'2034');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'46', E'2035');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'47', E'2036');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'48', E'2037');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'49', E'2038');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'50', E'2039');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'51', E'2040');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'52', E'2041');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'53', E'2042');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'54', E'2043');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'55', E'2044');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'56', E'2045');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'57', E'2046');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'58', E'2047');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'59', E'2048');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'60', E'2049');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'61', E'2050');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'62', E'2051');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'63', E'2052');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'64', E'2053');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'65', E'2054');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'66', E'2055');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'67', E'2056');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'68', E'2057');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'69', E'2058');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'70', E'2059');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'71', E'2060');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'72', E'2061');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'73', E'2062');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'74', E'2063');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'75', E'2064');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'76', E'2065');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'77', E'2066');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'78', E'2067');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'79', E'2068');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'80', E'2069');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'81', E'2070');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'82', E'2071');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'83', E'2072');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'84', E'2073');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'85', E'2074');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'86', E'2075');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'87', E'2076');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'88', E'2077');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'89', E'2078');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'90', E'2079');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'91', E'2080');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'92', E'2081');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'93', E'2082');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'94', E'2083');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'95', E'2084');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'96', E'2085');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'97', E'2086');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'98', E'2087');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'99', E'2088');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'100', E'2089');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'101', E'2090');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'102', E'2091');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'103', E'2092');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'104', E'2093');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'105', E'2094');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'106', E'2095');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'107', E'2096');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'108', E'2097');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'109', E'2098');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'110', E'2099');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'111', E'2100');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'112', E'2101');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'113', E'2102');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'114', E'2103');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'115', E'2104');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'116', E'2105');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'117', E'2106');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'118', E'2107');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'119', E'2108');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'120', E'2109');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'121', E'2110');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'122', E'2111');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'123', E'2112');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'124', E'2113');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'125', E'2114');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'126', E'2115');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'127', E'2116');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'128', E'2117');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'129', E'2118');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'130', E'2119');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'131', E'2120');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'132', E'2121');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'133', E'2122');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'134', E'2123');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'135', E'2124');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'136', E'2125');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'137', E'2126');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'138', E'2127');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'139', E'2128');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'140', E'2129');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'141', E'2130');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'142', E'2131');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'143', E'2132');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'144', E'2133');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'145', E'2134');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'146', E'2135');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'147', E'2136');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'148', E'2137');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'149', E'2138');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'150', E'2139');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'151', E'2140');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'152', E'2141');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'153', E'2142');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'154', E'2143');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'155', E'2144');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'156', E'2145');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'157', E'2146');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'158', E'2147');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'159', E'2148');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'160', E'2149');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'161', E'2150');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'162', E'2151');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'163', E'2152');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'164', E'2153');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'165', E'2154');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'166', E'2155');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'167', E'2156');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'168', E'2157');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'169', E'2158');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'170', E'2159');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'171', E'2160');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'172', E'2161');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'173', E'2162');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'174', E'2163');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'175', E'2164');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'176', E'2165');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'177', E'2166');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'178', E'2167');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'179', E'2168');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'180', E'2169');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'181', E'2170');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'182', E'2171');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'183', E'2172');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'184', E'2173');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'185', E'2174');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'186', E'2175');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'187', E'2176');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'188', E'2177');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'189', E'2178');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'190', E'2179');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'191', E'2180');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'192', E'2181');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'193', E'2182');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'194', E'2183');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'195', E'2184');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'196', E'2185');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'197', E'2186');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'198', E'2187');
--- ddl-end --
-INSERT INTO public.anio (ani_codigo, ani_nombre) VALUES (E'199', E'2188');
+ALTER TABLE public.anio OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.mes | type: TABLE --
@@ -2324,32 +1830,7 @@ CREATE TABLE public.mes(
 
 );
 -- ddl-end --
-ALTER TABLE public.mes OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'1', E'Enero');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'2', E'Febrero');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'3', E'Marzo');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'4', E'Abril');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'5', E'Mayo');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'6', E'Junio');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'7', E'Julio');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'8', E'Agosto');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'9', E'Septiembre');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'10', E'Octubre');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'11', E'Noviembre');
--- ddl-end --
-INSERT INTO public.mes (mes_codigo, mes_nombre) VALUES (E'12', E'Diciembre');
+ALTER TABLE public.mes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.dia | type: TABLE --
@@ -2361,7 +1842,7 @@ CREATE TABLE public.dia(
 
 );
 -- ddl-end --
-ALTER TABLE public.dia OWNER TO postgres;
+ALTER TABLE public.dia OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.semestre | type: TABLE --
@@ -2373,16 +1854,7 @@ CREATE TABLE public.semestre(
 
 );
 -- ddl-end --
-ALTER TABLE public.semestre OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'1', E'I');
--- ddl-end --
-INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'2', E'II');
--- ddl-end --
-INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'3', E'III');
--- ddl-end --
-INSERT INTO public.semestre (sem_codigo, sem_nombre) VALUES (E'4', E'IV');
+ALTER TABLE public.semestre OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".icfes | type: TABLE --
@@ -2393,8 +1865,8 @@ CREATE TABLE "Educacion".icfes(
 	icf_alcance integer,
 	icf_semestre smallint,
 	icf_materias integer,
-	icf_puntaje_prom integer,
-	icf_desviacion_est integer,
+	icf_puntaje_prom double precision,
+	icf_desviacion_est double precision,
 	CONSTRAINT icfes_pk PRIMARY KEY (icf_codigo)
 
 );
@@ -2415,14 +1887,14 @@ COMMENT ON COLUMN "Educacion".icfes.icf_puntaje_prom IS 'EL puntaje promedio';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".icfes.icf_desviacion_est IS 'La desviación estándar';
 -- ddl-end --
-ALTER TABLE "Educacion".icfes OWNER TO postgres;
+ALTER TABLE "Educacion".icfes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".materias | type: TABLE --
 -- DROP TABLE IF EXISTS "Educacion".materias CASCADE;
 CREATE TABLE "Educacion".materias(
 	mate_codigo serial NOT NULL,
-	mat_nombre character varying(150) NOT NULL,
+	mate_nombre character varying(150) NOT NULL,
 	CONSTRAINT materias_pk PRIMARY KEY (mate_codigo)
 
 );
@@ -2431,9 +1903,9 @@ COMMENT ON TABLE "Educacion".materias IS 'Tabla que contiene las diferentes mate
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".materias.mate_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".materias.mat_nombre IS 'Nombre de la materia ';
+COMMENT ON COLUMN "Educacion".materias.mate_nombre IS 'Nombre de la materia ';
 -- ddl-end --
-ALTER TABLE "Educacion".materias OWNER TO postgres;
+ALTER TABLE "Educacion".materias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.alcance | type: TABLE --
@@ -2451,12 +1923,7 @@ COMMENT ON COLUMN public.alcance.alc_codigo IS 'Llave primaria para la identific
 -- ddl-end --
 COMMENT ON COLUMN public.alcance.alc_nombre IS 'Nombre que indica si es a nivel nacional o departamental';
 -- ddl-end --
-ALTER TABLE public.alcance OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.alcance (alc_codigo, alc_nombre) VALUES (E'1', E'Nacional');
--- ddl-end --
-INSERT INTO public.alcance (alc_codigo, alc_nombre) VALUES (E'2', E'Departamental');
+ALTER TABLE public.alcance OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".banco | type: TABLE --
@@ -2474,7 +1941,7 @@ COMMENT ON COLUMN "cifras macro economicas".banco.ban_codigo IS 'Llave primaria 
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".banco.ban_nombre IS 'Nombre del banco';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".banco OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".banco OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".bancos_municipios | type: TABLE --
@@ -2502,7 +1969,7 @@ COMMENT ON COLUMN "cifras macro economicas".bancos_municipios.bmun_anio IS 'Año
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".bancos_municipios.bmun_cantidad IS 'Cantidad de bancos por municipio.';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".bancos_municipios OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".bancos_municipios OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".captaciones_bancos | type: TABLE --
@@ -2528,7 +1995,7 @@ COMMENT ON COLUMN "cifras macro economicas".captaciones_bancos.caba_anio IS 'Añ
 COMMENT ON COLUMN "cifras macro economicas".captaciones_bancos.caba_total IS 'Total de la captación.
 ';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".captaciones_bancos OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".captaciones_bancos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".tipo_transaccion | type: TABLE --
@@ -2546,7 +2013,7 @@ COMMENT ON COLUMN "cifras macro economicas".tipo_transaccion.ttran_codigo IS 'C�
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".tipo_transaccion.ttran_nombre IS 'Nombre de la transacción bancaria';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".tipo_transaccion OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".tipo_transaccion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".captaciones | type: TABLE --
@@ -2576,7 +2043,7 @@ COMMENT ON COLUMN "cifras macro economicas".captaciones."cap_codTipoEstablecimie
 COMMENT ON COLUMN "cifras macro economicas".captaciones."cap_totalCaptacion" IS 'Total de la captación de la entidad.
 ';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".captaciones OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".captaciones OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".tipo_establecimiento | type: TABLE --
@@ -2595,7 +2062,7 @@ COMMENT ON COLUMN "cifras macro economicas".tipo_establecimiento.tes_codigo IS '
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".tipo_establecimiento.tes_nombre IS 'Nombre del tipo de establecimiento';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".tipo_establecimiento OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".tipo_establecimiento OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".tipo_credito | type: TABLE --
@@ -2613,7 +2080,7 @@ COMMENT ON COLUMN "cifras macro economicas".tipo_credito.tcre_codigo IS 'Llave p
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".tipo_credito.tcre_nombre IS 'Nombre del credito';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".tipo_credito OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".tipo_credito OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".cartera_municipios | type: TABLE --
@@ -2630,7 +2097,7 @@ CREATE TABLE "cifras macro economicas".cartera_municipios(
 -- ddl-end --
 COMMENT ON TABLE "cifras macro economicas".cartera_municipios IS 'Cartera de bancos por municipios';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".cartera_municipios OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".cartera_municipios OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".cartera | type: TABLE --
@@ -2658,7 +2125,7 @@ COMMENT ON COLUMN "cifras macro economicas".cartera.cart_anio IS 'Año al cual h
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".cartera.cart_total IS 'Total recolectado por el establecimiento.';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".cartera OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".cartera OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".comercio_exterior | type: TABLE --
@@ -2680,7 +2147,7 @@ COMMENT ON COLUMN "cifras macro economicas".comercio_exterior.comex_importacione
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".comercio_exterior.comex_anio IS 'Año al cual hace referencia cada registro de los datos';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".comercio_exterior OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".comercio_exterior OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.cervecerias | type: TABLE --
@@ -2698,26 +2165,7 @@ COMMENT ON COLUMN public.cervecerias.cerv_codigo IS 'Llave primaria de la tabla'
 -- ddl-end --
 COMMENT ON COLUMN public.cervecerias.cerv_nombre IS 'Nombre de la cerveceria';
 -- ddl-end --
-ALTER TABLE public.cervecerias OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'1', E'Cerveza Extranjera');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'2', E'Cerveza Cerveunion');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'3', E'Bavaria');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'4', E'Cerveza del Valle');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'5', E'Cerveza Colon S.A.');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'6', E'Artesana BEER Company S.A.');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'7', E'Cerveceria BBC S.A.');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'8', E'Artesanos de Cervezas S.A.S.');
--- ddl-end --
-INSERT INTO public.cervecerias (cerv_codigo, cerv_nombre) VALUES (E'9', E'Jairo Rafael Oñate Carvajal');
+ALTER TABLE public.cervecerias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".consumo_cerveza | type: TABLE --
@@ -2746,7 +2194,7 @@ COMMENT ON COLUMN "cifras macro economicas".consumo_cerveza."cocer_codCerveceria
 COMMENT ON COLUMN "cifras macro economicas".consumo_cerveza.cocer_consumo IS 'Total del consumo en decenas.
 ';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".consumo_cerveza OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".consumo_cerveza OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".consumo_cigarrillos | type: TABLE --
@@ -2774,7 +2222,7 @@ COMMENT ON COLUMN "cifras macro economicas".consumo_cigarrillos.coci_nacionales 
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".consumo_cigarrillos.coci_extranjero IS 'Consumo de cigarrillos extranjeros por decenas de cajetillas.';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".consumo_cigarrillos OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".consumo_cigarrillos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.tipo_combustible | type: TABLE --
@@ -2792,18 +2240,7 @@ COMMENT ON COLUMN public.tipo_combustible.tcom_codigo IS 'Llave primaria de la t
 -- ddl-end --
 COMMENT ON COLUMN public.tipo_combustible.tcom_nombre IS 'Nombre de combustible';
 -- ddl-end --
-ALTER TABLE public.tipo_combustible OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'1', E'Gasolina');
--- ddl-end --
-INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'2', E'Gasolina extra');
--- ddl-end --
-INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'3', E'Gasolina corriente');
--- ddl-end --
-INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'4', E'ACPM');
--- ddl-end --
-INSERT INTO public.tipo_combustible (tcom_codigo, tcom_nombre) VALUES (E'5', E'Gas Natural');
+ALTER TABLE public.tipo_combustible OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".consumo_combustible | type: TABLE --
@@ -2831,7 +2268,7 @@ COMMENT ON COLUMN "cifras macro economicas".consumo_combustible."cocom_codCombus
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".consumo_combustible.cocom_consumo IS 'Total del consumo de combustible por galones';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".consumo_combustible OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".consumo_combustible OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.tipo_licor | type: TABLE --
@@ -2849,20 +2286,7 @@ COMMENT ON COLUMN public.tipo_licor.tli_codigo IS 'Llave principal de la tabla.'
 -- ddl-end --
 COMMENT ON COLUMN public.tipo_licor.tli_nombre IS 'Nombre del tipo de licor(extranjero, nacional, vino, etc).';
 -- ddl-end --
-ALTER TABLE public.tipo_licor OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'1', E'Nacional');
--- ddl-end --
-INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'2', E'Extranjero');
--- ddl-end --
-INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'3', E'Departamental');
--- ddl-end --
-INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'4', E'Vino Nacional');
--- ddl-end --
-INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'5', E'Vino Extranjero');
--- ddl-end --
-INSERT INTO public.tipo_licor (tli_codigo, tli_nombre) VALUES (E'6', E'Licor Extranjero');
+ALTER TABLE public.tipo_licor OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".consumo_licor | type: TABLE --
@@ -2882,6 +2306,8 @@ COMMENT ON TABLE "cifras macro economicas".consumo_licor IS 'Consumo de licores 
 COMMENT ON COLUMN "cifras macro economicas".consumo_licor."coli_codTipoLicor" IS 'Llave foránea que apunta a la tabla tipo_licor';
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".consumo_licor.coli_consumo IS 'Consumo de licor en botellas de 750 c.c.';
+-- ddl-end --
+ALTER TABLE "cifras macro economicas".consumo_licor OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".cotizacion_dolar | type: TABLE --
@@ -2908,7 +2334,7 @@ COMMENT ON COLUMN "cifras macro economicas".cotizacion_dolar."cot_pesoPorDolar" 
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".cotizacion_dolar.cotd_variacion IS 'Variación promedio del precio.';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".cotizacion_dolar OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".cotizacion_dolar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas"."captaciones_entidadesBancarias" | type: TABLE --
@@ -2931,7 +2357,7 @@ COMMENT ON COLUMN "cifras macro economicas"."captaciones_entidadesBancarias"."ca
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas"."captaciones_entidadesBancarias"."caen_codBanco" IS 'Llave foránea que apunta a la tabla banco';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas"."captaciones_entidadesBancarias" OWNER TO postgres;
+ALTER TABLE "cifras macro economicas"."captaciones_entidadesBancarias" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".desagregado_cartera_entidades | type: TABLE --
@@ -2961,7 +2387,7 @@ COMMENT ON COLUMN "cifras macro economicas".desagregado_cartera_entidades.dce_to
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".desagregado_cartera_entidades.dce_anio IS 'Año al cual hace referencia el registro de los datos';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".desagregado_cartera_entidades OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".desagregado_cartera_entidades OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".sector_productor | type: TABLE --
@@ -2975,7 +2401,7 @@ CREATE TABLE "cifras macro economicas".sector_productor(
 -- ddl-end --
 COMMENT ON TABLE "cifras macro economicas".sector_productor IS 'Descripción de sectores de producción(Agropecuario, minero, industrial,etc)';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".sector_productor OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".sector_productor OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".actividad_economica_sec | type: TABLE --
@@ -2993,7 +2419,7 @@ COMMENT ON COLUMN "cifras macro economicas".actividad_economica_sec.acec_codigo 
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".actividad_economica_sec.acec_nombre IS 'Nombre de la actividad económica';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".actividad_economica_sec OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".actividad_economica_sec OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".exportaciones_importaciones | type: TABLE --
@@ -3023,7 +2449,7 @@ COMMENT ON COLUMN "cifras macro economicas".exportaciones_importaciones.expim_to
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".exportaciones_importaciones."expim_codTipoComercioIInternacional" IS 'Llave foránea que apunta a la tabla tipo_comercioIInternacional';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".exportaciones_importaciones OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".exportaciones_importaciones OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas"."tipo_comercioInternacional" | type: TABLE --
@@ -3041,7 +2467,7 @@ COMMENT ON COLUMN "cifras macro economicas"."tipo_comercioInternacional".tcin_co
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas"."tipo_comercioInternacional".tcin_nombre IS 'Nombre de la actividad comercial internacional';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas"."tipo_comercioInternacional" OWNER TO postgres;
+ALTER TABLE "cifras macro economicas"."tipo_comercioInternacional" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".petrolera | type: TABLE --
@@ -3055,7 +2481,7 @@ CREATE TABLE "cifras macro economicas".petrolera(
 -- ddl-end --
 COMMENT ON TABLE "cifras macro economicas".petrolera IS 'Conjunto de petroleras que operan en el departamento';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".petrolera OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".petrolera OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas".produccion_petroleo | type: TABLE --
@@ -3085,7 +2511,7 @@ COMMENT ON COLUMN "cifras macro economicas".produccion_petroleo.propet_mes IS 'M
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas".produccion_petroleo.propet_produccion IS 'Producción de barriles de petróleo por día';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas".produccion_petroleo OWNER TO postgres;
+ALTER TABLE "cifras macro economicas".produccion_petroleo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "cifras macro economicas"."UVR" | type: TABLE --
@@ -3121,7 +2547,7 @@ COMMENT ON COLUMN "cifras macro economicas"."UVR"."uvr_variacionAnual" IS 'Proce
 -- ddl-end --
 COMMENT ON COLUMN "cifras macro economicas"."UVR"."uvr_valoracionAnioCorrido" IS 'Porcentaje de variación año corrido';
 -- ddl-end --
-ALTER TABLE "cifras macro economicas"."UVR" OWNER TO postgres;
+ALTER TABLE "cifras macro economicas"."UVR" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".top_programas_universitarios | type: TABLE --
@@ -3146,19 +2572,20 @@ COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_puesto IS 'numero
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_programa IS 'Llave foránea que apunta a la tabla programa.';
 -- ddl-end --
-ALTER TABLE "Educacion".top_programas_universitarios OWNER TO postgres;
+ALTER TABLE "Educacion".top_programas_universitarios OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".sena | type: TABLE --
 -- DROP TABLE IF EXISTS "Educacion".sena CASCADE;
 CREATE TABLE "Educacion".sena(
 	sen_codigo bigserial NOT NULL,
-	"sen_codMunicipio" integer,
 	sen_anio integer,
-	sen_nivel_formacion_sena integer,
-	sen_genero integer,
+	"sen_codMunicipio" integer,
 	sen_sector_economico integer,
-	sen_num_oferta integer,
+	sen_nivel_formacion_sena integer,
+	sen_num_cursos integer,
+	"sen_num_aprendicesHombres" integer,
+	"sen_num_aprendicesMujeres" integer,
 	CONSTRAINT sena_pk PRIMARY KEY (sen_codigo)
 
 );
@@ -3167,17 +2594,21 @@ COMMENT ON TABLE "Educacion".sena IS 'Tabla que contiene la oferta educativa del
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".sena.sen_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".sena."sen_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
--- ddl-end --
 COMMENT ON COLUMN "Educacion".sena.sen_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".sena.sen_nivel_formacion_sena IS 'Llave foránea que apunta a la tabla nivel_formacion_sena';
--- ddl-end --
-COMMENT ON COLUMN "Educacion".sena.sen_genero IS 'Llave foránea que apunta a la tabla genero';
+COMMENT ON COLUMN "Educacion".sena."sen_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".sena.sen_sector_economico IS 'Llave foranea que apunta a la tabla sector_economico';
 -- ddl-end --
-ALTER TABLE "Educacion".sena OWNER TO postgres;
+COMMENT ON COLUMN "Educacion".sena.sen_nivel_formacion_sena IS 'Llave foránea que apunta a la tabla nivel_formacion_sena';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".sena.sen_num_cursos IS 'numero de cursos ';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".sena."sen_num_aprendicesHombres" IS 'Número de aprendices Hombres';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".sena."sen_num_aprendicesMujeres" IS 'Número de aprendices Mujeres.';
+-- ddl-end --
+ALTER TABLE "Educacion".sena OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".nivel_formacion_sena | type: TABLE --
@@ -3195,25 +2626,25 @@ COMMENT ON COLUMN "Educacion".nivel_formacion_sena.nfs_codigo IS 'Llave primaria
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".nivel_formacion_sena.nfs_nombre IS 'Nombre del nivel educativo que ofrece el sena';
 -- ddl-end --
-ALTER TABLE "Educacion".nivel_formacion_sena OWNER TO postgres;
+ALTER TABLE "Educacion".nivel_formacion_sena OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".sector_economico | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".sector_economico CASCADE;
-CREATE TABLE "Educacion".sector_economico(
+-- object: "Educacion".sector_economico_sena | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".sector_economico_sena CASCADE;
+CREATE TABLE "Educacion".sector_economico_sena(
 	sec_codigo serial NOT NULL,
 	sec_nombre character varying(200),
 	CONSTRAINT sector_economico_pk PRIMARY KEY (sec_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".sector_economico IS 'Tabla que contiene los nombres de los sectores economicos a los cuales se enfoca la oferta educativa del sena';
+COMMENT ON TABLE "Educacion".sector_economico_sena IS 'Tabla que contiene los nombres de los sectores economicos a los cuales se enfoca la oferta educativa del sena';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".sector_economico.sec_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".sector_economico_sena.sec_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".sector_economico.sec_nombre IS 'Nombre del sector económico';
+COMMENT ON COLUMN "Educacion".sector_economico_sena.sec_nombre IS 'Nombre del sector económico';
 -- ddl-end --
-ALTER TABLE "Educacion".sector_economico OWNER TO postgres;
+ALTER TABLE "Educacion".sector_economico_sena OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".matriculas_usco | type: TABLE --
@@ -3252,7 +2683,7 @@ COMMENT ON COLUMN "Educacion".matriculas_usco.matu_semestre IS 'Llave foránea q
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".matriculas_usco.matu_num_matricula IS 'Numero de matriculados';
 -- ddl-end --
-ALTER TABLE "Educacion".matriculas_usco OWNER TO postgres;
+ALTER TABLE "Educacion".matriculas_usco OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.departamento | type: TABLE --
@@ -3268,74 +2699,7 @@ COMMENT ON TABLE public.departamento IS 'Tabla que contiene los nombres de los d
 -- ddl-end --
 COMMENT ON COLUMN public.departamento.dep_nombre IS 'Nombre de los departamentos en el país.';
 -- ddl-end --
-ALTER TABLE public.departamento OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'91', E'Amazonas');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'5', E'Antioquia');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'81', E'Arauca');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'8', E'Atlántico');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'11', E'Bogota D.C');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'13', E'Bolivar');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'15', E'Boyacá');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'17', E'Caldas');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'18', E'Caquetá');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'85', E'Casanare');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'19', E'Cauca');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'20', E'Cesar');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'27', E'Chocó');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'23', E'Córdoba');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'25', E'Cundinamarca');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'94', E'Guainía');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'95', E'Guaviare');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'41', E'Huila');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'44', E'La Guajira');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'47', E'Magdalena');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'50', E'Meta');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'52', E'Nariño');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'54', E'Norte de Santander');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'86', E'Putumayo');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'63', E'Quindio');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'66', E'Risaralda');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'88', E'San Andrés');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'68', E'Santander');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'70', E'Sucre');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'73', E'Tolima');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'76', E'Valle del Cauca');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'97', E'Vaupés');
--- ddl-end --
-INSERT INTO public.departamento (dep_codigo, dep_nombre) VALUES (E'99', E'Vichada');
+ALTER TABLE public.departamento OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura"."Turistas_parques_museo" | type: TABLE --
@@ -3368,7 +2732,7 @@ COMMENT ON COLUMN "Cultura"."Turistas_parques_museo".tpmu_nacionalidad IS 'Llave
 -- ddl-end --
 COMMENT ON COLUMN "Cultura"."Turistas_parques_museo"."tpmu_numero de turistas" IS 'Número de turistas ';
 -- ddl-end --
-ALTER TABLE "Cultura"."Turistas_parques_museo" OWNER TO postgres;
+ALTER TABLE "Cultura"."Turistas_parques_museo" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".tipo_turista | type: TABLE --
@@ -3386,7 +2750,7 @@ COMMENT ON COLUMN "Cultura".tipo_turista.ttu_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".tipo_turista."ttu_Nombre" IS 'Nombre del tipo de turista';
 -- ddl-end --
-ALTER TABLE "Cultura".tipo_turista OWNER TO postgres;
+ALTER TABLE "Cultura".tipo_turista OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".parque_museo | type: TABLE --
@@ -3404,7 +2768,7 @@ COMMENT ON COLUMN "Cultura".parque_museo.pam_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".parque_museo."pam_Nombre" IS 'Nombre del parque o museo';
 -- ddl-end --
-ALTER TABLE "Cultura".parque_museo OWNER TO postgres;
+ALTER TABLE "Cultura".parque_museo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".ingresos_centros_turisticos_comfamiliar | type: TABLE --
@@ -3431,7 +2795,7 @@ COMMENT ON COLUMN "Cultura".ingresos_centros_turisticos_comfamiliar.ictc_centro_
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".ingresos_centros_turisticos_comfamiliar."ictc_numero de turistas" IS 'Número de turistas ';
 -- ddl-end --
-ALTER TABLE "Cultura".ingresos_centros_turisticos_comfamiliar OWNER TO postgres;
+ALTER TABLE "Cultura".ingresos_centros_turisticos_comfamiliar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".centro_turistico | type: TABLE --
@@ -3449,7 +2813,7 @@ COMMENT ON COLUMN "Cultura".centro_turistico.cet_codigo IS 'Llave primaria para 
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".centro_turistico."cet_Nombre" IS 'Nombre del centro turistico';
 -- ddl-end --
-ALTER TABLE "Cultura".centro_turistico OWNER TO postgres;
+ALTER TABLE "Cultura".centro_turistico OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura"."instalaciones depor_recreativas" | type: TABLE --
@@ -3477,7 +2841,7 @@ COMMENT ON COLUMN "Cultura"."instalaciones depor_recreativas".ider_area IS 'Llav
 -- ddl-end --
 COMMENT ON COLUMN "Cultura"."instalaciones depor_recreativas".ider_num_instalaciones IS 'Número de las instalaciones deportivas y recreativas.';
 -- ddl-end --
-ALTER TABLE "Cultura"."instalaciones depor_recreativas" OWNER TO postgres;
+ALTER TABLE "Cultura"."instalaciones depor_recreativas" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".instalacion_de_re | type: TABLE --
@@ -3495,7 +2859,7 @@ COMMENT ON COLUMN "Cultura".instalacion_de_re.inde_codigo IS 'Llave primaria par
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".instalacion_de_re.inde_nombre IS 'Nombre del centro turistico';
 -- ddl-end --
-ALTER TABLE "Cultura".instalacion_de_re OWNER TO postgres;
+ALTER TABLE "Cultura".instalacion_de_re OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura"."Reinas_bambuco" | type: TABLE --
@@ -3515,7 +2879,7 @@ COMMENT ON TABLE "Cultura"."Reinas_bambuco" IS 'Tabla que contiene los nombres y
 -- ddl-end --
 COMMENT ON COLUMN "Cultura"."Reinas_bambuco".reb_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-ALTER TABLE "Cultura"."Reinas_bambuco" OWNER TO postgres;
+ALTER TABLE "Cultura"."Reinas_bambuco" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".capacidad_hotelera | type: TABLE --
@@ -3548,7 +2912,7 @@ COMMENT ON COLUMN "Cultura".capacidad_hotelera.cah_num_habitaciones IS 'Número 
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".capacidad_hotelera."cah_Capacidad" IS 'Capacidad de alojamiento del hotel.';
 -- ddl-end --
-ALTER TABLE "Cultura".capacidad_hotelera OWNER TO postgres;
+ALTER TABLE "Cultura".capacidad_hotelera OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".hotel | type: TABLE --
@@ -3566,7 +2930,7 @@ COMMENT ON COLUMN "Cultura".hotel.hot_codigo IS 'Llave primaria para la identifi
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".hotel.hot_nombre IS 'Nombre de los hoteles.';
 -- ddl-end --
-ALTER TABLE "Cultura".hotel OWNER TO postgres;
+ALTER TABLE "Cultura".hotel OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".escenarios_grupos | type: TABLE --
@@ -3597,7 +2961,7 @@ COMMENT ON COLUMN "Cultura".escenarios_grupos.egcd_num_escenarios IS 'Número de
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".escenarios_grupos.egcd_grupos_culturales IS 'Llave foránea que apunta a la tabla grupos_culturales.';
 -- ddl-end --
-ALTER TABLE "Cultura".escenarios_grupos OWNER TO postgres;
+ALTER TABLE "Cultura".escenarios_grupos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".tipo_escenario | type: TABLE --
@@ -3615,7 +2979,7 @@ COMMENT ON COLUMN "Cultura".tipo_escenario.esc_codigo IS 'Llave primaria para la
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".tipo_escenario.esc_nombre IS 'El tipo escenario en el departamento';
 -- ddl-end --
-ALTER TABLE "Cultura".tipo_escenario OWNER TO postgres;
+ALTER TABLE "Cultura".tipo_escenario OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".grupos_culturales | type: TABLE --
@@ -3633,7 +2997,7 @@ COMMENT ON COLUMN "Cultura".grupos_culturales.gcu_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".grupos_culturales.gcu_nombre IS 'El tipo escenario en el departamento';
 -- ddl-end --
-ALTER TABLE "Cultura".grupos_culturales OWNER TO postgres;
+ALTER TABLE "Cultura".grupos_culturales OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".bibliotecas | type: TABLE --
@@ -3660,7 +3024,7 @@ COMMENT ON COLUMN "Cultura".bibliotecas.bib_naturaleza_pu_pr IS 'Llave foránea 
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".bibliotecas.bib_num_bibliotecas IS 'Número de bibliotecas';
 -- ddl-end --
-ALTER TABLE "Cultura".bibliotecas OWNER TO postgres;
+ALTER TABLE "Cultura".bibliotecas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".naturaleza_pu_pr | type: TABLE --
@@ -3678,7 +3042,7 @@ COMMENT ON COLUMN "Cultura".naturaleza_pu_pr.nat_codigo IS 'Llave primaria para 
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".naturaleza_pu_pr.nat_nombre IS 'Nombre, si es naturaleza publica o privada';
 -- ddl-end --
-ALTER TABLE "Cultura".naturaleza_pu_pr OWNER TO postgres;
+ALTER TABLE "Cultura".naturaleza_pu_pr OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".inventario_atractivos_turisticos | type: TABLE --
@@ -3700,7 +3064,7 @@ COMMENT ON COLUMN "Cultura".inventario_atractivos_turisticos.itc_anio IS 'Llave 
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".inventario_atractivos_turisticos.itc_sitio IS 'Llave foranea que apunta a la tabla sitios_turisticos';
 -- ddl-end --
-ALTER TABLE "Cultura".inventario_atractivos_turisticos OWNER TO postgres;
+ALTER TABLE "Cultura".inventario_atractivos_turisticos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".sitios_turisticos | type: TABLE --
@@ -3718,7 +3082,7 @@ COMMENT ON COLUMN "Cultura".sitios_turisticos.sit_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".sitios_turisticos.sit_nombre IS 'Nombre de los sitios turisticos';
 -- ddl-end --
-ALTER TABLE "Cultura".sitios_turisticos OWNER TO postgres;
+ALTER TABLE "Cultura".sitios_turisticos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".inventario_monumentos | type: TABLE --
@@ -3742,7 +3106,7 @@ COMMENT ON COLUMN "Cultura".inventario_monumentos."imo_codMunicipio" IS 'Llave f
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".inventario_monumentos.imo_monumentos IS 'Llave foranea que apunta a la tabla monumentos.';
 -- ddl-end --
-ALTER TABLE "Cultura".inventario_monumentos OWNER TO postgres;
+ALTER TABLE "Cultura".inventario_monumentos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".monumentos | type: TABLE --
@@ -3760,7 +3124,7 @@ COMMENT ON COLUMN "Cultura".monumentos.mon_codigo IS 'Llave primaria para la ide
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".monumentos.mon_nombre IS 'Nombre de los monumentos';
 -- ddl-end --
-ALTER TABLE "Cultura".monumentos OWNER TO postgres;
+ALTER TABLE "Cultura".monumentos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".museos | type: TABLE --
@@ -3791,7 +3155,7 @@ COMMENT ON COLUMN "Cultura".museos.mus_capacidad IS 'Capacidad de visitantes al 
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".museos.mus_num_empleados IS 'Número de empleados del museo';
 -- ddl-end --
-ALTER TABLE "Cultura".museos OWNER TO postgres;
+ALTER TABLE "Cultura".museos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Cultura".nacionalidad | type: TABLE --
@@ -3809,7 +3173,7 @@ COMMENT ON COLUMN "Cultura".nacionalidad.nac_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Cultura".nacionalidad.nac_nombre IS 'Nombre de la nacionalidad';
 -- ddl-end --
-ALTER TABLE "Cultura".nacionalidad OWNER TO postgres;
+ALTER TABLE "Cultura".nacionalidad OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Calidad de vida".datos_calidad_vida | type: TABLE --
@@ -3839,7 +3203,7 @@ COMMENT ON COLUMN "Calidad de vida".datos_calidad_vida.dcv_indice_pobreza_extrem
 -- ddl-end --
 COMMENT ON COLUMN "Calidad de vida".datos_calidad_vida.dcv_indice_pobreza IS 'Indice de pobreza por departamentos';
 -- ddl-end --
-ALTER TABLE "Calidad de vida".datos_calidad_vida OWNER TO postgres;
+ALTER TABLE "Calidad de vida".datos_calidad_vida OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Calidad de vida".pobreza_monetaria | type: TABLE --
@@ -3866,7 +3230,7 @@ COMMENT ON COLUMN "Calidad de vida".pobreza_monetaria.pmo_linea_pobreza IS 'Line
 -- ddl-end --
 COMMENT ON COLUMN "Calidad de vida".pobreza_monetaria.pmo_linea_pobreza_ext IS 'Linea de la pobreza extrema';
 -- ddl-end --
-ALTER TABLE "Calidad de vida".pobreza_monetaria OWNER TO postgres;
+ALTER TABLE "Calidad de vida".pobreza_monetaria OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Construccion".area_destinada_vivienda | type: TABLE --
@@ -3894,7 +3258,7 @@ COMMENT ON COLUMN "Construccion".area_destinada_vivienda.adv_tipo_interes_social
 -- ddl-end --
 COMMENT ON COLUMN "Construccion".area_destinada_vivienda.adv_tipo_vivienda IS 'Llave foránea que apunta a la tabal tipo_vivienda.';
 -- ddl-end --
-ALTER TABLE "Construccion".area_destinada_vivienda OWNER TO postgres;
+ALTER TABLE "Construccion".area_destinada_vivienda OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Construccion".tipo_interes_social | type: TABLE --
@@ -3912,7 +3276,7 @@ COMMENT ON COLUMN "Construccion".tipo_interes_social.tvi_codigo IS 'Llave primar
 -- ddl-end --
 COMMENT ON COLUMN "Construccion".tipo_interes_social.tvi_nombre IS 'dice si es o no vivienda de interes social';
 -- ddl-end --
-ALTER TABLE "Construccion".tipo_interes_social OWNER TO postgres;
+ALTER TABLE "Construccion".tipo_interes_social OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.tipo_vivienda | type: TABLE --
@@ -3930,7 +3294,7 @@ COMMENT ON COLUMN public.tipo_vivienda.tco_codigo IS 'Llave primaria para la ide
 -- ddl-end --
 COMMENT ON COLUMN public.tipo_vivienda.tco_nombre IS 'NOmbre, casa o apartamento';
 -- ddl-end --
-ALTER TABLE public.tipo_vivienda OWNER TO postgres;
+ALTER TABLE public.tipo_vivienda OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Construccion".licencias | type: TABLE --
@@ -3963,7 +3327,7 @@ COMMENT ON COLUMN "Construccion".licencias.lic_num_licencias IS 'Número de lice
 -- ddl-end --
 COMMENT ON COLUMN "Construccion".licencias.lic_area_contruir IS 'Área de construcción.';
 -- ddl-end --
-ALTER TABLE "Construccion".licencias OWNER TO postgres;
+ALTER TABLE "Construccion".licencias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Construccion".catastro | type: TABLE --
@@ -4002,7 +3366,7 @@ COMMENT ON COLUMN "Construccion".catastro.cat_area_construida IS 'Area construid
 -- ddl-end --
 COMMENT ON COLUMN "Construccion".catastro.cat_propietarios IS 'Numero propietarios';
 -- ddl-end --
-ALTER TABLE "Construccion".catastro OWNER TO postgres;
+ALTER TABLE "Construccion".catastro OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Finanzas publicas"."evaluacion_desempeño_fiscal_departamentos" | type: TABLE --
@@ -4044,7 +3408,7 @@ COMMENT ON COLUMN "Finanzas publicas"."evaluacion_desempeño_fiscal_departamento
 -- ddl-end --
 COMMENT ON COLUMN "Finanzas publicas"."evaluacion_desempeño_fiscal_departamentos".def_entornos IS 'Llave foránea que apunta a la tabla entornos_desarrollo';
 -- ddl-end --
-ALTER TABLE "Finanzas publicas"."evaluacion_desempeño_fiscal_departamentos" OWNER TO postgres;
+ALTER TABLE "Finanzas publicas"."evaluacion_desempeño_fiscal_departamentos" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Finanzas publicas".entorno_desarrollo | type: TABLE --
@@ -4062,7 +3426,7 @@ COMMENT ON COLUMN "Finanzas publicas".entorno_desarrollo.end_codigo IS 'Llave pr
 -- ddl-end --
 COMMENT ON COLUMN "Finanzas publicas".entorno_desarrollo.end_nombre IS 'Nombre del entorno de desarrollo';
 -- ddl-end --
-ALTER TABLE "Finanzas publicas".entorno_desarrollo OWNER TO postgres;
+ALTER TABLE "Finanzas publicas".entorno_desarrollo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Finanzas publicas"."evaluacion_desempeño_fiscal_municipios" | type: TABLE --
@@ -4107,7 +3471,7 @@ COMMENT ON COLUMN "Finanzas publicas"."evaluacion_desempeño_fiscal_municipios".
 -- ddl-end --
 COMMENT ON COLUMN "Finanzas publicas"."evaluacion_desempeño_fiscal_municipios".def_entornos IS 'Llave foránea que apunta a la tabla entornos_desarrollo';
 -- ddl-end --
-ALTER TABLE "Finanzas publicas"."evaluacion_desempeño_fiscal_municipios" OWNER TO postgres;
+ALTER TABLE "Finanzas publicas"."evaluacion_desempeño_fiscal_municipios" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Finanzas publicas".impuestos | type: TABLE --
@@ -4134,7 +3498,7 @@ COMMENT ON COLUMN "Finanzas publicas".impuestos.imp_tipo_impuesto IS 'Llave for�
 -- ddl-end --
 COMMENT ON COLUMN "Finanzas publicas".impuestos.imp_recaudo IS 'Valor del recaudo hecho por el tipo de impuesto';
 -- ddl-end --
-ALTER TABLE "Finanzas publicas".impuestos OWNER TO postgres;
+ALTER TABLE "Finanzas publicas".impuestos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Finanzas publicas".tipo_impuesto | type: TABLE --
@@ -4152,7 +3516,7 @@ COMMENT ON COLUMN "Finanzas publicas".tipo_impuesto.tpim_codigo IS 'Llave primar
 -- ddl-end --
 COMMENT ON COLUMN "Finanzas publicas".tipo_impuesto.tpim_nombre IS 'Nombre del impuesto ';
 -- ddl-end --
-ALTER TABLE "Finanzas publicas".tipo_impuesto OWNER TO postgres;
+ALTER TABLE "Finanzas publicas".tipo_impuesto OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".salario_minimo | type: TABLE --
@@ -4176,7 +3540,7 @@ COMMENT ON COLUMN "Empleo".salario_minimo.sam_valor IS 'El valor del salario min
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".salario_minimo.sam_incremento IS 'Valor del incremento del salario minimo respecto al año anterior';
 -- ddl-end --
-ALTER TABLE "Empleo".salario_minimo OWNER TO postgres;
+ALTER TABLE "Empleo".salario_minimo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".indicadores_mercado_laboral_porcentajes | type: TABLE --
@@ -4224,7 +3588,7 @@ COMMENT ON COLUMN "Empleo".indicadores_mercado_laboral_porcentajes.tasa_subem_ob
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".indicadores_mercado_laboral_porcentajes.iml_variacion IS 'Variación con respecto al preiordo anterior (+,-,=)';
 -- ddl-end --
-ALTER TABLE "Empleo".indicadores_mercado_laboral_porcentajes OWNER TO postgres;
+ALTER TABLE "Empleo".indicadores_mercado_laboral_porcentajes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".indicadores_laborales_numero_personas | type: TABLE --
@@ -4245,7 +3609,7 @@ COMMENT ON COLUMN "Empleo".indicadores_laborales_numero_personas.ilph_indicador_
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".indicadores_laborales_numero_personas.ilph_numero_personas IS 'Numero de personas dentro de un indicador laboral.';
 -- ddl-end --
-ALTER TABLE "Empleo".indicadores_laborales_numero_personas OWNER TO postgres;
+ALTER TABLE "Empleo".indicadores_laborales_numero_personas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".indicadores_laborales_huila | type: TABLE --
@@ -4263,7 +3627,7 @@ COMMENT ON COLUMN "Empleo".indicadores_laborales_huila.ilh_codigo IS 'Llave prim
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".indicadores_laborales_huila.ilh_nombre IS 'Nombre del indicador laboral';
 -- ddl-end --
-ALTER TABLE "Empleo".indicadores_laborales_huila OWNER TO postgres;
+ALTER TABLE "Empleo".indicadores_laborales_huila OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".datos_pensionados_administracion_departamental | type: TABLE --
@@ -4293,7 +3657,7 @@ COMMENT ON COLUMN "Empleo".datos_pensionados_administracion_departamental.dpad_n
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".datos_pensionados_administracion_departamental.dpad_costo_pensional IS 'Costo pensional del departamento';
 -- ddl-end --
-ALTER TABLE "Empleo".datos_pensionados_administracion_departamental OWNER TO postgres;
+ALTER TABLE "Empleo".datos_pensionados_administracion_departamental OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".entidades_departamento | type: TABLE --
@@ -4311,7 +3675,7 @@ COMMENT ON COLUMN "Empleo".entidades_departamento.ende_codigo IS 'Llave primaria
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".entidades_departamento.ende_nombre IS 'Nombre de las entidades.';
 -- ddl-end --
-ALTER TABLE "Empleo".entidades_departamento OWNER TO postgres;
+ALTER TABLE "Empleo".entidades_departamento OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."clases_enLas_entidades_admon_central_deptal" | type: TABLE --
@@ -4329,7 +3693,7 @@ COMMENT ON COLUMN "Empleo"."clases_enLas_entidades_admon_central_deptal".cead_co
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."clases_enLas_entidades_admon_central_deptal".cead_nombre IS 'Nombre de las clases en las entidades de administracion central del departamento.';
 -- ddl-end --
-ALTER TABLE "Empleo"."clases_enLas_entidades_admon_central_deptal" OWNER TO postgres;
+ALTER TABLE "Empleo"."clases_enLas_entidades_admon_central_deptal" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."tipo_empresa_porNum_trabajadores" | type: TABLE --
@@ -4347,7 +3711,7 @@ COMMENT ON COLUMN "Empleo"."tipo_empresa_porNum_trabajadores".tet_codigo IS 'Lla
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."tipo_empresa_porNum_trabajadores".tet_rango IS 'Rango de numero de trabajadores por el que se clasifican las empresas';
 -- ddl-end --
-ALTER TABLE "Empleo"."tipo_empresa_porNum_trabajadores" OWNER TO postgres;
+ALTER TABLE "Empleo"."tipo_empresa_porNum_trabajadores" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."tipo_trabajadores_porSalario" | type: TABLE --
@@ -4365,7 +3729,7 @@ COMMENT ON COLUMN "Empleo"."tipo_trabajadores_porSalario".tts_codigo IS 'Llave p
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."tipo_trabajadores_porSalario".tts_rango IS 'Diferentes rangos salariales';
 -- ddl-end --
-ALTER TABLE "Empleo"."tipo_trabajadores_porSalario" OWNER TO postgres;
+ALTER TABLE "Empleo"."tipo_trabajadores_porSalario" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".trabajadores_tamanio_empresa | type: TABLE --
@@ -4390,7 +3754,7 @@ COMMENT ON COLUMN "Empleo".trabajadores_tamanio_empresa.ttem_tipo_empresa_trabaj
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".trabajadores_tamanio_empresa.ttem_sector IS 'Llave foránea que apunta a la tabla';
 -- ddl-end --
-ALTER TABLE "Empleo".trabajadores_tamanio_empresa OWNER TO postgres;
+ALTER TABLE "Empleo".trabajadores_tamanio_empresa OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".sector | type: TABLE --
@@ -4408,7 +3772,7 @@ COMMENT ON COLUMN "Empleo".sector.sect_codigo IS 'Llave primaria para la identif
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".sector.sect_nombre IS 'Nombre del sector oficial o privado';
 -- ddl-end --
-ALTER TABLE "Empleo".sector OWNER TO postgres;
+ALTER TABLE "Empleo".sector OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".trabajadores_nivel_salarial | type: TABLE --
@@ -4435,7 +3799,7 @@ COMMENT ON COLUMN "Empleo".trabajadores_nivel_salarial.tns_sector IS 'Llave for�
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".trabajadores_nivel_salarial.tns_num_trabajadores IS 'Número de trabajadores claseificados por su nivel salarial';
 -- ddl-end --
-ALTER TABLE "Empleo".trabajadores_nivel_salarial OWNER TO postgres;
+ALTER TABLE "Empleo".trabajadores_nivel_salarial OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".trabajadores_afiliados_nivel_salarial_comfamiliar | type: TABLE --
@@ -4465,7 +3829,7 @@ COMMENT ON COLUMN "Empleo".trabajadores_afiliados_nivel_salarial_comfamiliar.tan
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".trabajadores_afiliados_nivel_salarial_comfamiliar.tans_num_variacion_anual IS 'Número que representa la variación anual de afiliados.';
 -- ddl-end --
-ALTER TABLE "Empleo".trabajadores_afiliados_nivel_salarial_comfamiliar OWNER TO postgres;
+ALTER TABLE "Empleo".trabajadores_afiliados_nivel_salarial_comfamiliar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".trabajadores_afiliados_tamanio_empresa_comfamiliar | type: TABLE --
@@ -4490,7 +3854,7 @@ COMMENT ON COLUMN "Empleo".trabajadores_afiliados_tamanio_empresa_comfamiliar.ta
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".trabajadores_afiliados_tamanio_empresa_comfamiliar.tate_sector IS 'Llave foránea que apunta a la tabla';
 -- ddl-end --
-ALTER TABLE "Empleo".trabajadores_afiliados_tamanio_empresa_comfamiliar OWNER TO postgres;
+ALTER TABLE "Empleo".trabajadores_afiliados_tamanio_empresa_comfamiliar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".tipo_empresa | type: TABLE --
@@ -4508,7 +3872,7 @@ COMMENT ON COLUMN "Empleo".tipo_empresa.temp_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".tipo_empresa.temp_nombre IS 'Nombre del tipo de empresa segun clasificación';
 -- ddl-end --
-ALTER TABLE "Empleo".tipo_empresa OWNER TO postgres;
+ALTER TABLE "Empleo".tipo_empresa OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."agencia_publica_empleo_empAsistidas" | type: TABLE --
@@ -4532,7 +3896,7 @@ COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_empAsistidas".apee_tipo_empre
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_empAsistidas".apee_num_empresas IS 'Número de empresas asistidas';
 -- ddl-end --
-ALTER TABLE "Empleo"."agencia_publica_empleo_empAsistidas" OWNER TO postgres;
+ALTER TABLE "Empleo"."agencia_publica_empleo_empAsistidas" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."agencia_publica_empleo_personasColocadas" | type: TABLE --
@@ -4554,7 +3918,7 @@ COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_personasColocadas"."apep_codM
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_personasColocadas".apep_nivel_preparacion IS 'Llave foránea que apunta a la tabla nivel_preparacion_agencia_empleo_sena';
 -- ddl-end --
-ALTER TABLE "Empleo"."agencia_publica_empleo_personasColocadas" OWNER TO postgres;
+ALTER TABLE "Empleo"."agencia_publica_empleo_personasColocadas" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."agencia_publica_empleo_personasVacantes" | type: TABLE --
@@ -4578,7 +3942,7 @@ COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_personasVacantes".apev_nivel_
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_personasVacantes".apev_num_personas_vacantes IS 'Número de personas vacantes';
 -- ddl-end --
-ALTER TABLE "Empleo"."agencia_publica_empleo_personasVacantes" OWNER TO postgres;
+ALTER TABLE "Empleo"."agencia_publica_empleo_personasVacantes" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."agencia_publica_empleo_persoInscritas" | type: TABLE --
@@ -4599,7 +3963,7 @@ COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_persoInscritas"."apei_codMuni
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."agencia_publica_empleo_persoInscritas".apei_num_personas_inscritas IS 'Número de personas inscritas en la agencia publica de empleo SENA';
 -- ddl-end --
-ALTER TABLE "Empleo"."agencia_publica_empleo_persoInscritas" OWNER TO postgres;
+ALTER TABLE "Empleo"."agencia_publica_empleo_persoInscritas" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".nivel_preparacion_agencia_empleo_sena | type: TABLE --
@@ -4617,7 +3981,7 @@ COMMENT ON COLUMN "Empleo".nivel_preparacion_agencia_empleo_sena.npae_codigo IS 
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".nivel_preparacion_agencia_empleo_sena.npae_nombre IS 'Nombre de cada nivel de preparación.';
 -- ddl-end --
-ALTER TABLE "Empleo".nivel_preparacion_agencia_empleo_sena OWNER TO postgres;
+ALTER TABLE "Empleo".nivel_preparacion_agencia_empleo_sena OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".nivel_preparacion_servicio_empleo_comfamiliar | type: TABLE --
@@ -4635,7 +3999,7 @@ COMMENT ON COLUMN "Empleo".nivel_preparacion_servicio_empleo_comfamiliar.npse_co
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".nivel_preparacion_servicio_empleo_comfamiliar.npse_nombre IS 'Nombre del nivel de preparación.';
 -- ddl-end --
-ALTER TABLE "Empleo".nivel_preparacion_servicio_empleo_comfamiliar OWNER TO postgres;
+ALTER TABLE "Empleo".nivel_preparacion_servicio_empleo_comfamiliar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."servicio_publico_empleo_personasColocadas" | type: TABLE --
@@ -4659,7 +4023,7 @@ COMMENT ON COLUMN "Empleo"."servicio_publico_empleo_personasColocadas".spep_nive
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."servicio_publico_empleo_personasColocadas".spep_num_personas_colocadas IS 'Número de personas colocadas en el servicio público de comfamiliar';
 -- ddl-end --
-ALTER TABLE "Empleo"."servicio_publico_empleo_personasColocadas" OWNER TO postgres;
+ALTER TABLE "Empleo"."servicio_publico_empleo_personasColocadas" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."servico_publico_empleo_personasVacantes" | type: TABLE --
@@ -4683,7 +4047,7 @@ COMMENT ON COLUMN "Empleo"."servico_publico_empleo_personasVacantes".spev_nivel_
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."servico_publico_empleo_personasVacantes".spev_num_personas_vacantes IS 'Número de personas vacantes el esl servico público de empleo de comfamiliar';
 -- ddl-end --
-ALTER TABLE "Empleo"."servico_publico_empleo_personasVacantes" OWNER TO postgres;
+ALTER TABLE "Empleo"."servico_publico_empleo_personasVacantes" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo"."servicio_publico_empleo_persoInscritas" | type: TABLE --
@@ -4704,7 +4068,7 @@ COMMENT ON COLUMN "Empleo"."servicio_publico_empleo_persoInscritas"."spei_codMun
 -- ddl-end --
 COMMENT ON COLUMN "Empleo"."servicio_publico_empleo_persoInscritas".spei_num_perosnas_inscritas IS 'Número de personas inscritas en el servicio publico de empleo comfamiliar';
 -- ddl-end --
-ALTER TABLE "Empleo"."servicio_publico_empleo_persoInscritas" OWNER TO postgres;
+ALTER TABLE "Empleo"."servicio_publico_empleo_persoInscritas" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".ocupaciones_exceso_inscritos | type: TABLE --
@@ -4729,7 +4093,7 @@ COMMENT ON COLUMN "Empleo".ocupaciones_exceso_inscritos.oei_ocupacion IS 'Llave 
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".ocupaciones_exceso_inscritos.oei_vacantes IS 'Número de vacantes por ocupación.';
 -- ddl-end --
-ALTER TABLE "Empleo".ocupaciones_exceso_inscritos OWNER TO postgres;
+ALTER TABLE "Empleo".ocupaciones_exceso_inscritos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".ocupacion | type: TABLE --
@@ -4745,7 +4109,7 @@ COMMENT ON TABLE "Empleo".ocupacion IS 'tabla que contiene las diferentes ocupac
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".ocupacion.ocup_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-ALTER TABLE "Empleo".ocupacion OWNER TO postgres;
+ALTER TABLE "Empleo".ocupacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".afiliados_eps | type: TABLE --
@@ -4775,7 +4139,7 @@ COMMENT ON COLUMN "Empleo".afiliados_eps.aeps_eps IS 'Llave foránea que apunta 
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".afiliados_eps.aeps_num_afiliados IS 'Número de personas afiliadas';
 -- ddl-end --
-ALTER TABLE "Empleo".afiliados_eps OWNER TO postgres;
+ALTER TABLE "Empleo".afiliados_eps OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".tipo_regimen | type: TABLE --
@@ -4793,7 +4157,7 @@ COMMENT ON COLUMN "Empleo".tipo_regimen.tre_codigo IS 'Llave primaria para la id
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".tipo_regimen.tre_nombre IS 'Nombre del regimen dubsidiado o contributivo';
 -- ddl-end --
-ALTER TABLE "Empleo".tipo_regimen OWNER TO postgres;
+ALTER TABLE "Empleo".tipo_regimen OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".empresa_prestadora_salud | type: TABLE --
@@ -4811,7 +4175,7 @@ COMMENT ON COLUMN "Empleo".empresa_prestadora_salud.eps_codigo IS 'Llave primari
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".empresa_prestadora_salud.eps_nombre IS 'Nombre de la eps';
 -- ddl-end --
-ALTER TABLE "Empleo".empresa_prestadora_salud OWNER TO postgres;
+ALTER TABLE "Empleo".empresa_prestadora_salud OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".funcionarios_consejales_alcaldias | type: TABLE --
@@ -4838,7 +4202,7 @@ COMMENT ON COLUMN "Empleo".funcionarios_consejales_alcaldias.fca_num_concejales 
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".funcionarios_consejales_alcaldias.fca_num_funcionarios IS 'Numero de funcionarios por municipios.';
 -- ddl-end --
-ALTER TABLE "Empleo".funcionarios_consejales_alcaldias OWNER TO postgres;
+ALTER TABLE "Empleo".funcionarios_consejales_alcaldias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".funcionarios_entidades_departamento | type: TABLE --
@@ -4865,7 +4229,7 @@ COMMENT ON COLUMN "Empleo".funcionarios_entidades_departamento.fed_genero IS 'Ll
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".funcionarios_entidades_departamento.fed_num_funcio IS 'Número de funcionarios en el departamento por entidad.';
 -- ddl-end --
-ALTER TABLE "Empleo".funcionarios_entidades_departamento OWNER TO postgres;
+ALTER TABLE "Empleo".funcionarios_entidades_departamento OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".entidades_neiva | type: TABLE --
@@ -4883,7 +4247,7 @@ COMMENT ON COLUMN "Empleo".entidades_neiva.enne_codigo IS 'Llave primaria para l
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".entidades_neiva.enne_nombre IS 'Nombre de las entidades.';
 -- ddl-end --
-ALTER TABLE "Empleo".entidades_neiva OWNER TO postgres;
+ALTER TABLE "Empleo".entidades_neiva OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Empleo".funcionarios_entidades_neiva | type: TABLE --
@@ -4910,7 +4274,7 @@ COMMENT ON COLUMN "Empleo".funcionarios_entidades_neiva.fen_genero IS 'Llave for
 -- ddl-end --
 COMMENT ON COLUMN "Empleo".funcionarios_entidades_neiva.fen_num_funcio IS 'Número de funcionarios en Neiva por entidad.';
 -- ddl-end --
-ALTER TABLE "Empleo".funcionarios_entidades_neiva OWNER TO postgres;
+ALTER TABLE "Empleo".funcionarios_entidades_neiva OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.actividad_economica | type: TABLE --
@@ -4928,114 +4292,7 @@ COMMENT ON COLUMN public.actividad_economica.ace_codigo IS 'Llave primaria para 
 -- ddl-end --
 COMMENT ON COLUMN public.actividad_economica.ace_nombre IS 'Nombre de la actividad econoconómica de la empresa.';
 -- ddl-end --
-ALTER TABLE public.actividad_economica OWNER TO postgres;
--- ddl-end --
-
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'1', E'Comercio');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'2', E'Alimentos');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'3', E'Servicios');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'4', E'Confecciones');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'5', E'Artesanias');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'6', E'Metalmecanica');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'7', E'Muebles en Madera');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'8', E'Prefabricados');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'9', E'Calzado');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'10', E'Marroquineria');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'11', E'Juegos Artificiales');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'12', E'AGRICULTURA');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'13', E'Cultivo de café');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'14', E'Cultivo de otros productos agrícolas');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'15', E'Producción pecuaria y caza incluyendo las actividades veterinarias');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'16', E'Silvicultura');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'17', E'Pesca');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'18', E'EXPLOTACION DE MINAS Y CANTERAS');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'19', E'Extracción de carbón');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'20', E'Extracción de petróleo crudo y de gas natural; actividades de servicios relacionadas con la extracción de petróleo y de gas');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'21', E'Extracción de minerales metáliferos');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'22', E'Extracción de minerales no metálicos');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'23', E'INDUSTRIA MANUFACTURERA');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'24', E'SUMINISTRO DE ELECTRICIDAD');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'25', E'Generación');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'26', E'Fabricación de gas; distribución de combustibles gaseosos por tuberías; suministro de vapor y agua caliente');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'27', E'Captación');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'28', E'Eliminación de desperdicios y aguas residuales');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'29', E'CONSTRUCCION');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'30', E'Construcción de edificaciones completas y de partes de edificaciones;  acondicionamiento de edificaciones');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'31', E'Construcción de obras de ingeniería civil');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'32', E'COMERCIO');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'33', E'Comercio');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'34', E'Mantenimiento y reparación de vehículos automotores; reparación de efectos personales y enseres domésticos');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'35', E'Hoteles');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'36', E'TRANSPORTE');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'37', E'Transporte por vía terrestre');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'38', E'Transporte por vía acuática');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'39', E'Transporte por vía aérea');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'40', E'Actividades complementarias y auxiliares al transporte; actividades de agencias de viajes');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'41', E'Correo y telecomunicaciones');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'42', E'ESTABLECIMIENTOS FINANCIEROS');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'43', E'Intermediación financiera');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'44', E'Actividades inmobiliarias y alquiler de vivienda');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'45', E'Actividades de servicios a las empresas excepto servicios financieros e inmobiliarios');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'46', E'ACTIVIDADES DE SERVICIOS SOCIALES');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'47', E'Administración pública y defensa; seguridad social de afiliación obligatoria');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'48', E'Educación de mercado');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'49', E'Educación de no mercado');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'50', E'Servicios sociales y de salud de mercado');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'51', E'Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de mercado');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'52', E'Actividades de asociaciones n.c.p.; actividades de esparcimiento y actividades culturales y deportivas; otras actividades de servicios de no mercado');
--- ddl-end --
-INSERT INTO public.actividad_economica (ace_codigo, ace_nombre) VALUES (E'53', E'Hogares privados con servicio doméstico');
+ALTER TABLE public.actividad_economica OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Movimeinto empresarial".microempresas | type: TABLE --
@@ -5060,7 +4317,7 @@ COMMENT ON COLUMN "Movimeinto empresarial".microempresas."mic_codMunicipio" IS '
 -- ddl-end --
 COMMENT ON COLUMN "Movimeinto empresarial".microempresas.mic_actividad_economica IS 'Llave foránea que apunta a la tabla actividad_economica';
 -- ddl-end --
-ALTER TABLE "Movimeinto empresarial".microempresas OWNER TO postgres;
+ALTER TABLE "Movimeinto empresarial".microempresas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Movimeinto empresarial".sociedades | type: TABLE --
@@ -5090,7 +4347,7 @@ COMMENT ON COLUMN "Movimeinto empresarial".sociedades.soc_num_sociedades IS 'Nú
 -- ddl-end --
 COMMENT ON COLUMN "Movimeinto empresarial".sociedades.soc_valor_autorizado IS 'Vlaor autorizado';
 -- ddl-end --
-ALTER TABLE "Movimeinto empresarial".sociedades OWNER TO postgres;
+ALTER TABLE "Movimeinto empresarial".sociedades OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Movimeinto empresarial".tipo_sociedad | type: TABLE --
@@ -5108,7 +4365,7 @@ COMMENT ON COLUMN "Movimeinto empresarial".tipo_sociedad.tso_codigo IS 'Llave pr
 -- ddl-end --
 COMMENT ON COLUMN "Movimeinto empresarial".tipo_sociedad.tso_nombre IS 'Nombre que lleva cada tipo de sociedad';
 -- ddl-end --
-ALTER TABLE "Movimeinto empresarial".tipo_sociedad OWNER TO postgres;
+ALTER TABLE "Movimeinto empresarial".tipo_sociedad OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Movimeinto empresarial".estado_sociedad | type: TABLE --
@@ -5126,7 +4383,7 @@ COMMENT ON COLUMN "Movimeinto empresarial".estado_sociedad.ess_codigo IS 'Llave 
 -- ddl-end --
 COMMENT ON COLUMN "Movimeinto empresarial".estado_sociedad.ess_nombre IS 'Nombre del estado de la sociedad.';
 -- ddl-end --
-ALTER TABLE "Movimeinto empresarial".estado_sociedad OWNER TO postgres;
+ALTER TABLE "Movimeinto empresarial".estado_sociedad OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "PIB".pib_departamental_precios_constantes | type: TABLE --
@@ -5162,7 +4419,7 @@ COMMENT ON COLUMN "PIB".pib_departamental_precios_constantes.pde_precios_corrien
 -- ddl-end --
 COMMENT ON COLUMN "PIB".pib_departamental_precios_constantes."pde_Porcentaje_precios_corrientes" IS 'Participación porcentual de los departamentos a precios corrientes.';
 -- ddl-end --
-ALTER TABLE "PIB".pib_departamental_precios_constantes OWNER TO postgres;
+ALTER TABLE "PIB".pib_departamental_precios_constantes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "PIB".pib_x_habitantes | type: TABLE --
@@ -5186,7 +4443,7 @@ COMMENT ON COLUMN "PIB".pib_x_habitantes.pha_departamento IS 'Llave foránea que
 -- ddl-end --
 COMMENT ON COLUMN "PIB".pib_x_habitantes.pha_pib_habitantes IS 'PIB de los departamentos a precios constantes';
 -- ddl-end --
-ALTER TABLE "PIB".pib_x_habitantes OWNER TO postgres;
+ALTER TABLE "PIB".pib_x_habitantes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".servicio_energia | type: TABLE --
@@ -5216,7 +4473,7 @@ COMMENT ON COLUMN "Servicios publicos".servicio_energia.seo_consumo IS 'Comsumo 
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".servicio_energia.seo_usuarios IS 'Número de usuarios por sectores';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".servicio_energia OWNER TO postgres;
+ALTER TABLE "Servicios publicos".servicio_energia OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".sector_servico | type: TABLE --
@@ -5234,7 +4491,7 @@ COMMENT ON COLUMN "Servicios publicos".sector_servico.ses_codigo IS 'Llave prima
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".sector_servico.ses_nombre IS 'Nombre del sector ( áreas comuns, provisional, bombeo y especial, alumbrado publico, etc...)';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".sector_servico OWNER TO postgres;
+ALTER TABLE "Servicios publicos".sector_servico OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".servicio_gas_alcanos | type: TABLE --
@@ -5267,7 +4524,7 @@ COMMENT ON COLUMN "Servicios publicos".servicio_gas_alcanos.sga_consumo IS 'Cons
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".servicio_gas_alcanos.sga_usuarios IS 'Usuarios de gas';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".servicio_gas_alcanos OWNER TO postgres;
+ALTER TABLE "Servicios publicos".servicio_gas_alcanos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tipo_servicio | type: TABLE --
@@ -5285,7 +4542,7 @@ COMMENT ON COLUMN "Servicios publicos".tipo_servicio.tsg_codigo IS 'Llave primar
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tipo_servicio.tsg_nombre IS 'Nombre del servicio';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tipo_servicio OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tipo_servicio OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tarifas_gas_alcanos | type: TABLE --
@@ -5318,7 +4575,7 @@ COMMENT ON COLUMN "Servicios publicos".tarifas_gas_alcanos.taga_unidad IS 'Llave
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tarifas_gas_alcanos.taga_tarifa IS 'Valor de la tarifa';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tarifas_gas_alcanos OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tarifas_gas_alcanos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".criterio_gas | type: TABLE --
@@ -5336,7 +4593,7 @@ COMMENT ON COLUMN "Servicios publicos".criterio_gas.crg_codigo IS 'Llave primari
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".criterio_gas.crg_nombre IS 'Nombre del criterio que usa el servicio de gas para tarifar.';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".criterio_gas OWNER TO postgres;
+ALTER TABLE "Servicios publicos".criterio_gas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".concepto_gas | type: TABLE --
@@ -5354,7 +4611,7 @@ COMMENT ON COLUMN "Servicios publicos".concepto_gas.cog_codigo IS 'Llave primari
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".concepto_gas.cog_nombre IS 'Nombre del criterio que usa el servicio de gas para tarifar.';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".concepto_gas OWNER TO postgres;
+ALTER TABLE "Servicios publicos".concepto_gas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".unidad_gas | type: TABLE --
@@ -5372,7 +4629,7 @@ COMMENT ON COLUMN "Servicios publicos".unidad_gas.ung_codigo IS 'Llave primaria 
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".unidad_gas.ung_nombre IS 'Nombre de la unidad';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".unidad_gas OWNER TO postgres;
+ALTER TABLE "Servicios publicos".unidad_gas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".servicio_gas_surgas | type: TABLE --
@@ -5405,7 +4662,7 @@ COMMENT ON COLUMN "Servicios publicos".servicio_gas_surgas.sgs_consumo IS 'Consu
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".servicio_gas_surgas.sgs_usuarios IS 'Usuarios de gas';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".servicio_gas_surgas OWNER TO postgres;
+ALTER TABLE "Servicios publicos".servicio_gas_surgas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tarifas_gas_surgas | type: TABLE --
@@ -5432,7 +4689,7 @@ COMMENT ON COLUMN "Servicios publicos".tarifas_gas_surgas.tags_criterio IS 'Llav
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tarifas_gas_surgas.tags_tarifa IS 'Valor de la tarifa';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tarifas_gas_surgas OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tarifas_gas_surgas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".acueducto | type: TABLE --
@@ -5462,7 +4719,7 @@ COMMENT ON COLUMN "Servicios publicos".acueducto.acu_tipo_servicio IS 'Llave for
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".acueducto.acu_suscriptores IS 'Suscriptores del servicio';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".acueducto OWNER TO postgres;
+ALTER TABLE "Servicios publicos".acueducto OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".entidad_acueducto | type: TABLE --
@@ -5480,7 +4737,7 @@ COMMENT ON COLUMN "Servicios publicos".entidad_acueducto.ena_codigo IS 'Llave pr
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".entidad_acueducto.ena_nombre IS 'Nombre de la entidad';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".entidad_acueducto OWNER TO postgres;
+ALTER TABLE "Servicios publicos".entidad_acueducto OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".acueducto_cobertura | type: TABLE --
@@ -5510,7 +4767,7 @@ COMMENT ON COLUMN "Servicios publicos".acueducto_cobertura.acc_cobertura IS 'cob
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".acueducto_cobertura.acc_hora_servicio IS 'Horas de servicio';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".acueducto_cobertura OWNER TO postgres;
+ALTER TABLE "Servicios publicos".acueducto_cobertura OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".alcantarillado | type: TABLE --
@@ -5540,7 +4797,7 @@ COMMENT ON COLUMN "Servicios publicos".alcantarillado.alc_suscriptores IS 'Suscr
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".alcantarillado.alc_descarga_final_alcantarillado IS 'Llave foránea que apunta a la tabla descarga_alcantarillado';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".alcantarillado OWNER TO postgres;
+ALTER TABLE "Servicios publicos".alcantarillado OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".descarga_alcantarillado | type: TABLE --
@@ -5558,7 +4815,7 @@ COMMENT ON COLUMN "Servicios publicos".descarga_alcantarillado.dal_codigo IS 'Ll
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".descarga_alcantarillado.dal_nombre IS 'Nombre del sitio de descarga';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".descarga_alcantarillado OWNER TO postgres;
+ALTER TABLE "Servicios publicos".descarga_alcantarillado OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".alcantarillado_sistema | type: TABLE --
@@ -5586,7 +4843,7 @@ COMMENT ON COLUMN "Servicios publicos".alcantarillado_sistema.als_entidad IS 'Ll
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".alcantarillado_sistema.als_tipo_sistema IS 'Llave foránea que apunta a la tabla tipo_sistema_alcantarillado';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".alcantarillado_sistema OWNER TO postgres;
+ALTER TABLE "Servicios publicos".alcantarillado_sistema OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tipo_sistema_alcantarillado | type: TABLE --
@@ -5604,7 +4861,7 @@ COMMENT ON COLUMN "Servicios publicos".tipo_sistema_alcantarillado.tsal_codigo I
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tipo_sistema_alcantarillado.tsal_nombre IS 'Nombre del tipo de sistema';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tipo_sistema_alcantarillado OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tipo_sistema_alcantarillado OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".aseo | type: TABLE --
@@ -5646,7 +4903,7 @@ COMMENT ON COLUMN "Servicios publicos".aseo.ase_basura_recolectada IS 'Basura re
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".aseo.ase_cobertura IS 'cobertura';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".aseo OWNER TO postgres;
+ALTER TABLE "Servicios publicos".aseo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos"."Limpieza" | type: TABLE --
@@ -5679,7 +4936,7 @@ COMMENT ON COLUMN "Servicios publicos"."Limpieza".lim_barrido_limpieza IS 'Barri
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos"."Limpieza".lim_cobertura IS 'CObertura';
 -- ddl-end --
-ALTER TABLE "Servicios publicos"."Limpieza" OWNER TO postgres;
+ALTER TABLE "Servicios publicos"."Limpieza" OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".lugar_disposicion_residuos | type: TABLE --
@@ -5697,7 +4954,7 @@ COMMENT ON COLUMN "Servicios publicos".lugar_disposicion_residuos.ldr_codigo IS 
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".lugar_disposicion_residuos.ldr_nombre IS 'Nombre del lugar final de disposición de residuos solidos.';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".lugar_disposicion_residuos OWNER TO postgres;
+ALTER TABLE "Servicios publicos".lugar_disposicion_residuos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".fuente_captacion | type: TABLE --
@@ -5733,7 +4990,7 @@ COMMENT ON COLUMN "Servicios publicos".fuente_captacion.fca_captacion IS 'Indica
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".fuente_captacion.fca_conduccion IS 'Indica la conducción el L/s';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".fuente_captacion OWNER TO postgres;
+ALTER TABLE "Servicios publicos".fuente_captacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".fuente | type: TABLE --
@@ -5751,7 +5008,7 @@ COMMENT ON COLUMN "Servicios publicos".fuente.fue_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".fuente.fue_nombre IS 'Nombre de la fuente de captación';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".fuente OWNER TO postgres;
+ALTER TABLE "Servicios publicos".fuente OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tipo_captacion | type: TABLE --
@@ -5769,7 +5026,7 @@ COMMENT ON COLUMN "Servicios publicos".tipo_captacion.tica_codigo IS 'Llave prim
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tipo_captacion.tica_nombre IS 'Nombre de la fuente de captación';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tipo_captacion OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tipo_captacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".medidores | type: TABLE --
@@ -5799,7 +5056,7 @@ COMMENT ON COLUMN "Servicios publicos".medidores."medi_medidores_enServicio" IS 
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".medidores.medi_agua_producida IS 'Agua producida en m3/año';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".medidores OWNER TO postgres;
+ALTER TABLE "Servicios publicos".medidores OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".agua_facturada | type: TABLE --
@@ -5826,7 +5083,7 @@ COMMENT ON COLUMN "Servicios publicos".agua_facturada.afa_tipo_servicio IS 'Llav
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".agua_facturada.afa_cantidad IS 'Cantidad de agua facturada en m3/año';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".agua_facturada OWNER TO postgres;
+ALTER TABLE "Servicios publicos".agua_facturada OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tratamiento_acueducto | type: TABLE --
@@ -5868,7 +5125,7 @@ COMMENT ON COLUMN "Servicios publicos".tratamiento_acueducto.tra_longitud_redes 
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tratamiento_acueducto.tra_num_hidrantes IS 'Número de hidrantes';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tratamiento_acueducto OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tratamiento_acueducto OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Servicios publicos".tipo_planta | type: TABLE --
@@ -5886,7 +5143,7 @@ COMMENT ON COLUMN "Servicios publicos".tipo_planta.tpla_codigo IS 'Llave primari
 -- ddl-end --
 COMMENT ON COLUMN "Servicios publicos".tipo_planta.tpla_nombre IS 'Nombre del tipo de planta de tratameinto (convencional, compacta)';
 -- ddl-end --
-ALTER TABLE "Servicios publicos".tipo_planta OWNER TO postgres;
+ALTER TABLE "Servicios publicos".tipo_planta OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".alcaldes_elegidos_xvoto | type: TABLE --
@@ -5916,7 +5173,7 @@ COMMENT ON COLUMN "Electorales".alcaldes_elegidos_xvoto.aev_partido_movimiento I
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".alcaldes_elegidos_xvoto.aev_votacion IS 'Número de votos recibidos por el alcalde electo.';
 -- ddl-end --
-ALTER TABLE "Electorales".alcaldes_elegidos_xvoto OWNER TO postgres;
+ALTER TABLE "Electorales".alcaldes_elegidos_xvoto OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".periodo_electoral | type: TABLE --
@@ -5934,7 +5191,7 @@ COMMENT ON COLUMN "Electorales".periodo_electoral.pel_codigo IS 'Llave primaria 
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".periodo_electoral.pel_rango IS 'Rango del periodo electoral ';
 -- ddl-end --
-ALTER TABLE "Electorales".periodo_electoral OWNER TO postgres;
+ALTER TABLE "Electorales".periodo_electoral OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".alcaldes | type: TABLE --
@@ -5952,7 +5209,7 @@ COMMENT ON COLUMN "Electorales".alcaldes.ald_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".alcaldes.ald_nombre IS 'Nombre de los alcaldes electos en el departamento';
 -- ddl-end --
-ALTER TABLE "Electorales".alcaldes OWNER TO postgres;
+ALTER TABLE "Electorales".alcaldes OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".partido_movimiento | type: TABLE --
@@ -5970,7 +5227,7 @@ COMMENT ON COLUMN "Electorales".partido_movimiento.pam_codigo IS 'Llave primaria
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".partido_movimiento.pam_nombre IS 'Nombre del partido o movimiento político.';
 -- ddl-end --
-ALTER TABLE "Electorales".partido_movimiento OWNER TO postgres;
+ALTER TABLE "Electorales".partido_movimiento OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.tipo_documento_id | type: TABLE --
@@ -5988,7 +5245,7 @@ COMMENT ON COLUMN public.tipo_documento_id.tdi_codigo IS 'Llave primaria para la
 -- ddl-end --
 COMMENT ON COLUMN public.tipo_documento_id.tdi_nombre IS 'Nombre del documento de identidad (cedula, tarjeta...)';
 -- ddl-end --
-ALTER TABLE public.tipo_documento_id OWNER TO postgres;
+ALTER TABLE public.tipo_documento_id OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".solicitud_documento_id | type: TABLE --
@@ -6006,7 +5263,7 @@ COMMENT ON COLUMN "Electorales".solicitud_documento_id.sdi_codigo IS 'Llave prim
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".solicitud_documento_id.sdi_nombre IS 'Nombre de la solicitud del documento.';
 -- ddl-end --
-ALTER TABLE "Electorales".solicitud_documento_id OWNER TO postgres;
+ALTER TABLE "Electorales".solicitud_documento_id OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".documentos_identidad | type: TABLE --
@@ -6036,7 +5293,7 @@ COMMENT ON COLUMN "Electorales".documentos_identidad.did_docuemnto IS 'Llave for
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".documentos_identidad.did_num_documentos IS 'Número de docuemntos ';
 -- ddl-end --
-ALTER TABLE "Electorales".documentos_identidad OWNER TO postgres;
+ALTER TABLE "Electorales".documentos_identidad OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".datos_escrutinio | type: TABLE --
@@ -6066,7 +5323,7 @@ COMMENT ON COLUMN "Electorales".datos_escrutinio.decr_num_mesas IS 'Número de m
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".datos_escrutinio.decr_num_poblacion_estimada IS 'Número de personas estimadas';
 -- ddl-end --
-ALTER TABLE "Electorales".datos_escrutinio OWNER TO postgres;
+ALTER TABLE "Electorales".datos_escrutinio OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".tipo_votacion | type: TABLE --
@@ -6084,7 +5341,7 @@ COMMENT ON COLUMN "Electorales".tipo_votacion.tvo_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".tipo_votacion.tvo_nombre IS 'Nombre del tipo de votación';
 -- ddl-end --
-ALTER TABLE "Electorales".tipo_votacion OWNER TO postgres;
+ALTER TABLE "Electorales".tipo_votacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Electorales".votaciones | type: TABLE --
@@ -6111,7 +5368,7 @@ COMMENT ON COLUMN "Electorales".votaciones.vot_tipo_votacion IS 'Llave foránea 
 -- ddl-end --
 COMMENT ON COLUMN "Electorales".votaciones.vot_num_votos IS 'Número de votos por tipo de votación';
 -- ddl-end --
-ALTER TABLE "Electorales".votaciones OWNER TO postgres;
+ALTER TABLE "Electorales".votaciones OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".delitos_meses_fiscalias | type: TABLE --
@@ -6136,7 +5393,7 @@ COMMENT ON COLUMN "Justicia".delitos_meses_fiscalias.dmf_delito IS 'Llave forán
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".delitos_meses_fiscalias.dmf_num_delitos IS 'Número de delitos';
 -- ddl-end --
-ALTER TABLE "Justicia".delitos_meses_fiscalias OWNER TO postgres;
+ALTER TABLE "Justicia".delitos_meses_fiscalias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".delitos | type: TABLE --
@@ -6154,7 +5411,7 @@ COMMENT ON COLUMN "Justicia".delitos.del_codigo IS 'Llave primaria para la ident
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".delitos.del_nombre IS 'Nombre del delito';
 -- ddl-end --
-ALTER TABLE "Justicia".delitos OWNER TO postgres;
+ALTER TABLE "Justicia".delitos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".delitos_fiscalias | type: TABLE --
@@ -6179,7 +5436,7 @@ COMMENT ON COLUMN "Justicia".delitos_fiscalias.def_delito IS 'Llave foránea que
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".delitos_fiscalias.def_num_delitos IS 'Número de delitos';
 -- ddl-end --
-ALTER TABLE "Justicia".delitos_fiscalias OWNER TO postgres;
+ALTER TABLE "Justicia".delitos_fiscalias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".fiscalias | type: TABLE --
@@ -6197,7 +5454,7 @@ COMMENT ON COLUMN "Justicia".fiscalias.fis_codigo IS 'Llave primaria para la ide
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".fiscalias.fis_nombre IS 'Nombre de la fiscalia (no confundir con municipios)';
 -- ddl-end --
-ALTER TABLE "Justicia".fiscalias OWNER TO postgres;
+ALTER TABLE "Justicia".fiscalias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".organismos | type: TABLE --
@@ -6215,7 +5472,7 @@ COMMENT ON COLUMN "Justicia".organismos.orga_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".organismos.orga_nombre IS 'Nombre de los organismos (sijin, D.A.S, EJERCITO...)';
 -- ddl-end --
-ALTER TABLE "Justicia".organismos OWNER TO postgres;
+ALTER TABLE "Justicia".organismos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".investigaciones_personerias | type: TABLE --
@@ -6240,7 +5497,7 @@ COMMENT ON COLUMN "Justicia".investigaciones_personerias.ipe_organismos IS 'Llav
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".investigaciones_personerias.ipe_num_investigaciones IS 'Número de investigaciones';
 -- ddl-end --
-ALTER TABLE "Justicia".investigaciones_personerias OWNER TO postgres;
+ALTER TABLE "Justicia".investigaciones_personerias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".distritos_policia | type: TABLE --
@@ -6258,7 +5515,7 @@ COMMENT ON COLUMN "Justicia".distritos_policia.dpo_codigo IS 'Llave primaria par
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".distritos_policia.dpo_nombre IS 'Nombre de los distritos de policia (no confundir con municipios)';
 -- ddl-end --
-ALTER TABLE "Justicia".distritos_policia OWNER TO postgres;
+ALTER TABLE "Justicia".distritos_policia OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".delitos_distritos_policia | type: TABLE --
@@ -6285,7 +5542,7 @@ COMMENT ON COLUMN "Justicia".delitos_distritos_policia.ddp_delito IS 'Llave for�
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".delitos_distritos_policia.ddp_num_delitos IS 'Número de delitos';
 -- ddl-end --
-ALTER TABLE "Justicia".delitos_distritos_policia OWNER TO postgres;
+ALTER TABLE "Justicia".delitos_distritos_policia OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".delitos_meses_distritos_policia | type: TABLE --
@@ -6310,7 +5567,7 @@ COMMENT ON COLUMN "Justicia".delitos_meses_distritos_policia.dmdp_delito IS 'Lla
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".delitos_meses_distritos_policia.dmdp_num_delitos IS 'Número de delitos';
 -- ddl-end --
-ALTER TABLE "Justicia".delitos_meses_distritos_policia OWNER TO postgres;
+ALTER TABLE "Justicia".delitos_meses_distritos_policia OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".visitas_personerias | type: TABLE --
@@ -6335,7 +5592,7 @@ COMMENT ON COLUMN "Justicia".visitas_personerias.vipe_organismos IS 'Llave forá
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".visitas_personerias.vipe_num_visitas IS 'Número de investigaciones';
 -- ddl-end --
-ALTER TABLE "Justicia".visitas_personerias OWNER TO postgres;
+ALTER TABLE "Justicia".visitas_personerias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".quejas_denuncias | type: TABLE --
@@ -6353,7 +5610,7 @@ COMMENT ON COLUMN "Justicia".quejas_denuncias.qde_codigo IS 'Llave primaria para
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".quejas_denuncias.qde_nombre IS 'Nombre de las quejas o denuncias.';
 -- ddl-end --
-ALTER TABLE "Justicia".quejas_denuncias OWNER TO postgres;
+ALTER TABLE "Justicia".quejas_denuncias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Justicia".personeria_quejas_denuncias | type: TABLE --
@@ -6380,7 +5637,7 @@ COMMENT ON COLUMN "Justicia".personeria_quejas_denuncias.pqd_tipo_queja IS 'Llav
 -- ddl-end --
 COMMENT ON COLUMN "Justicia".personeria_quejas_denuncias.pqd_num_quejas_denuncias IS 'Número de quejas y denuncias';
 -- ddl-end --
-ALTER TABLE "Justicia".personeria_quejas_denuncias OWNER TO postgres;
+ALTER TABLE "Justicia".personeria_quejas_denuncias OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".viviendas_con_sevicios_publicos | type: TABLE --
@@ -6408,7 +5665,7 @@ COMMENT ON COLUMN "SISBEN".viviendas_con_sevicios_publicos.vsp_si IS 'Número de
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".viviendas_con_sevicios_publicos.vsp_no IS 'Número de viviendas que no cuentan con el servicio público.';
 -- ddl-end --
-ALTER TABLE "SISBEN".viviendas_con_sevicios_publicos OWNER TO postgres;
+ALTER TABLE "SISBEN".viviendas_con_sevicios_publicos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".tipo_servicio_publico | type: TABLE --
@@ -6426,7 +5683,7 @@ COMMENT ON COLUMN "SISBEN".tipo_servicio_publico.tspu_codigo IS 'Llave primaria 
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".tipo_servicio_publico.tspu_nombre IS 'Nombre del servicio público (agua, luz, gas, acueducto...)';
 -- ddl-end --
-ALTER TABLE "SISBEN".tipo_servicio_publico OWNER TO postgres;
+ALTER TABLE "SISBEN".tipo_servicio_publico OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".estratos | type: TABLE --
@@ -6444,7 +5701,7 @@ COMMENT ON COLUMN "SISBEN".estratos.est_codigo IS 'Llave primaria para la identi
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".estratos.est_nombre IS 'Nombre de los distintos estratos (0,1,2,3...)';
 -- ddl-end --
-ALTER TABLE "SISBEN".estratos OWNER TO postgres;
+ALTER TABLE "SISBEN".estratos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".viviendas_por_estrato | type: TABLE --
@@ -6469,7 +5726,7 @@ COMMENT ON COLUMN "SISBEN".viviendas_por_estrato.vpes_estrato IS 'Llave foránea
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".viviendas_por_estrato.vpes_num_viviendas IS 'Número de viviendas por estratos.';
 -- ddl-end --
-ALTER TABLE "SISBEN".viviendas_por_estrato OWNER TO postgres;
+ALTER TABLE "SISBEN".viviendas_por_estrato OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_sisben_seguridad_social | type: TABLE --
@@ -6496,7 +5753,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_sisben_seguridad_social.pss_salud_sisben IS
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_sisben_seguridad_social.pss_num_personas IS 'Número de personas por el tipo de afiliación';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_sisben_seguridad_social OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_sisben_seguridad_social OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".salud_sisben | type: TABLE --
@@ -6514,7 +5771,7 @@ COMMENT ON COLUMN "SISBEN".salud_sisben.ssi_codigo IS 'Llave primaria para la id
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".salud_sisben.ssi_nombre IS 'Nombre de las distintas formas de salud (iss, regimenes especiales, ninguna...)';
 -- ddl-end --
-ALTER TABLE "SISBEN".salud_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".salud_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".puntaje_sisben | type: TABLE --
@@ -6532,7 +5789,7 @@ COMMENT ON COLUMN "SISBEN".puntaje_sisben.pus_codigo IS 'Llave primaria para la 
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".puntaje_sisben.pus_rango IS 'Rango de los puntajes del sisben';
 -- ddl-end --
-ALTER TABLE "SISBEN".puntaje_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".puntaje_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_puntaje_sisben | type: TABLE --
@@ -6559,7 +5816,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_puntaje_sisben.pps_puntaje_sisben IS 'Llave
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_puntaje_sisben.pps_num_personas IS 'Número de personas por puntajes del sisben';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_puntaje_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_puntaje_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: public.edades_rangos | type: TABLE --
@@ -6577,7 +5834,7 @@ COMMENT ON COLUMN public.edades_rangos.edr_codigo IS 'Llave primaria para la ide
 -- ddl-end --
 COMMENT ON COLUMN public.edades_rangos.edr_rango IS 'Rango de las edades del sisben';
 -- ddl-end --
-ALTER TABLE public.edades_rangos OWNER TO postgres;
+ALTER TABLE public.edades_rangos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_edades_sisben | type: TABLE --
@@ -6604,7 +5861,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_edades_sisben.ped_edades_sisben IS 'Llave f
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_edades_sisben.ped_num_personas IS 'Número de personas por eades del sisben';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_edades_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_edades_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".nivel_esducativo_sisben | type: TABLE --
@@ -6622,7 +5879,7 @@ COMMENT ON COLUMN "SISBEN".nivel_esducativo_sisben.nies_codigo IS 'Llave primari
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".nivel_esducativo_sisben.nies_nombre IS 'Nombre de los niveles educativos alcanzados.';
 -- ddl-end --
-ALTER TABLE "SISBEN".nivel_esducativo_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".nivel_esducativo_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_nivel_educativo_sisben | type: TABLE --
@@ -6649,7 +5906,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_nivel_educativo_sisben.pnes_nivel_educativo
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_nivel_educativo_sisben.ped_num_personas IS 'Número de personas por eades del sisben';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_nivel_educativo_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_nivel_educativo_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_genero_sisben | type: TABLE --
@@ -6676,7 +5933,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_genero_sisben.pgsi_genero IS 'Llave foráne
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_genero_sisben.ped_num_personas IS 'Número de personas por genero.';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_genero_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_genero_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_tipo_documento_sisben | type: TABLE --
@@ -6703,7 +5960,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_tipo_documento_sisben.ptds_tipo_documento I
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_tipo_documento_sisben.ptds_num_personas IS 'Número de personas por tipo de documento de identitad.';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_tipo_documento_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_tipo_documento_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_vivienda_zona_sisben | type: TABLE --
@@ -6733,7 +5990,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_vivienda_zona_sisben.pvz_tipo_vivienda IS '
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_vivienda_zona_sisben.pvz_num_personas IS 'Número de personas por tipo de vivienda y zona.';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_vivienda_zona_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_vivienda_zona_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".poblacion_tenencia_vivienda_sisben | type: TABLE --
@@ -6760,7 +6017,7 @@ COMMENT ON COLUMN "SISBEN".poblacion_tenencia_vivienda_sisben.ptv_tenencia IS 'L
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".poblacion_tenencia_vivienda_sisben.ptv_num_personas IS 'Número de personas por tenencia de vivienda.';
 -- ddl-end --
-ALTER TABLE "SISBEN".poblacion_tenencia_vivienda_sisben OWNER TO postgres;
+ALTER TABLE "SISBEN".poblacion_tenencia_vivienda_sisben OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "SISBEN".tenencia_vivienda | type: TABLE --
@@ -6778,7 +6035,7 @@ COMMENT ON COLUMN "SISBEN".tenencia_vivienda.tv_codigo IS 'Llave primaria para l
 -- ddl-end --
 COMMENT ON COLUMN "SISBEN".tenencia_vivienda.tv_nombre IS 'Nombre del tipo de tenencia de vivienda (arriendo, propia...)';
 -- ddl-end --
-ALTER TABLE "SISBEN".tenencia_vivienda OWNER TO postgres;
+ALTER TABLE "SISBEN".tenencia_vivienda OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.densidad_poblacion | type: TABLE --
@@ -6812,7 +6069,7 @@ COMMENT ON COLUMN poblacion.densidad_poblacion.depo_porcentaje IS 'Porcentanje d
 -- ddl-end --
 COMMENT ON COLUMN poblacion.densidad_poblacion.depo_densidad IS 'Desnsidad de la población por muncipio';
 -- ddl-end --
-ALTER TABLE poblacion.densidad_poblacion OWNER TO postgres;
+ALTER TABLE poblacion.densidad_poblacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.tipo_hogares | type: TABLE --
@@ -6830,7 +6087,7 @@ COMMENT ON COLUMN poblacion.tipo_hogares.tho_codigo IS 'Llave primaria para la i
 -- ddl-end --
 COMMENT ON COLUMN poblacion.tipo_hogares.tho_nombre IS 'Nombre del tipo de hogar (hogares expulsados, hogares recibido, hogares declarados)';
 -- ddl-end --
-ALTER TABLE poblacion.tipo_hogares OWNER TO postgres;
+ALTER TABLE poblacion.tipo_hogares OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.hogares_desplazados | type: TABLE --
@@ -6857,7 +6114,7 @@ COMMENT ON COLUMN poblacion.hogares_desplazados.hod_tipo_hogares IS 'Llave forá
 -- ddl-end --
 COMMENT ON COLUMN poblacion.hogares_desplazados.hod_num_hogares IS 'Número de hogares';
 -- ddl-end --
-ALTER TABLE poblacion.hogares_desplazados OWNER TO postgres;
+ALTER TABLE poblacion.hogares_desplazados OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.tipo_poblacion_desplazada | type: TABLE --
@@ -6875,7 +6132,7 @@ COMMENT ON COLUMN poblacion.tipo_poblacion_desplazada.tpde_codigo IS 'Llave prim
 -- ddl-end --
 COMMENT ON COLUMN poblacion.tipo_poblacion_desplazada.tpde_nombre IS 'Nombre del tipo de poblacion (personas expulsadas, personas recibidas, personas declaradas)';
 -- ddl-end --
-ALTER TABLE poblacion.tipo_poblacion_desplazada OWNER TO postgres;
+ALTER TABLE poblacion.tipo_poblacion_desplazada OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.poblacion_desplazada | type: TABLE --
@@ -6902,7 +6159,7 @@ COMMENT ON COLUMN poblacion.poblacion_desplazada."pood_tipo_población" IS 'Llav
 -- ddl-end --
 COMMENT ON COLUMN poblacion.poblacion_desplazada.pood_num_personas IS 'Número de personas desplazadas';
 -- ddl-end --
-ALTER TABLE poblacion.poblacion_desplazada OWNER TO postgres;
+ALTER TABLE poblacion.poblacion_desplazada OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.tipo_etnia | type: TABLE --
@@ -6920,7 +6177,7 @@ COMMENT ON COLUMN poblacion.tipo_etnia.tet_codigo IS 'Llave primaria para la ide
 -- ddl-end --
 COMMENT ON COLUMN poblacion.tipo_etnia.tet_nombre IS 'Nombre del tipo de etnia (indigena, mulato, afro, raizal...)';
 -- ddl-end --
-ALTER TABLE poblacion.tipo_etnia OWNER TO postgres;
+ALTER TABLE poblacion.tipo_etnia OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.poblacion_etnica | type: TABLE --
@@ -6947,7 +6204,7 @@ COMMENT ON COLUMN poblacion.poblacion_etnica.poet_tipo_etnia IS 'Llave foránea 
 -- ddl-end --
 COMMENT ON COLUMN poblacion.poblacion_etnica.poet_num_personas IS 'Número de personas por etnia.';
 -- ddl-end --
-ALTER TABLE poblacion.poblacion_etnica OWNER TO postgres;
+ALTER TABLE poblacion.poblacion_etnica OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.poblacion_nbi | type: TABLE --
@@ -6974,7 +6231,7 @@ COMMENT ON COLUMN poblacion.poblacion_nbi.nbi_porcentaje_dane IS 'Porcentaje de 
 -- ddl-end --
 COMMENT ON COLUMN poblacion.poblacion_nbi.nbi_num_personas IS 'Número de personas NBI';
 -- ddl-end --
-ALTER TABLE poblacion.poblacion_nbi OWNER TO postgres;
+ALTER TABLE poblacion.poblacion_nbi OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.poblacion_grupos_quinquenales | type: TABLE --
@@ -7001,7 +6258,7 @@ COMMENT ON COLUMN poblacion.poblacion_grupos_quinquenales.pgq_edades IS 'Llave f
 -- ddl-end --
 COMMENT ON COLUMN poblacion.poblacion_grupos_quinquenales.nbi_num_personas IS 'Número de personas ';
 -- ddl-end --
-ALTER TABLE poblacion.poblacion_grupos_quinquenales OWNER TO postgres;
+ALTER TABLE poblacion.poblacion_grupos_quinquenales OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.poblacion_genero | type: TABLE --
@@ -7028,7 +6285,7 @@ COMMENT ON COLUMN poblacion.poblacion_genero.poge_genero IS 'Llave foránea que 
 -- ddl-end --
 COMMENT ON COLUMN poblacion.poblacion_genero.poge_num_personas IS 'Número de personas por genero.';
 -- ddl-end --
-ALTER TABLE poblacion.poblacion_genero OWNER TO postgres;
+ALTER TABLE poblacion.poblacion_genero OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: poblacion.poblacion_proyeccion | type: TABLE --
@@ -7055,7 +6312,7 @@ COMMENT ON COLUMN poblacion.poblacion_proyeccion.pyp_area IS 'Llave foránea que
 -- ddl-end --
 COMMENT ON COLUMN poblacion.poblacion_proyeccion.pyp_num_personas IS 'Proyección de número de personas.';
 -- ddl-end --
-ALTER TABLE poblacion.poblacion_proyeccion OWNER TO postgres;
+ALTER TABLE poblacion.poblacion_proyeccion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".poblacion_censada_municipio | type: TABLE --
@@ -7070,7 +6327,7 @@ CREATE TABLE "Salud".poblacion_censada_municipio(
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".poblacion_censada_municipio OWNER TO postgres;
+ALTER TABLE "Salud".poblacion_censada_municipio OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".vih_clasificacion | type: TABLE --
@@ -7086,7 +6343,7 @@ COMMENT ON TABLE "Salud".vih_clasificacion IS 'Almacenamiento de la clasificaci�
 -- ddl-end --
 COMMENT ON COLUMN "Salud".vih_clasificacion.vicla_nombre IS 'Nombre de la clasificación del VIH';
 -- ddl-end --
-ALTER TABLE "Salud".vih_clasificacion OWNER TO postgres;
+ALTER TABLE "Salud".vih_clasificacion OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".poblacion_edad_escolar | type: TABLE --
@@ -7113,7 +6370,7 @@ COMMENT ON COLUMN "Educacion".poblacion_edad_escolar.ped_poblacion_escolar IS 'L
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".poblacion_edad_escolar.ped_num_poblacion_escolar IS 'Número de población.';
 -- ddl-end --
-ALTER TABLE "Educacion".poblacion_edad_escolar OWNER TO postgres;
+ALTER TABLE "Educacion".poblacion_edad_escolar OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Deportes".deporte | type: TABLE --
@@ -7135,7 +6392,7 @@ COMMENT ON COLUMN "Deportes".deporte.dep_descripcion IS 'Descripción del deport
 -- ddl-end --
 COMMENT ON COLUMN "Deportes".deporte.dep_desc_fuente IS 'Fuente de la descripción del deporte mencionado';
 -- ddl-end --
-ALTER TABLE "Deportes".deporte OWNER TO sir_huila;
+ALTER TABLE "Deportes".deporte OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Deportes".torneo | type: TABLE --
@@ -7159,7 +6416,7 @@ COMMENT ON COLUMN "Deportes".torneo.tor_fecha_fin IS 'Fecha de finalización del
 -- ddl-end --
 COMMENT ON COLUMN "Deportes".torneo."tor_codMunicipio" IS 'Municipio en el que se desarrolló el torneo';
 -- ddl-end --
-ALTER TABLE "Deportes".torneo OWNER TO sir_huila;
+ALTER TABLE "Deportes".torneo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Riesgos".desastres | type: TABLE --
@@ -7191,7 +6448,7 @@ COMMENT ON COLUMN "Riesgos".desastres.des_longitud IS 'Longitud geográfica del 
 -- ddl-end --
 COMMENT ON CONSTRAINT des_codigo_pk ON "Riesgos".desastres  IS 'Restricción de llave primaria';
 -- ddl-end --
-ALTER TABLE "Riesgos".desastres OWNER TO sir_huila;
+ALTER TABLE "Riesgos".desastres OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "fk_codMunicipio" | type: CONSTRAINT --
@@ -7741,29 +6998,29 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: "fk_Clasificacion_icfes_estab_educa_codMunicipio" | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" DROP CONSTRAINT IF EXISTS "fk_Clasificacion_icfes_estab_educa_codMunicipio" CASCADE;
-ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" ADD CONSTRAINT "fk_Clasificacion_icfes_estab_educa_codMunicipio" FOREIGN KEY ("cies_codMunicipio")
+-- ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos DROP CONSTRAINT IF EXISTS "fk_Clasificacion_icfes_estab_educa_codMunicipio" CASCADE;
+ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos ADD CONSTRAINT "fk_Clasificacion_icfes_estab_educa_codMunicipio" FOREIGN KEY ("cies_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: "fk_Clasificacion_icfes_estab_edu_tp_institucion" | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" DROP CONSTRAINT IF EXISTS "fk_Clasificacion_icfes_estab_edu_tp_institucion" CASCADE;
-ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" ADD CONSTRAINT "fk_Clasificacion_icfes_estab_edu_tp_institucion" FOREIGN KEY (cies_tipo_institucion)
+-- ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos DROP CONSTRAINT IF EXISTS "fk_Clasificacion_icfes_estab_edu_tp_institucion" CASCADE;
+ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos ADD CONSTRAINT "fk_Clasificacion_icfes_estab_edu_tp_institucion" FOREIGN KEY (cies_tipo_institucion)
 REFERENCES "Educacion".tipo_institucion (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_clas_icfes_estab_edu_anio | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" DROP CONSTRAINT IF EXISTS fk_clas_icfes_estab_edu_anio CASCADE;
-ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" ADD CONSTRAINT fk_clas_icfes_estab_edu_anio FOREIGN KEY (cies_anio)
+-- ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos DROP CONSTRAINT IF EXISTS fk_clas_icfes_estab_edu_anio CASCADE;
+ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos ADD CONSTRAINT fk_clas_icfes_estab_edu_anio FOREIGN KEY (cies_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_cla_icfes_estab_educa_semestre | type: CONSTRAINT --
--- ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" DROP CONSTRAINT IF EXISTS fk_cla_icfes_estab_educa_semestre CASCADE;
-ALTER TABLE "Educacion"."Clasificacion_icfes_estab_educativos" ADD CONSTRAINT fk_cla_icfes_estab_educa_semestre FOREIGN KEY (cies_semestre)
+-- ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos DROP CONSTRAINT IF EXISTS fk_cla_icfes_estab_educa_semestre CASCADE;
+ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos ADD CONSTRAINT fk_cla_icfes_estab_educa_semestre FOREIGN KEY (cies_semestre)
 REFERENCES public.semestre (sem_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
@@ -7790,50 +7047,50 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_datos_universidades_universidad | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_universidad CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT fk_datos_universidades_universidad FOREIGN KEY (dau_universidad)
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_universidad CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_universidad FOREIGN KEY (dau_universidad)
 REFERENCES "Educacion".universidad (uni_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_datos_universidades_nedusuperior | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_nedusuperior CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT fk_datos_universidades_nedusuperior FOREIGN KEY (dau_nivel_educacion_superior)
-REFERENCES "Educacion".nivel_educacion_superior (nes_codigo) MATCH FULL
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_nedusuperior CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_nedusuperior FOREIGN KEY (dau_nivel_educacion_superior)
+REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_datos_universidades_programa | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_programa CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT fk_datos_universidades_programa FOREIGN KEY (dau_programa)
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_programa CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_programa FOREIGN KEY (dau_programa)
 REFERENCES "Educacion".programa (pro_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: "fk_datos_universidades_categoria_personalU" | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS "fk_datos_universidades_categoria_personalU" CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT "fk_datos_universidades_categoria_personalU" FOREIGN KEY ("dau_categoria_personalU")
-REFERENCES "Educacion"."categoria_personalU" (cpu_codigo) MATCH FULL
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS "fk_datos_universidades_categoria_personalU" CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT "fk_datos_universidades_categoria_personalU" FOREIGN KEY ("dau_categoria_personalU")
+REFERENCES "Educacion".categoria_personal (cpu_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_datos_universidades_genero | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_genero CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT fk_datos_universidades_genero FOREIGN KEY (dau_genero)
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_genero CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_genero FOREIGN KEY (dau_genero)
 REFERENCES public.genero (gen_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_datos_universidades_anio | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_anio CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT fk_datos_universidades_anio FOREIGN KEY (dau_anio)
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_anio CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_anio FOREIGN KEY (dau_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_datos_universidades_semestre | type: CONSTRAINT --
--- ALTER TABLE "Educacion".datos_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_semestre CASCADE;
-ALTER TABLE "Educacion".datos_universidades ADD CONSTRAINT fk_datos_universidades_semestre FOREIGN KEY (dau_semestre)
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_semestre CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_semestre FOREIGN KEY (dau_semestre)
 REFERENCES public.semestre (sem_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
@@ -8104,17 +7361,10 @@ REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_sena_genero | type: CONSTRAINT --
--- ALTER TABLE "Educacion".sena DROP CONSTRAINT IF EXISTS fk_sena_genero CASCADE;
-ALTER TABLE "Educacion".sena ADD CONSTRAINT fk_sena_genero FOREIGN KEY (sen_genero)
-REFERENCES public.genero (gen_codigo) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
 -- object: fk_sena_sector_eco | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".sena DROP CONSTRAINT IF EXISTS fk_sena_sector_eco CASCADE;
 ALTER TABLE "Educacion".sena ADD CONSTRAINT fk_sena_sector_eco FOREIGN KEY (sen_sector_economico)
-REFERENCES "Educacion".sector_economico (sec_codigo) MATCH FULL
+REFERENCES "Educacion".sector_economico_sena (sec_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
