@@ -3,11 +3,20 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="4,1599" last-zoom="0.9"
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,545" last-zoom="0.8"
 	 default-owner="sirhuila">
 <role name="sirhuila"
+      createdb="true"
+      inherit="true"
+      login="true"
       encrypted="true"
       password="}d9-2#p{L">
+</role>
+
+<role name="analytics"
+      login="true"
+      encrypted="true"
+      password="sirhuila.123_">
 </role>
 
 <database name="sirhuila">
@@ -1384,7 +1393,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento]]></comment>
-	<position x="40" y="1403"/>
+	<position x="40" y="1400"/>
 	<column name="ine_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1422,7 +1431,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de planteles educativos, instituciones,centros y sedes]]></comment>
-	<position x="40" y="1543"/>
+	<position x="40" y="1540"/>
 	<column name="tpe_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1440,7 +1449,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[matriculas por niveles, areas, instituciones en los municipios del departamento.]]></comment>
-	<position x="520" y="1383"/>
+	<position x="520" y="1380"/>
 	<column name="mat_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1473,10 +1482,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Numero matriculas en los municipios.]]></comment>
 	</column>
-	<column name="mat_porce_cobertura">
-		<type name="double precision" length="0"/>
-		<comment><![CDATA[Porcentaje de cobertura en matriculas]]></comment>
-	</column>
 	<constraint name="matriculas_pk" type="pk-constr" table="&quot;Educacion&quot;.matriculas">
 		<columns names="mat_codigo" ref-type="src-columns"/>
 	</constraint>
@@ -1486,7 +1491,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de educación (basico, prescolar, primaria,etc...)]]></comment>
-	<position x="480" y="1583"/>
+	<position x="480" y="1580"/>
 	<column name="tpne_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1504,7 +1509,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de instituciones (oficiales, no oficiales)]]></comment>
-	<position x="20" y="1623"/>
+	<position x="20" y="1620"/>
 	<column name="tpin_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1522,7 +1527,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[tipos de rangos de la poblacion escolar 5, 6-10, 11-16 años, adultos.]]></comment>
-	<position x="500" y="1663"/>
+	<position x="500" y="1660"/>
 	<column name="pes_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1540,7 +1545,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los grados de los diferentes niveles educativos]]></comment>
-	<position x="500" y="1743"/>
+	<position x="500" y="1740"/>
 	<column name="gra_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1558,7 +1563,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Desempeño de los 30 primeros establecimientos educativos por puestos y municipios según pruebas icfes en el departamento  ]]></comment>
-	<position x="20" y="1703"/>
+	<position x="20" y="1700"/>
 	<column name="cies_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1604,7 +1609,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Comportamiento de los alumnos en cuanto a aprobados, reprobados, desertores por municipios en el departamento del huila.]]></comment>
-	<position x="0" y="1963"/>
+	<position x="0" y="1960"/>
 	<column name="coal_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1633,6 +1638,10 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de estudiantes desertores]]></comment>
 	</column>
+	<column name="coal_traslados">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero de personas trasladadas]]></comment>
+	</column>
 	<column name="coal_porce_aprobados">
 		<type name="double precision" length="0"/>
 		<comment><![CDATA[Prcentanje de estudiantes aprobados]]></comment>
@@ -1641,7 +1650,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="double precision" length="0"/>
 		<comment><![CDATA[Porcentaje estudiantes reprobados]]></comment>
 	</column>
-	<column name="coal_porce_estudiantes desertores">
+	<column name="coal_porce_desertores">
 		<type name="double precision" length="0"/>
 	</column>
 	<column name="coal_porce_traslados">
@@ -1653,11 +1662,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="datos_universidades" hide-ext-attribs="true">
+<table name="docentes_universidades" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.]]></comment>
-	<position x="480" y="1843"/>
+	<position x="480" y="1840"/>
 	<column name="dau_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1694,7 +1703,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de personas inscritas, matriculadas, docentes, egresados, graduados.]]></comment>
 	</column>
-	<constraint name="datos_universidades_pk" type="pk-constr" table="&quot;Educacion&quot;.datos_universidades">
+	<constraint name="docentes_universidades_pk" type="pk-constr" table="&quot;Educacion&quot;.docentes_universidades">
 		<columns names="dau_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -1703,7 +1712,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de los diferentes programas de las universidades.]]></comment>
-	<position x="0" y="2203"/>
+	<position x="0" y="2200"/>
 	<column name="pro_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1721,7 +1730,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes universidades.]]></comment>
-	<position x="0" y="2323"/>
+	<position x="0" y="2320"/>
 	<column name="uni_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1739,7 +1748,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes categorias de personas que tiene la universidad.]]></comment>
-	<position x="480" y="2063"/>
+	<position x="480" y="2060"/>
 	<column name="cpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1757,7 +1766,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Planta de personal del sistema educativo por municipios en el departamento.]]></comment>
-	<position x="920" y="1383"/>
+	<position x="920" y="1380"/>
 	<column name="ddo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1787,7 +1796,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes categorias de directivos y docentes en el departamento.]]></comment>
-	<position x="920" y="1523"/>
+	<position x="920" y="1520"/>
 	<column name="cdd_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1805,7 +1814,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Información de la cantida y el valor de los creditos del icetex por año y lineas de credito.]]></comment>
-	<position x="940" y="1603"/>
+	<position x="940" y="1600"/>
 	<column name="ice_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1839,7 +1848,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes lineas de credito que tiene el ICETEX.]]></comment>
-	<position x="940" y="1743"/>
+	<position x="940" y="1740"/>
 	<column name="lic_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1857,7 +1866,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes estadosdel crédito en el ICETEX.]]></comment>
-	<position x="940" y="1823"/>
+	<position x="940" y="1820"/>
 	<column name="esc_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1935,7 +1944,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que recoge información acerca de las icfes en el departamento y el pais (alumnos, materias, puntaje promedio y desviacion estandar).]]></comment>
-	<position x="920" y="1903"/>
+	<position x="920" y="1900"/>
 	<column name="icf_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1973,7 +1982,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las diferentes materias vistas por los estuadiantes de colegios y evaluadas por el icfes.]]></comment>
-	<position x="920" y="2043"/>
+	<position x="920" y="2040"/>
 	<column name="mate_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2707,7 +2716,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla de los programas con mayor demanda a nivel nacional y departamental]]></comment>
-	<position x="40" y="2423"/>
+	<position x="40" y="2420"/>
 	<column name="tpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -2736,7 +2745,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la oferta educativa del sena]]></comment>
-	<position x="440" y="2203"/>
+	<position x="440" y="2200"/>
 	<column name="sen_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2778,7 +2787,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos niveles de formación del sena.]]></comment>
-	<position x="920" y="2203"/>
+	<position x="920" y="2200"/>
 	<column name="nfs_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2796,7 +2805,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los sectores economicos a los cuales se enfoca la oferta educativa del sena]]></comment>
-	<position x="940" y="2283"/>
+	<position x="940" y="2280"/>
 	<column name="sec_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2814,7 +2823,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[matriculas por niveles, origen departamental,municipal, genero, nivel de educación superior]]></comment>
-	<position x="440" y="2363"/>
+	<position x="440" y="2360"/>
 	<column name="matu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6937,7 +6946,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Número de personas en edad escolar]]></comment>
-	<position x="900" y="2403"/>
+	<position x="900" y="2400"/>
 	<column name="ped_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -7568,43 +7577,43 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_datos_universidades_universidad" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.universidad" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.universidad" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_universidad" ref-type="src-columns"/>
 	<columns names="uni_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_nedusuperior" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_nivel_educacion_superior" ref-type="src-columns"/>
 	<columns names="tpne_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_programa" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.programa" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.programa" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_programa" ref-type="src-columns"/>
 	<columns names="pro_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_categoria_personalU" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.categoria_personal" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.categoria_personal" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_categoria_personalU" ref-type="src-columns"/>
 	<columns names="cpu_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_genero" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.genero" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.genero" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_genero" ref-type="src-columns"/>
 	<columns names="gen_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_datos_universidades_semestre" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.semestre" table="&quot;Educacion&quot;.datos_universidades">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.semestre" table="&quot;Educacion&quot;.docentes_universidades">
 	<columns names="dau_semestre" ref-type="src-columns"/>
 	<columns names="sem_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -9746,32 +9755,32 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_universidad" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="&quot;Educacion&quot;.universidad"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_programa" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="&quot;Educacion&quot;.programa"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_datos_universidades_categoria_personalU&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="&quot;Educacion&quot;.categoria_personal"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_genero" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="public.genero"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_anio" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_semestre" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="public.semestre"
 	 src-required="false" dst-required="false"/>
 
@@ -11404,7 +11413,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_tipo_nivel_educativo" type="relfk"
-	 src-table="&quot;Educacion&quot;.datos_universidades"
+	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
 	 src-required="false" dst-required="false"/>
 
