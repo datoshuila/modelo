@@ -1,89 +1,182 @@
-pro_codigo,pro_nombre
-1,Administración de Empresas - Diurna
-2,Administración de Empresas - Nocturna 
-3,Administración de Empresas – Garzón
-4,Administración de Empresas - La Plata
-5,Administración de Empresas - La Pitalito
-6,Contaduría Pública - Diurna
-7,Contaduría Pública - Nocturna
-8,Contaduría Pública – Garzón 
-9,Contaduría Pública - La Plata
-10,Contaduría Pública - Pitalito
-11,Administración Financiera - Ciclo Profesional
-12,Tecnología en Administración Financiera
-13,Medicina 
-14,Enfermería
-15,Ingeniería Agrícola - Neiva
-16,Ingeniería Agrícola – Garzón
-17,Ingeniería Agrícola - La Plata
-18,Ingeniería Agrícola - Pitalito
-19,Ingeniería de Petróleos 
-20,Ingeniería Civil
-21,Ingeniería Electrónica 
-22,Ingeniería de Desarrollo de Software - Neiva
-23,Tecnología en Desarrollo de Software - Neiva
-24,Tecnología en Desarrollo de Software-Pitalito
-25,Tecnología en Obras Civiles
-26,Tecnología en Obras Civiles- Garzón
-27,Lic. en Educ. Bás. Con Énfasis en Ciencias Naturales y Educ. Ambiental - Neiva
-28,Lic. en Educ. Bás. Con Énfasis en humanidades y lengua Castellana
-29,"Lic. en Educ. Bás. Con Énfasis en Humanidades, Lengua Extranjera - Neiva"
-30,Lic. en Matemáticas - Neiva
-31,Lic. en Educ. Bás. Con Énfasis en Educ. Artística y Cultural
-32,"Lic. en Educ. Bás. Con Énfasis en Educ. Física, Recreación y Deportes "
-33,Lic. en Pedagogía Infantil
-34,Psicología - Neiva
-35,Comunicación Social y Periodísmo
-36,Comunicación Social y Periodísmo- Pitalito
-37,Matemáticas Aplicada - Neiva
-38,Tecnología en Acuicultura Continental - Neiva
-39,Lic. en Física - Neiva
-40,Ciencias Políticas
-41,Derecho  Diurna- Neiva
-42,Derecho Nocturna- Neiva
-43,Derecho Nocturna- Pitalito
-44,Ingeniería de Sistemas
-45,Ingeniería Industrial
-46,Ingeniería Civil
-47,Técnico Profesional en Fútbol
-48,Especialización Gerencia de la Salud Ocupacional 
-49,Especialización Gerencia de la Calidad y Auditoría en Salud 
-50,Especialización en Alta Gerencia 
-51,Especialización en Gerencia de Mercadeo estratégico
-52,Especialización en Gerencia Tributaria
-53,Especialización en Epidemiologia
-54,Especialización en Enfermería -Cuidado Crítico 
-55,Especialización en Enfermería en Nefrológica y Urológica
-56,Especializaciones clinicas equivalentes a maestrías
-57,Especialización en Anestesiología y Reanimación 
-58,Especialización en Cirugía General
-59,Especialización en Medicina Interna 
-60,Especialización en Ginecoobstetricia
-61,Especialización en Pediatría 
-62,Especialización en Ingeniería Ambiental 
-63,Maestría en Ecología y Gestión de Ecosistemas Estratégicos
-64,Maestría en Ingeniría y Gestión Ambiental
-65,Especialización en Creatividad y Comunicación para la Docencia
-66,Especialización en Integración educativa para la Discapacidad
-67,Especialización en Pedagogía de la Expresión Lúdica
-68,Maestría en Educación área de profundización: Diseño Gestión y Evaluación Curricular
-69,Maestría en Educación área de profundización: Docencia e investigacion universitaria
-70,Maestría en Educación Física 
-71,Maestría en Conflicto Territorio y Cultura 
-72,Maestría en Educacion y Cultura para La Paz
-73,Esp. en Pedagogía Sitémica y de los Sitemas Dinámicos
-74,Maestría en Didáctica del Inglés
-75,Maestría en derecho público
-76,Técnico en fútbol
-77,Bienestar Universitario
-78,Departamento de idiomas
-79,Adminstración BAncaria y Financiera
-80,Adminstración Comercial
-81,Adminstración de Empresas Agro
-82,Adminstración Turística
-83,"Mercadeo, Publicidad y Ventas"
-84,Negocios Internacionales
-85,Medicina Veterinaria y Zootecnia
-86,Ingeniería Ambiental
-87,Gerencia de sistemas Integrados de calidad
-88,Economía
+pro_codigo,pro_nombre,,
+1,Administraci?n de Empresas - Diurna,1,Administración de Empresas                    1/
+2,Administraci?n de Empresas - Nocturna ,6,Contaduría Pública                                   2/
+3,Administraci?n de Empresas - Garz?n,88,Economía
+4,Administraci?n de Empresas - La Plata,14,Enfermería
+5,Administraci?n de Empresas - La Pitalito,13,Medicina
+6,Contadur?a P?blica - Diurna,34,Psicología
+7,Contadur?a P?blica - Nocturna,15,Ingeniería Agrícola
+8,Contadur?a P?blica - Garz?n ,19,Ingeniería de Petróleos
+9,Contadur?a P?blica - La Plata,21,Ingeniería Electrónica
+10,Contadur?a P?blica - Pitalito,81,Administración de Empresas Agropecuarias
+11,Administraci?n Financiera - Ciclo Profesional,32,Licenciatura en Educación Fisíca
+12,Tecnolog?a en Administraci?n Financiera,29,Licenciatura en Lenguas Modernas
+13,Medicina ,191,Licenciatura en Educación para la Democracia
+14,Enfermer?a,,Licenciatura en Música
+15,Ingenier?a Agr?cola - Neiva,,Licenciatura en Español y Comunicación Educativa
+16,Ingenier?a Agr?cola - Garz?n,,Licenciatura en Educación Básica con Enfasis en Educ Artistica.
+17,Ingenier?a Agr?cola - La Plata,,Lic. en Educac. Básica con Enfas. en Human. Lengua Extranjera
+18,Ingenier?a Agr?cola - Pitalito,,Lic. en Educac. Básica con Enfas. en Ciencias Naturales y Educac.
+19,Ingenier?a de Petr?leos ,,Lic. en Educac. Básica con Enfasis en Educ. Fisica y Recreación
+20,Ingenier?a Civil,,Lic. en Educac. Bás. Con enfasis en  human. y Lengua Castellana.
+21,Ingenier?a Electr?nica ,,Licenciatura en Matematicas y Física.
+22,Ingenier?a de Desarrollo de Software - Neiva,,Licenciatura en Pedagogia Infantil.
+23,Tecnolog?a en Desarrollo de Software - Neiva,,Comunicación Social y Periodismo.
+24,Tecnolog?a en Desarrollo de Software-Pitalito,,Derecho
+25,Tecnolog?a en Obras Civiles,,Tecnología en Acuicultura Continental.                       3/
+26,Tecnolog?a en Obras Civiles- Garz?n,,
+27,Lic. en Educ. B?s. Con ?nfasis en Ciencias Naturales y Educ. Ambiental - Neiva,,
+28,Lic. en Educ. B?s. Con ?nfasis en humanidades y lengua Castellana,,
+29,"Lic. en Educ. B?s. Con ?nfasis en Humanidades, Lengua Extranjera - Neiva",,
+30,Lic. en Matem?ticas - Neiva,,
+31,Lic. en Educ. B?s. Con ?nfasis en Educ. Art?stica y Cultural,,
+32,"Lic. en Educ. B?s. Con ?nfasis en Educ. F?sica, Recreaci?n y Deportes ",,
+33,Lic. en Pedagog?a Infantil,,
+34,Psicolog?a - Neiva,,
+35,Comunicaci?n Social y Period?smo,,
+36,Comunicaci?n Social y Period?smo- Pitalito,,
+37,Matem?ticas Aplicada - Neiva,,
+38,Tecnolog?a en Acuicultura Continental - Neiva,,
+39,Lic. en F?sica - Neiva,,
+40,Ciencias Pol?ticas,,
+41,Derecho  Diurna- Neiva,,
+42,Derecho Nocturna- Neiva,,
+43,Derecho Nocturna- Pitalito,,
+44,Ingenier?a de Sistemas,,
+45,Ingenier?a Industrial,,
+46,Dise?o Gr?fico,,
+47,T?cnico Profesional en F?tbol,,
+48,Especializaci?n Gerencia de la Salud Ocupacional ,,
+49,Especializaci?n Gerencia de la Calidad y Auditor?a en Salud ,,
+50,Especializaci?n en Alta Gerencia ,,
+51,Especializaci?n en Gerencia de Mercadeo estrateg?co,,
+52,Especializaci?n en Gerencia Tributaria,,
+53,Especializaci?n en Epidemiologia,,
+54,Especializaci?n en Enfermer?a -Cuidado Cr?tico ,,
+55,Especializaci?n en Enfermer?a en Nefrol?gica y Urol?gica,,
+56,Especializaciones clinicas equivalentes a Maestr?as,,
+57,Especializaci?n en Anestesiolog?a y Reanimaci?n ,,
+58,Especializaci?n en Cirug?a General,,
+59,Especializaci?n en Medicina Interna ,,
+60,Especializaci?n en Ginecoobstetricia,,
+61,Especializaci?n en Pediatr?a ,,
+62,Especializaci?n en Ingenier?a Ambiental ,,
+63,Maestr?a en Ecolog?a y Gesti?n de Ecosistemas estrateg?cos,,
+64,Maestr?a en Ingenir?a y Gesti?n Ambiental,,
+65,Especializaci?n en Creatividad y Comunicaci?n para la Docencia,,
+66,Especializaci?n en Integraci?n educativa para la Discapacidad,,
+67,Especializaci?n en Pedagog?a de la Expresi?n L?dica,,
+68,Maestr?a en Educaci?n ?rea de profundizaci?n: Dise?o Gesti?n y Evaluaci?n Curricular,,
+69,Maestr?a en Educaci?n ?rea de profundizaci?n: Docencia e investigacion universitaria,,
+70,Maestr?a en Educaci?n F?sica ,,
+71,Maestr?a en Conflicto Territorio y Cultura ,,
+72,Maestr?a en Educacion y Cultura para La Paz,,
+73,Fisioterapia,,
+74,Maestr?a en Did?ctica del Ingl?s,,
+75,Maestr?a en derecho p?blico,,
+76,T?cnico en f?tbol,,
+77,Bienestar Universitario,,
+78,Departamento de idiomas,,
+79,Administraci?n Bancaria y Financiera,,
+80,Administraci?n Comercial,,
+81,Administraci?n de Empresas Agropecuarias,,
+82,Administraci?n Tur?stica,,
+83,"Mercadeo, Publicidad y Ventas",,
+84,Negocios Internacionales,,
+85,Medicina Veterinaria y Zootecnia,,
+86,Ingenier?a Ambiental,,
+87,Gerencia de sistemas Integrados de calidad,,
+88,Econom?a,,
+89,Especializaci?n en Gerencia de Servicios de Salud y Seguridad,,
+90,Lic. Artes visuales,,
+91,Lic. M?sica,,
+92,Lic.en Matem?ticas y F?sica,,
+93,Arquitectura,,
+94,Comercio,,
+95,Ingenier?a Electromec?nica,,
+96,Ingenier?a Mec?nica,,
+97,Licenciatura,,
+98,Odontolog?a,,
+99,Especializaci?n en Auditoria y control Fiscal,,
+100,Dise?o Y Producci?n De Modas ,,
+101,Dise?o Visual E Ilustraci?n ,,
+102,Gesti?n Social Y Salud Comunitaria,,
+103,Administraci?n De Empresas Distancia,,
+104,Administraci?n Publica Distancia,,
+105,Contadur?a Publica  Distancia,,
+106,Gesti?n Social Y Salud Comunitaria Distancia,,
+107,Administraci?n Tur?stica Y Hotelera Distancia,,
+108,Agronom?a,,
+109,Filosof?a,,
+120,Ingenier?a Agroforestal,,
+121,Ingenieria de Alimentos,,
+122,Ingenieria de Telecomunicaciones,,
+123,Licenciatura en Filosofia,,
+124,Licenciatura Etnoeducacion,,
+125,Manejo Agroecol?gico y de Postcosecha,,
+126,Manejo Agroforestal,,
+127,Regencia de Farmacia,,
+128,Zootecnia,,
+129,Esp. Educaci?n Superior y a Distancia,,
+130,"Esp. Educaci?n, Cultura y Pol?tica",,
+131,Esp. En Gerencia Estrat?gica de Mercadeo,,
+132,Esp. En Gesti?n P?blica,,
+133,Esp. En Pedagogia para el Des. Autonomo,,
+134,Esp. En Procesos de Alimentos y Biomateriales,,
+135,Esp. Gesti?n de Proyectos,,
+136,Esp. Nutrici?n Animal Sostenible,,
+137,Tec. Agroforestal,,
+138,Tec. En Alimentos,,
+139,Tec. En Electr?nica,,
+140,Tec. En Indutrial,,
+141,Tec. En Producci?n Agricola,,
+142,Tec. En Producci?n Animal,,
+143,Tec. En Sistemas,,
+144,Tec. En Telecomunicaciones,,
+145,Tec. Gesti?n Agropecuaria,,
+146,Tec. Gesti?n Comercial y de Neg.,,
+147,Tec. Gesti?n de Empresas Asociativas y Organizaciones Com.,,
+148,Tec. Gesti?n de Obras Civiles y Cont.,,
+149,Tec. Gesti?n de Transportes,,
+150,Tec. Gesti?n Industrial,,
+151,Licenciatura En Educaci�n Preescolar,,
+152,Licenciatura En Filosof�a Educaci�n Religiosa,,
+153,"Licenciatura En Filosof�a, �tica Y Valores",,
+154,Licenciatura En Filosof�a Pensamiento Politico Y Economico,,
+155,Licenciatura En Lengua Castellana Y Literatura,,
+156,Licenciatura En Lengua Extranjera: Ingl�s,,
+157,Licenciatura En Literatura Y Lengua Castellana,,
+158,Licenciatura En Teolog�a,,
+159,Administraci�n Ambiental Y De Los Recursos Naturales,,
+160,Construcci�n En Arquitectura E Ingenieria,,
+161,Lic. En Educaci�n Infantil Integrada,,
+162,Licenciatura en Espa�ol y Comunicaci�n Educativa  - Neiva,,
+163,Esp. en Pedagogia Sist�mica y de los Sistemas Din�micos,,
+164,Esp. en Pedagogia Sist�mica y de los Sistemas Din�micos-Garz�n,,
+165,Esp. en Pedagogia Sist�mica y de los Sistemas Din�micos-La Plata,,
+166,Esp. en Pedagogia Sist�mica y de los Sistemas Din�micos-Pitalito,,
+167,Especializaci�n en Psicolog�a de la Salud,,
+168,Dise�o De Vestuario Y Patronaje ,,
+169,LIC. Filosofia y Letras,,
+170,LIC. Edu Basica Primaria y Promocion de la  Comunidad,,
+171,Administracion de Sistemas Informaticos,,
+172,Tecnologia en Gesti�n Bancaria y Financiera - Garz�n,,
+173,Tecnologia en Gesti�n Bancaria y Financiera - Pitalito,,
+174,Tecnologia en Gesti�n Bancaria y Financiera - La Plata,,
+175,Salud ocupacional - Garz�n,,
+176,Salud Ocupacional - Pitalito,,
+177,Salud Ocupacional - La Plata,,
+178,Tecnolog�a en Obras Civiles - Pitalito,,
+179,Administraci�n de Empresas Agropecuarias - Garz�n,,
+180,Tecnolog�a Forestal - Neiva,,
+181,Tecnologia en Sistemas de Informacion- Neiva,,
+182,Tecnologia en Sistemas de Informacion- Garz�n,,
+183,Tecnologia en Sistemas de Informacion- Pitalito,,
+184,Licenciatrua en Lenguas Modernas - Neiva,,
+185,Licenciatura en   Educaci�n F�sica - Neiva,,
+186,Comercio Internacional,,
+187,Esp. En Direcci�n Financiera y Desarrollo Organizacional,,
+188,Psicología Social Comunitaria,,
+189,Administración Pública Territorial,,
+190,Gerencia Hospitalaria,,
+191,Licenciatura en Educación para la Democracia,,
