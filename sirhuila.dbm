@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,487" last-zoom="0.8"
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="0.8"
 	 default-owner="sirhuila">
 <role name="sirhuila"
       createdb="true"
@@ -5618,7 +5618,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabala que contiene la información de los alcaldes elegidos por voto popular en los municipios del departamento del Huila.]]></comment>
-	<position x="20" y="680"/>
+	<position x="0" y="703"/>
 	<column name="aev_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5652,7 +5652,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los distintos periodos electorales.]]></comment>
-	<position x="360" y="640"/>
+	<position x="340" y="663"/>
 	<column name="pel_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5670,7 +5670,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los alcaldes del departamento]]></comment>
-	<position x="360" y="740"/>
+	<position x="340" y="763"/>
 	<column name="ald_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5688,7 +5688,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los diferentes partidos politicos o movimientos.]]></comment>
-	<position x="20" y="820"/>
+	<position x="0" y="843"/>
 	<column name="pam_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5724,7 +5724,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información acerca del documento de identidad (primera vez, duplicado, rectificación...)]]></comment>
-	<position x="20" y="920"/>
+	<position x="0" y="943"/>
 	<column name="sdi_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5742,7 +5742,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información sobre los documentos de identidad]]></comment>
-	<position x="20" y="980"/>
+	<position x="0" y="1003"/>
 	<column name="did_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5776,7 +5776,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene información sobre el escrutinio]]></comment>
-	<position x="320" y="920"/>
+	<position x="300" y="943"/>
 	<column name="decr_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5810,7 +5810,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los tipos de votación (gobernacion, alcaldia, consejo, asamblea...)]]></comment>
-	<position x="420" y="1060"/>
+	<position x="400" y="1083"/>
 	<column name="tvo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -5828,7 +5828,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Electorales&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el resultado de votaciones]]></comment>
-	<position x="40" y="1120"/>
+	<position x="20" y="1143"/>
 	<column name="vot_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6080,7 +6080,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="visitas_personerias" hide-ext-attribs="true">
 	<schema name="&quot;Justicia&quot;"/>
 	<role name="sirhuila"/>
-	<position x="680" y="400"/>
+	<position x="360" y="520"/>
 	<column name="vipe_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
