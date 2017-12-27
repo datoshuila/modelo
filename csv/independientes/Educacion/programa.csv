@@ -1,218 +1,301 @@
-pro_codigo,pro_nombre,,,,
-1,Aministración de Empresas - Diurna,1,,1,Administración de Empresas
-2,Aministración de Empresas - Nocturna ,2,,6,Contaduría Pública        
-3,Aministración de Empresas - Garzón,3,,11,Administración Financiera
-4,Aministración de Empresas - La Plata,4,,13,Medicina
-5,Aministración de Empresas - La Pitalito,5,,14,Enfermería
-6,Contaduría Pública - Diurna,6,,34,Psicología - Neiva
-7,Contaduría Pública - Nocturna,7,,196,Licenciatura Administración Educativa         
-8,Contaduría Pública - Garzón ,8,,#N/A,Licenciatura En Educación Física
-9,Contaduría Pública - La Plata,9,,#N/A,Licenciatura Lenguas Modernas
-10,Contaduría Pública - Pitalito,10,,#N/A,Licenciatura Educación para la Democracia
-11,Aministración Financiera - Ciclo Profesional,11,,#N/A,Licenciatura Español y Comunicación Educativa
-12,Tecnología en Aministración Financiera,12,,198,Licenciatura Arte Escénico
-13,Medicina,13,,91,Licenciatura Música
-14,Enfermería,14,,#N/A,Licenciatura En Artes Visuales
-15,Ingeniería Agrícola - Neiva,15,,161,Licenciatura En Educación Infantil Integrada
-16,Ingeniería Agrícola - Garzón,16,,#N/A,Licenciatura Biología y Química
-17,Ingeniería Agrícola - La Plata,17,,#N/A,Licenciatura Matemáticas y Física
-18,Ingeniería Agrícola - Pitalito,18,,#N/A,Licenciatura en Educ. Bás. Con enfasis en educ. Artistica
-19,Ingeniería de Petróleos ,19,,#N/A,"Licenciatura en Educ. Bás. Con enfasis en  Humanidades, lenguas extrangera."
-20,Ingeniería Civil,20,,#N/A,Licenciatura en Educ. Bás. Con enfasis en Ciencias Naturales y Educ. Ambiental
-21,Ingeniería Electrónica,21,,#N/A,"Licenciatura en Educ. Bás. Con enfasis en educ. Fisica, Recreación y Deporte"
-22,Ingeniería de Desarrollo de Software - Neiva,22,,#N/A,Licenciatura en Educ. Bás. Con enfasis en  Humanidades y lenguas Castallana.
-23,Tecnología en Desarrollo de Software - Neiva,23,,#N/A,Licenciatura En Pedagogia Infantil
-24,Tecnología en Desarrollo de Software-Pitalito,24,,#N/A,Licenciatura Matemáticas 
-25,Tecnología en Obras Civiles,25,,#N/A,Departamento de Psicopedagogía.
-26,Tecnología en Obras Civiles- Garzón,26,,#N/A,Comunicación Social y Periodismo
-27,Licenciatura en Educación Básica Con Énfasis en Ciencias Naturales y Educación Ambiental - Neiva,27,,#N/A,Ciencias de la Información y la Documenctación ( c )
-28,Licenciatura en Educación Básica Con Énfasis en humanidades y lengua Castellana,28,,#N/A,Ingeniería Agrícola
-29,"Licenciatura en Educación Básica Con Énfasis en Humanidades, Lengua Extranjera - Neiva",29,,#N/A,Ingeniería de Petroleos
-30,Licenciatura en Matemáticas - Neiva,30,,21,Ingeniería Electrónica
-31,Licenciatura en Educación Básica Con Énfasis en Educación Artística y Cultural,31,,#N/A,Tecnología Electrónica
-32,Licenciatura en Educación Básica Con Énfasis en Educación Física Recreación y Deportes ,32,,25,Tecnología  en Obras Civiles
-33,Licenciatura en Pedagogía Infantil,33,,128,Zootecnia
-34,Psicología - Neiva,34,,#N/A,Administración del Desarrollo Agroindustrial
-35,Comunicación Social y Periodísmo,35,,#N/A,Administración Agroindustrial
-36,Comunicación Social y Periodísmo- Pitalito,36,,#N/A,Derecho
-37,Matemáticas Aplicada - Neiva,37,,#N/A,Tecnología en Acuicultura Continental
-38,Tecnología en Acuicultura Continental - Neiva,38,,,
-39,Licenciatura en Física - Neiva,39,,,
-40,Ciencias Políticas,40,,,
-41,Derecho  Diurna- Neiva,41,,,
-42,Derecho Nocturna- Neiva,42,,,
-43,Derecho Nocturna- Pitalito,43,,,
-44,Ingeniería de Sistemas,44,,,
-45,Ingeniería Industrial,45,,,
-46,Diseño Gráfico,46,,,
-47,Técnico Profesional en Fútbol,47,,,
-48,Especialización Gerencia de la Salud Ocupacional ,48,,,
-49,Especialización Gerencia de la Calidad y Auditoría en Salud ,49,,,
-50,Especialización en Alta Gerencia ,50,,,
-51,Especialización en Gerencia de Mercadeo estrategíco,51,,,
-52,Especialización en Gerencia Tributaria,52,,,
-53,Especialización en Epidemiologia,53,,,
-54,Especialización en Enfermería - Cuidado Crítico ,54,,,
-55,Especialización en Enfermería en Nefrológica y Urológica,55,,,
-56,Especializaciones clinicas equivalentes a Maestrías,56,,,
-57,Especialización en Anestesiología y Reanimación ,57,,,
-58,Especialización en Cirugía General,58,,,
-59,Especialización en Medicina Interna ,59,,,
-60,Especialización en Ginecoobstetricia,60,,,
-61,Especialización en Pediatría ,61,,,
-62,Especialización en Ingeniería Ambiental ,62,,,
-63,Maestría en Ecología y Gestión de Ecosistemas estrategícos,63,,,
-64,Maestría en Ingeniería y Gestión Ambiental,64,,,
-65,Especialización en Creatividad y Comunicación para la Docencia,65,,,
-66,Especialización en Integración educativa para la Discapacidad,66,,,
-67,Especialización en Pedagogía de la Expresión Lúdica,67,,,
-68,Maestría en Educación área de profundización: Diseño Gestión y Evaluación Curricular,68,,,
-69,Maestría en Educación área de profundización: Docencia e investigacion universitaria,69,,,
-70,Maestría en Educación Física ,70,,,
-71,Maestría en Conflicto Territorio y Cultura ,71,,,
-72,Maestría en Educacion y Cultura para La Paz,72,,,
-73,Fisioterapia,73,,,
-74,Maestría en Didáctica del Inglés,74,,,
-75,Maestría en derecho público,75,,,
-76,Técnico en Fútbol,76,,,
-77,Bienestar Universitario,77,,,
-78,Departamento de idiomas,78,,,
-79,Aministración Bancaria y Financiera,79,,,
-80,Aministración Comercial,80,,,
-81,Aministración de Empresas Agropecuarias,81,,,
-82,Aministración Turística,82,,,
-83,"Mercadeo, Publicidad y Ventas",83,,,
-84,Negocios Internacionales,84,,,
-85,Medicina Veterinaria y Zootecnia,85,,,
-86,Ingeniería Ambiental,86,,,
-87,Gerencia de sistemas Integrados de calidad,87,,,
-88,Economía,88,,,
-89,Especialización en Gerencia de Servicios de Salud y Seguridad,89,,,
-90,Licenciatura Artes visuales,90,,,
-91,Licenciatura Música,91,,,
-92,Licenciatura en Matemáticas y Física,92,,,
-93,Arquitectura,93,,,
-94,Comercio,94,,,
-95,Ingeniería Electromecánica,95,,,
-96,Ingeniería Mecánica,96,,,
-97,Licenciatura,97,,,
-98,Odontología,98,,,
-99,Especialización en Auditoria y control Fiscal,99,,,
-100,Diseño Y Producción De Modas ,100,,,
-101,Diseño Visual E Ilustración ,101,,,
-102,Gestión Social Y Salud Comunitaria,102,,,
-103,Aministración De Empresas Distancia,103,,,
-104,Aministración Publica Distancia,104,,,
-105,Contaduría Publica  Distancia,105,,,
-106,Gestión Social Y Salud Comunitaria Distancia,106,,,
-107,Aministración Turística Y Hotelera Distancia,107,,,
-108,Agronomía,108,,,
-109,Filosofía,109,,,
-120,Ingeniería Agroforestal,120,,,
-121,Ingeniería de Alimentos,121,,,
-122,Ingenieria de Telecomunicaciones,122,,,
-123,Licenciatura en Filosofia,123,,,
-124,Licenciatura Etnoeducacion,124,,,
-125,Manejo Agroecológico y de Postcosecha,125,,,
-126,Manejo Agroforestal,126,,,
-127,Regencia de Farmacia,127,,,
-128,Zootecnia,128,,,
-129,Especialización Educación Superior y a Distancia,129,,,
-130,"Especialización Educación, Cultura y Política",130,,,
-131,Especialización En Gerencia Estratégica de Mercadeo,131,,,
-132,Especialización En Gestión Pública,132,,,
-133,Especialización En Pedagogia para el Des. Autonomo,133,,,
-134,Especialización En Procesos de Alimentos y Biomateriales,134,,,
-135,Especialización Gestión de Proyectos,135,,,
-136,Especialización Nutrición Animal Sostenible,136,,,
-137,Tecnología Agroforestal,137,,,
-138,Tecnología En Alimentos,138,,,
-139,Tecnología En Electrónica,139,,,
-140,Tecnología En Indutrial,140,,,
-141,Tecnología En Producción Agricola,141,,,
-142,Tecnología En Producción Animal,142,,,
-143,Tecnología En Sistemas,143,,,
-144,Tecnología En Telecomunicaciones,144,,,
-145,Tecnología Gestión Agropecuaria,145,,,
-146,Tecnología Gestión Comercial y de Negocios,146,,,
-147,Tecnología Gestión de Empresas Asociativas y Organizaciones Com.,147,,,
-148,Tecnología Gestión de Obras Civiles y Construcción,148,,,
-149,Tecnología Gestión de Transportes,149,,,
-150,Tecnología Gestión Industrial,150,,,
-151,Licenciatura En Educación Preescolar,151,,,
-152,Licenciatura En Filosofía Educación Religiosa,152,,,
-153,"Licenciatura En Filosofía, ética Y Valores",153,,,
-154,Licenciatura En Filosofía Pensamiento Politico Y Economico,154,,,
-155,Licenciatura En Lengua Castellana Y Literatura,155,,,
-156,Licenciatura En Lengua Extranjera Inglés,156,,,
-157,Licenciatura En Literatura Y Lengua Castellana,157,,,
-158,Licenciatura En Teología,158,,,
-159,Administración Ambiental Y De Los Recursos Naturales,159,,,
-160,Construcción En Arquitectura E Ingenieria,160,,,
-161,Licenciatura En Educación Infantil Integrada,161,,,
-162,Licenciatura en Español y Comunicación Educativa  - Neiva,162,,,
-163,Especialización en Pedagogia Sistémica y de los Sistemas Dinámicos,163,,,
-164,Especialización en Pedagogia Sistémica y de los Sistemas Dinámicos-Garzón,164,,,
-165,Especialización en Pedagogia Sistémica y de los Sistemas Dinámicos-La Plata,165,,,
-166,Especialización en Pedagogia Sistémica y de los Sistemas Dinámicos-Pitalito,166,,,
-167,Especialización en Psicología de la Salud,167,,,
-168,Diseño De Vestuario Y Patronaje ,168,,,
-169,Licenciatura Filosofia y Letras,169,,,
-170,Licenciatura Edu Basica Primaria y Promocion de la  Comunidad,170,,,
-171,Administracion de Sistemas Informaticos,171,,,
-172,Tecnologia en Gestión Bancaria y Financiera - Garzón,172,,,
-173,Tecnologia en Gestión Bancaria y Financiera - Pitalito,173,,,
-174,Tecnologia en Gestión Bancaria y Financiera - La Plata,174,,,
-175,Salud ocupacional - Garzón,175,,,
-176,Salud Ocupacional - Pitalito,176,,,
-177,Salud Ocupacional - La Plata,177,,,
-178,Tecnología en Obras Civiles - Pitalito,178,,,
-179,Administración de Empresas Agropecuarias - Garzón,179,,,
-180,Tecnología Forestal - Neiva,180,,,
-181,Tecnologia en Sistemas de Informacion- Neiva,181,,,
-182,Tecnologia en Sistemas de Informacion- Garzón,182,,,
-183,Tecnologia en Sistemas de Informacion- Pitalito,183,,,
-184,Licenciatrua en Lenguas Modernas - Neiva,184,,,
-185,Licenciatura en   Educación Física - Neiva,185,,,
-186,Comercio Internacional,186,,,
-187,Especialización En Dirección Financiera y Desarrollo Organizacional,187,,,
-188,Psicología Social Comunitaria,188,,,
-189,Administración Pública Territorial,189,,,
-190,Gerencia Hospitalaria,190,,,
-191,Licenciatura en Educación para la Democracia,191,,,
-192,Espec. en Gerencia de las Organizaciónes de la Salud,192,,,
-193,Especialización en Auditoría Financiera,193,,,
-194,Espec. en Formulac. y Evaluac. de Proyec. de Desarr. Social,194,,,
-195,Administración Desarrollo Agroindustrial,195,,,
-196,Licenciatura Administración Educativa,196,,,
-197,Licenciatura En Biología y Química,197,,,
-198,Licenciatura Arte Escénico,198,,,
-199,Especialización Gestion tributaria y aduanera,199,,,
-200,Especialización Gerencia de Mercados,200,,,
-201,Especialización Revisoria fiscal y control de gestion,201,,,
-202,Comunicación Social Comunitaria,202,,,
-203,Tecnologia En recursos Naturales,203,,,
-204,Tecnologia en Producción Agropecuaria,204,,,
-205,Tecnologia En Administración de Empresas,205,,,
-206,Administración Ambiental,206,,,
-207,Administración Agropecuaria,207,,,
-208,Administración de Sistemas,208,,,
-209,Construcción,209,,,
-210,Filosofía e Historia,210,,,
-211,Filosofía Ciencias Religión,211,,,
-212,Licenciatura el Educación Básica,212,,,
-213,Licenciatura en Educación Ambiental,213,,,
-214,Licenciatura en Biología,214,,,
-215,Educación Religiosa,215,,,
-216,Licenciatura en Filosofía Cultura de paz,216,,,
-217,Administración Pública Municipal y Regional,217,,,
-218,Administración Pública Contemporanea,218,,,
-219,Proyectos de Desarrollo,219,,,
-220,Especialización gerencia servicios en salud,220,,,
-221,Patologia de la Construcción,221,,,
-222,Docencia Universitaria,222,,,
-223,Especialización Ciencias Administrativas Constitucionales,223,,,
-224,Especialización en Derecho Comercial y Financiero,224,,,
-225,Tecnología En Construcción,225,,,
-226,Especialización en Gerencia,226,,,
-227,Especialización Gestión Humana,227,,,
+pro_codigo,pro_nombre
+1,Administración de Empresas - Diurna
+2,Administración de Empresas - Nocturna 
+3,Administración de Empresas - Garzón
+4,Administración de Empresas - La Plata
+5,Administración de Empresas - Pitalito
+6,Contaduría Pública - Diurna
+7,Contaduría Pública - Nocturna
+8,Contaduría Pública - Garzón 
+9,Contaduría Pública - La Plata
+10,Contaduría Pública - Pitalito
+11,Administración Financiera - Ciclo Profesional
+12,Tecnología en Administración Financiera
+13,Medicina
+14,Enfermería
+15,Ingeniería Agrícola - Neiva
+16,Ingeniería Agrícola - Garzón
+17,Ingeniería Agrícola - La Plata
+18,Ingeniería Agrícola - Pitalito
+19,Ingeniería de Petróleos
+20,Ingeniería Civil
+21,Ingeniería Electrónica
+22,Ingeniería de Desarrollo de Software - Neiva
+23,Tecnología en Desarrollo de Software - Neiva
+24,Tecnología en Desarrollo de Software - Pitalito
+25,Tecnología en Obras Civiles
+26,Tecnología en Obras Civiles - Garzón
+27,Licenciatura en Educación Básica Con énfasis en Ciencias Naturales y Educación Ambiental - Neiva
+28,Licenciatura en Educación Básica Con énfasis en humanidades y lengua Castellana
+29,"Licenciatura en Educación Básica Con énfasis en Humanidades, Lengua Extranjera - Neiva"
+30,Licenciatura en Matemáticas - Neiva
+31,Licenciatura en Educación Básica Con énfasis en Educación Artística y Cultural
+32,Licenciatura en Educación Básica Con énfasis en Educación Física Recreación y Deportes 
+33,Licenciatura en Pedagogía Infantil
+34,Psicología - Neiva
+35,Comunicación Social y Periodísmo
+36,Comunicación Social y Periodísmo- Pitalito
+37,Matemáticas Aplicada - Neiva
+38,Tecnología en Acuicultura Continental - Neiva
+39,Licenciatura en Física - Neiva
+40,Ciencias Políticas
+41,Derecho  Diurna- Neiva
+42,Derecho Nocturna- Neiva
+43,Derecho Nocturna- Pitalito
+44,Ingeniería de Sistemas
+45,Ingeniería Industrial
+46,Diseño Gráfico
+47,Técnico Profesional en Fútbol
+48,Especialización Gerencia de la Salud Ocupacional 
+49,Especialización Gerencia de la Calidad y Auditoría en Salud 
+50,Especialización en Alta Gerencia 
+51,Especialización en Gerencia de Mercadeo estrategíco
+52,Especialización en Gerencia Tributaria
+53,Especialización en Epidemiologia
+54,Especialización en Enfermería - Cuidado Crítico 
+55,Especialización en Enfermería en Nefrológica y Urológica
+56,Especializaciones clinicas equivalentes a Maestrías
+57,Especialización en Anestesiología y Reanimación 
+58,Especialización en Cirugía General
+59,Especialización en Medicina Interna 
+60,Especialización en Ginecoobstetricia
+61,Especialización en Pediatría 
+62,Especialización en Ingeniería Ambiental 
+63,Maestría en Ecología y Gestión de Ecosistemas estrategícos
+64,Maestría en Ingeniería y Gestión Ambiental
+65,Especialización en Creatividad y Comunicación para la Docencia
+66,Especialización en Integración educativa para la Discapacidad
+67,Especialización en Pedagogía de la Expresión Lúdica
+68,Maestría en Educación área de profundización: Diseño Gestión y Evaluación Curricular
+69,Maestría en Educación área de profundización: Docencia e investigacion universitaria
+70,Maestría en Educación Física 
+71,Maestría en Conflicto Territorio y Cultura 
+72,Maestría en Educación y Cultura para La Paz
+73,Fisioterapia
+74,Maestría en Didáctica del Inglés
+75,Maestría en derecho público
+76,Técnico en Fútbol
+77,Bienestar Universitario
+78,Departamento de idiomas
+79,Administración Bancaria y Financiera
+80,Administración Comercial
+81,Administración de Empresas Agropecuarias
+82,Administración Turística
+83,"Mercadeo, Publicidad y Ventas"
+84,Negocios Internacionales
+85,Medicina Veterinaria y Zootecnia
+86,Ingeniería Ambiental
+87,Gerencia de sistemas Integrados de calidad
+88,Economía
+89,Especialización en Gerencia de Servicios de Salud y Seguridad
+90,Licenciatura en Artes visuales
+91,Licenciatura Música
+92,Licenciatura en Matemáticas y Física
+93,Arquitectura
+94,Comercio
+95,Ingeniería Electromecánica
+96,Ingeniería Mecánica
+97,Licenciatura
+98,Odontología
+99,Especialización en Auditoria y control Fiscal
+100,Diseño Y Producción De Modas 
+101,Diseño Visual E Ilustración 
+102,Gestión Social Y Salud Comunitaria
+103,Administración De Empresas Distancia
+104,Administración Pública Distancia
+105,Contaduría Pública  Distancia
+106,Gestión Social Y Salud Comunitaria Distancia
+107,Administración Turística Y Hotelera Distancia
+108,Agronomía
+109,Filosofía
+110,Ingeniería Agroforestal
+111,Ingeniería de Alimentos
+112,Ingenieria de Telecomunicaciones
+113,Licenciatura en Filosofía
+114,Licenciatura EtnoEducación
+115,Manejo Agroecológico y de Poscosecha
+116,Manejo Agroforestal
+117,Regencia de Farmacia
+118,Zootecnia
+119,Especialización Educación Superior y a Distancia
+120,"Especialización Educación, Cultura y Política"
+121,Especialización En Gerencia Estratégica de Mercadeo
+122,Especialización En Gestión pública
+123,Especialización En Pedagogia para el Des. Autonomo
+124,Especialización En Procesos de Alimentos y Biomateriales
+125,Especialización Gestión de Proyectos
+126,Especialización Nutrición Animal Sostenible
+127,Tecnología Agroforestal
+128,Tecnología En Alimentos
+129,Tecnología En Electrónica
+130,Tecnología Industrial
+131,Tecnología En Producción Agrícola
+132,Tecnología En Producción Animal
+133,Tecnología En Sistemas
+134,Tecnología En Telecomunicaciones
+135,Tecnología Gestión Agropecuaria
+136,Tecnología Gestión Comercial y de Negocios
+137,Tecnología Gestión de Empresas Asociativas y Organizaciones Com.
+138,Tecnología Gestión de Obras Civiles y Construcción
+139,Tecnología Gestión de Transportes
+140,Tecnología Gestión Industrial
+141,Licenciatura En Educación Preescolar
+142,Licenciatura En Filosofía Educación Religiosa
+143,"Licenciatura En Filosofía, ética Y Valores"
+144,Licenciatura En Filosofía Pensamiento Politico Y Economico
+145,Licenciatura En Lengua Castellana Y Literatura
+146,Licenciatura En Lengua Extranjera Inglés
+147,Licenciatura En Literatura Y Lengua Castellana
+148,Licenciatura En Teología
+149,Administración Ambiental Y De Los Recursos Naturales
+150,Construcción En Arquitectura E Ingeniería
+151,Licenciatura En Educación Infantil Integrada
+152,Licenciatura en Español y Comunicación Educativa  - Neiva
+153,Especialización en Pedagogía Sistémica y de los Sistemas Dinámicos
+154,Especialización en Pedagogía Sistémica y de los Sistemas Dinámicos-Garzón
+155,Especialización en Pedagogía Sistémica y de los Sistemas Dinámicos-La Plata
+156,Especialización en Pedagogía Sistémica y de los Sistemas Dinámicos-Pitalito
+157,Especialización en Psicología de la Salud
+158,Diseño De Vestuario Y Patronaje 
+159,Licenciatura Filosofía y Letras
+160,Licenciatura Edu Basica Primaria y Promocion de la  Comunidad
+161,Administracion de Sistemas Informaticos
+162,Tecnologia en Gestión Bancaria y Financiera - Garzón
+163,Tecnologia en Gestión Bancaria y Financiera - Pitalito
+164,Tecnologia en Gestión Bancaria y Financiera - La Plata
+165,Salud ocupacional - Garzón
+166,Salud Ocupacional - Pitalito
+167,Salud Ocupacional - La Plata
+168,Tecnología en Obras Civiles - Pitalito
+169,Administración de Empresas Agropecuarias - Garzón
+170,Tecnología Forestal - Neiva
+171,Tecnologia en Sistemas de Informacion - Neiva
+172,Tecnologia en Sistemas de Informacion - Garzón
+173,Tecnologia en Sistemas de Informacion - Pitalito
+174,Licenciatrua en Lenguas Modernas - Neiva
+175,Licenciatura en Educación Física - Neiva
+176,Comercio Internacional
+177,Especialización En Dirección Financiera y Desarrollo Organizacional
+178,Psicología Social Comunitaria
+179,Administración Pública Territorial
+180,Gerencia Hospitalaria
+181,Licenciatura en Educación para la Democracia
+182,Especialización en Gerencia de las Organizaciones de la Salud
+183,Especialización en Auditoría Financiera
+184,Especialización en Formulación y Evaluación de Proyectos de Desarrollo Social
+185,Administración del Desarrollo Agroindustrial
+186,Licenciatura Administración Educativa
+187,Licenciatura En Biología y Química
+188,Licenciatura Arte Escénico
+189,Especialización Gestion tributaria y aduanera
+190,Especialización Gerencia de Mercados
+191,Especialización Revisoria fiscal y control de Gestión
+192,Comunicación Social Comunitaria
+193,Tecnologia En recursos Naturales
+194,Tecnologia en Producción Agropecuaria
+195,Tecnologia En Administración de Empresas
+196,Administración Ambiental
+197,Administración Agropecuaria
+198,Administración de Sistemas
+199,Construcción
+200,Filosofía e Historia
+201,Filosofía Ciencias Religión
+202,Licenciatura en Educación Básica
+203,Licenciatura en Educación Ambiental
+204,Licenciatura en Biología
+205,Educación Religiosa
+206,Licenciatura en Filosofía Cultura de paz
+207,Administración Pública Municipal y Regional
+208,Administración Pública Contemporanea
+209,Proyectos de Desarrollo
+210,Especialización gerencia servicios en salud
+211,Patología de la Construcción
+212,Docencia Universitaria
+213,Especialización Ciencias Administrativas Constitucionales
+214,Especialización en Derecho Comercial y Financiero
+215,Tecnología En Construcción
+216,Especialización en Gerencia
+217,Especialización Gestión Humana
+218,Departamento de PsicoPedagogía.
+219,Ciencias de la Información y la Documentación
+220,Administración Agroindustrial
+221,Tecnología en Sistemas de Datos
+222,Finanzas posgrado
+223,Ciencias Fiscales posgrado
+224,Computación para la Docencia posgrado
+225,Administración De Empresas Posgrado
+226,Auditoría de Sistemas posgrado
+227,Especialización Auditoría Integral
+228,Especialización Control Interno y Auditoría en las Organizaciones de Salud
+229,Psicología Distancia
+230,Tecnología en Sistemas Distancia
+231,Educación Básica Primaria Distancia
+232,Ingeniería de Sistemas Distancia
+233,Idiomas y negocios internacionales
+234,Tecnología Mantenimiento Electrónico
+235,Tecnología en Diseño Gráfico
+236,Tecnología en Diseño de Textil y Moda
+237,Tecnología en Comunicación y Relaciones públicas
+238,Contabilidad y Finanzas Distancia
+239,Administración de Negocios Internacionales
+240,Tecnología Agroindustrial
+241,Especialización Gerencia Informática
+242,Especialización Revisoría Fiscal y Contraloría
+243,Tecnología en Informática
+244,Licenciatura en Lingüística y Literatura 
+245,Tecnología en Gestión Financiera
+246,Especialización en administración Financiera - Convenio EAN
+247,Especialización En Negocios y Finanzas Internacionales -Convenio EAN
+248,Especialización en Gerencia  y Auditoría de la Calidad de la Salud -Convenio universidad Jorge Tadeo Lozano
+249,Maestría en Administracion - Convenio  Universidad del Valle
+250,Maestrìa en Pedagogìa del Inglés-Convenio Universidad De Caldas
+251,Especialización En derecho de familia 
+252,Especialización en administración pública
+253,"Especialización en Pedagogía, Desarrollo y Aprendizaje"
+254,Trabajo Social
+255,Administración en Salud Ocupacional
+256,Salud ocupacional
+257,Resto de programas
+258,Tecnología en contabilidad y finanzas
+259,Tecnología en salud ocupacional
+260,Tecnología en análisis y desarrollo de sistemas de información
+261,Tecnologia en regencia de farmacia
+262,Tecnico profesional en servicio de policia
+263,Tecnico profesional en procesos administrativos
+264,Tecnico profesional en contabilidad y finanzas
+265,Tecnico profesional en diseño gráfico
+266,Tecnico profesional en gastronomía
+267,Tecnología en gestión empresarial
+268,Tecnología en Producción Agropecuaria ecólogica
+269,Tecnología en gestión de empresas agropecuarias
+270,Técnico profesional en diseño digital
+271,Técnico profesional en medios de comunicación
+272,Técnico profesional en armado de estructuras en guadua.
+273,Tecnologia en Sistemas de Informacion - La Plata
+274,"Licenciatura en Educación  Básica Con énfasis en Humanidades, Lengua Extranjera – Garzón"
+275,"Licenciatura en Educación Básica Con énfasis en Educación Física, Recreación y Deportes - Pitalito"
+276,Lic. en Pedagogía Infantil-Garzón
+277,Bacteriología y laboratorío clínico
+278,Ingeniería Química
+279,Comunicación Social 
+280,Área de educación
+281,Área de Salud
+282,Área Agropecuaría
+283,Área Ambiental
+284,Administración Pública
+285,Español e Idiomas
+286,Diseño Gráfico y textil
+287,Artes plásticas
+288,Democracia y participación ciudadana
+289,Ingeniería en Informática
+290,licenciatura en Educacion Basica con Enfasis en Matematicas 
+291,Licenciatura en Filosofia y Ciencias Religiosas
+292,Tecnologia en Gestión Bancaria y Financiera
+293,Comunicación y Relaciones Públicas 
+294,Especialización en Teleinformática - Convenio Unidistrital
+295,Especialización en Automatización Industrial - Coruniversitaria
+296,Especialización En Pedagogía Sistemática y de los Sistemas Dinámicos
+297,Especialización en Derecho Administrativo - Uninacional
+298,Esp. Comp. Docencia
+299,Diseño Textil
+300,Patología de la conducta
