@@ -2,11 +2,11 @@
 
 ![Modelo de datos del Sistema de Información Regional](/img/sirhuila.png)
 
-Actualizado el 16 de Noviembre de 2017. Disponible en formato [DBM](/sirhuila.dbm), [SQL](/script/sirhuila.sql), y [PNG](/img/sirhuila.png).
+Actualizado el 27 de Diciembre de 2017. Disponible en formato [DBM](/sirhuila.dbm), [SQL](/script/sirhuila.sql), y [PNG](/img/sirhuila.png). A la fecha se encuentra en formato de Base de Datos (CSV) los esquemas de educación, salud y el 5% de Agropecuario. 
 
-El Sistema de Información Regional condensa toda la información estadística y espacial del Departamento del Huila en Colombia. Mediante este modelo de datos, se busca cimentar las bases conceptuales de la base de datos del Sistema de Información. 
+El Sistema de Información Regional condensa toda la información estadística y espacial del Departamento del Huila en Colombia. Mediante este modelo de datos, se busca cimentar las bases conceptuales y computacionales de la base de datos del Sistema de Información.
 
-El modelo se encuentra en su versión 0.3 con un total de 18 esquemas y uno público:
+El modelo se encuentra en su versión 0.4 con un total de 18 esquemas y uno público:
 
 1. Agropecuario (18 tablas)
 2. Calidad de vida (2 tablas)
@@ -14,7 +14,7 @@ El modelo se encuentra en su versión 0.3 con un total de 18 esquemas y uno púb
 4. Construcción (4 tablas)
 5. Cultura (21 tablas)
 6. Deportes (2 tablas)
-7. Educación (27 tablas)
+7. Educación (32 tablas)
 8. Electorales (9 tablas)
 9. Empleo (33 tablas)
 10. Finanzas Públicas (5 tablas)
@@ -23,14 +23,24 @@ El modelo se encuentra en su versión 0.3 con un total de 18 esquemas y uno púb
 13. PIB (2 tablas)
 14. Población (11 tablas)
 15. Riesgos (1 tabla)
-16. Salud (25 tablas)
+16. Salud (41 tablas)
 17. Servicios públicos (27 tablas)
 18. SISBEN (16 tablas)
-19. Público (16 tablas)
+19. Público (17 tablas)
 
-El programa con el que corre el modelo es [pgModeler](https://pgmodeler.com.br/). Este software de código abierto es un modelador de bases de datos para PostgreSQL y tiene las bondades de exportar automáticamente el modelo a una base de datos (PostgreSQL), un archivo de base de datos (SQL) o imágenes del modelo (PNG), entre muchas otras. 
+El programa con el que corre el modelo es [pgModeler](https://pgmodeler.com.br/). Este software de código abierto es un modelador de bases de datos para PostgreSQL y tiene las bondades de exportar automáticamente el modelo a una base de datos (PostgreSQL), un archivo de base de datos (SQL) o imágenes del modelo (PNG), entre muchas otras.
 
-La versión en SQL tiene más de 8600 líneas de código. Cada columna, tabla y schema se encuentra comentada bajo el comando "COMMENT ON" con el propósito de tener un diccionario automático de datos con cada versión del modelo.
+La versión en SQL del modelo tiene más de 8600 líneas de código. Cada columna, tabla y schema se encuentra comentada bajo el comando "COMMENT ON" con el propósito de tener un __diccionario automático y actualizado__ de datos con cada versión del modelo.
+
+# Actualización de la base de datos
+
+Para actualizar la base de datos PostgreSQL, es necesario seguir los siguientes pasos:
+
+1. Borrar la base de datos `sirhuila`
+2. Borrar los roles `sirhuila` y `analytics`
+3. Exportar de pgModeler a la Base de datos
+4. Adicionar `analytics` como miembro de `sirhuila`
+5. Correr el archivo script/uploadcsv.sh
 
 La estructura propuesta para la información es:
 
