@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="0.8"
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,3089" last-zoom="0.9"
 	 default-owner="sirhuila">
 <role name="sirhuila"
       createdb="true"
@@ -133,10 +133,6 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="100"/>
 		<comment><![CDATA[Nombres del cultivo]]></comment>
 	</column>
-	<column name="cul_fechaRegistro" not-null="true">
-		<type name="timestamp" length="0"/>
-		<comment><![CDATA[Fecha de registro del cultivo en el sistema]]></comment>
-	</column>
 	<column name="cul_descripcion">
 		<type name="character varying" length="250"/>
 		<comment><![CDATA[Texto que puede dar una breve descripción del cultivo.]]></comment>
@@ -146,7 +142,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="tipo_cultivo">
+<table name="tipo_cultivo" hide-ext-attribs="true">
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipos de cultivos que pueden existir en el sistema]]></comment>
@@ -692,7 +688,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Coberturas de vacunación en menores de 1 año por biológicos según municipios en el departamento.]]></comment>
-	<position x="20" y="3300"/>
+	<position x="420" y="4300"/>
 	<column name="vabi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -704,36 +700,32 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 		<type name="integer" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
-	<column name="vabi_poblacionMeta">
+	<column name="vabi_tipo_biologicos">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Población menor de 1 año meta programática.]]></comment>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_biologicos.]]></comment>
 	</column>
-	<column name="vabi_edadPoblacion" not-null="true">
-		<type name="character varying" length="20"/>
-		<comment><![CDATA[Edad de los menores vacunados.]]></comment>
-	</column>
-	<column name="vabi_codBiologicos">
+	<column name="vabi_tipo_poblacion">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla biologicos.]]></comment>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_poblacion_salud]]></comment>
 	</column>
 	<column name="vabi_vacunados">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Cantidad de menores vacunados]]></comment>
 	</column>
-	<column name="vabi_cobertura" not-null="true">
+	<column name="vabi_cobertura">
 		<type name="double precision" length="0"/>
-		<comment><![CDATA[Porcentaje de menores vacunados]]></comment>
+		<comment><![CDATA[cobertura de vacunación]]></comment>
 	</column>
 	<constraint name="vacunacion_biologicos_pk" type="pk-constr" table="&quot;Salud&quot;.vacunacion_biologicos">
 		<columns names="vabi_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="biologicos" hide-ext-attribs="true">
+<table name="tipo_biologicos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de virus]]></comment>
-	<position x="20" y="3460"/>
+	<position x="740" y="4240"/>
 	<column name="bio_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -742,7 +734,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 		<type name="character varying" length="50"/>
 		<comment><![CDATA[Nombre del Biologico.]]></comment>
 	</column>
-	<constraint name="virus_pk" type="pk-constr" table="&quot;Salud&quot;.biologicos">
+	<constraint name="virus_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_biologicos">
 		<columns names="bio_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -751,7 +743,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Defunciones  por área,sexo y tipo de defunción  por municipio de ocurrencia en el departamento ]]></comment>
-	<position x="480" y="3300"/>
+	<position x="640" y="3320"/>
 	<column name="def_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -767,6 +759,10 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<column name="def_codTipoDefuncion">
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_defuncion.]]></comment>
+	</column>
+	<column name="def_rango_edad">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla edades_rangos]]></comment>
 	</column>
 	<column name="def_codAreaDefuncion">
 		<type name="smallint" length="0"/>
@@ -807,7 +803,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[ Almacena los diferentes tipos de defunción.]]></comment>
-	<position x="480" y="3440"/>
+	<position x="680" y="3480"/>
 	<column name="tdef_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -831,7 +827,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[situación nutricional en menores de cinco años por municipios en el departamento.]]></comment>
-	<position x="20" y="3640"/>
+	<position x="700" y="4060"/>
 	<column name="dnut_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -843,6 +839,10 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<column name="dnut_anio" not-null="true">
 		<type name="integer" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="dnut_edad">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla rangos_edades]]></comment>
 	</column>
 	<column name="dnut_numGlobal">
 		<type name="integer" length="0"/>
@@ -877,7 +877,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Nacimientos por área y sexo según municipio de ocurrencia en el departamento]]></comment>
-	<position x="20" y="3840"/>
+	<position x="340" y="3880"/>
 	<column name="nac_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -898,7 +898,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla genero]]></comment>
 	</column>
-	<column name="nac_numeroCasos">
+	<column name="nac_numero_nacimientos">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Numero de nacimeintos.]]></comment>
 	</column>
@@ -911,7 +911,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[principales causas de mortalidad en el departamento]]></comment>
-	<position x="460" y="3620"/>
+	<position x="980" y="3800"/>
 	<column name="pmort_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -920,13 +920,17 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
-	<column name="pmort_nombre">
-		<type name="character varying" length="250"/>
+	<column name="pmort_tipo_causa">
+		<type name="integer" length="250"/>
 		<comment><![CDATA[Nombre de la causa de mortalidad.]]></comment>
 	</column>
 	<column name="pmort_defunciones">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de defunciones.]]></comment>
+	</column>
+	<column name="pmort_porcentaje">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[porcentaje de moratalidad por causa.]]></comment>
 	</column>
 	<constraint name="mortalidad_principales_pk" type="pk-constr" table="&quot;Salud&quot;.principales_mortalidad">
 		<columns names="pmort_codigo" ref-type="src-columns"/>
@@ -937,10 +941,14 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[principales causas de morbilidad por tipo consulta  en el departamento.]]></comment>
-	<position x="480" y="3740"/>
+	<position x="680" y="3880"/>
 	<column name="pmor_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="pmor_municipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla municipio]]></comment>
 	</column>
 	<column name="pmor_anio" not-null="true">
 		<type name="integer" length="4"/>
@@ -950,24 +958,32 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_consulta.]]></comment>
 	</column>
-	<column name="pmor_nombre">
-		<type name="character varying" length="250"/>
-		<comment><![CDATA[Nombre de la causa de mortalidad.]]></comment>
+	<column name="pmor_tipo_causa">
+		<type name="integer" length="250"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_causa]]></comment>
+	</column>
+	<column name="pmor_edad">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla edades_rangos]]></comment>
 	</column>
 	<column name="pmor_atenciones">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de atenciones por consulta externa.]]></comment>
+	</column>
+	<column name="pmor_porcentaje">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Porcentaje de la causa de morbilidad]]></comment>
 	</column>
 	<constraint name="principales_morbilidad_pk" type="pk-constr" table="&quot;Salud&quot;.principales_morbilidad">
 		<columns names="pmor_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="tipo_consulta">
+<table name="tipo_consulta" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipo de consultas medicas (urgencias, externas, hospitalización, etc)]]></comment>
-	<position x="480" y="3880"/>
+	<position x="1000" y="3900"/>
 	<column name="tcon_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -981,21 +997,28 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="adopciones">
+<table name="adopciones" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
-	<position x="40" y="3960"/>
+	<position x="20" y="3320"/>
 	<column name="ado_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
-	<column name="ado_abiertas">
+	<column name="ado_origen_familia">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla alcance.]]></comment>
 	</column>
-	<column name="ado_determinadas">
+	<column name="ado_pais">
 		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla pais]]></comment>
 	</column>
-	<column name="ado_lugar">
-		<type name="character varying" length="50"/>
+	<column name="ado_tipo_adopcion">
+		<type name="integer" length="50"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_adopcion.]]></comment>
+	</column>
+	<column name="ado_num_adopciones">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de adopciones en el departamento.]]></comment>
 	</column>
 	<constraint name="adopciones_pk" type="pk-constr" table="&quot;Salud&quot;.adopciones">
 		<columns names="ado_codigo" ref-type="src-columns"/>
@@ -1005,7 +1028,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="huerfanos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
-	<position x="480" y="3980"/>
+	<position x="280" y="4480"/>
 	<column name="huer_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -1013,7 +1036,10 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 	</column>
 	<column name="huer_anio" not-null="true">
-		<type name="character varying" length="4"/>
+		<type name="integer" length="4"/>
+	</column>
+	<column name="huer_num_casos">
+		<type name="integer" length="0"/>
 	</column>
 	<constraint name="huerfanos_pk" type="pk-constr" table="&quot;Salud&quot;.huerfanos">
 		<columns names="huer_codigo" ref-type="src-columns"/>
@@ -1024,52 +1050,41 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Cobertura y aseguramiento a los regimenes subsidiado y contributivo por municipios]]></comment>
-	<position x="40" y="4080"/>
+	<position x="0" y="4420"/>
 	<column name="coas_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
-	<column name="coas_codTipoPoblacionCesada">
+	<column name="coas_municipio">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_poblacion_censada]]></comment>
+		<comment><![CDATA[llave foranea que apunta a la tabla municipio.]]></comment>
+	</column>
+	<column name="coas_anio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="coas_cobertura">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[llave foranea que apunta a la tabla tipo_cobertura]]></comment>
+	</column>
+	<column name="coas_tipo_poblacion">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_poblacion_salud]]></comment>
 	</column>
 	<column name="coas_numPersonas">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Cantidad de la población listada en determinada categoría.]]></comment>
-	</column>
-	<column name="coas_numListadosCensales">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Total de SISBEN  1 y 2 mas listados censales]]></comment>
-	</column>
-	<column name="coas_totalAfiliadosSubsidiado">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Total afiliados con  régimen subsdiado.]]></comment>
-	</column>
-	<column name="coas_totalAfiliadosContributivo">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Total afiliados régimen contributivo]]></comment>
-	</column>
-	<column name="coas_porcentajeCobeturaSubsidiado">
-		<type name="double precision" length="0"/>
-		<comment><![CDATA[Porcentaje de cobertura de afiliación de régimen subsidiado.]]></comment>
-	</column>
-	<column name="coas_porcentajeSGSSS">
-		<type name="double precision" length="0"/>
-		<comment><![CDATA[Co AFIL SGSSS ]]></comment>
-	</column>
-	<column name="coas_codPoblacionSensadaMunicipio" not-null="true">
-		<type name="bigint" length="0"/>
 	</column>
 	<constraint name="cobertura_aseguramiento_pk" type="pk-constr" table="&quot;Salud&quot;.cobertura_aseguramiento">
 		<columns names="coas_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="tipo_poblacion_censada">
+<table name="tipo_poblacion_salud" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)]]></comment>
-	<position x="500" y="4120"/>
+	<position x="280" y="4580"/>
 	<column name="tpoce_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1078,19 +1093,23 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="100"/>
 		<comment><![CDATA[Nombre de la población censada.]]></comment>
 	</column>
-	<constraint name="poblacion_censales_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_poblacion_censada">
+	<constraint name="poblacion_censales_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_poblacion_salud">
 		<columns names="tpoce_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="casos_VHI-sida" hide-ext-attribs="true">
+<table name="casos_vih_sida" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Casos de VIH-SIDA]]></comment>
-	<position x="920" y="3440"/>
+	<position x="1020" y="3320"/>
 	<column name="cvih_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="cvih_municipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla municipio.]]></comment>
 	</column>
 	<column name="cvih_anio" not-null="true">
 		<type name="integer" length="4"/>
@@ -1099,16 +1118,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<column name="cvih_numCasos">
 		<type name="integer" length="0"/>
 	</column>
-	<constraint name="casos_VHI-sida_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;casos_VHI-sida&quot;">
+	<constraint name="casos_VHI-sida_pk" type="pk-constr" table="&quot;Salud&quot;.casos_vih_sida">
 		<columns names="cvih_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="vih_genero">
+<table name="vih_genero" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Número de casos de vih por genero.]]></comment>
-	<position x="920" y="3280"/>
+	<position x="1000" y="3420"/>
 	<column name="vihg_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1130,11 +1149,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="vih_viaTransmision" hide-ext-attribs="true">
+<table name="vih_via_transmision" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Vias de transmision de VIH.]]></comment>
-	<position x="900" y="3520"/>
+	<position x="320" y="3520"/>
 	<column name="vihvia_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1151,18 +1170,18 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de casos registrados por cada tipo de transmisión]]></comment>
 	</column>
-	<constraint name="vih_viaTransmision_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
+	<constraint name="vih_viaTransmision_pk" type="pk-constr" table="&quot;Salud&quot;.vih_via_transmision">
 		<columns names="vihvia_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="tipo_transmision">
+<table name="tipo_transmision" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el nombre de los tipos de trasmision.]]></comment>
-	<position x="900" y="3660"/>
+	<position x="960" y="3620"/>
 	<column name="ttrans_codigo" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="smallserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="ttrans_nombre" not-null="true">
@@ -1193,7 +1212,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la calsificación de VIH.]]></comment>
-	<position x="900" y="3760"/>
+	<position x="980" y="3520"/>
 	<column name="vihcla_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1218,7 +1237,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Dengue clásico y dengue grave confirmado por laboratorio, por municipios.]]></comment>
-	<position x="440" y="4440"/>
+	<position x="320" y="3620"/>
 	<column name="den_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1248,7 +1267,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Información sobre el numero de camas, dias camas disponibles, dias camas ocupadas, porcentaje ocupacional, dias estancia egresos, promedio dia estancia y giros de camas por municipios.]]></comment>
-	<position x="880" y="4020"/>
+	<position x="0" y="4020"/>
 	<column name="hos_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1302,7 +1321,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Incidencia de la tuberculosis de todas las formas por municipios en el departamento]]></comment>
-	<position x="620" y="4300"/>
+	<position x="600" y="3660"/>
 	<column name="tub_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1336,7 +1355,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Organismos de salud y número de camas por municipios en el departamento.]]></comment>
-	<position x="920" y="4240"/>
+	<position x="720" y="4400"/>
 	<column name="orsa_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1349,11 +1368,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio]]></comment>
 	</column>
-	<column name="orsa_num_camas">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[Número de camas por municipio]]></comment>
-	</column>
-	<column name="orsa_codTipo_organismos_salud">
+	<column name="orsa_tipo_organismos_salud">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_orsa]]></comment>
 	</column>
@@ -1366,11 +1381,11 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="tipo_orsa">
+<table name="tipo_organismos_salud" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipos de organismos de salud (ESE Hospitales, Centros de salud, Puestos de salud, Clinicas, IPS, etc...)]]></comment>
-	<position x="920" y="4420"/>
+	<position x="740" y="4320"/>
 	<column name="tp_orsa_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1379,7 +1394,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="150"/>
 		<comment><![CDATA[Nombre del tipo de organismo de salud]]></comment>
 	</column>
-	<constraint name="tipo_orsa_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_orsa">
+	<constraint name="tipo_organismos_salud_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_organismos_salud">
 		<columns names="tp_orsa_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -1389,41 +1404,41 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<comment><![CDATA[Esquema educación.]]></comment>
 </schema>
 
-<table name="instituciones_educativas" hide-ext-attribs="true">
+<table name="numero_instituciones_educativas" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento]]></comment>
 	<position x="40" y="1400"/>
-	<column name="ine_codigo" not-null="true">
+	<column name="nine_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
-	<column name="ine_codMunicipio">
+	<column name="nine_codMunicipio">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
 	</column>
-	<column name="ine_anio" not-null="true">
+	<column name="nine_anio" not-null="true">
 		<type name="smallint" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
-	<column name="ine_tipo_institucion">
+	<column name="nine_tipo_institucion">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_institucion]]></comment>
 	</column>
-	<column name="ine_tipo_plantel">
+	<column name="nine_tipo_plantel">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_plantel_educativo.]]></comment>
 	</column>
-	<column name="ine_area">
+	<column name="nine_area">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla area.]]></comment>
 	</column>
-	<column name="ine_num_instituciones">
+	<column name="nine_num_instituciones">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Numero de instituciones, centros educativos y sedes.]]></comment>
 	</column>
-	<constraint name="intituciones_educativas_pk" type="pk-constr" table="&quot;Educacion&quot;.instituciones_educativas">
-		<columns names="ine_codigo" ref-type="src-columns"/>
+	<constraint name="intituciones_educativas_pk" type="pk-constr" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+		<columns names="nine_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -1581,8 +1596,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Puesto que ocupa la institución educativa.]]></comment>
 	</column>
 	<column name="cies_institucion_educativa">
-		<type name="character varying" length="250"/>
-		<comment><![CDATA[Nombre de la institución educativa]]></comment>
+		<type name="integer" length="250"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla instituciones_de_educacion.]]></comment>
 	</column>
 	<column name="cies_codMunicipio">
 		<type name="integer" length="0"/>
@@ -1609,7 +1624,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Comportamiento de los alumnos en cuanto a aprobados, reprobados, desertores por municipios en el departamento del huila.]]></comment>
-	<position x="0" y="1960"/>
+	<position x="0" y="1880"/>
 	<column name="coal_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1667,44 +1682,44 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.]]></comment>
 	<position x="480" y="1840"/>
-	<column name="dau_codigo" not-null="true">
+	<column name="dou_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
-	<column name="dau_anio" not-null="true">
+	<column name="dou_anio" not-null="true">
 		<type name="smallint" length="4"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
 	</column>
-	<column name="dau_universidad">
+	<column name="dou_universidad">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla universidad.]]></comment>
+		<comment><![CDATA[Llave foránea que apunta a la tabla instituciones_de_educacion.]]></comment>
 	</column>
-	<column name="dau_semestre">
+	<column name="dou_semestre">
 		<type name="smallint" length="2"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla semestre.]]></comment>
 	</column>
-	<column name="dau_nivel_educacion_superior">
+	<column name="dou_nivel_educacion_superior">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla nivel_educacion_superior.]]></comment>
 	</column>
-	<column name="dau_programa">
+	<column name="dou_programa">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla programa.]]></comment>
 	</column>
-	<column name="dau_categoria_personalU">
+	<column name="dou_categoria_personalU">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla categoria_personalU.]]></comment>
 	</column>
-	<column name="dau_genero">
+	<column name="dou_genero">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla genero.]]></comment>
 	</column>
-	<column name="dau_num_personalU">
+	<column name="dou_num_personalU">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Número de personas inscritas, matriculadas, docentes, egresados, graduados.]]></comment>
+		<comment><![CDATA[Número de docentes.]]></comment>
 	</column>
 	<constraint name="docentes_universidades_pk" type="pk-constr" table="&quot;Educacion&quot;.docentes_universidades">
-		<columns names="dau_codigo" ref-type="src-columns"/>
+		<columns names="dou_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -1712,7 +1727,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de los diferentes programas de las universidades.]]></comment>
-	<position x="0" y="2200"/>
+	<position x="0" y="2100"/>
 	<column name="pro_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1726,21 +1741,49 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="universidad" hide-ext-attribs="true">
+<table name="instituciones_educativas" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
-	<comment><![CDATA[Almacena los nombres de las diferentes universidades.]]></comment>
-	<position x="0" y="2320"/>
-	<column name="uni_codigo" not-null="true">
+	<comment><![CDATA[Almacena los nombres de las diferentes instituciones educativas, colegios, escuelas,universidades.]]></comment>
+	<position x="0" y="2180"/>
+	<column name="ined_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
-	<column name="uni_nombre" not-null="true">
-		<type name="character varying" length="250"/>
-		<comment><![CDATA[Nombre de las distintas universidades en el departamento]]></comment>
+	<column name="ined_codDane">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Codigo Dane que corresponde a cada institución]]></comment>
 	</column>
-	<constraint name="universidad_pk" type="pk-constr" table="&quot;Educacion&quot;.universidad">
-		<columns names="uni_codigo" ref-type="src-columns"/>
+	<column name="ined_codMunicipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio.]]></comment>
+	</column>
+	<column name="ined_nombre" not-null="true">
+		<type name="character varying" length="250"/>
+		<comment><![CDATA[Nombre de las distintas instituciones educativas en el departamento]]></comment>
+	</column>
+	<column name="ined_tipo_institucion">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_institucion.]]></comment>
+	</column>
+	<column name="ined_area">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla area.]]></comment>
+	</column>
+	<column name="ined_direccion">
+		<type name="character varying" length="300"/>
+		<comment><![CDATA[DIreción del establecimiento educativo]]></comment>
+	</column>
+	<column name="ined_lati">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Cordenadas de latitud]]></comment>
+	</column>
+	<column name="ined_long">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Coordenadas de longuitud.]]></comment>
+	</column>
+	<constraint name="Instituciones_educativas_pk" type="pk-constr" table="&quot;Educacion&quot;.instituciones_educativas">
+		<columns names="ined_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -1755,7 +1798,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</column>
 	<column name="cpu_nombre" not-null="true">
 		<type name="character varying" length="150"/>
-		<comment><![CDATA[Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.]]></comment>
+		<comment><![CDATA[Nombre de las distintas categorias de las personal docente, catedrático, tiempo completo, medio tiempo u ocasional.]]></comment>
 	</column>
 	<constraint name="categoria_personalU_pk" type="pk-constr" table="&quot;Educacion&quot;.categoria_personal">
 		<columns names="cpu_codigo" ref-type="src-columns"/>
@@ -1982,7 +2025,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene las diferentes materias vistas por los estuadiantes de colegios y evaluadas por el icfes.]]></comment>
-	<position x="920" y="2040"/>
+	<position x="880" y="2080"/>
 	<column name="mate_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2716,7 +2759,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla de los programas con mayor demanda a nivel nacional y departamental]]></comment>
-	<position x="40" y="2420"/>
+	<position x="0" y="2360"/>
 	<column name="tpu_codigo" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -2728,13 +2771,16 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foránea que apunta a la tabla alcance.]]></comment>
 	</column>
+	<column name="tpu_programa">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla programa.]]></comment>
+	</column>
 	<column name="tpu_puesto">
 		<type name="smallint" length="0"/>
 		<comment><![CDATA[numero de puesto en el que se encuentra el programa]]></comment>
 	</column>
-	<column name="tpu_programa">
+	<column name="tpu_num_matriculas">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Llave foránea que apunta a la tabla programa.]]></comment>
 	</column>
 	<constraint name="top_programas_universitarios_pk" type="pk-constr" table="&quot;Educacion&quot;.top_programas_universitarios">
 		<columns names="tpu_codigo" ref-type="src-columns"/>
@@ -2745,7 +2791,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la oferta educativa del sena]]></comment>
-	<position x="440" y="2200"/>
+	<position x="460" y="2140"/>
 	<column name="sen_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -2823,7 +2869,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[matriculas por niveles, origen departamental,municipal, genero, nivel de educación superior]]></comment>
-	<position x="440" y="2360"/>
+	<position x="460" y="2320"/>
 	<column name="matu_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3417,7 +3463,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Calidad de vida&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el coeficiente GINI, pobreza, pobreza extrema por departamentos]]></comment>
-	<position x="80" y="2720"/>
+	<position x="3820" y="2360"/>
 	<column name="dcv_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -3451,7 +3497,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Calidad de vida&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la pobreza monetaria del departamento del huila]]></comment>
-	<position x="40" y="2880"/>
+	<position x="3780" y="2520"/>
 	<column name="pmo_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6599,7 +6645,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="densidad_poblacion" hide-ext-attribs="true">
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
-	<position x="460" y="2740"/>
+	<position x="2640" y="2860"/>
 	<column name="depo_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6641,7 +6687,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los diferentes tipos de hogares.]]></comment>
-	<position x="760" y="2760"/>
+	<position x="2940" y="2880"/>
 	<column name="tho_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6659,7 +6705,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de hogares desplazados por tipo.]]></comment>
-	<position x="1040" y="2760"/>
+	<position x="3220" y="2880"/>
 	<column name="hod_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6689,7 +6735,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de los diferentes tipos de población desplazada.]]></comment>
-	<position x="460" y="2900"/>
+	<position x="2640" y="3020"/>
 	<column name="tpde_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6707,7 +6753,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas desplazadas por tipo.]]></comment>
-	<position x="760" y="2860"/>
+	<position x="2940" y="2980"/>
 	<column name="pood_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6737,7 +6783,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene los nombres de las diferentes tipos de etnias.]]></comment>
-	<position x="1140" y="2900"/>
+	<position x="3320" y="3020"/>
 	<column name="tet_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6755,7 +6801,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero de personas por etnia en los muncipios]]></comment>
-	<position x="460" y="2980"/>
+	<position x="2640" y="3100"/>
 	<column name="poet_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6785,7 +6831,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene el numero poblacion NBI (Necesidades Basicas Insatisfechas) y el porcentaje segun DANE.]]></comment>
-	<position x="900" y="2980"/>
+	<position x="3080" y="3100"/>
 	<column name="nbi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6815,7 +6861,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene la poblacion por grupos quinquenales por edad.]]></comment>
-	<position x="460" y="3100"/>
+	<position x="2640" y="3220"/>
 	<column name="pgq_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6845,7 +6891,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Tabla que contiene la población por sexo.]]></comment>
-	<position x="760" y="3100"/>
+	<position x="2940" y="3220"/>
 	<column name="poge_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6875,7 +6921,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="poblacion"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene la proyección de la población en el departamento 2010-2020.]]></comment>
-	<position x="1060" y="3100"/>
+	<position x="3240" y="3220"/>
 	<column name="pyp_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -6901,27 +6947,43 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="poblacion_censada_municipio">
+<table name="datos_poblacion_censada_municipio" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
-	<position x="40" y="4340"/>
-	<column name="psm_codigo" not-null="true">
+	<position x="0" y="4220"/>
+	<column name="dpcm_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
-	<column name="psm_codMunicipio" not-null="true">
-		<type name="smallint" length="0"/>
-	</column>
-	<column name="psm_anio" not-null="true">
-		<type name="smallint" length="0"/>
-	</column>
-	<column name="psm_poblacionTotal">
+	<column name="dpcm_codMunicipio" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="psm_poblacionSisben">
+	<column name="dpcm_anio" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dpcm_poblacionTotal">
 		<type name="integer" length="0"/>
 	</column>
-	<constraint name="poblacion_sensada_municipio_pk" type="pk-constr" table="&quot;Salud&quot;.poblacion_censada_municipio">
-		<columns names="psm_codigo" ref-type="src-columns"/>
+	<column name="dpcm_poblacionSisben">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dpcm_afiliados_subsidiado">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Total afiliados con  régimen subsdiado.]]></comment>
+	</column>
+	<column name="dpcm_afiliados_contributivo">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Total afiliados régimen contributivo]]></comment>
+	</column>
+	<column name="dpcm_porcentaje_sgsss">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Co AFIL SGSSS ]]></comment>
+	</column>
+	<column name="dpcm_porcentaje_cobertura_subsidiado">
+		<type name="double precision" length="0"/>
+		<comment><![CDATA[Porcentaje de cobertura de afiliación de régimen subsidiado.]]></comment>
+	</column>
+	<constraint name="datos_poblacion_censada_municipio_pk" type="pk-constr" table="&quot;Salud&quot;.datos_poblacion_censada_municipio">
+		<columns names="dpcm_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -6929,7 +6991,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de la clasificación del VIH]]></comment>
-	<position x="880" y="3940"/>
+	<position x="680" y="3580"/>
 	<column name="vicla_codigo" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -7062,6 +7124,586 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<constraint name="des_codigo_pk" type="pk-constr" table="&quot;Riesgos&quot;.desastres">
 		<columns names="des_codigo" ref-type="src-columns"/>
 		<comment><![CDATA[Restricción de llave primaria]]></comment>
+	</constraint>
+</table>
+
+<table name="categoria_registro" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Almacena los nombres de las diferentes categorias de personas que tiene la universidad.]]></comment>
+	<position x="460" y="2520"/>
+	<column name="creg_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="creg_nombre" not-null="true">
+		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.]]></comment>
+	</column>
+	<constraint name="categoria_registro_pk" type="pk-constr" table="&quot;Educacion&quot;.categoria_registro">
+		<columns names="creg_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="registro_universidades" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.]]></comment>
+	<position x="860" y="2520"/>
+	<column name="runi_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="runi_anio" not-null="true">
+		<type name="smallint" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="runi_universidad">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla instituciones_de_educacion.]]></comment>
+	</column>
+	<column name="runi_semestre">
+		<type name="smallint" length="2"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla semestre.]]></comment>
+	</column>
+	<column name="runi_nivel_educacion_superior">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla nivel_educacion_superior.]]></comment>
+	</column>
+	<column name="runi_programa">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla programa.]]></comment>
+	</column>
+	<column name="runi_categoria_registro">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla categoria_registro]]></comment>
+	</column>
+	<column name="runi_genero">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla genero.]]></comment>
+	</column>
+	<column name="runi_num_personas">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de personas inscritas, matriculadas, docentes, egresados, graduados.]]></comment>
+	</column>
+	<constraint name="registro_universidades_pk" type="pk-constr" table="&quot;Educacion&quot;.registro_universidades">
+		<columns names="runi_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="defunciones_menores" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[defunciones de menores comparando con los nacidos vivos]]></comment>
+	<position x="20" y="3880"/>
+	<column name="defm_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="defm_codMunicipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta la tabla municipio.]]></comment>
+	</column>
+	<column name="defm_anio" not-null="true">
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="defm_tipo_defuncion">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_defuncion.]]></comment>
+	</column>
+	<column name="defm_num_defunciones">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de defunciones]]></comment>
+	</column>
+	<column name="defm_num_nacidoVivos">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero de nacidos vivos]]></comment>
+	</column>
+	<constraint name="defunciones_menores_pk" type="pk-constr" table="&quot;Salud&quot;.defunciones_menores">
+		<columns names="defm_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_adopcion" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[ Almacena los diferentes tipos de adopción.]]></comment>
+	<position x="20" y="3440"/>
+	<column name="tpad_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tpad_nombre">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Nombre del tipo de adopción.]]></comment>
+	</column>
+	<constraint name="tipo_adopcion_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_adopcion">
+		<columns names="tpad_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="pais" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Tabla que contiene los distintos paises.]]></comment>
+	<position x="1500" y="1940"/>
+	<column name="pais_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="pais_nombre">
+		<type name="character varying" length="200"/>
+		<comment><![CDATA[Nombre de cada pais.]]></comment>
+	</column>
+	<constraint name="pais_pk" type="pk-constr" table="public.pais">
+		<columns names="pais_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="atencion_extra_menorFamilia" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Tabla que contiene los datos de atención extrajudicial del menor y la familia.]]></comment>
+	<position x="320" y="3320"/>
+	<column name="atem_codigo" not-null="true">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="atem_municipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla municipio.]]></comment>
+	</column>
+	<column name="atem_anio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[llave foranea que apunta a la tabla anio]]></comment>
+	</column>
+	<column name="atem_tipo_atencion_extra">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_atencion_extra]]></comment>
+	</column>
+	<column name="atem_tipo_dato_atencion">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_dato_atencion]]></comment>
+	</column>
+	<column name="atem_numero">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero de datos para la atención extrajudicial del menor y la familia.]]></comment>
+	</column>
+	<constraint name="atencion_extra_menorFamilia_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;">
+		<columns names="atem_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_atencion_extra" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[ Almacena los diferentes tipos de dea tención extrajudicial.]]></comment>
+	<position x="340" y="3440"/>
+	<column name="tpat_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tpat_nombre">
+		<type name="character varying" length="100"/>
+		<comment><![CDATA[Nombre del tipo de atención si es reconocimiento voluntario de la pternidad, alimentos, custodia y cuidado personal, etc...]]></comment>
+	</column>
+	<constraint name="tipo_atencion_extra_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_atencion_extra">
+		<columns names="tpat_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_dato_atencion" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[ Almacena los diferentes tipos de datos de la atención extrajudicial.]]></comment>
+	<position x="20" y="3520"/>
+	<column name="tpda_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tpda_nombre">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Nombre del tipo de atención si es el número de menores o una demanda.]]></comment>
+	</column>
+	<constraint name="tipo_dato_atencion_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_dato_atencion">
+		<columns names="tpda_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="vih_casos_mes" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Tabla que contiene los casos de VIH por mes]]></comment>
+	<position x="980" y="3700"/>
+	<column name="vihm_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="vihm_anio" not-null="true">
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="vihm_mes">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla mes.]]></comment>
+	</column>
+	<column name="vihm_numeroCasos">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="vih_casos_mes_pk" type="pk-constr" table="&quot;Salud&quot;.vih_casos_mes">
+		<columns names="vihm_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="vih_casos_rango" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Tabla que contiene los casos de VIH por rango de edades]]></comment>
+	<position x="20" y="3620"/>
+	<column name="vihr_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="vihr_anio" not-null="true">
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="vihr_rango">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla edades_rangos]]></comment>
+	</column>
+	<column name="vihr_numeroCasos">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="vih_casos_rango_pk" type="pk-constr" table="&quot;Salud&quot;.vih_casos_rango">
+		<columns names="vihr_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="modelo_atencion_icbf" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[tabla que contiene el numero de casos en los diferentes modelos de atención del ICBF.]]></comment>
+	<position x="20" y="3740"/>
+	<column name="mai_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="mai_codMunicipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
+	</column>
+	<column name="mai_anio" not-null="true">
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="mai_tipo_modalidades">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_modalidades_icbf]]></comment>
+	</column>
+	<column name="mai_tipo_dato_modalidad">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_datos_modalidades_icbf]]></comment>
+	</column>
+	<column name="mai_numero">
+		<type name="bigint" length="0"/>
+		<comment><![CDATA[Número de casos atentidos]]></comment>
+	</column>
+	<constraint name="modelo_atencion_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.modelo_atencion_icbf">
+		<columns names="mai_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_modalidades_icbf" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[ Almacena los diferentes tipos de dea tención extrajudicial.]]></comment>
+	<position x="660" y="3800"/>
+	<column name="tpmi_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tpmi_nombre">
+		<type name="character varying" length="100"/>
+		<comment><![CDATA[Nombre del tipo de atención si es, HCB TIEMPO COMPLETO, CDI MODALIDAD SIN ARRIENDO INFRAESTRUCTURA ICBF, CDI MODALIDAD  CON ARREINDO, CDI MODALIDAD  FAMILIAR SIN ARRIENDO, etc..
+]]></comment>
+	</column>
+	<constraint name="tipo_modalidaes_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_modalidades_icbf">
+		<columns names="tpmi_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_dato_modalidades_icbf" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[ Almacena los diferentes tipos de datos de las modalidades del ICBF.]]></comment>
+	<position x="380" y="3800"/>
+	<column name="tpdm_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tpdm_nombre">
+		<type name="character varying" length="50"/>
+		<comment><![CDATA[Nombre del tipo de atención si es UD, presupuesto, usuarios.]]></comment>
+	</column>
+	<constraint name="tipo_dato_modalidades_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_dato_modalidades_icbf">
+		<columns names="tpdm_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="educacion_adultos" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[matriculas por niveles, instituciones en los municipios del departamento para la poblacion adulta.]]></comment>
+	<position x="0" y="2500"/>
+	<column name="educ_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="educ_municipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio,]]></comment>
+	</column>
+	<column name="educ_anio">
+		<type name="smallint" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="educ_nivel_educativo">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_nivel_educativo.]]></comment>
+	</column>
+	<column name="educ_tipo_institucion">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_institucion.]]></comment>
+	</column>
+	<column name="educ_grado">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla grado.]]></comment>
+	</column>
+	<column name="educ_area">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla area.]]></comment>
+	</column>
+	<column name="educ_num_matriculas">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero matriculas en los municipios para la poblacion adulta.]]></comment>
+	</column>
+	<constraint name="educacion_adultos_pk" type="pk-constr" table="&quot;Educacion&quot;.educacion_adultos">
+		<columns names="educ_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ciclos_educativos" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Almacena los nombres de los ciclos de educación.]]></comment>
+	<position x="460" y="2600"/>
+	<column name="cie_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="cie_nombre" not-null="true">
+		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre de los diferentes ciclos de educación, del programa nacional de alfabetización.]]></comment>
+	</column>
+	<constraint name="ciclos_educativos_pk" type="pk-constr" table="&quot;Educacion&quot;.ciclos_educativos">
+		<columns names="cie_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_dato_pna" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Almacena los nombres del tipo de dato del Programa nacional de alfabetizacion.]]></comment>
+	<position x="0" y="2660"/>
+	<column name="tpdp_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tpdp_nombre" not-null="true">
+		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre de los diferentes tipos de datos como alfabetizadores, matriculados por ciclos y instituciones educativas.]]></comment>
+	</column>
+	<constraint name="tipo_dato_pna_pk" type="pk-constr" table="&quot;Educacion&quot;.tipo_dato_pna">
+		<columns names="tpdp_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="programa_nacional_alfabetizacion" hide-ext-attribs="true">
+	<schema name="&quot;Educacion&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Tabla que almacena la información del programa nacional de alfabetización.]]></comment>
+	<position x="0" y="2740"/>
+	<column name="pna_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="pna_municipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio,]]></comment>
+	</column>
+	<column name="pna_anio">
+		<type name="smallint" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="pna_tipo_dato">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla tipo_dato_pna]]></comment>
+	</column>
+	<column name="pna_ciclo">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla ciclos_educativos]]></comment>
+	</column>
+	<column name="pna_area">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla area.]]></comment>
+	</column>
+	<column name="pna_numero">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Numero de personas matriculadas por ciclo, alfabetizadores, instituciones educativas.]]></comment>
+	</column>
+	<constraint name="programa_nacional_alfabetizacion_pk" type="pk-constr" table="&quot;Educacion&quot;.programa_nacional_alfabetizacion">
+		<columns names="pna_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="negocios_iniciados_juzgados_icbf" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Incidencia de la tuberculosis de todas las formas por municipios en el departamento]]></comment>
+	<position x="360" y="4060"/>
+	<column name="niji_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="niji_codMunicipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla municipio]]></comment>
+	</column>
+	<column name="niji_anio" not-null="true">
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="niji_tipo_modalidades">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_modalidades_icbf]]></comment>
+	</column>
+	<column name="niji_tipo_dato_modalidad">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_datos_modalidades_icbf]]></comment>
+	</column>
+	<column name="niji_numero">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Número de casos iniciados y reiniciados]]></comment>
+	</column>
+	<constraint name="negocios_iniciados_juzgados_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
+		<columns names="niji_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Poblacion_vacunacion" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Poblacion de menores para vacunación.]]></comment>
+	<position x="720" y="4520"/>
+	<column name="pva_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="pva_codMunicipio">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="pva_anio" not-null="true">
+		<type name="integer" length="4"/>
+		<comment><![CDATA[Llave foránea que apunta a la tabla anio.]]></comment>
+	</column>
+	<column name="pva_tipo_poblacion">
+		<type name="integer" length="20"/>
+		<comment><![CDATA[llave foranea que apunta a la tabla tipo_poblacion]]></comment>
+	</column>
+	<column name="pva_poblacionMeta">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Población menor  meta programática.]]></comment>
+	</column>
+	<constraint name="Poblacion_vacunacion_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;">
+		<columns names="pva_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_causa_morbilidad" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Almacena las diferentes tipo de causas de morbibilidad]]></comment>
+	<position x="1040" y="3980"/>
+	<column name="tcam_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tcam_nombre">
+		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre de la causa de morbilidad.]]></comment>
+	</column>
+	<constraint name="tipo_causa_morbilidad_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_causa_morbilidad">
+		<columns names="tcam_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_causa_mortalidad" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[Almacena las diferentes tipo de causas de morbibilidad]]></comment>
+	<position x="1060" y="4280"/>
+	<column name="tcamt_codigo" not-null="true">
+		<type name="serial" length="0"/>
+		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
+	</column>
+	<column name="tcamt_nombre">
+		<type name="character varying" length="150"/>
+		<comment><![CDATA[Nombre de la causa de la mortalidad.]]></comment>
+	</column>
+	<constraint name="tipo_causa_mortalidad_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_causa_mortalidad">
+		<columns names="tcamt_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mortalidad_materna" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[tabla que contiene la mortalidad materna por municipio]]></comment>
+	<position x="1020" y="4540"/>
+	<column name="mma_codigo" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="mma_codMunicipio">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="mma_anio" not-null="true">
+		<type name="integer" length="4"/>
+	</column>
+	<column name="mma_casos">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="mortalidad_materna_pk" type="pk-constr" table="&quot;Salud&quot;.mortalidad_materna">
+		<columns names="mma_codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipo_cobertura" hide-ext-attribs="true">
+	<schema name="&quot;Salud&quot;"/>
+	<role name="sirhuila"/>
+	<comment><![CDATA[tabla que contiene si pertenece o no al sisben]]></comment>
+	<position x="0" y="4580"/>
+	<column name="tpco_codigo" not-null="true">
+		<type name="smallserial" length="0"/>
+		<comment><![CDATA[Codigo de identificación de cada registro.]]></comment>
+	</column>
+	<column name="tpco_nombre">
+		<type name="character varying" length="100"/>
+		<comment><![CDATA[si es con sisben o sin sisben.]]></comment>
+	</column>
+	<constraint name="tipo_cobertura_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_cobertura">
+		<columns names="tpco_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -7259,8 +7901,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_vacunacion-codVirus" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.biologicos" table="&quot;Salud&quot;.vacunacion_biologicos">
-	<columns names="vabi_codBiologicos" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_biologicos" table="&quot;Salud&quot;.vacunacion_biologicos">
+	<columns names="vabi_tipo_biologicos" ref-type="src-columns"/>
 	<columns names="bio_codigo" ref-type="dst-columns"/>
 </constraint>
 
@@ -7268,6 +7910,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vacunacion_biologicos">
 	<columns names="vabi_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_vacunacion_tipo_poblacion" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_poblacion_salud" table="&quot;Salud&quot;.vacunacion_biologicos">
+	<columns names="vabi_tipo_poblacion" ref-type="src-columns"/>
+	<columns names="tpoce_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_defunciones-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
@@ -7300,6 +7948,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_defuncion_rango_edad" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.edades_rangos" table="&quot;Salud&quot;.defunciones">
+	<columns names="def_rango_edad" ref-type="src-columns"/>
+	<columns names="edr_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_desnutricion-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.desnutricion">
 	<columns names="dnut_codMunicipio" ref-type="src-columns"/>
@@ -7310,6 +7964,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.desnutricion">
 	<columns names="dnut_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_desnutricion_edad" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.edades_rangos" table="&quot;Salud&quot;.desnutricion">
+	<columns names="dnut_edad" ref-type="src-columns"/>
+	<columns names="edr_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_nacimientos-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
@@ -7342,6 +8002,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_mortalidad_tipo_causa" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_causa_mortalidad" table="&quot;Salud&quot;.principales_mortalidad">
+	<columns names="pmort_tipo_causa" ref-type="src-columns"/>
+	<columns names="tcamt_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_morbilidad-tipoConsulta" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_consulta" table="&quot;Salud&quot;.principales_morbilidad">
 	<columns names="pmor_tipoConsulta" ref-type="src-columns"/>
@@ -7354,28 +8020,88 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_morbilidad_causa" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_causa_morbilidad" table="&quot;Salud&quot;.principales_morbilidad">
+	<columns names="pmor_tipo_causa" ref-type="src-columns"/>
+	<columns names="tcam_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_morbilidad_edad" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.edades_rangos" table="&quot;Salud&quot;.principales_morbilidad">
+	<columns names="pmor_edad" ref-type="src-columns"/>
+	<columns names="edr_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_morbilidad_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.principales_morbilidad">
+	<columns names="pmor_municipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adopciones_alcance" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.alcance" table="&quot;Salud&quot;.adopciones">
+	<columns names="ado_origen_familia" ref-type="src-columns"/>
+	<columns names="alc_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adopciones_pais" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.pais" table="&quot;Salud&quot;.adopciones">
+	<columns names="ado_pais" ref-type="src-columns"/>
+	<columns names="pais_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adopciones_tipo_adopcion" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_adopcion" table="&quot;Salud&quot;.adopciones">
+	<columns names="ado_tipo_adopcion" ref-type="src-columns"/>
+	<columns names="tpad_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_huerfnos-codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.huerfanos">
 	<columns names="huer_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_huerfanos_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.huerfanos">
+	<columns names="huer_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_coberturaPoblacion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_poblacion_censada" table="&quot;Salud&quot;.cobertura_aseguramiento">
-	<columns names="coas_codTipoPoblacionCesada" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_poblacion_salud" table="&quot;Salud&quot;.cobertura_aseguramiento">
+	<columns names="coas_tipo_poblacion" ref-type="src-columns"/>
 	<columns names="tpoce_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.poblacion_censada_municipio" table="&quot;Salud&quot;.cobertura_aseguramiento">
-	<columns names="coas_codPoblacionSensadaMunicipio" ref-type="src-columns"/>
-	<columns names="psm_codigo" ref-type="dst-columns"/>
+<constraint name="fk_cobertura_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.cobertura_aseguramiento">
+	<columns names="coas_municipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_cobertura_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.cobertura_aseguramiento">
+	<columns names="coas_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_cobertura_cobertura" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_cobertura" table="&quot;Salud&quot;.cobertura_aseguramiento">
+	<columns names="coas_cobertura" ref-type="src-columns"/>
+	<columns names="tpco_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_vih_sida_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;casos_VHI-sida&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.casos_vih_sida">
 	<columns names="cvih_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_vih_sida_casos_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.casos_vih_sida">
+	<columns names="cvih_municipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_VIHgenego-genero" type="fk-constr" comparison-type="MATCH FULL"
@@ -7391,13 +8117,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_transmisionVIH-tipoTransmision" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_transmision" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_transmision" table="&quot;Salud&quot;.vih_via_transmision">
 	<columns names="vihvia_codTipoTransmision" ref-type="src-columns"/>
 	<columns names="ttrans_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_via_trasmision_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_via_transmision">
 	<columns names="vihvia_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -7457,8 +8183,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_codTipo_organismos_salud" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_orsa" table="&quot;Salud&quot;.organismos_salud">
-	<columns names="orsa_codTipo_organismos_salud" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_organismos_salud" table="&quot;Salud&quot;.organismos_salud">
+	<columns names="orsa_tipo_organismos_salud" ref-type="src-columns"/>
 	<columns names="tp_orsa_codigo" ref-type="dst-columns"/>
 </constraint>
 
@@ -7469,32 +8195,32 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_intituciones_educativas_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.instituciones_educativas">
-	<columns names="ine_codMunicipio" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+	<columns names="nine_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_tp_plantel" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_plantel_educativo" table="&quot;Educacion&quot;.instituciones_educativas">
-	<columns names="ine_tipo_plantel" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_plantel_educativo" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+	<columns names="nine_tipo_plantel" ref-type="src-columns"/>
 	<columns names="tpe_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_area" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="&quot;Educacion&quot;.instituciones_educativas">
-	<columns names="ine_area" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+	<columns names="nine_area" ref-type="src-columns"/>
 	<columns names="are_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.instituciones_educativas">
-	<columns names="ine_tipo_institucion" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+	<columns names="nine_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.instituciones_educativas">
-	<columns names="ine_anio" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+	<columns names="nine_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
@@ -7558,6 +8284,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="sem_codigo" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_clas_icfes_estab_edu_instituciones_educacion" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.instituciones_educativas" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
+	<columns names="cies_institucion_educativa" ref-type="src-columns"/>
+	<columns names="ined_codigo" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="fk_comportamiento_alumnos_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.comportamiento_alumnos">
 	<columns names="coal_codMunicipio" ref-type="src-columns"/>
@@ -7576,46 +8308,64 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_universidad" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.universidad" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_universidad" ref-type="src-columns"/>
-	<columns names="uni_codigo" ref-type="dst-columns"/>
+<constraint name="fk_docentes_universidades_instituciones_educativas" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.instituciones_educativas" table="&quot;Educacion&quot;.docentes_universidades">
+	<columns names="dou_universidad" ref-type="src-columns"/>
+	<columns names="ined_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_nedusuperior" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="fk_docentes_universidades_nedusuperior" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_nivel_educacion_superior" ref-type="src-columns"/>
+	<columns names="dou_nivel_educacion_superior" ref-type="src-columns"/>
 	<columns names="tpne_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_programa" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="fk_docentes_universidades_programa" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.programa" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_programa" ref-type="src-columns"/>
+	<columns names="dou_programa" ref-type="src-columns"/>
 	<columns names="pro_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_categoria_personalU" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="fk_docentes_universidades_categoria_personalU" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.categoria_personal" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_categoria_personalU" ref-type="src-columns"/>
+	<columns names="dou_categoria_personalU" ref-type="src-columns"/>
 	<columns names="cpu_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_genero" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="fk_docentes_universidades_genero" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.genero" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_genero" ref-type="src-columns"/>
+	<columns names="dou_genero" ref-type="src-columns"/>
 	<columns names="gen_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_anio" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="fk_docentes_universidades_anio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_anio" ref-type="src-columns"/>
+	<columns names="dou_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_datos_universidades_semestre" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="fk_docentes_universidades_semestre" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.semestre" table="&quot;Educacion&quot;.docentes_universidades">
-	<columns names="dau_semestre" ref-type="src-columns"/>
+	<columns names="dou_semestre" ref-type="src-columns"/>
 	<columns names="sem_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_inst_educa_tipo" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.instituciones_educativas">
+	<columns names="ined_tipo_institucion" ref-type="src-columns"/>
+	<columns names="tpin_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_inst_educ_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.instituciones_educativas">
+	<columns names="ined_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_inst_educ_area" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="&quot;Educacion&quot;.instituciones_educativas">
+	<columns names="ined_area" ref-type="src-columns"/>
+	<columns names="are_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_directivos_docentes_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
@@ -9395,9 +10145,15 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_poblacionCesadaMunicipio_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.poblacion_censada_municipio">
-	<columns names="psm_anio" ref-type="src-columns"/>
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.datos_poblacion_censada_municipio">
+	<columns names="dpcm_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_poblacionCesadaMunicipio_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.datos_poblacion_censada_municipio">
+	<columns names="dpcm_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_edad_escolar_municipio" type="fk-constr" comparison-type="MATCH FULL"
@@ -9429,6 +10185,258 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="des_codMunicipio" ref-type="src-columns"/>
 	<columns names="mun_codigo" ref-type="dst-columns"/>
 		<comment><![CDATA[Llave foránea que conecta con el municipio]]></comment>
+</constraint>
+
+<constraint name="fk_registro_universidades_instituciones_educativas" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.instituciones_educativas" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_universidad" ref-type="src-columns"/>
+	<columns names="ined_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_registro_universidades_nedusuperior" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_nivel_educacion_superior" ref-type="src-columns"/>
+	<columns names="tpne_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_registro_universidades_programa" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.programa" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_programa" ref-type="src-columns"/>
+	<columns names="pro_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_registro_universidades_categoria_registro" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.categoria_registro" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_categoria_registro" ref-type="src-columns"/>
+	<columns names="creg_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_registro_universidades_genero" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.genero" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_genero" ref-type="src-columns"/>
+	<columns names="gen_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_registro_universidades_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_registro_universidades_semestre" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.semestre" table="&quot;Educacion&quot;.registro_universidades">
+	<columns names="runi_semestre" ref-type="src-columns"/>
+	<columns names="sem_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_defunciones_menores_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.defunciones_menores">
+	<columns names="defm_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_defuncion_menores_tipo" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_defuncion" table="&quot;Salud&quot;.defunciones_menores">
+	<columns names="defm_tipo_defuncion" ref-type="src-columns"/>
+	<columns names="tdef_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_defunciones_menores_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.defunciones_menores">
+	<columns names="defm_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_atencion_extra_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;">
+	<columns names="atem_municipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_atencion_extra_tipo" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_atencion_extra" table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;">
+	<columns names="atem_tipo_atencion_extra" ref-type="src-columns"/>
+	<columns names="tpat_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_atencion_extra_dato" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_dato_atencion" table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;">
+	<columns names="atem_tipo_dato_atencion" ref-type="src-columns"/>
+	<columns names="tpda_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_atencion_extra_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;">
+	<columns names="atem_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_vih_mes_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_casos_mes">
+	<columns names="vihm_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_mes" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.mes" table="&quot;Salud&quot;.vih_casos_mes">
+	<columns names="vihm_mes" ref-type="src-columns"/>
+	<columns names="mes_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_vih_rango_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_casos_rango">
+	<columns names="vihr_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_rango" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.edades_rangos" table="&quot;Salud&quot;.vih_casos_rango">
+	<columns names="vihr_rango" ref-type="src-columns"/>
+	<columns names="edr_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_modelo_icbf_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.modelo_atencion_icbf">
+	<columns names="mai_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_modelo_icbf_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.modelo_atencion_icbf">
+	<columns names="mai_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_modelo_icbf_modalidades" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_modalidades_icbf" table="&quot;Salud&quot;.modelo_atencion_icbf">
+	<columns names="mai_tipo_modalidades" ref-type="src-columns"/>
+	<columns names="tpmi_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_modelo_icbf_tipo_dato" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_dato_modalidades_icbf" table="&quot;Salud&quot;.modelo_atencion_icbf">
+	<columns names="mai_tipo_dato_modalidad" ref-type="src-columns"/>
+	<columns names="tpdm_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adultos_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.educacion_adultos">
+	<columns names="educ_municipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adultos_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.educacion_adultos">
+	<columns names="educ_tipo_institucion" ref-type="src-columns"/>
+	<columns names="tpin_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adultos_nivel_educativo" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.educacion_adultos">
+	<columns names="educ_nivel_educativo" ref-type="src-columns"/>
+	<columns names="tpne_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adultos_grado" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.grado" table="&quot;Educacion&quot;.educacion_adultos">
+	<columns names="educ_grado" ref-type="src-columns"/>
+	<columns names="gra_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adultos_area" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.area" table="&quot;Educacion&quot;.educacion_adultos">
+	<columns names="educ_area" ref-type="src-columns"/>
+	<columns names="are_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_adultos_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.educacion_adultos">
+	<columns names="educ_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_pna_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Educacion&quot;.programa_nacional_alfabetizacion">
+	<columns names="pna_municipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_pna_ciclo" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.ciclos_educativos" table="&quot;Educacion&quot;.programa_nacional_alfabetizacion">
+	<columns names="pna_ciclo" ref-type="src-columns"/>
+	<columns names="cie_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_pna_dato" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_nivel_educativo" table="&quot;Educacion&quot;.programa_nacional_alfabetizacion">
+	<columns names="pna_tipo_dato" ref-type="src-columns"/>
+	<columns names="tpne_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_pna_area" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.grado" table="&quot;Educacion&quot;.programa_nacional_alfabetizacion">
+	<columns names="pna_area" ref-type="src-columns"/>
+	<columns names="gra_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_pna_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Educacion&quot;.programa_nacional_alfabetizacion">
+	<columns names="pna_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_juzgados_icbf_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
+	<columns names="niji_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_juzgados_icbf_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
+	<columns names="niji_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_juzgados_icbf_modalidades" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_modalidades_icbf" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
+	<columns names="niji_tipo_modalidades" ref-type="src-columns"/>
+	<columns names="tpmi_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_juzgados_icbf_tipo_dato" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_dato_modalidades_icbf" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
+	<columns names="niji_tipo_dato_modalidad" ref-type="src-columns"/>
+	<columns names="tpdm_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_poblacion_vacunacion_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;">
+	<columns names="pva_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_poblacion_vacunacion_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;">
+	<columns names="pva_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_poblacion_vacunacion_tipo" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_poblacion_salud" table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;">
+	<columns names="pva_tipo_poblacion" ref-type="src-columns"/>
+	<columns names="tpoce_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_mortalidad_materna_codMunicipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.municipio" table="&quot;Salud&quot;.mortalidad_materna">
+	<columns names="mma_codMunicipio" ref-type="src-columns"/>
+	<columns names="mun_codigo" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_mortalidad_materna_anio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.mortalidad_materna">
+	<columns names="mma_anio" ref-type="src-columns"/>
+	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <relationship name="rel_area_cosechada_municipio" type="relfk"
@@ -9567,7 +10575,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_vacunacion_biologicos_virus" type="relfk"
 	 src-table="&quot;Salud&quot;.vacunacion_biologicos"
-	 dst-table="&quot;Salud&quot;.biologicos"
+	 dst-table="&quot;Salud&quot;.tipo_biologicos"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_defunciones_municipio" type="relfk"
@@ -9622,7 +10630,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_cobertura_aseguramiento_tipo_poblacion_censada" type="relfk"
 	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
-	 dst-table="&quot;Salud&quot;.tipo_poblacion_censada"
+	 dst-table="&quot;Salud&quot;.tipo_poblacion_salud"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_vih_genero_genero" type="relfk"
@@ -9631,7 +10639,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_vih_viaTransmision_tipo_transmision&quot;" type="relfk"
-	 src-table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;"
+	 src-table="&quot;Salud&quot;.vih_via_transmision"
 	 dst-table="&quot;Salud&quot;.tipo_transmision"
 	 src-required="false" dst-required="false"/>
 
@@ -9657,31 +10665,31 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_organismos_salud_tipo_orsa" type="relfk"
 	 src-table="&quot;Salud&quot;.organismos_salud"
-	 dst-table="&quot;Salud&quot;.tipo_orsa"
+	 dst-table="&quot;Salud&quot;.tipo_organismos_salud"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_municipio&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_tipo_plantel_educativo&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="&quot;Educacion&quot;.tipo_plantel_educativo"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_area&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="public.area"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_tipo_institucion&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="&quot;Educacion&quot;.tipo_institucion"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_anio&quot;" type="relfk"
-	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
@@ -9756,7 +10764,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_datos_universidades_universidad" type="relfk"
 	 src-table="&quot;Educacion&quot;.docentes_universidades"
-	 dst-table="&quot;Educacion&quot;.universidad"
+	 dst-table="&quot;Educacion&quot;.instituciones_educativas"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_datos_universidades_programa" type="relfk"
@@ -11338,12 +12346,12 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_casos_VHI-sida_anio&quot;" type="relfk"
-	 src-table="&quot;Salud&quot;.&quot;casos_VHI-sida&quot;"
+	 src-table="&quot;Salud&quot;.casos_vih_sida"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_vih_viaTransmision_anio&quot;" type="relfk"
-	 src-table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;"
+	 src-table="&quot;Salud&quot;.vih_via_transmision"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
@@ -11352,13 +12360,8 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_cobertura_aseguramiento_poblacion_sensada_municipio" type="relfk"
-	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
-	 dst-table="&quot;Salud&quot;.poblacion_censada_municipio"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_poblacion_censada_municipio_anio" type="relfk"
-	 src-table="&quot;Salud&quot;.poblacion_censada_municipio"
+	 src-table="&quot;Salud&quot;.datos_poblacion_censada_municipio"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
@@ -11415,6 +12418,320 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_datos_universidades_tipo_nivel_educativo" type="relfk"
 	 src-table="&quot;Educacion&quot;.docentes_universidades"
 	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Instituciones_de_educacion_tipo_institucion&quot;" type="relfk"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Instituciones_de_educacion_municipio&quot;" type="relfk"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Instituciones_de_educacion_area&quot;" type="relfk"
+	 src-table="&quot;Educacion&quot;.instituciones_educativas"
+	 dst-table="public.area"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_clasificacion_icfes_estab_educativos_Instituciones_de_educa&quot;" type="relfk"
+	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
+	 dst-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_docentes_universidades_cp_instituciones_educativas" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="&quot;Educacion&quot;.instituciones_educativas"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_docentes_universidades_cp_tipo_nivel_educativo" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_docentes_universidades_cp_programa" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="&quot;Educacion&quot;.programa"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_docentes_universidades_cp_genero" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="public.genero"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_docentes_universidades_cp_anio" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_docentes_universidades_cp_semestre" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="public.semestre"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_registro_universidades_categoria_registro" type="relfk"
+	 src-table="&quot;Educacion&quot;.registro_universidades"
+	 dst-table="&quot;Educacion&quot;.categoria_registro"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_defunciones_edades_rangos" type="relfk"
+	 src-table="&quot;Salud&quot;.defunciones"
+	 dst-table="public.edades_rangos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_defunciones_cp_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.defunciones_menores"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_defunciones_cp_tipo_defuncion" type="relfk"
+	 src-table="&quot;Salud&quot;.defunciones_menores"
+	 dst-table="&quot;Salud&quot;.tipo_defuncion"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_defunciones_cp_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.defunciones_menores"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_desnutricion_edades_rangos" type="relfk"
+	 src-table="&quot;Salud&quot;.desnutricion"
+	 dst-table="public.edades_rangos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_adopciones_alcance" type="relfk"
+	 src-table="&quot;Salud&quot;.adopciones"
+	 dst-table="public.alcance"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_adopciones_pais" type="relfk"
+	 src-table="&quot;Salud&quot;.adopciones"
+	 dst-table="public.pais"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_adopciones_tipo_adopcion" type="relfk"
+	 src-table="&quot;Salud&quot;.adopciones"
+	 dst-table="&quot;Salud&quot;.tipo_adopcion"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_casos_VHI-sida_municipio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.casos_vih_sida"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_atencion_extra_menorFamilia_municipio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_atencion_extra_menorFamilia_tipo_atencion_extra&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;"
+	 dst-table="&quot;Salud&quot;.tipo_atencion_extra"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_atencion_extra_menorFamilia_tipo_dato_atencion&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;"
+	 dst-table="&quot;Salud&quot;.tipo_dato_atencion"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_casos_clasificacion_cp_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_casos_mes"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_casos_mes_mes" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_casos_mes"
+	 dst-table="public.mes"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_casos_mes_cp_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_casos_rango"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vih_casos_mes_cp_edades_rangos" type="relfk"
+	 src-table="&quot;Salud&quot;.vih_casos_rango"
+	 dst-table="public.edades_rangos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Tuberculosis_cp_municipio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.modelo_atencion_icbf"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Tuberculosis_cp_anio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.modelo_atencion_icbf"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_modelo_atencion_icbf_tipo_modalidaes_icbf" type="relfk"
+	 src-table="&quot;Salud&quot;.modelo_atencion_icbf"
+	 dst-table="&quot;Salud&quot;.tipo_modalidades_icbf"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_modelo_atencion_icbf_tipo_dato_modalidades_icbf" type="relfk"
+	 src-table="&quot;Salud&quot;.modelo_atencion_icbf"
+	 dst-table="&quot;Salud&quot;.tipo_dato_modalidades_icbf"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_municipio1" type="relfk"
+	 src-table="&quot;Educacion&quot;.educacion_adultos"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_tipo_institucion" type="relfk"
+	 src-table="&quot;Educacion&quot;.educacion_adultos"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_tipo_nivel_educativo" type="relfk"
+	 src-table="&quot;Educacion&quot;.educacion_adultos"
+	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_grado" type="relfk"
+	 src-table="&quot;Educacion&quot;.educacion_adultos"
+	 dst-table="&quot;Educacion&quot;.grado"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_area" type="relfk"
+	 src-table="&quot;Educacion&quot;.educacion_adultos"
+	 dst-table="public.area"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_matriculas_cp_anio1" type="relfk"
+	 src-table="&quot;Educacion&quot;.educacion_adultos"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_educacion_adultos_cp_municipio" type="relfk"
+	 src-table="&quot;Educacion&quot;.programa_nacional_alfabetizacion"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_educacion_adultos_cp_tipo_nivel_educativo" type="relfk"
+	 src-table="&quot;Educacion&quot;.programa_nacional_alfabetizacion"
+	 dst-table="&quot;Educacion&quot;.tipo_nivel_educativo"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_educacion_adultos_cp_grado" type="relfk"
+	 src-table="&quot;Educacion&quot;.programa_nacional_alfabetizacion"
+	 dst-table="&quot;Educacion&quot;.grado"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_educacion_adultos_cp_anio" type="relfk"
+	 src-table="&quot;Educacion&quot;.programa_nacional_alfabetizacion"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_modelo_atencion_icbf_cp_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_modelo_atencion_icbf_cp_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_modelo_atencion_icbf_cp_tipo_modalidaes_icbf" type="relfk"
+	 src-table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf"
+	 dst-table="&quot;Salud&quot;.tipo_modalidades_icbf"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_modelo_atencion_icbf_cp_tipo_dato_modalidades_icbf" type="relfk"
+	 src-table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf"
+	 dst-table="&quot;Salud&quot;.tipo_dato_modalidades_icbf"
+	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="0.14" y="-0.2"/>
+	</label>
+</relationship>
+
+<relationship name="rel_poblacion_censada_municipio_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.datos_poblacion_censada_municipio"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cobertura_aseguramiento_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cobertura_aseguramiento_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vacunacion_biologicos_cp_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vacunacion_biologicos_cp_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_vacunacion_biologicos_tipo_poblacion_censada" type="relfk"
+	 src-table="&quot;Salud&quot;.vacunacion_biologicos"
+	 dst-table="&quot;Salud&quot;.tipo_poblacion_salud"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Poblacion_vacunacion_tipo_poblacion_censada&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;Poblacion_vacunacion&quot;"
+	 dst-table="&quot;Salud&quot;.tipo_poblacion_salud"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_principales_morbilidad_tipo_causa" type="relfk"
+	 src-table="&quot;Salud&quot;.principales_morbilidad"
+	 dst-table="&quot;Salud&quot;.tipo_causa_morbilidad"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_principales_morbilidad_edades_rangos" type="relfk"
+	 src-table="&quot;Salud&quot;.principales_morbilidad"
+	 dst-table="public.edades_rangos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_principales_mortalidad_tipo_causa_mortalidad" type="relfk"
+	 src-table="&quot;Salud&quot;.principales_mortalidad"
+	 dst-table="&quot;Salud&quot;.tipo_causa_mortalidad"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_principales_morbilidad_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.principales_morbilidad"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_huerfanos_cp_municipio" type="relfk"
+	 src-table="&quot;Salud&quot;.mortalidad_materna"
+	 dst-table="public.municipio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_huerfanos_cp_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.mortalidad_materna"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_huerfanos_anio" type="relfk"
+	 src-table="&quot;Salud&quot;.huerfanos"
+	 dst-table="public.anio"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cobertura_aseguramiento_tipo_sisben" type="relfk"
+	 src-table="&quot;Salud&quot;.cobertura_aseguramiento"
+	 dst-table="&quot;Salud&quot;.tipo_cobertura"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_programa_nacional_alfabetizacion_ciclos_educativos" type="relfk"
+	 src-table="&quot;Educacion&quot;.programa_nacional_alfabetizacion"
+	 dst-table="&quot;Educacion&quot;.ciclos_educativos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_atencion_extra_menorFamilia_anio&quot;" type="relfk"
+	 src-table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;"
+	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
