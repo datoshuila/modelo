@@ -1,4 +1,4 @@
-ice_codigo,ice_anio,ice_linea_credito,ice_estado_credito,ice_num_creditos,ice_valor_credito
+ice_codigo,ice_anio,ice_linea_credito,ice_estado_credito,ice_num_credito,ice_valor_credito
 1,2014,1,1,878,2049898181
 2,2014,2,1,46,78611975
 3,2014,3,1,46,59119030
