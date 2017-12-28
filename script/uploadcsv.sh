@@ -4,8 +4,10 @@ array=(\
 	"independientes/public"\
 	"independientes/Educacion"\
 	"dependientes/Educacion"\
+	"independientes/Salud"\
+	"dependientes/Salud"\
+	"independientes/Agropecuario"\
 	# "independientes/Agropecuario"\
-	# "independientes/Salud"\
 	)
 for path in "${array[@]}"; do   # The quotes are necessary here
     schema=${path##*/}

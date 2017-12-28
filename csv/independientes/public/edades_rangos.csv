@@ -1,7 +1,55 @@
 edr_codigo,edr_rango
 1,0 - 4
-2,5 - 9
-3,10 - 14
+2,05 a 09
+3,10 -14
 4,15 - 19
 5,20 - 24
 6,25 y más
+7,25 - 29
+8,30 - 34
+9,35 - 39
+10,40 - 44
+11,45 - 49
+12,50 - 54
+13,55 - 59
+14,60 - 64
+15,65 - 69
+16,70 - 74
+17,75 - 80
+18,Mas de 80
+19,1 a 5 semanas
+20,6 a 10 semanas
+21,11 a 15 semanas
+22,16 a 20 semanas
+23,21 a 25 semanas
+24,26 a 30 semanas
+25,31 a 35 semanas
+26,36 a 40 semanas
+27,Mas de 40 semanas
+28,Sin información
+29,1 a 4 semanas
+30,5 a 8 semanas
+31,9 a 12 semanas
+32,13 a 16 semanas
+33,17 a 20 semanas
+34,21 a 24 semanas
+35,25 a 28 semanas
+36,29 a 32 semanas
+37,33 a 36 semanas
+38,37 a 40 semanas
+39,menores de 5 anios
+40,menores de 12 anios
+41,0 a 9
+42,10 a 19
+43,20 a 29
+44,30 a 39
+45,40 a 49
+46,50 a 59
+47,60 o más
+48,50 o más
+49,sin dato 
+50,menores de 1 año
+51,1 a 4 
+52,5 - 14
+53,15- 44
+54,45 - 59

@@ -757,11 +757,10 @@ CREATE TABLE "Salud".vacunacion_biologicos(
 	vabi_codigo bigserial NOT NULL,
 	"vabi_codMunicipio" integer,
 	vabi_anio integer NOT NULL,
-	"vabi_poblacionMeta" integer,
-	"vabi_edadPoblacion" character varying(20) NOT NULL,
-	"vabi_codBiologicos" integer,
+	vabi_tipo_biologicos integer,
+	vabi_tipo_poblacion integer,
 	vabi_vacunados integer,
-	vabi_cobertura double precision NOT NULL,
+	vabi_cobertura double precision,
 	CONSTRAINT vacunacion_biologicos_pk PRIMARY KEY (vabi_codigo)
 
 );
@@ -772,35 +771,33 @@ COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_codMunicipio" IS 'Llave pr
 -- ddl-end --
 COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_poblacionMeta" IS 'Población menor de 1 año meta programática.';
+COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_tipo_biologicos IS 'Llave foránea que apunta a la tabla tipo_biologicos.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_edadPoblacion" IS 'Edad de los menores vacunados.';
--- ddl-end --
-COMMENT ON COLUMN "Salud".vacunacion_biologicos."vabi_codBiologicos" IS 'Llave foránea que apunta a la tabla biologicos.';
+COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_tipo_poblacion IS 'Llave foranea que apunta a la tabla tipo_poblacion_salud';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_vacunados IS 'Cantidad de menores vacunados';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_cobertura IS 'Porcentaje de menores vacunados';
+COMMENT ON COLUMN "Salud".vacunacion_biologicos.vabi_cobertura IS 'cobertura de vacunación';
 -- ddl-end --
 ALTER TABLE "Salud".vacunacion_biologicos OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Salud".biologicos | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".biologicos CASCADE;
-CREATE TABLE "Salud".biologicos(
+-- object: "Salud".tipo_biologicos | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_biologicos CASCADE;
+CREATE TABLE "Salud".tipo_biologicos(
 	bio_codigo serial NOT NULL,
 	bio_nombre character varying(50) NOT NULL,
 	CONSTRAINT virus_pk PRIMARY KEY (bio_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Salud".biologicos IS 'Almacena los diferentes tipos de virus';
+COMMENT ON TABLE "Salud".tipo_biologicos IS 'Almacena los diferentes tipos de virus';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".biologicos.bio_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Salud".tipo_biologicos.bio_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".biologicos.bio_nombre IS 'Nombre del Biologico.';
+COMMENT ON COLUMN "Salud".tipo_biologicos.bio_nombre IS 'Nombre del Biologico.';
 -- ddl-end --
-ALTER TABLE "Salud".biologicos OWNER TO sirhuila;
+ALTER TABLE "Salud".tipo_biologicos OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".defunciones | type: TABLE --
@@ -810,6 +807,7 @@ CREATE TABLE "Salud".defunciones(
 	"def_codMunicipio" integer,
 	def_anio integer NOT NULL,
 	"def_codTipoDefuncion" smallint,
+	def_rango_edad integer,
 	"def_codAreaDefuncion" smallint,
 	def_genero integer NOT NULL,
 	"def_numeroCasos" integer,
@@ -826,6 +824,8 @@ COMMENT ON COLUMN "Salud".defunciones."def_codMunicipio" IS 'Llave foránea que 
 COMMENT ON COLUMN "Salud".defunciones.def_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".defunciones."def_codTipoDefuncion" IS 'Llave foránea que apunta a la tabla tipo_defuncion.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones.def_rango_edad IS 'Llave foránea que apunta a la tabla edades_rangos';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".defunciones."def_codAreaDefuncion" IS 'Llave foránea que apunta a la tabla area.';
 -- ddl-end --
@@ -878,6 +878,7 @@ CREATE TABLE "Salud".desnutricion(
 	dnut_codigo bigserial NOT NULL,
 	"dnut_codMunicipio" integer,
 	dnut_anio integer NOT NULL,
+	dnut_edad integer,
 	"dnut_numGlobal" integer,
 	"dnut_porcentajeDesnuGlobal" double precision,
 	"dnut_numDesnCronica" integer,
@@ -895,6 +896,8 @@ COMMENT ON COLUMN "Salud".desnutricion.dnut_codigo IS 'Llave primaria para la id
 COMMENT ON COLUMN "Salud".desnutricion."dnut_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".desnutricion.dnut_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".desnutricion.dnut_edad IS 'Llave foránea que apunta a la tabla rangos_edades';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".desnutricion."dnut_numGlobal" IS 'Número de niños con desnutrición global';
 -- ddl-end --
@@ -919,7 +922,7 @@ CREATE TABLE "Salud".nacimientos(
 	nac_anio integer NOT NULL,
 	"nac_codArea" smallint,
 	nac_genero integer NOT NULL,
-	"nac_numeroCasos" integer,
+	nac_numero_nacimientos integer,
 	CONSTRAINT nacimientos_pk PRIMARY KEY (nac_codigo)
 
 );
@@ -936,7 +939,7 @@ COMMENT ON COLUMN "Salud".nacimientos."nac_codArea" IS 'Llave foránea que apunt
 -- ddl-end --
 COMMENT ON COLUMN "Salud".nacimientos.nac_genero IS 'Llave foránea que apunta a la tabla genero';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".nacimientos."nac_numeroCasos" IS 'Numero de nacimeintos.';
+COMMENT ON COLUMN "Salud".nacimientos.nac_numero_nacimientos IS 'Numero de nacimeintos.';
 -- ddl-end --
 ALTER TABLE "Salud".nacimientos OWNER TO sirhuila;
 -- ddl-end --
@@ -946,8 +949,9 @@ ALTER TABLE "Salud".nacimientos OWNER TO sirhuila;
 CREATE TABLE "Salud".principales_mortalidad(
 	pmort_codigo serial NOT NULL,
 	pmort_anio integer NOT NULL,
-	pmort_nombre character varying(250),
+	pmort_tipo_causa integer,
 	pmort_defunciones integer,
+	pmort_porcentaje integer,
 	CONSTRAINT mortalidad_principales_pk PRIMARY KEY (pmort_codigo)
 
 );
@@ -958,9 +962,11 @@ COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_codigo IS 'Llave primaria
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_nombre IS 'Nombre de la causa de mortalidad.';
+COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_tipo_causa IS 'Nombre de la causa de mortalidad.';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_defunciones IS 'Número de defunciones.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_mortalidad.pmort_porcentaje IS 'porcentaje de moratalidad por causa.';
 -- ddl-end --
 ALTER TABLE "Salud".principales_mortalidad OWNER TO sirhuila;
 -- ddl-end --
@@ -969,10 +975,13 @@ ALTER TABLE "Salud".principales_mortalidad OWNER TO sirhuila;
 -- DROP TABLE IF EXISTS "Salud".principales_morbilidad CASCADE;
 CREATE TABLE "Salud".principales_morbilidad(
 	pmor_codigo bigserial NOT NULL,
+	pmor_municipio integer,
 	pmor_anio integer NOT NULL,
 	"pmor_tipoConsulta" smallint,
-	pmor_nombre character varying(250),
+	pmor_tipo_causa integer,
+	pmor_edad integer,
 	pmor_atenciones integer,
+	pmor_porcentaje double precision,
 	CONSTRAINT principales_morbilidad_pk PRIMARY KEY (pmor_codigo)
 
 );
@@ -981,13 +990,19 @@ COMMENT ON TABLE "Salud".principales_morbilidad IS 'principales causas de morbil
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_municipio IS 'Llave foranea que apunta a la tabla municipio';
+-- ddl-end --
 COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_morbilidad."pmor_tipoConsulta" IS 'Llave foránea que apunta a la tabla tipo_consulta.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_nombre IS 'Nombre de la causa de mortalidad.';
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_tipo_causa IS 'Llave foranea que apunta a la tabla tipo_causa';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_edad IS 'Llave foranea que apunta a la tabla edades_rangos';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_atenciones IS 'Número de atenciones por consulta externa.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".principales_morbilidad.pmor_porcentaje IS 'Porcentaje de la causa de morbilidad';
 -- ddl-end --
 ALTER TABLE "Salud".principales_morbilidad OWNER TO sirhuila;
 -- ddl-end --
@@ -1014,12 +1029,21 @@ ALTER TABLE "Salud".tipo_consulta OWNER TO sirhuila;
 -- DROP TABLE IF EXISTS "Salud".adopciones CASCADE;
 CREATE TABLE "Salud".adopciones(
 	ado_codigo bigserial NOT NULL,
-	ado_abiertas integer,
-	ado_determinadas integer,
-	ado_lugar character varying(50),
+	ado_origen_familia integer,
+	ado_pais integer,
+	ado_tipo_adopcion integer,
+	ado_num_adopciones integer,
 	CONSTRAINT adopciones_pk PRIMARY KEY (ado_codigo)
 
 );
+-- ddl-end --
+COMMENT ON COLUMN "Salud".adopciones.ado_origen_familia IS 'Llave foranea que apunta a la tabla alcance.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".adopciones.ado_pais IS 'Llave foranea que apunta a la tabla pais';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".adopciones.ado_tipo_adopcion IS 'Llave foranea que apunta a la tabla tipo_adopcion.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".adopciones.ado_num_adopciones IS 'Número de adopciones en el departamento.';
 -- ddl-end --
 ALTER TABLE "Salud".adopciones OWNER TO sirhuila;
 -- ddl-end --
@@ -1029,7 +1053,8 @@ ALTER TABLE "Salud".adopciones OWNER TO sirhuila;
 CREATE TABLE "Salud".huerfanos(
 	huer_codigo bigserial NOT NULL,
 	"huer_codMunicipio" integer,
-	huer_anio character varying(4) NOT NULL,
+	huer_anio integer NOT NULL,
+	huer_num_casos integer,
 	CONSTRAINT huerfanos_pk PRIMARY KEY (huer_codigo)
 
 );
@@ -1041,14 +1066,11 @@ ALTER TABLE "Salud".huerfanos OWNER TO sirhuila;
 -- DROP TABLE IF EXISTS "Salud".cobertura_aseguramiento CASCADE;
 CREATE TABLE "Salud".cobertura_aseguramiento(
 	coas_codigo bigserial NOT NULL,
-	"coas_codTipoPoblacionCesada" integer,
+	coas_municipio integer,
+	coas_anio integer,
+	coas_cobertura integer,
+	coas_tipo_poblacion integer,
 	"coas_numPersonas" integer,
-	"coas_numListadosCensales" integer,
-	"coas_totalAfiliadosSubsidiado" integer,
-	"coas_totalAfiliadosContributivo" integer,
-	"coas_porcentajeCobeturaSubsidiado" double precision,
-	"coas_porcentajeSGSSS" double precision,
-	"coas_codPoblacionSensadaMunicipio" bigint NOT NULL,
 	CONSTRAINT cobertura_aseguramiento_pk PRIMARY KEY (coas_codigo)
 
 );
@@ -1057,58 +1079,57 @@ COMMENT ON TABLE "Salud".cobertura_aseguramiento IS 'Cobertura y aseguramiento a
 -- ddl-end --
 COMMENT ON COLUMN "Salud".cobertura_aseguramiento.coas_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_codTipoPoblacionCesada" IS 'Llave foránea que apunta a la tabla tipo_poblacion_censada';
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento.coas_municipio IS 'llave foranea que apunta a la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento.coas_anio IS 'Llave foranea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento.coas_cobertura IS 'llave foranea que apunta a la tabla tipo_cobertura';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".cobertura_aseguramiento.coas_tipo_poblacion IS 'Llave foránea que apunta a la tabla tipo_poblacion_salud';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_numPersonas" IS 'Cantidad de la población listada en determinada categoría.';
--- ddl-end --
-COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_numListadosCensales" IS 'Total de SISBEN  1 y 2 mas listados censales';
--- ddl-end --
-COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_totalAfiliadosSubsidiado" IS 'Total afiliados con  régimen subsdiado.';
--- ddl-end --
-COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_totalAfiliadosContributivo" IS 'Total afiliados régimen contributivo';
--- ddl-end --
-COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_porcentajeCobeturaSubsidiado" IS 'Porcentaje de cobertura de afiliación de régimen subsidiado.';
--- ddl-end --
-COMMENT ON COLUMN "Salud".cobertura_aseguramiento."coas_porcentajeSGSSS" IS 'Co AFIL SGSSS ';
 -- ddl-end --
 ALTER TABLE "Salud".cobertura_aseguramiento OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Salud".tipo_poblacion_censada | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".tipo_poblacion_censada CASCADE;
-CREATE TABLE "Salud".tipo_poblacion_censada(
+-- object: "Salud".tipo_poblacion_salud | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_poblacion_salud CASCADE;
+CREATE TABLE "Salud".tipo_poblacion_salud(
 	tpoce_codigo bigserial NOT NULL,
 	tpoce_nombre character varying(100) NOT NULL,
 	CONSTRAINT poblacion_censales_pk PRIMARY KEY (tpoce_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Salud".tipo_poblacion_censada IS 'Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)';
+COMMENT ON TABLE "Salud".tipo_poblacion_salud IS 'Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".tipo_poblacion_censada.tpoce_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Salud".tipo_poblacion_salud.tpoce_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".tipo_poblacion_censada.tpoce_nombre IS 'Nombre de la población censada.';
+COMMENT ON COLUMN "Salud".tipo_poblacion_salud.tpoce_nombre IS 'Nombre de la población censada.';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_poblacion_censada OWNER TO sirhuila;
+ALTER TABLE "Salud".tipo_poblacion_salud OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Salud"."casos_VHI-sida" | type: TABLE --
--- DROP TABLE IF EXISTS "Salud"."casos_VHI-sida" CASCADE;
-CREATE TABLE "Salud"."casos_VHI-sida"(
+-- object: "Salud".casos_vih_sida | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".casos_vih_sida CASCADE;
+CREATE TABLE "Salud".casos_vih_sida(
 	cvih_codigo bigserial NOT NULL,
+	cvih_municipio integer,
 	cvih_anio integer NOT NULL,
 	"cvih_numCasos" integer,
 	CONSTRAINT "casos_VHI-sida_pk" PRIMARY KEY (cvih_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Salud"."casos_VHI-sida" IS 'Casos de VIH-SIDA';
+COMMENT ON TABLE "Salud".casos_vih_sida IS 'Casos de VIH-SIDA';
 -- ddl-end --
-COMMENT ON COLUMN "Salud"."casos_VHI-sida".cvih_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Salud".casos_vih_sida.cvih_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud"."casos_VHI-sida".cvih_anio IS 'Llave foránea que apunta a la tabla anio.';
+COMMENT ON COLUMN "Salud".casos_vih_sida.cvih_municipio IS 'Llave foranea que apunta a la tabla municipio.';
 -- ddl-end --
-ALTER TABLE "Salud"."casos_VHI-sida" OWNER TO sirhuila;
+COMMENT ON COLUMN "Salud".casos_vih_sida.cvih_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+ALTER TABLE "Salud".casos_vih_sida OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".vih_genero | type: TABLE --
@@ -1319,8 +1340,7 @@ CREATE TABLE "Salud".organismos_salud(
 	orsa_codigo bigserial NOT NULL,
 	"orsa_codMunicipio" integer,
 	orsa_anio integer NOT NULL,
-	orsa_num_camas integer,
-	"orsa_codTipo_organismos_salud" integer,
+	orsa_tipo_organismos_salud integer,
 	orsa_num_organismos_salud integer,
 	CONSTRAINT organismos_salud_pk PRIMARY KEY (orsa_codigo)
 
@@ -1334,64 +1354,62 @@ COMMENT ON COLUMN "Salud".organismos_salud."orsa_codMunicipio" IS 'Llave foráne
 -- ddl-end --
 COMMENT ON COLUMN "Salud".organismos_salud.orsa_anio IS 'Llave foránea que apunta a la tabla anio';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".organismos_salud.orsa_num_camas IS 'Número de camas por municipio';
--- ddl-end --
-COMMENT ON COLUMN "Salud".organismos_salud."orsa_codTipo_organismos_salud" IS 'Llave foránea que apunta a la tabla tipo_orsa';
+COMMENT ON COLUMN "Salud".organismos_salud.orsa_tipo_organismos_salud IS 'Llave foránea que apunta a la tabla tipo_orsa';
 -- ddl-end --
 COMMENT ON COLUMN "Salud".organismos_salud.orsa_num_organismos_salud IS 'Número de organismos de salud';
 -- ddl-end --
 ALTER TABLE "Salud".organismos_salud OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Salud".tipo_orsa | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".tipo_orsa CASCADE;
-CREATE TABLE "Salud".tipo_orsa(
+-- object: "Salud".tipo_organismos_salud | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_organismos_salud CASCADE;
+CREATE TABLE "Salud".tipo_organismos_salud(
 	tp_orsa_codigo serial NOT NULL,
 	tipo_nombre_orsa character varying(150),
-	CONSTRAINT tipo_orsa_pk PRIMARY KEY (tp_orsa_codigo)
+	CONSTRAINT tipo_organismos_salud_pk PRIMARY KEY (tp_orsa_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Salud".tipo_orsa IS 'Almacena las diferentes tipos de organismos de salud (ESE Hospitales, Centros de salud, Puestos de salud, Clinicas, IPS, etc...)';
+COMMENT ON TABLE "Salud".tipo_organismos_salud IS 'Almacena las diferentes tipos de organismos de salud (ESE Hospitales, Centros de salud, Puestos de salud, Clinicas, IPS, etc...)';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".tipo_orsa.tp_orsa_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Salud".tipo_organismos_salud.tp_orsa_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Salud".tipo_orsa.tipo_nombre_orsa IS 'Nombre del tipo de organismo de salud';
+COMMENT ON COLUMN "Salud".tipo_organismos_salud.tipo_nombre_orsa IS 'Nombre del tipo de organismo de salud';
 -- ddl-end --
-ALTER TABLE "Salud".tipo_orsa OWNER TO sirhuila;
+ALTER TABLE "Salud".tipo_organismos_salud OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".instituciones_educativas | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".instituciones_educativas CASCADE;
-CREATE TABLE "Educacion".instituciones_educativas(
-	ine_codigo bigserial NOT NULL,
-	"ine_codMunicipio" integer,
-	ine_anio smallint NOT NULL,
-	ine_tipo_institucion integer,
-	ine_tipo_plantel integer,
-	ine_area integer,
-	ine_num_instituciones integer,
-	CONSTRAINT intituciones_educativas_pk PRIMARY KEY (ine_codigo)
+-- object: "Educacion".numero_instituciones_educativas | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".numero_instituciones_educativas CASCADE;
+CREATE TABLE "Educacion".numero_instituciones_educativas(
+	nine_codigo bigserial NOT NULL,
+	"nine_codMunicipio" integer,
+	nine_anio smallint NOT NULL,
+	nine_tipo_institucion integer,
+	nine_tipo_plantel integer,
+	nine_area integer,
+	nine_num_instituciones integer,
+	CONSTRAINT intituciones_educativas_pk PRIMARY KEY (nine_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".instituciones_educativas IS 'Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento';
+COMMENT ON TABLE "Educacion".numero_instituciones_educativas IS 'Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas."ine_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas."nine_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_anio IS 'Llave foránea que apunta a la tabla anio.';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_tipo_plantel IS 'Llave foránea que apunta a la tabla tipo_plantel_educativo.';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_tipo_plantel IS 'Llave foránea que apunta a la tabla tipo_plantel_educativo.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_area IS 'Llave foránea que apunta a la tabla area.';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_area IS 'Llave foránea que apunta a la tabla area.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".instituciones_educativas.ine_num_instituciones IS 'Numero de instituciones, centros educativos y sedes.';
+COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_num_instituciones IS 'Numero de instituciones, centros educativos y sedes.';
 -- ddl-end --
-ALTER TABLE "Educacion".instituciones_educativas OWNER TO sirhuila;
+ALTER TABLE "Educacion".numero_instituciones_educativas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".tipo_plantel_educativo | type: TABLE --
@@ -1527,7 +1545,7 @@ CREATE TABLE "Educacion".clasificacion_icfes_estab_educativos(
 	cies_anio smallint NOT NULL,
 	cies_semestre smallint,
 	cies_puesto integer,
-	cies_institucion_educativa character varying(250),
+	cies_institucion_educativa integer,
 	"cies_codMunicipio" integer,
 	cies_tipo_institucion integer,
 	cies_indice double precision,
@@ -1546,7 +1564,7 @@ COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_semestre
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_puesto IS 'Puesto que ocupa la institución educativa.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_institucion_educativa IS 'Nombre de la institución educativa';
+COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos.cies_institucion_educativa IS 'Llave foranea que apunta a la tabla instituciones_de_educacion.';
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".clasificacion_icfes_estab_educativos."cies_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
 -- ddl-end --
@@ -1608,38 +1626,38 @@ ALTER TABLE "Educacion".comportamiento_alumnos OWNER TO sirhuila;
 -- object: "Educacion".docentes_universidades | type: TABLE --
 -- DROP TABLE IF EXISTS "Educacion".docentes_universidades CASCADE;
 CREATE TABLE "Educacion".docentes_universidades(
-	dau_codigo bigserial NOT NULL,
-	dau_anio smallint NOT NULL,
-	dau_universidad integer,
-	dau_semestre smallint,
-	dau_nivel_educacion_superior integer,
-	dau_programa integer,
-	"dau_categoria_personalU" integer,
-	dau_genero integer,
-	"dau_num_personalU" integer,
-	CONSTRAINT docentes_universidades_pk PRIMARY KEY (dau_codigo)
+	dou_codigo bigserial NOT NULL,
+	dou_anio smallint NOT NULL,
+	dou_universidad integer,
+	dou_semestre smallint,
+	dou_nivel_educacion_superior integer,
+	dou_programa integer,
+	"dou_categoria_personalU" integer,
+	dou_genero integer,
+	"dou_num_personalU" integer,
+	CONSTRAINT docentes_universidades_pk PRIMARY KEY (dou_codigo)
 
 );
 -- ddl-end --
 COMMENT ON TABLE "Educacion".docentes_universidades IS 'Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_anio IS 'Llave foránea que apunta a la tabla anio.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_anio IS 'Llave foránea que apunta a la tabla anio.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_universidad IS 'Llave foránea que apunta a la tabla universidad.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_universidad IS 'Llave foránea que apunta a la tabla instituciones_de_educacion.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_semestre IS 'Llave foránea que apunta a la tabla semestre.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_semestre IS 'Llave foránea que apunta a la tabla semestre.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_nivel_educacion_superior IS 'Llave foránea que apunta a la tabla nivel_educacion_superior.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_nivel_educacion_superior IS 'Llave foránea que apunta a la tabla nivel_educacion_superior.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_programa IS 'Llave foránea que apunta a la tabla programa.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_programa IS 'Llave foránea que apunta a la tabla programa.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades."dau_categoria_personalU" IS 'Llave foránea que apunta a la tabla categoria_personalU.';
+COMMENT ON COLUMN "Educacion".docentes_universidades."dou_categoria_personalU" IS 'Llave foránea que apunta a la tabla categoria_personalU.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades.dau_genero IS 'Llave foránea que apunta a la tabla genero.';
+COMMENT ON COLUMN "Educacion".docentes_universidades.dou_genero IS 'Llave foránea que apunta a la tabla genero.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".docentes_universidades."dau_num_personalU" IS 'Número de personas inscritas, matriculadas, docentes, egresados, graduados.';
+COMMENT ON COLUMN "Educacion".docentes_universidades."dou_num_personalU" IS 'Número de docentes.';
 -- ddl-end --
 ALTER TABLE "Educacion".docentes_universidades OWNER TO sirhuila;
 -- ddl-end --
@@ -1662,22 +1680,43 @@ COMMENT ON COLUMN "Educacion".programa.pro_nombre IS 'Nombre de los distintos pr
 ALTER TABLE "Educacion".programa OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".universidad | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".universidad CASCADE;
-CREATE TABLE "Educacion".universidad(
-	uni_codigo serial NOT NULL,
-	uni_nombre character varying(250) NOT NULL,
-	CONSTRAINT universidad_pk PRIMARY KEY (uni_codigo)
+-- object: "Educacion".instituciones_educativas | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".instituciones_educativas CASCADE;
+CREATE TABLE "Educacion".instituciones_educativas(
+	ined_codigo serial NOT NULL,
+	"ined_codDane" integer,
+	"ined_codMunicipio" integer,
+	ined_nombre character varying(250) NOT NULL,
+	ined_tipo_institucion integer,
+	ined_area integer,
+	ined_direccion character varying(300),
+	ined_lati double precision,
+	ined_long double precision,
+	CONSTRAINT "Instituciones_educativas_pk" PRIMARY KEY (ined_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".universidad IS 'Almacena los nombres de las diferentes universidades.';
+COMMENT ON TABLE "Educacion".instituciones_educativas IS 'Almacena los nombres de las diferentes instituciones educativas, colegios, escuelas,universidades.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".universidad.uni_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".universidad.uni_nombre IS 'Nombre de las distintas universidades en el departamento';
+COMMENT ON COLUMN "Educacion".instituciones_educativas."ined_codDane" IS 'Codigo Dane que corresponde a cada institución';
 -- ddl-end --
-ALTER TABLE "Educacion".universidad OWNER TO sirhuila;
+COMMENT ON COLUMN "Educacion".instituciones_educativas."ined_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_nombre IS 'Nombre de las distintas instituciones educativas en el departamento';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_area IS 'Llave foranea que apunta a la tabla area.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_direccion IS 'DIreción del establecimiento educativo';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_lati IS 'Cordenadas de latitud';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".instituciones_educativas.ined_long IS 'Coordenadas de longuitud.';
+-- ddl-end --
+ALTER TABLE "Educacion".instituciones_educativas OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".categoria_personal | type: TABLE --
@@ -1693,7 +1732,7 @@ COMMENT ON TABLE "Educacion".categoria_personal IS 'Almacena los nombres de las 
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".categoria_personal.cpu_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".categoria_personal.cpu_nombre IS 'Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.';
+COMMENT ON COLUMN "Educacion".categoria_personal.cpu_nombre IS 'Nombre de las distintas categorias de las personal docente, catedrático, tiempo completo, medio tiempo u ocasional.';
 -- ddl-end --
 ALTER TABLE "Educacion".categoria_personal OWNER TO sirhuila;
 -- ddl-end --
@@ -2556,8 +2595,9 @@ CREATE TABLE "Educacion".top_programas_universitarios(
 	tpu_codigo serial NOT NULL,
 	tpu_anio integer,
 	tpu_alcance integer,
-	tpu_puesto smallint,
 	tpu_programa integer,
+	tpu_puesto smallint,
+	tpu_num_matriculas integer,
 	CONSTRAINT top_programas_universitarios_pk PRIMARY KEY (tpu_codigo)
 
 );
@@ -2568,9 +2608,9 @@ COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_anio IS 'llave fo
 -- ddl-end --
 COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_alcance IS 'Llave foránea que apunta a la tabla alcance.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_puesto IS 'numero de puesto en el que se encuentra el programa';
--- ddl-end --
 COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_programa IS 'Llave foránea que apunta a la tabla programa.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".top_programas_universitarios.tpu_puesto IS 'numero de puesto en el que se encuentra el programa';
 -- ddl-end --
 ALTER TABLE "Educacion".top_programas_universitarios OWNER TO sirhuila;
 -- ddl-end --
@@ -6315,19 +6355,31 @@ COMMENT ON COLUMN poblacion.poblacion_proyeccion.pyp_num_personas IS 'Proyecció
 ALTER TABLE poblacion.poblacion_proyeccion OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Salud".poblacion_censada_municipio | type: TABLE --
--- DROP TABLE IF EXISTS "Salud".poblacion_censada_municipio CASCADE;
-CREATE TABLE "Salud".poblacion_censada_municipio(
-	psm_codigo bigserial NOT NULL,
-	"psm_codMunicipio" smallint NOT NULL,
-	psm_anio smallint NOT NULL,
-	"psm_poblacionTotal" integer,
-	"psm_poblacionSisben" integer,
-	CONSTRAINT poblacion_sensada_municipio_pk PRIMARY KEY (psm_codigo)
+-- object: "Salud".datos_poblacion_censada_municipio | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".datos_poblacion_censada_municipio CASCADE;
+CREATE TABLE "Salud".datos_poblacion_censada_municipio(
+	dpcm_codigo bigserial NOT NULL,
+	"dpcm_codMunicipio" integer NOT NULL,
+	dpcm_anio smallint NOT NULL,
+	"dpcm_poblacionTotal" integer,
+	"dpcm_poblacionSisben" integer,
+	dpcm_afiliados_subsidiado integer,
+	dpcm_afiliados_contributivo integer,
+	dpcm_porcentaje_sgsss double precision,
+	dpcm_porcentaje_cobertura_subsidiado double precision,
+	CONSTRAINT datos_poblacion_censada_municipio_pk PRIMARY KEY (dpcm_codigo)
 
 );
 -- ddl-end --
-ALTER TABLE "Salud".poblacion_censada_municipio OWNER TO sirhuila;
+COMMENT ON COLUMN "Salud".datos_poblacion_censada_municipio.dpcm_afiliados_subsidiado IS 'Total afiliados con  régimen subsdiado.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".datos_poblacion_censada_municipio.dpcm_afiliados_contributivo IS 'Total afiliados régimen contributivo';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".datos_poblacion_censada_municipio.dpcm_porcentaje_sgsss IS 'Co AFIL SGSSS ';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".datos_poblacion_censada_municipio.dpcm_porcentaje_cobertura_subsidiado IS 'Porcentaje de cobertura de afiliación de régimen subsidiado.';
+-- ddl-end --
+ALTER TABLE "Salud".datos_poblacion_censada_municipio OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Salud".vih_clasificacion | type: TABLE --
@@ -6449,6 +6501,536 @@ COMMENT ON COLUMN "Riesgos".desastres.des_longitud IS 'Longitud geográfica del 
 COMMENT ON CONSTRAINT des_codigo_pk ON "Riesgos".desastres  IS 'Restricción de llave primaria';
 -- ddl-end --
 ALTER TABLE "Riesgos".desastres OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Educacion".categoria_registro | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".categoria_registro CASCADE;
+CREATE TABLE "Educacion".categoria_registro(
+	creg_codigo serial NOT NULL,
+	creg_nombre character varying(150) NOT NULL,
+	CONSTRAINT categoria_registro_pk PRIMARY KEY (creg_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".categoria_registro IS 'Almacena los nombres de las diferentes categorias de personas que tiene la universidad.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".categoria_registro.creg_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".categoria_registro.creg_nombre IS 'Nombre de las distintas categorias de las personas inscritas, matriculadas, docentes, egresados, graduados.';
+-- ddl-end --
+ALTER TABLE "Educacion".categoria_registro OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Educacion".registro_universidades | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".registro_universidades CASCADE;
+CREATE TABLE "Educacion".registro_universidades(
+	runi_codigo bigserial NOT NULL,
+	runi_anio smallint NOT NULL,
+	runi_universidad integer,
+	runi_semestre smallint,
+	runi_nivel_educacion_superior integer,
+	runi_programa integer,
+	runi_categoria_registro integer,
+	runi_genero integer,
+	runi_num_personas integer,
+	CONSTRAINT registro_universidades_pk PRIMARY KEY (runi_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".registro_universidades IS 'Alumnos inscritos, matriculados, docentes, egresados, graduados, por programa, semestre y sexo.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_universidad IS 'Llave foránea que apunta a la tabla instituciones_de_educacion.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_semestre IS 'Llave foránea que apunta a la tabla semestre.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_nivel_educacion_superior IS 'Llave foránea que apunta a la tabla nivel_educacion_superior.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_programa IS 'Llave foránea que apunta a la tabla programa.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_categoria_registro IS 'Llave foránea que apunta a la tabla categoria_registro';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_genero IS 'Llave foránea que apunta a la tabla genero.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".registro_universidades.runi_num_personas IS 'Número de personas inscritas, matriculadas, docentes, egresados, graduados.';
+-- ddl-end --
+ALTER TABLE "Educacion".registro_universidades OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".defunciones_menores | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".defunciones_menores CASCADE;
+CREATE TABLE "Salud".defunciones_menores(
+	defm_codigo bigserial NOT NULL,
+	"defm_codMunicipio" integer,
+	defm_anio integer NOT NULL,
+	defm_tipo_defuncion smallint,
+	defm_num_defunciones integer,
+	"defm_num_nacidoVivos" integer,
+	CONSTRAINT defunciones_menores_pk PRIMARY KEY (defm_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".defunciones_menores IS 'defunciones de menores comparando con los nacidos vivos';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones_menores.defm_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones_menores."defm_codMunicipio" IS 'Llave foránea que apunta la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones_menores.defm_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones_menores.defm_tipo_defuncion IS 'Llave foránea que apunta a la tabla tipo_defuncion.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones_menores.defm_num_defunciones IS 'Número de defunciones';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".defunciones_menores."defm_num_nacidoVivos" IS 'Numero de nacidos vivos';
+-- ddl-end --
+ALTER TABLE "Salud".defunciones_menores OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_adopcion | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_adopcion CASCADE;
+CREATE TABLE "Salud".tipo_adopcion(
+	tpad_codigo smallserial NOT NULL,
+	tpad_nombre character varying(50),
+	CONSTRAINT tipo_adopcion_pk PRIMARY KEY (tpad_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_adopcion IS ' Almacena los diferentes tipos de adopción.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_adopcion.tpad_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_adopcion.tpad_nombre IS 'Nombre del tipo de adopción.';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_adopcion OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: public.pais | type: TABLE --
+-- DROP TABLE IF EXISTS public.pais CASCADE;
+CREATE TABLE public.pais(
+	pais_codigo bigserial NOT NULL,
+	pais_nombre character varying(200),
+	CONSTRAINT pais_pk PRIMARY KEY (pais_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE public.pais IS 'Tabla que contiene los distintos paises.';
+-- ddl-end --
+COMMENT ON COLUMN public.pais.pais_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN public.pais.pais_nombre IS 'Nombre de cada pais.';
+-- ddl-end --
+ALTER TABLE public.pais OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud"."atencion_extra_menorFamilia" | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud"."atencion_extra_menorFamilia" CASCADE;
+CREATE TABLE "Salud"."atencion_extra_menorFamilia"(
+	atem_codigo integer NOT NULL,
+	atem_municipio integer,
+	atem_anio integer,
+	atem_tipo_atencion_extra integer,
+	atem_tipo_dato_atencion integer,
+	atem_numero integer,
+	CONSTRAINT "atencion_extra_menorFamilia_pk" PRIMARY KEY (atem_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud"."atencion_extra_menorFamilia" IS 'Tabla que contiene los datos de atención extrajudicial del menor y la familia.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_municipio IS 'Llave foranea que apunta a la tabla municipio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_anio IS 'llave foranea que apunta a la tabla anio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_tipo_atencion_extra IS 'Llave foranea que apunta a la tabla tipo_atencion_extra';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_tipo_dato_atencion IS 'Llave foranea que apunta a la tabla tipo_dato_atencion';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_numero IS 'Numero de datos para la atención extrajudicial del menor y la familia.';
+-- ddl-end --
+ALTER TABLE "Salud"."atencion_extra_menorFamilia" OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_atencion_extra | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_atencion_extra CASCADE;
+CREATE TABLE "Salud".tipo_atencion_extra(
+	tpat_codigo smallserial NOT NULL,
+	tpat_nombre character varying(100),
+	CONSTRAINT tipo_atencion_extra_pk PRIMARY KEY (tpat_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_atencion_extra IS ' Almacena los diferentes tipos de dea tención extrajudicial.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_atencion_extra.tpat_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_atencion_extra.tpat_nombre IS 'Nombre del tipo de atención si es reconocimiento voluntario de la pternidad, alimentos, custodia y cuidado personal, etc...';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_atencion_extra OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_dato_atencion | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_dato_atencion CASCADE;
+CREATE TABLE "Salud".tipo_dato_atencion(
+	tpda_codigo smallserial NOT NULL,
+	tpda_nombre character varying(50),
+	CONSTRAINT tipo_dato_atencion_pk PRIMARY KEY (tpda_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_dato_atencion IS ' Almacena los diferentes tipos de datos de la atención extrajudicial.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_dato_atencion.tpda_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_dato_atencion.tpda_nombre IS 'Nombre del tipo de atención si es el número de menores o una demanda.';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_dato_atencion OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".vih_casos_mes | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".vih_casos_mes CASCADE;
+CREATE TABLE "Salud".vih_casos_mes(
+	vihm_codigo bigserial NOT NULL,
+	vihm_anio integer NOT NULL,
+	vihm_mes smallint,
+	"vihm_numeroCasos" integer,
+	CONSTRAINT vih_casos_mes_pk PRIMARY KEY (vihm_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".vih_casos_mes IS 'Tabla que contiene los casos de VIH por mes';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_mes.vihm_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_mes.vihm_anio IS 'Llave foranea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_mes.vihm_mes IS 'Llave foránea que apunta a la tabla mes.';
+-- ddl-end --
+ALTER TABLE "Salud".vih_casos_mes OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".vih_casos_rango | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".vih_casos_rango CASCADE;
+CREATE TABLE "Salud".vih_casos_rango(
+	vihr_codigo bigserial NOT NULL,
+	vihr_anio integer NOT NULL,
+	vihr_rango smallint,
+	"vihr_numeroCasos" integer,
+	CONSTRAINT vih_casos_rango_pk PRIMARY KEY (vihr_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".vih_casos_rango IS 'Tabla que contiene los casos de VIH por rango de edades';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_rango.vihr_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_rango.vihr_anio IS 'Llave foranea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".vih_casos_rango.vihr_rango IS 'Llave foránea que apunta a la tabla edades_rangos';
+-- ddl-end --
+ALTER TABLE "Salud".vih_casos_rango OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".modelo_atencion_icbf | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".modelo_atencion_icbf CASCADE;
+CREATE TABLE "Salud".modelo_atencion_icbf(
+	mai_codigo bigserial NOT NULL,
+	"mai_codMunicipio" integer,
+	mai_anio integer NOT NULL,
+	mai_tipo_modalidades integer,
+	mai_tipo_dato_modalidad integer,
+	mai_numero integer,
+	CONSTRAINT modelo_atencion_icbf_pk PRIMARY KEY (mai_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".modelo_atencion_icbf IS 'tabla que contiene el numero de casos en los diferentes modelos de atención del ICBF.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".modelo_atencion_icbf.mai_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".modelo_atencion_icbf."mai_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".modelo_atencion_icbf.mai_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".modelo_atencion_icbf.mai_tipo_modalidades IS 'Llave foranea que apunta a la tabla tipo_modalidades_icbf';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".modelo_atencion_icbf.mai_tipo_dato_modalidad IS 'Llave foranea que apunta a la tabla tipo_datos_modalidades_icbf';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".modelo_atencion_icbf.mai_numero IS 'Número de casos atentidos';
+-- ddl-end --
+ALTER TABLE "Salud".modelo_atencion_icbf OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_modalidaes_icbf | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_modalidaes_icbf CASCADE;
+CREATE TABLE "Salud".tipo_modalidaes_icbf(
+	tpmi_codigo smallserial NOT NULL,
+	tpmi_nombre character varying(100),
+	CONSTRAINT tipo_modalidaes_icbf_pk PRIMARY KEY (tpmi_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_modalidaes_icbf IS ' Almacena los diferentes tipos de dea tención extrajudicial.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_modalidaes_icbf.tpmi_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_modalidaes_icbf.tpmi_nombre IS 'Nombre del tipo de atención si es, HCB TIEMPO COMPLETO, CDI MODALIDAD SIN ARRIENDO INFRAESTRUCTURA ICBF, CDI MODALIDAD  CON ARREINDO, CDI MODALIDAD  FAMILIAR SIN ARRIENDO, etc..
+';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_modalidaes_icbf OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_dato_modalidades_icbf | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_dato_modalidades_icbf CASCADE;
+CREATE TABLE "Salud".tipo_dato_modalidades_icbf(
+	tpdm_codigo smallserial NOT NULL,
+	tpdm_nombre character varying(50),
+	CONSTRAINT tipo_dato_modalidades_icbf_pk PRIMARY KEY (tpdm_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_dato_modalidades_icbf IS ' Almacena los diferentes tipos de datos de las modalidades del ICBF.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_dato_modalidades_icbf.tpdm_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_dato_modalidades_icbf.tpdm_nombre IS 'Nombre del tipo de atención si es UD, presupuesto, usuarios.';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_dato_modalidades_icbf OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Educacion".educacion_adultos | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".educacion_adultos CASCADE;
+CREATE TABLE "Educacion".educacion_adultos(
+	educ_codigo bigserial NOT NULL,
+	educ_municipio integer,
+	educ_anio smallint,
+	educ_nivel_educativo integer,
+	educ_tipo_institucion integer,
+	educ_grado integer,
+	educ_area integer,
+	educ_num_matriculas integer,
+	CONSTRAINT educacion_adultos_pk PRIMARY KEY (educ_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".educacion_adultos IS 'matriculas por niveles, instituciones en los municipios del departamento para la poblacion adulta.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_municipio IS 'Llave foránea que apunta a la tabla municipio,';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_nivel_educativo IS 'Llave foránea que apunta a la tabla tipo_nivel_educativo.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_tipo_institucion IS 'Llave foránea que apunta a la tabla tipo_institucion.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_grado IS 'Llave foránea que apunta a la tabla grado.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_area IS 'Llave foránea que apunta a la tabla area.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".educacion_adultos.educ_num_matriculas IS 'Numero matriculas en los municipios para la poblacion adulta.';
+-- ddl-end --
+ALTER TABLE "Educacion".educacion_adultos OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Educacion".ciclos_educativos | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".ciclos_educativos CASCADE;
+CREATE TABLE "Educacion".ciclos_educativos(
+	cie_codigo serial NOT NULL,
+	cie_nombre character varying(150) NOT NULL,
+	CONSTRAINT ciclos_educativos_pk PRIMARY KEY (cie_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".ciclos_educativos IS 'Almacena los nombres de los ciclos de educación.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".ciclos_educativos.cie_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".ciclos_educativos.cie_nombre IS 'Nombre de los diferentes ciclos de educación, del programa nacional de alfabetización.';
+-- ddl-end --
+ALTER TABLE "Educacion".ciclos_educativos OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Educacion".tipo_dato_pna | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".tipo_dato_pna CASCADE;
+CREATE TABLE "Educacion".tipo_dato_pna(
+	tpdp_codigo serial NOT NULL,
+	tpdp_nombre character varying(150) NOT NULL,
+	CONSTRAINT tipo_dato_pna_pk PRIMARY KEY (tpdp_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".tipo_dato_pna IS 'Almacena los nombres del tipo de dato del Programa nacional de alfabetizacion.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".tipo_dato_pna.tpdp_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".tipo_dato_pna.tpdp_nombre IS 'Nombre de los diferentes tipos de datos como alfabetizadores, matriculados por ciclos y instituciones educativas.';
+-- ddl-end --
+ALTER TABLE "Educacion".tipo_dato_pna OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Educacion".programa_nacional_alfabetizacion | type: TABLE --
+-- DROP TABLE IF EXISTS "Educacion".programa_nacional_alfabetizacion CASCADE;
+CREATE TABLE "Educacion".programa_nacional_alfabetizacion(
+	pna_codigo bigserial NOT NULL,
+	pna_municipio integer,
+	pna_anio smallint,
+	pna_tipo_dato integer,
+	pna_ciclo integer,
+	pna_area integer,
+	pna_numero integer,
+	CONSTRAINT programa_nacional_alfabetizacion_pk PRIMARY KEY (pna_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Educacion".programa_nacional_alfabetizacion IS 'Tabla que almacena la información del programa nacional de alfabetización.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_municipio IS 'Llave foránea que apunta a la tabla municipio,';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_tipo_dato IS 'Llave foránea que apunta a la tabla tipo_dato_pna';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_ciclo IS 'Llave foránea que apunta a la tabla ciclos_educativos';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_area IS 'Llave foránea que apunta a la tabla area.';
+-- ddl-end --
+COMMENT ON COLUMN "Educacion".programa_nacional_alfabetizacion.pna_numero IS 'Numero de personas matriculadas por ciclo, alfabetizadores, instituciones educativas.';
+-- ddl-end --
+ALTER TABLE "Educacion".programa_nacional_alfabetizacion OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".negocios_iniciados_juzgados_icbf | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".negocios_iniciados_juzgados_icbf CASCADE;
+CREATE TABLE "Salud".negocios_iniciados_juzgados_icbf(
+	niji_codigo bigserial NOT NULL,
+	"niji_codMunicipio" integer,
+	niji_anio integer NOT NULL,
+	niji_tipo_modalidades integer,
+	niji_tipo_dato_modalidad integer,
+	niji_numero integer,
+	CONSTRAINT negocios_iniciados_juzgados_icbf_pk PRIMARY KEY (niji_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".negocios_iniciados_juzgados_icbf IS 'Incidencia de la tuberculosis de todas las formas por municipios en el departamento';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".negocios_iniciados_juzgados_icbf.niji_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".negocios_iniciados_juzgados_icbf."niji_codMunicipio" IS 'Llave foránea que apunta a la tabla municipio';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".negocios_iniciados_juzgados_icbf.niji_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".negocios_iniciados_juzgados_icbf.niji_tipo_modalidades IS 'Llave foranea que apunta a la tabla tipo_modalidades_icbf';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".negocios_iniciados_juzgados_icbf.niji_tipo_dato_modalidad IS 'Llave foranea que apunta a la tabla tipo_datos_modalidades_icbf';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".negocios_iniciados_juzgados_icbf.niji_numero IS 'Número de casos iniciados y reiniciados';
+-- ddl-end --
+ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud"."Poblacion_vacunacion" | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud"."Poblacion_vacunacion" CASCADE;
+CREATE TABLE "Salud"."Poblacion_vacunacion"(
+	pva_codigo bigserial NOT NULL,
+	"pva_codMunicipio" integer,
+	pva_anio integer NOT NULL,
+	pva_tipo_poblacion integer,
+	"pva_poblacionMeta" integer,
+	CONSTRAINT "Poblacion_vacunacion_pk" PRIMARY KEY (pva_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud"."Poblacion_vacunacion" IS 'Poblacion de menores para vacunación.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Poblacion_vacunacion"."pva_codMunicipio" IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Poblacion_vacunacion".pva_anio IS 'Llave foránea que apunta a la tabla anio.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Poblacion_vacunacion".pva_tipo_poblacion IS 'llave foranea que apunta a la tabla tipo_poblacion';
+-- ddl-end --
+COMMENT ON COLUMN "Salud"."Poblacion_vacunacion"."pva_poblacionMeta" IS 'Población menor  meta programática.';
+-- ddl-end --
+ALTER TABLE "Salud"."Poblacion_vacunacion" OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_causa_morbilidad | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_causa_morbilidad CASCADE;
+CREATE TABLE "Salud".tipo_causa_morbilidad(
+	tcam_codigo serial NOT NULL,
+	tcam_nombre character varying(150),
+	CONSTRAINT tipo_causa_morbilidad_pk PRIMARY KEY (tcam_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_causa_morbilidad IS 'Almacena las diferentes tipo de causas de morbibilidad';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_causa_morbilidad.tcam_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_causa_morbilidad.tcam_nombre IS 'Nombre de la causa de morbilidad.';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_causa_morbilidad OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_causa_mortalidad | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_causa_mortalidad CASCADE;
+CREATE TABLE "Salud".tipo_causa_mortalidad(
+	tcamt_codigo serial NOT NULL,
+	tcamt_nombre character varying(150),
+	CONSTRAINT tipo_causa_mortalidad_pk PRIMARY KEY (tcamt_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_causa_mortalidad IS 'Almacena las diferentes tipo de causas de morbibilidad';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_causa_mortalidad.tcamt_codigo IS 'Llave primaria para la identificación única de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_causa_mortalidad.tcamt_nombre IS 'Nombre de la causa de la mortalidad.';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_causa_mortalidad OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".mortalidad_materna | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".mortalidad_materna CASCADE;
+CREATE TABLE "Salud".mortalidad_materna(
+	mma_codigo bigserial NOT NULL,
+	"mma_codMunicipio" integer,
+	mma_anio integer NOT NULL,
+	mma_casos integer,
+	CONSTRAINT mortalidad_materna_pk PRIMARY KEY (mma_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".mortalidad_materna IS 'tabla que contiene la mortalidad materna por municipio';
+-- ddl-end --
+ALTER TABLE "Salud".mortalidad_materna OWNER TO sirhuila;
+-- ddl-end --
+
+-- object: "Salud".tipo_cobertura | type: TABLE --
+-- DROP TABLE IF EXISTS "Salud".tipo_cobertura CASCADE;
+CREATE TABLE "Salud".tipo_cobertura(
+	tpco_codigo integer NOT NULL,
+	tpco_nombre integer,
+	CONSTRAINT tipo_cobertura_pk PRIMARY KEY (tpco_codigo)
+
+);
+-- ddl-end --
+COMMENT ON TABLE "Salud".tipo_cobertura IS 'tabla que contiene si pertenece o no al sisben';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_cobertura.tpco_codigo IS 'Codigo de identificación de cada registro.';
+-- ddl-end --
+COMMENT ON COLUMN "Salud".tipo_cobertura.tpco_nombre IS 'si es con sisben o sin sisben.';
+-- ddl-end --
+ALTER TABLE "Salud".tipo_cobertura OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "fk_codMunicipio" | type: CONSTRAINT --
@@ -6677,8 +7259,8 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- object: "fk_vacunacion-codVirus" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".vacunacion_biologicos DROP CONSTRAINT IF EXISTS "fk_vacunacion-codVirus" CASCADE;
-ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT "fk_vacunacion-codVirus" FOREIGN KEY ("vabi_codBiologicos")
-REFERENCES "Salud".biologicos (bio_codigo) MATCH FULL
+ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT "fk_vacunacion-codVirus" FOREIGN KEY (vabi_tipo_biologicos)
+REFERENCES "Salud".tipo_biologicos (bio_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6686,6 +7268,13 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE "Salud".vacunacion_biologicos DROP CONSTRAINT IF EXISTS fk_vacunacion_bio_anio CASCADE;
 ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT fk_vacunacion_bio_anio FOREIGN KEY (vabi_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vacunacion_tipo_poblacion | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vacunacion_biologicos DROP CONSTRAINT IF EXISTS fk_vacunacion_tipo_poblacion CASCADE;
+ALTER TABLE "Salud".vacunacion_biologicos ADD CONSTRAINT fk_vacunacion_tipo_poblacion FOREIGN KEY (vabi_tipo_poblacion)
+REFERENCES "Salud".tipo_poblacion_salud (tpoce_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6724,6 +7313,13 @@ REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_defuncion_rango_edad | type: CONSTRAINT --
+-- ALTER TABLE "Salud".defunciones DROP CONSTRAINT IF EXISTS fk_defuncion_rango_edad CASCADE;
+ALTER TABLE "Salud".defunciones ADD CONSTRAINT fk_defuncion_rango_edad FOREIGN KEY (def_rango_edad)
+REFERENCES public.edades_rangos (edr_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_desnutricion-codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".desnutricion DROP CONSTRAINT IF EXISTS "fk_desnutricion-codMunicipio" CASCADE;
 ALTER TABLE "Salud".desnutricion ADD CONSTRAINT "fk_desnutricion-codMunicipio" FOREIGN KEY ("dnut_codMunicipio")
@@ -6735,6 +7331,13 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE "Salud".desnutricion DROP CONSTRAINT IF EXISTS pk_desnutricion_anio CASCADE;
 ALTER TABLE "Salud".desnutricion ADD CONSTRAINT pk_desnutricion_anio FOREIGN KEY (dnut_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_desnutricion_edad | type: CONSTRAINT --
+-- ALTER TABLE "Salud".desnutricion DROP CONSTRAINT IF EXISTS fk_desnutricion_edad CASCADE;
+ALTER TABLE "Salud".desnutricion ADD CONSTRAINT fk_desnutricion_edad FOREIGN KEY (dnut_edad)
+REFERENCES public.edades_rangos (edr_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6773,6 +7376,13 @@ REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_mortalidad_tipo_causa | type: CONSTRAINT --
+-- ALTER TABLE "Salud".principales_mortalidad DROP CONSTRAINT IF EXISTS fk_mortalidad_tipo_causa CASCADE;
+ALTER TABLE "Salud".principales_mortalidad ADD CONSTRAINT fk_mortalidad_tipo_causa FOREIGN KEY (pmort_tipo_causa)
+REFERENCES "Salud".tipo_causa_mortalidad (tcamt_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_morbilidad-tipoConsulta" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".principales_morbilidad DROP CONSTRAINT IF EXISTS "fk_morbilidad-tipoConsulta" CASCADE;
 ALTER TABLE "Salud".principales_morbilidad ADD CONSTRAINT "fk_morbilidad-tipoConsulta" FOREIGN KEY ("pmor_tipoConsulta")
@@ -6787,6 +7397,48 @@ REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_morbilidad_causa | type: CONSTRAINT --
+-- ALTER TABLE "Salud".principales_morbilidad DROP CONSTRAINT IF EXISTS fk_morbilidad_causa CASCADE;
+ALTER TABLE "Salud".principales_morbilidad ADD CONSTRAINT fk_morbilidad_causa FOREIGN KEY (pmor_tipo_causa)
+REFERENCES "Salud".tipo_causa_morbilidad (tcam_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_morbilidad_edad | type: CONSTRAINT --
+-- ALTER TABLE "Salud".principales_morbilidad DROP CONSTRAINT IF EXISTS fk_morbilidad_edad CASCADE;
+ALTER TABLE "Salud".principales_morbilidad ADD CONSTRAINT fk_morbilidad_edad FOREIGN KEY (pmor_edad)
+REFERENCES public.edades_rangos (edr_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_morbilidad_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".principales_morbilidad DROP CONSTRAINT IF EXISTS fk_morbilidad_municipio CASCADE;
+ALTER TABLE "Salud".principales_morbilidad ADD CONSTRAINT fk_morbilidad_municipio FOREIGN KEY (pmor_municipio)
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adopciones_alcance | type: CONSTRAINT --
+-- ALTER TABLE "Salud".adopciones DROP CONSTRAINT IF EXISTS fk_adopciones_alcance CASCADE;
+ALTER TABLE "Salud".adopciones ADD CONSTRAINT fk_adopciones_alcance FOREIGN KEY (ado_origen_familia)
+REFERENCES public.alcance (alc_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adopciones_pais | type: CONSTRAINT --
+-- ALTER TABLE "Salud".adopciones DROP CONSTRAINT IF EXISTS fk_adopciones_pais CASCADE;
+ALTER TABLE "Salud".adopciones ADD CONSTRAINT fk_adopciones_pais FOREIGN KEY (ado_pais)
+REFERENCES public.pais (pais_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adopciones_tipo_adopcion | type: CONSTRAINT --
+-- ALTER TABLE "Salud".adopciones DROP CONSTRAINT IF EXISTS fk_adopciones_tipo_adopcion CASCADE;
+ALTER TABLE "Salud".adopciones ADD CONSTRAINT fk_adopciones_tipo_adopcion FOREIGN KEY (ado_tipo_adopcion)
+REFERENCES "Salud".tipo_adopcion (tpad_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_huerfnos-codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".huerfanos DROP CONSTRAINT IF EXISTS "fk_huerfnos-codMunicipio" CASCADE;
 ALTER TABLE "Salud".huerfanos ADD CONSTRAINT "fk_huerfnos-codMunicipio" FOREIGN KEY ("huer_codMunicipio")
@@ -6794,24 +7446,52 @@ REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: "fk_coberturaPoblacion" | type: CONSTRAINT --
--- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS "fk_coberturaPoblacion" CASCADE;
-ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT "fk_coberturaPoblacion" FOREIGN KEY ("coas_codTipoPoblacionCesada")
-REFERENCES "Salud".tipo_poblacion_censada (tpoce_codigo) MATCH FULL
+-- object: fk_huerfanos_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".huerfanos DROP CONSTRAINT IF EXISTS fk_huerfanos_anio CASCADE;
+ALTER TABLE "Salud".huerfanos ADD CONSTRAINT fk_huerfanos_anio FOREIGN KEY (huer_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: "fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" | type: CONSTRAINT --
--- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS "fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" CASCADE;
-ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT "fk_coberturaAseguramiento-codPoblacionSensadaMunicipio" FOREIGN KEY ("coas_codPoblacionSensadaMunicipio")
-REFERENCES "Salud".poblacion_censada_municipio (psm_codigo) MATCH FULL
+-- object: "fk_coberturaPoblacion" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS "fk_coberturaPoblacion" CASCADE;
+ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT "fk_coberturaPoblacion" FOREIGN KEY (coas_tipo_poblacion)
+REFERENCES "Salud".tipo_poblacion_salud (tpoce_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_cobertura_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS fk_cobertura_municipio CASCADE;
+ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT fk_cobertura_municipio FOREIGN KEY (coas_municipio)
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_cobertura_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS fk_cobertura_anio CASCADE;
+ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT fk_cobertura_anio FOREIGN KEY (coas_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_cobertura_cobertura | type: CONSTRAINT --
+-- ALTER TABLE "Salud".cobertura_aseguramiento DROP CONSTRAINT IF EXISTS fk_cobertura_cobertura CASCADE;
+ALTER TABLE "Salud".cobertura_aseguramiento ADD CONSTRAINT fk_cobertura_cobertura FOREIGN KEY (coas_cobertura)
+REFERENCES "Salud".tipo_cobertura (tpco_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_vih_sida_anio | type: CONSTRAINT --
--- ALTER TABLE "Salud"."casos_VHI-sida" DROP CONSTRAINT IF EXISTS fk_vih_sida_anio CASCADE;
-ALTER TABLE "Salud"."casos_VHI-sida" ADD CONSTRAINT fk_vih_sida_anio FOREIGN KEY (cvih_anio)
+-- ALTER TABLE "Salud".casos_vih_sida DROP CONSTRAINT IF EXISTS fk_vih_sida_anio CASCADE;
+ALTER TABLE "Salud".casos_vih_sida ADD CONSTRAINT fk_vih_sida_anio FOREIGN KEY (cvih_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vih_sida_casos_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".casos_vih_sida DROP CONSTRAINT IF EXISTS fk_vih_sida_casos_municipio CASCADE;
+ALTER TABLE "Salud".casos_vih_sida ADD CONSTRAINT fk_vih_sida_casos_municipio FOREIGN KEY (cvih_municipio)
+REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6908,8 +7588,8 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- object: "fk_codTipo_organismos_salud" | type: CONSTRAINT --
 -- ALTER TABLE "Salud".organismos_salud DROP CONSTRAINT IF EXISTS "fk_codTipo_organismos_salud" CASCADE;
-ALTER TABLE "Salud".organismos_salud ADD CONSTRAINT "fk_codTipo_organismos_salud" FOREIGN KEY ("orsa_codTipo_organismos_salud")
-REFERENCES "Salud".tipo_orsa (tp_orsa_codigo) MATCH FULL
+ALTER TABLE "Salud".organismos_salud ADD CONSTRAINT "fk_codTipo_organismos_salud" FOREIGN KEY (orsa_tipo_organismos_salud)
+REFERENCES "Salud".tipo_organismos_salud (tp_orsa_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -6921,36 +7601,36 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: "fk_intituciones_educativas_codMunicipio" | type: CONSTRAINT --
--- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS "fk_intituciones_educativas_codMunicipio" CASCADE;
-ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT "fk_intituciones_educativas_codMunicipio" FOREIGN KEY ("ine_codMunicipio")
+-- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS "fk_intituciones_educativas_codMunicipio" CASCADE;
+ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT "fk_intituciones_educativas_codMunicipio" FOREIGN KEY ("nine_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_tp_plantel | type: CONSTRAINT --
--- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tp_plantel CASCADE;
-ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tp_plantel FOREIGN KEY (ine_tipo_plantel)
+-- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tp_plantel CASCADE;
+ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tp_plantel FOREIGN KEY (nine_tipo_plantel)
 REFERENCES "Educacion".tipo_plantel_educativo (tpe_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_area | type: CONSTRAINT --
--- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_area CASCADE;
-ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_area FOREIGN KEY (ine_area)
+-- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_area CASCADE;
+ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_area FOREIGN KEY (nine_area)
 REFERENCES public.area (are_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_tipo_institucion | type: CONSTRAINT --
--- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tipo_institucion CASCADE;
-ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tipo_institucion FOREIGN KEY (ine_tipo_institucion)
+-- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tipo_institucion CASCADE;
+ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tipo_institucion FOREIGN KEY (nine_tipo_institucion)
 REFERENCES "Educacion".tipo_institucion (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_instituciones_educativas_anio | type: CONSTRAINT --
--- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_anio CASCADE;
-ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_anio FOREIGN KEY (ine_anio)
+-- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_anio CASCADE;
+ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_anio FOREIGN KEY (nine_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
@@ -7025,6 +7705,13 @@ REFERENCES public.semestre (sem_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: fk_clas_icfes_estab_edu_instituciones_educacion | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos DROP CONSTRAINT IF EXISTS fk_clas_icfes_estab_edu_instituciones_educacion CASCADE;
+ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos ADD CONSTRAINT fk_clas_icfes_estab_edu_instituciones_educacion FOREIGN KEY (cies_institucion_educativa)
+REFERENCES "Educacion".instituciones_educativas (ined_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: "fk_comportamiento_alumnos_codMunicipio" | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".comportamiento_alumnos DROP CONSTRAINT IF EXISTS "fk_comportamiento_alumnos_codMunicipio" CASCADE;
 ALTER TABLE "Educacion".comportamiento_alumnos ADD CONSTRAINT "fk_comportamiento_alumnos_codMunicipio" FOREIGN KEY ("coal_codMunicipio")
@@ -7046,52 +7733,73 @@ REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_datos_universidades_universidad | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_universidad CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_universidad FOREIGN KEY (dau_universidad)
-REFERENCES "Educacion".universidad (uni_codigo) MATCH FULL
+-- object: fk_docentes_universidades_instituciones_educativas | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_instituciones_educativas CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_instituciones_educativas FOREIGN KEY (dou_universidad)
+REFERENCES "Educacion".instituciones_educativas (ined_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_datos_universidades_nedusuperior | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_nedusuperior CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_nedusuperior FOREIGN KEY (dau_nivel_educacion_superior)
+-- object: fk_docentes_universidades_nedusuperior | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_nedusuperior CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_nedusuperior FOREIGN KEY (dou_nivel_educacion_superior)
 REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_datos_universidades_programa | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_programa CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_programa FOREIGN KEY (dau_programa)
+-- object: fk_docentes_universidades_programa | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_programa CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_programa FOREIGN KEY (dou_programa)
 REFERENCES "Educacion".programa (pro_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: "fk_datos_universidades_categoria_personalU" | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS "fk_datos_universidades_categoria_personalU" CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT "fk_datos_universidades_categoria_personalU" FOREIGN KEY ("dau_categoria_personalU")
+-- object: "fk_docentes_universidades_categoria_personalU" | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS "fk_docentes_universidades_categoria_personalU" CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT "fk_docentes_universidades_categoria_personalU" FOREIGN KEY ("dou_categoria_personalU")
 REFERENCES "Educacion".categoria_personal (cpu_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_datos_universidades_genero | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_genero CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_genero FOREIGN KEY (dau_genero)
+-- object: fk_docentes_universidades_genero | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_genero CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_genero FOREIGN KEY (dou_genero)
 REFERENCES public.genero (gen_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_datos_universidades_anio | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_anio CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_anio FOREIGN KEY (dau_anio)
+-- object: fk_docentes_universidades_anio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_anio CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_anio FOREIGN KEY (dou_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: fk_datos_universidades_semestre | type: CONSTRAINT --
--- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_datos_universidades_semestre CASCADE;
-ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_datos_universidades_semestre FOREIGN KEY (dau_semestre)
+-- object: fk_docentes_universidades_semestre | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_semestre CASCADE;
+ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_semestre FOREIGN KEY (dou_semestre)
 REFERENCES public.semestre (sem_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_inst_educa_tipo | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_inst_educa_tipo CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_inst_educa_tipo FOREIGN KEY (ined_tipo_institucion)
+REFERENCES "Educacion".tipo_institucion (tpin_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_inst_educ_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS "fk_inst_educ_codMunicipio" CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT "fk_inst_educ_codMunicipio" FOREIGN KEY ("ined_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_inst_educ_area | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_inst_educ_area CASCADE;
+ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_inst_educ_area FOREIGN KEY (ined_area)
+REFERENCES public.area (are_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -9168,9 +9876,16 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: "fk_poblacionCesadaMunicipio_anio" | type: CONSTRAINT --
--- ALTER TABLE "Salud".poblacion_censada_municipio DROP CONSTRAINT IF EXISTS "fk_poblacionCesadaMunicipio_anio" CASCADE;
-ALTER TABLE "Salud".poblacion_censada_municipio ADD CONSTRAINT "fk_poblacionCesadaMunicipio_anio" FOREIGN KEY (psm_anio)
+-- ALTER TABLE "Salud".datos_poblacion_censada_municipio DROP CONSTRAINT IF EXISTS "fk_poblacionCesadaMunicipio_anio" CASCADE;
+ALTER TABLE "Salud".datos_poblacion_censada_municipio ADD CONSTRAINT "fk_poblacionCesadaMunicipio_anio" FOREIGN KEY (dpcm_anio)
 REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_poblacionCesadaMunicipio_municipio" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".datos_poblacion_censada_municipio DROP CONSTRAINT IF EXISTS "fk_poblacionCesadaMunicipio_municipio" CASCADE;
+ALTER TABLE "Salud".datos_poblacion_censada_municipio ADD CONSTRAINT "fk_poblacionCesadaMunicipio_municipio" FOREIGN KEY ("dpcm_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -9206,6 +9921,300 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE "Riesgos".desastres DROP CONSTRAINT IF EXISTS "fk_codMunicipio" CASCADE;
 ALTER TABLE "Riesgos".desastres ADD CONSTRAINT "fk_codMunicipio" FOREIGN KEY ("des_codMunicipio")
 REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_instituciones_educativas | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_instituciones_educativas CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_instituciones_educativas FOREIGN KEY (runi_universidad)
+REFERENCES "Educacion".instituciones_educativas (ined_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_nedusuperior | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_nedusuperior CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_nedusuperior FOREIGN KEY (runi_nivel_educacion_superior)
+REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_programa | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_programa CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_programa FOREIGN KEY (runi_programa)
+REFERENCES "Educacion".programa (pro_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_categoria_registro | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_categoria_registro CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_categoria_registro FOREIGN KEY (runi_categoria_registro)
+REFERENCES "Educacion".categoria_registro (creg_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_genero | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_genero CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_genero FOREIGN KEY (runi_genero)
+REFERENCES public.genero (gen_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_anio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_anio CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_anio FOREIGN KEY (runi_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_registro_universidades_semestre | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_semestre CASCADE;
+ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_semestre FOREIGN KEY (runi_semestre)
+REFERENCES public.semestre (sem_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_defunciones_menores_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".defunciones_menores DROP CONSTRAINT IF EXISTS fk_defunciones_menores_municipio CASCADE;
+ALTER TABLE "Salud".defunciones_menores ADD CONSTRAINT fk_defunciones_menores_municipio FOREIGN KEY ("defm_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_defuncion_menores_tipo | type: CONSTRAINT --
+-- ALTER TABLE "Salud".defunciones_menores DROP CONSTRAINT IF EXISTS fk_defuncion_menores_tipo CASCADE;
+ALTER TABLE "Salud".defunciones_menores ADD CONSTRAINT fk_defuncion_menores_tipo FOREIGN KEY (defm_tipo_defuncion)
+REFERENCES "Salud".tipo_defuncion (tdef_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_defunciones_menores_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".defunciones_menores DROP CONSTRAINT IF EXISTS fk_defunciones_menores_anio CASCADE;
+ALTER TABLE "Salud".defunciones_menores ADD CONSTRAINT fk_defunciones_menores_anio FOREIGN KEY (defm_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_atencion_extra_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."atencion_extra_menorFamilia" DROP CONSTRAINT IF EXISTS fk_atencion_extra_municipio CASCADE;
+ALTER TABLE "Salud"."atencion_extra_menorFamilia" ADD CONSTRAINT fk_atencion_extra_municipio FOREIGN KEY (atem_municipio)
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_atencion_extra_tipo | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."atencion_extra_menorFamilia" DROP CONSTRAINT IF EXISTS fk_atencion_extra_tipo CASCADE;
+ALTER TABLE "Salud"."atencion_extra_menorFamilia" ADD CONSTRAINT fk_atencion_extra_tipo FOREIGN KEY (atem_tipo_atencion_extra)
+REFERENCES "Salud".tipo_atencion_extra (tpat_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_atencion_extra_dato | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."atencion_extra_menorFamilia" DROP CONSTRAINT IF EXISTS fk_atencion_extra_dato CASCADE;
+ALTER TABLE "Salud"."atencion_extra_menorFamilia" ADD CONSTRAINT fk_atencion_extra_dato FOREIGN KEY (atem_tipo_dato_atencion)
+REFERENCES "Salud".tipo_dato_atencion (tpda_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_atencion_extra_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."atencion_extra_menorFamilia" DROP CONSTRAINT IF EXISTS fk_atencion_extra_anio CASCADE;
+ALTER TABLE "Salud"."atencion_extra_menorFamilia" ADD CONSTRAINT fk_atencion_extra_anio FOREIGN KEY (atem_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vih_mes_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_casos_mes DROP CONSTRAINT IF EXISTS fk_vih_mes_anio CASCADE;
+ALTER TABLE "Salud".vih_casos_mes ADD CONSTRAINT fk_vih_mes_anio FOREIGN KEY (vihm_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_mes | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_casos_mes DROP CONSTRAINT IF EXISTS fk_mes CASCADE;
+ALTER TABLE "Salud".vih_casos_mes ADD CONSTRAINT fk_mes FOREIGN KEY (vihm_mes)
+REFERENCES public.mes (mes_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_vih_rango_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_casos_rango DROP CONSTRAINT IF EXISTS fk_vih_rango_anio CASCADE;
+ALTER TABLE "Salud".vih_casos_rango ADD CONSTRAINT fk_vih_rango_anio FOREIGN KEY (vihr_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_rango | type: CONSTRAINT --
+-- ALTER TABLE "Salud".vih_casos_rango DROP CONSTRAINT IF EXISTS fk_rango CASCADE;
+ALTER TABLE "Salud".vih_casos_rango ADD CONSTRAINT fk_rango FOREIGN KEY (vihr_rango)
+REFERENCES public.edades_rangos (edr_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_modelo_icbf_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".modelo_atencion_icbf DROP CONSTRAINT IF EXISTS "fk_modelo_icbf_codMunicipio" CASCADE;
+ALTER TABLE "Salud".modelo_atencion_icbf ADD CONSTRAINT "fk_modelo_icbf_codMunicipio" FOREIGN KEY ("mai_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_modelo_icbf_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".modelo_atencion_icbf DROP CONSTRAINT IF EXISTS fk_modelo_icbf_anio CASCADE;
+ALTER TABLE "Salud".modelo_atencion_icbf ADD CONSTRAINT fk_modelo_icbf_anio FOREIGN KEY (mai_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_modelo_icbf_modalidades | type: CONSTRAINT --
+-- ALTER TABLE "Salud".modelo_atencion_icbf DROP CONSTRAINT IF EXISTS fk_modelo_icbf_modalidades CASCADE;
+ALTER TABLE "Salud".modelo_atencion_icbf ADD CONSTRAINT fk_modelo_icbf_modalidades FOREIGN KEY (mai_tipo_modalidades)
+REFERENCES "Salud".tipo_modalidaes_icbf (tpmi_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_modelo_icbf_tipo_dato | type: CONSTRAINT --
+-- ALTER TABLE "Salud".modelo_atencion_icbf DROP CONSTRAINT IF EXISTS fk_modelo_icbf_tipo_dato CASCADE;
+ALTER TABLE "Salud".modelo_atencion_icbf ADD CONSTRAINT fk_modelo_icbf_tipo_dato FOREIGN KEY (mai_tipo_dato_modalidad)
+REFERENCES "Salud".tipo_dato_modalidades_icbf (tpdm_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adultos_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_municipio CASCADE;
+ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_municipio FOREIGN KEY (educ_municipio)
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adultos_tipo_institucion | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_tipo_institucion CASCADE;
+ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_tipo_institucion FOREIGN KEY (educ_tipo_institucion)
+REFERENCES "Educacion".tipo_institucion (tpin_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adultos_nivel_educativo | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_nivel_educativo CASCADE;
+ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_nivel_educativo FOREIGN KEY (educ_nivel_educativo)
+REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adultos_grado | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_grado CASCADE;
+ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_grado FOREIGN KEY (educ_grado)
+REFERENCES "Educacion".grado (gra_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adultos_area | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_area CASCADE;
+ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_area FOREIGN KEY (educ_area)
+REFERENCES public.area (are_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_adultos_anio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_anio CASCADE;
+ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_anio FOREIGN KEY (educ_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_pna_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".programa_nacional_alfabetizacion DROP CONSTRAINT IF EXISTS fk_pna_municipio CASCADE;
+ALTER TABLE "Educacion".programa_nacional_alfabetizacion ADD CONSTRAINT fk_pna_municipio FOREIGN KEY (pna_municipio)
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_pna_ciclo | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".programa_nacional_alfabetizacion DROP CONSTRAINT IF EXISTS fk_pna_ciclo CASCADE;
+ALTER TABLE "Educacion".programa_nacional_alfabetizacion ADD CONSTRAINT fk_pna_ciclo FOREIGN KEY (pna_ciclo)
+REFERENCES "Educacion".ciclos_educativos (cie_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_pna_dato | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".programa_nacional_alfabetizacion DROP CONSTRAINT IF EXISTS fk_pna_dato CASCADE;
+ALTER TABLE "Educacion".programa_nacional_alfabetizacion ADD CONSTRAINT fk_pna_dato FOREIGN KEY (pna_tipo_dato)
+REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_pna_area | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".programa_nacional_alfabetizacion DROP CONSTRAINT IF EXISTS fk_pna_area CASCADE;
+ALTER TABLE "Educacion".programa_nacional_alfabetizacion ADD CONSTRAINT fk_pna_area FOREIGN KEY (pna_area)
+REFERENCES "Educacion".grado (gra_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_pna_anio | type: CONSTRAINT --
+-- ALTER TABLE "Educacion".programa_nacional_alfabetizacion DROP CONSTRAINT IF EXISTS fk_pna_anio CASCADE;
+ALTER TABLE "Educacion".programa_nacional_alfabetizacion ADD CONSTRAINT fk_pna_anio FOREIGN KEY (pna_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_juzgados_icbf_municipio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf DROP CONSTRAINT IF EXISTS fk_juzgados_icbf_municipio CASCADE;
+ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf ADD CONSTRAINT fk_juzgados_icbf_municipio FOREIGN KEY ("niji_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_juzgados_icbf_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf DROP CONSTRAINT IF EXISTS fk_juzgados_icbf_anio CASCADE;
+ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf ADD CONSTRAINT fk_juzgados_icbf_anio FOREIGN KEY (niji_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_juzgados_icbf_modalidades | type: CONSTRAINT --
+-- ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf DROP CONSTRAINT IF EXISTS fk_juzgados_icbf_modalidades CASCADE;
+ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf ADD CONSTRAINT fk_juzgados_icbf_modalidades FOREIGN KEY (niji_tipo_modalidades)
+REFERENCES "Salud".tipo_modalidaes_icbf (tpmi_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_juzgados_icbf_tipo_dato | type: CONSTRAINT --
+-- ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf DROP CONSTRAINT IF EXISTS fk_juzgados_icbf_tipo_dato CASCADE;
+ALTER TABLE "Salud".negocios_iniciados_juzgados_icbf ADD CONSTRAINT fk_juzgados_icbf_tipo_dato FOREIGN KEY (niji_tipo_dato_modalidad)
+REFERENCES "Salud".tipo_dato_modalidades_icbf (tpdm_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_poblacion_vacunacion_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."Poblacion_vacunacion" DROP CONSTRAINT IF EXISTS "fk_poblacion_vacunacion_codMunicipio" CASCADE;
+ALTER TABLE "Salud"."Poblacion_vacunacion" ADD CONSTRAINT "fk_poblacion_vacunacion_codMunicipio" FOREIGN KEY ("pva_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_poblacion_vacunacion_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."Poblacion_vacunacion" DROP CONSTRAINT IF EXISTS fk_poblacion_vacunacion_anio CASCADE;
+ALTER TABLE "Salud"."Poblacion_vacunacion" ADD CONSTRAINT fk_poblacion_vacunacion_anio FOREIGN KEY (pva_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_poblacion_vacunacion_tipo | type: CONSTRAINT --
+-- ALTER TABLE "Salud"."Poblacion_vacunacion" DROP CONSTRAINT IF EXISTS fk_poblacion_vacunacion_tipo CASCADE;
+ALTER TABLE "Salud"."Poblacion_vacunacion" ADD CONSTRAINT fk_poblacion_vacunacion_tipo FOREIGN KEY (pva_tipo_poblacion)
+REFERENCES "Salud".tipo_poblacion_salud (tpoce_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: "fk_mortalidad_materna_codMunicipio" | type: CONSTRAINT --
+-- ALTER TABLE "Salud".mortalidad_materna DROP CONSTRAINT IF EXISTS "fk_mortalidad_materna_codMunicipio" CASCADE;
+ALTER TABLE "Salud".mortalidad_materna ADD CONSTRAINT "fk_mortalidad_materna_codMunicipio" FOREIGN KEY ("mma_codMunicipio")
+REFERENCES public.municipio (mun_codigo) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: fk_mortalidad_materna_anio | type: CONSTRAINT --
+-- ALTER TABLE "Salud".mortalidad_materna DROP CONSTRAINT IF EXISTS fk_mortalidad_materna_anio CASCADE;
+ALTER TABLE "Salud".mortalidad_materna ADD CONSTRAINT fk_mortalidad_materna_anio FOREIGN KEY (mma_anio)
+REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 

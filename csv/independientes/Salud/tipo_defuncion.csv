@@ -1,3 +1,11 @@
 tdef_codigo,tdf_nombre
 1,Fetales
-2,No fetales
+2,Natural
+3,En estudio
+4,Accidente de transito
+5,En estudio violento
+6,Homicidio
+7,Otro accidente
+8,Suicidio
+9,Menores de 5 años
+10,Menores de 1 año

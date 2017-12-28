@@ -1,0 +1,55 @@
+tpmi_codigo,tpmi_nombre
+1,hcb tiempo completo
+2,cdi modalidad sin arriendo infraestructura icbf
+3,cdi modalidad con arriendo
+4,cdi modalidad familiar sin arriendo
+5,cdi modalidad familiar con arriendo
+6,hcb fami familiares
+7,hcb grupales tc hogares comunitarios
+8,grupos étnicos 
+9,hogares infantiles
+10,hcb medio tiempo
+11,cdi modalidad familiar
+12,hcb múltiple
+13,apoyo al desarrollo de las familias del area rural dispersa
+14,hcb atención niños y niñas de 0-6 años
+15,fortalecimiento a la familia
+16,ftc
+17,hcb atención niños y niñas de 0-6 años indígenas
+18,recuperación materno infantil
+19,recuperación nutricional ambulatoria
+20,anea desayuno
+21,anea refrigerio
+22,anea almuerzo
+23,anea des-alm ep.
+24,anaspe re. Almuerzo flia. Indigena
+25,anaspe pobl. Rural disp
+26,anaspe hogares juveniles campesinos
+27,clubes prejuveniles
+28,clubes juveniles
+29,atención familiar familia indigena
+30,atención familiar educador familiar
+31,atención familiar escuela padres
+32,atención familiar asistencia y asesoria a la familia
+33,atención familiar unidades moviles
+34,protección en el medio familiar aban-pelig
+35,protección en el medio familiar discapacidad
+36,medio social y comunitario – gestión contratada externado – discapacidad
+37,medio social y comunitario – gestión contratada intervencion de apoyo – situación peligro
+38,medio social y comunitario – gestión contratada intervencion de apoyo – en conflicto con la ley
+39,medio institucional – protección internado – situac peligro
+40,medio institucional – protección internado – discapacidad
+41,medio institucional – protección internado – sustancias psicoactivas
+42,medio institucional – inst reeducación – cerrado
+43,Atención convenios – org de salud – cama pediatrica
+44,atención convenios – org de salud – sida_tbc
+45,hcb atención niños y niñas de 0-6 años familiares y mult
+46,investigación de la paternidad
+47,impugnac. Patern. Presunta
+48,alimentos
+49,ejecutivos por alimentos
+50,suspención patría potestad
+51,rehabilitación patria potestad de guarda
+52,provisión de guardas
+53,otros
+54,total negocios civil
