@@ -5,7 +5,7 @@
 # http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html
 # *********************************************************************************
 sudo apt-get update;
-sudo apt-get install postgresql postgresql-contrib;
+sudo apt-get install -y postgresql postgresql-contrib;
 
 # Basic Server Setup
 # Crear usuario 'posrgres'  y permitir conectarse desde otros servidores
