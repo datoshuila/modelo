@@ -4,6 +4,14 @@
 
 Actualizado el 27 de Diciembre de 2017. Disponible en formato [DBM](/sirhuila.dbm), [SQL](/script/sirhuila.sql), y [PNG](/img/sirhuila.png). A la fecha se encuentra en formato de Base de Datos (CSV) los esquemas de educación, salud y el 5% de Agropecuario. 
 
+El procedimiento de actualización del modelo de datos es:
+
+1. Nombrar los esquemas y tablas en el modelo, en función de la información disponible en los anuarios. 
+2. Transformar los archivos en Excel de la carpeta "anuarios" a archivos CSV con los nombre definidos en el modelo. Existen dos carpetas: "dependientes" e "independientes". 
+    1. Los archivos CSV en independientes son tablas que no dependen de ninguna tabla y son subidos de primero a la base de datos.
+    2. Los archivos CSV en dependientes son tablas que dependen de las tablas independientes y por eso son subidas de último.
+3. Diseñar la __vista__ respectiva de las tablas __dependientes__ de cada esquema. Las vistas son el equivalente al archivo SQL que facilitaría la consulta en la base de datos. La vista se actualiza desde el Modelo de Datos para dejarlo predefinido en cada esquema de la base de datos.
+
 El Sistema de Información Regional condensa toda la información estadística y espacial del Departamento del Huila en Colombia. Mediante este modelo de datos, se busca cimentar las bases conceptuales y computacionales de la base de datos del Sistema de Información.
 
 El modelo se encuentra en su versión 0.4 con un total de 18 esquemas y uno público:

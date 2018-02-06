@@ -3,14 +3,13 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,3089" last-zoom="0.9"
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,807" last-zoom="0.9"
 	 default-owner="sirhuila">
 <role name="sirhuila"
-      createdb="true"
       inherit="true"
       login="true"
       encrypted="true"
-      password="}d9-2#p{L">
+      password="#J.kr$%xx+-mm">
 </role>
 
 <role name="analytics"
@@ -133,6 +132,10 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="100"/>
 		<comment><![CDATA[Nombres del cultivo]]></comment>
 	</column>
+	<column name="cul_fechaRegistro" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Fecha de registro del cultivo en el sistema]]></comment>
+	</column>
 	<column name="cul_descripcion">
 		<type name="character varying" length="250"/>
 		<comment><![CDATA[Texto que puede dar una breve descripción del cultivo.]]></comment>
@@ -142,7 +145,7 @@ POR MUNICIPIOS EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="tipo_cultivo" hide-ext-attribs="true">
+<table name="tipo_cultivo">
 	<schema name="&quot;Agropecuario&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacenamiento de los diferentes tipos de cultivos que pueden existir en el sistema]]></comment>
@@ -688,7 +691,7 @@ CRUCE PREDOMINANTE DE BOVINOS Y PORCINOS]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Coberturas de vacunación en menores de 1 año por biológicos según municipios en el departamento.]]></comment>
-	<position x="420" y="4300"/>
+	<position x="440" y="4200"/>
 	<column name="vabi_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -1028,7 +1031,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <table name="huerfanos" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
-	<position x="280" y="4480"/>
+	<position x="360" y="4400"/>
 	<column name="huer_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -1084,7 +1087,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipos población (indígenas, victimas, desmovilizados, etc.)]]></comment>
-	<position x="280" y="4580"/>
+	<position x="360" y="4500"/>
 	<column name="tpoce_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -1149,7 +1152,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="vih_via_transmision" hide-ext-attribs="true">
+<table name="vih_viaTransmision" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Vias de transmision de VIH.]]></comment>
@@ -1170,7 +1173,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de casos registrados por cada tipo de transmisión]]></comment>
 	</column>
-	<constraint name="vih_viaTransmision_pk" type="pk-constr" table="&quot;Salud&quot;.vih_via_transmision">
+	<constraint name="vih_viaTransmision_pk" type="pk-constr" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
 		<columns names="vihvia_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -1181,7 +1184,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<comment><![CDATA[Tabla que contiene el nombre de los tipos de trasmision.]]></comment>
 	<position x="960" y="3620"/>
 	<column name="ttrans_codigo" not-null="true">
-		<type name="smallserial" length="0"/>
+		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
 	</column>
 	<column name="ttrans_nombre" not-null="true">
@@ -7274,10 +7277,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foranea que apunta a la tabla municipio.]]></comment>
 	</column>
-	<column name="atem_anio">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[llave foranea que apunta a la tabla anio]]></comment>
-	</column>
 	<column name="atem_tipo_atencion_extra">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_atencion_extra]]></comment>
@@ -7407,7 +7406,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Llave foranea que apunta a la tabla tipo_datos_modalidades_icbf]]></comment>
 	</column>
 	<column name="mai_numero">
-		<type name="bigint" length="0"/>
+		<type name="integer" length="0"/>
 		<comment><![CDATA[Número de casos atentidos]]></comment>
 	</column>
 	<constraint name="modelo_atencion_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.modelo_atencion_icbf">
@@ -7415,7 +7414,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="tipo_modalidades_icbf" hide-ext-attribs="true">
+<table name="tipo_modalidaes_icbf" hide-ext-attribs="true">
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[ Almacena los diferentes tipos de dea tención extrajudicial.]]></comment>
@@ -7429,7 +7428,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<comment><![CDATA[Nombre del tipo de atención si es, HCB TIEMPO COMPLETO, CDI MODALIDAD SIN ARRIENDO INFRAESTRUCTURA ICBF, CDI MODALIDAD  CON ARREINDO, CDI MODALIDAD  FAMILIAR SIN ARRIENDO, etc..
 ]]></comment>
 	</column>
-	<constraint name="tipo_modalidaes_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_modalidades_icbf">
+	<constraint name="tipo_modalidaes_icbf_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_modalidaes_icbf">
 		<columns names="tpmi_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -7572,7 +7571,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Incidencia de la tuberculosis de todas las formas por municipios en el departamento]]></comment>
-	<position x="360" y="4060"/>
+	<position x="380" y="4020"/>
 	<column name="niji_codigo" not-null="true">
 		<type name="bigserial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -7635,7 +7634,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipo de causas de morbibilidad]]></comment>
-	<position x="1040" y="3980"/>
+	<position x="1060" y="3960"/>
 	<column name="tcam_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -7653,7 +7652,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena las diferentes tipo de causas de morbibilidad]]></comment>
-	<position x="1060" y="4280"/>
+	<position x="1060" y="4040"/>
 	<column name="tcamt_codigo" not-null="true">
 		<type name="serial" length="0"/>
 		<comment><![CDATA[Llave primaria para la identificación única de cada registro.]]></comment>
@@ -7693,13 +7692,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<schema name="&quot;Salud&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[tabla que contiene si pertenece o no al sisben]]></comment>
-	<position x="0" y="4580"/>
+	<position x="20" y="4560"/>
 	<column name="tpco_codigo" not-null="true">
-		<type name="smallserial" length="0"/>
+		<type name="integer" length="0"/>
 		<comment><![CDATA[Codigo de identificación de cada registro.]]></comment>
 	</column>
 	<column name="tpco_nombre">
-		<type name="character varying" length="100"/>
+		<type name="integer" length="0"/>
 		<comment><![CDATA[si es con sisben o sin sisben.]]></comment>
 	</column>
 	<constraint name="tipo_cobertura_pk" type="pk-constr" table="&quot;Salud&quot;.tipo_cobertura">
@@ -8117,13 +8116,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_transmisionVIH-tipoTransmision" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_transmision" table="&quot;Salud&quot;.vih_via_transmision">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_transmision" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
 	<columns names="vihvia_codTipoTransmision" ref-type="src-columns"/>
 	<columns names="ttrans_codigo" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="fk_via_trasmision_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_via_transmision">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;">
 	<columns names="vihvia_anio" ref-type="src-columns"/>
 	<columns names="ani_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -10265,12 +10264,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<columns names="tpda_codigo" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_atencion_extra_anio" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;">
-	<columns names="atem_anio" ref-type="src-columns"/>
-	<columns names="ani_codigo" ref-type="dst-columns"/>
-</constraint>
-
 <constraint name="fk_vih_mes_anio" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.anio" table="&quot;Salud&quot;.vih_casos_mes">
 	<columns names="vihm_anio" ref-type="src-columns"/>
@@ -10308,7 +10301,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_modelo_icbf_modalidades" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_modalidades_icbf" table="&quot;Salud&quot;.modelo_atencion_icbf">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_modalidaes_icbf" table="&quot;Salud&quot;.modelo_atencion_icbf">
 	<columns names="mai_tipo_modalidades" ref-type="src-columns"/>
 	<columns names="tpmi_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -10398,7 +10391,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_juzgados_icbf_modalidades" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_modalidades_icbf" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Salud&quot;.tipo_modalidaes_icbf" table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf">
 	<columns names="niji_tipo_modalidades" ref-type="src-columns"/>
 	<columns names="tpmi_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -10639,7 +10632,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_vih_viaTransmision_tipo_transmision&quot;" type="relfk"
-	 src-table="&quot;Salud&quot;.vih_via_transmision"
+	 src-table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;"
 	 dst-table="&quot;Salud&quot;.tipo_transmision"
 	 src-required="false" dst-required="false"/>
 
@@ -12351,7 +12344,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_vih_viaTransmision_anio&quot;" type="relfk"
-	 src-table="&quot;Salud&quot;.vih_via_transmision"
+	 src-table="&quot;Salud&quot;.&quot;vih_viaTransmision&quot;"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
@@ -12567,7 +12560,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_modelo_atencion_icbf_tipo_modalidaes_icbf" type="relfk"
 	 src-table="&quot;Salud&quot;.modelo_atencion_icbf"
-	 dst-table="&quot;Salud&quot;.tipo_modalidades_icbf"
+	 dst-table="&quot;Salud&quot;.tipo_modalidaes_icbf"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_modelo_atencion_icbf_tipo_dato_modalidades_icbf" type="relfk"
@@ -12637,17 +12630,13 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="rel_modelo_atencion_icbf_cp_tipo_modalidaes_icbf" type="relfk"
 	 src-table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf"
-	 dst-table="&quot;Salud&quot;.tipo_modalidades_icbf"
+	 dst-table="&quot;Salud&quot;.tipo_modalidaes_icbf"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_modelo_atencion_icbf_cp_tipo_dato_modalidades_icbf" type="relfk"
 	 src-table="&quot;Salud&quot;.negocios_iniciados_juzgados_icbf"
 	 dst-table="&quot;Salud&quot;.tipo_dato_modalidades_icbf"
-	 src-required="false" dst-required="false">
-	<label ref-type="dst-label">
-		<position x="0.14" y="-0.2"/>
-	</label>
-</relationship>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_poblacion_censada_municipio_municipio" type="relfk"
 	 src-table="&quot;Salud&quot;.datos_poblacion_censada_municipio"
@@ -12727,11 +12716,6 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 <relationship name="rel_programa_nacional_alfabetizacion_ciclos_educativos" type="relfk"
 	 src-table="&quot;Educacion&quot;.programa_nacional_alfabetizacion"
 	 dst-table="&quot;Educacion&quot;.ciclos_educativos"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="&quot;rel_atencion_extra_menorFamilia_anio&quot;" type="relfk"
-	 src-table="&quot;Salud&quot;.&quot;atencion_extra_menorFamilia&quot;"
-	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>

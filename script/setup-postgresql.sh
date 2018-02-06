@@ -11,31 +11,19 @@ sudo apt-get install postgresql postgresql-contrib;
 # Crear usuario 'posrgres'  y permitir conectarse desde otros servidores
 
 sudo -u postgres psql postgres
-
 # pass: 
-
-# crear un usuario 
-sudo -u postgres createuser -D -A -P sirhuila
-
-# pass: 
-
 
 # verificar que el puerto 5432 este habilitado
-
 netstat -nlt
 
 # Agregar ip cliente
-
-sudo nano /etc/postgresql/9.3/main/pg_hba.conf
-sudo nano /etc/postgresql/9.6/main/pg_hba.conf
-
+sudo nano /etc/postgresql/10/main/pg_hba.conf
 # local      database  user  auth-method  [auth-options]
 # se agregan los datos del host cliente
-#host	all 	all 	192.89.245.245/24  trust
+# host	all 	all 	0.0.0.0/0  trust
 
 # Ahora debemos permitir que los usuarios se conecten al servidor
-
-sudo nano /etc/postgresql/9.3/main/postgresql.conf
+sudo nano /etc/postgresql/10/main/postgresql.conf
 
 # la siguiete linea la editamos
 # listen_addresses = 'localhost'

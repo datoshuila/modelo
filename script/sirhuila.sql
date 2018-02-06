@@ -1,16 +1,15 @@
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler  version: 0.9.0
--- PostgreSQL version: 9.6
+-- pgModeler  version: 0.9.1-beta
+-- PostgreSQL version: 10.0
 -- Project Site: pgmodeler.com.br
 -- Model Author: ---
 
 -- object: sirhuila | type: ROLE --
 -- DROP ROLE IF EXISTS sirhuila;
 CREATE ROLE sirhuila WITH 
-	CREATEDB
 	INHERIT
 	LOGIN
-	ENCRYPTED PASSWORD '}d9-2#p{L';
+	ENCRYPTED PASSWORD '#J.kr$%xx+-mm';
 -- ddl-end --
 
 -- object: analytics | type: ROLE --
@@ -6631,7 +6630,6 @@ ALTER TABLE public.pais OWNER TO sirhuila;
 CREATE TABLE "Salud"."atencion_extra_menorFamilia"(
 	atem_codigo integer NOT NULL,
 	atem_municipio integer,
-	atem_anio integer,
 	atem_tipo_atencion_extra integer,
 	atem_tipo_dato_atencion integer,
 	atem_numero integer,
@@ -6644,8 +6642,6 @@ COMMENT ON TABLE "Salud"."atencion_extra_menorFamilia" IS 'Tabla que contiene lo
 COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
 COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_municipio IS 'Llave foranea que apunta a la tabla municipio.';
--- ddl-end --
-COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_anio IS 'llave foranea que apunta a la tabla anio';
 -- ddl-end --
 COMMENT ON COLUMN "Salud"."atencion_extra_menorFamilia".atem_tipo_atencion_extra IS 'Llave foranea que apunta a la tabla tipo_atencion_extra';
 -- ddl-end --
@@ -10012,13 +10008,6 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ALTER TABLE "Salud"."atencion_extra_menorFamilia" DROP CONSTRAINT IF EXISTS fk_atencion_extra_dato CASCADE;
 ALTER TABLE "Salud"."atencion_extra_menorFamilia" ADD CONSTRAINT fk_atencion_extra_dato FOREIGN KEY (atem_tipo_dato_atencion)
 REFERENCES "Salud".tipo_dato_atencion (tpda_codigo) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: fk_atencion_extra_anio | type: CONSTRAINT --
--- ALTER TABLE "Salud"."atencion_extra_menorFamilia" DROP CONSTRAINT IF EXISTS fk_atencion_extra_anio CASCADE;
-ALTER TABLE "Salud"."atencion_extra_menorFamilia" ADD CONSTRAINT fk_atencion_extra_anio FOREIGN KEY (atem_anio)
-REFERENCES public.anio (ani_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
