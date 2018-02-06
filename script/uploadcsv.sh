@@ -4,9 +4,9 @@ array=(\
 	"independientes/public"\
 	"independientes/Educacion"\
 	"dependientes/Educacion"\
-	"independientes/Salud"\
-	"dependientes/Salud"\
-	"independientes/Agropecuario"\
+	# "independientes/Salud"\
+	# "dependientes/Salud"\
+	# "independientes/Agropecuario"\
 	# "independientes/Agropecuario"\
 	)
 for path in "${array[@]}"; do   # The quotes are necessary here
