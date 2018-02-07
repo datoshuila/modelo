@@ -48,4 +48,4 @@ for path in "${array[@]}"; do   # The quotes are necessary here
 done
 
 # Delete: psql -h localhost -d sirhuila -U postgres -c "DELETE FROM \"Educacion\".\"comportamiento_alumnos\";"
-# Upload: psql -h localhost -d sirhuila -U postgres -c "\copy \"Educacion\".\"comportamiento_alumnos\" FROM '/home/camilo/Dropbox/1. Proyectos/Gob. Huila/SIR/modelo/csv/dependientes/Educacion/comportamiento_alumnos.csv' DELIMITER ',' CSV HEADER;"
+# Upload: psql -h localhost -d sirhuila -U postgres -c "\copy \"Educacion\".\"instituciones_educativas\" FROM '/home/camilo/Dropbox/1. Proyectos/Gob. Huila/SIR/modelo/csv/dependientes/Educacion/comportamiento_alumnos.csv' DELIMITER ',' CSV HEADER;"
