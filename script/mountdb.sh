@@ -1,11 +1,12 @@
 #!/bin/bash 
+# The file should be run at 'script' folder. 
+
 # Bash code to run sirhuila.sql and upload the empty tables exported from PgModeler
-
-# Aún no sirve por que la BD (sirhuila) entra en conflicto con el código: 
-psql -h localhost -d postgres -U postgres -c "DROP DATABASE sirhuila; DROP USER sirhuila; DROP USER analytics;"
+psql -h localhost -d postgres -U postgres -c "DROP DATABASE IF EXISTS sirhuila;"
+psql -h localhost -d postgres -U postgres -c "DROP ROLE IF EXISTS sirhuila;"
+psql -h localhost -d postgres -U postgres -c "DROP ROLE IF EXISTS analytics;"
 psql -h localhost -d postgres -U postgres -c "CREATE DATABASE sirhuila;"
-
-psql -h localhost -d sirhuila -U sirhuila -f "~/modelo/script/sirhuila.sql"
+psql -h localhost -d sirhuila -U postgres -f "/home/camilo/modelo/script/sirhuila.sql"
 
 # Bash code to upload all CSV organized on local computer to PostgreSQL
 array=(\
