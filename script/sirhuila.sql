@@ -1411,22 +1411,22 @@ COMMENT ON COLUMN "Educacion".numero_instituciones_educativas.nine_num_instituci
 ALTER TABLE "Educacion".numero_instituciones_educativas OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".tipo_plantel_educativo | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".tipo_plantel_educativo CASCADE;
-CREATE TABLE "Educacion".tipo_plantel_educativo(
+-- object: public.tipo_plantel_educativo | type: TABLE --
+-- DROP TABLE IF EXISTS public.tipo_plantel_educativo CASCADE;
+CREATE TABLE public.tipo_plantel_educativo(
 	tpe_codigo serial NOT NULL,
 	tpe_nombre character varying(150) NOT NULL,
 	CONSTRAINT tipo_plantel_educativo_pk PRIMARY KEY (tpe_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".tipo_plantel_educativo IS 'Almacena los diferentes tipos de planteles educativos, instituciones,centros y sedes';
+COMMENT ON TABLE public.tipo_plantel_educativo IS 'Almacena los diferentes tipos de planteles educativos, instituciones,centros y sedes';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".tipo_plantel_educativo.tpe_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN public.tipo_plantel_educativo.tpe_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".tipo_plantel_educativo.tpe_nombre IS 'Nombre del tipo de plantel educativo';
+COMMENT ON COLUMN public.tipo_plantel_educativo.tpe_nombre IS 'Nombre del tipo de plantel educativo';
 -- ddl-end --
-ALTER TABLE "Educacion".tipo_plantel_educativo OWNER TO sirhuila;
+ALTER TABLE public.tipo_plantel_educativo OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".matriculas | type: TABLE --
@@ -1465,40 +1465,40 @@ COMMENT ON COLUMN "Educacion".matriculas.mat_num_matriculas IS 'Numero matricula
 ALTER TABLE "Educacion".matriculas OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".tipo_nivel_educativo | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".tipo_nivel_educativo CASCADE;
-CREATE TABLE "Educacion".tipo_nivel_educativo(
+-- object: public.tipo_nivel_educativo | type: TABLE --
+-- DROP TABLE IF EXISTS public.tipo_nivel_educativo CASCADE;
+CREATE TABLE public.tipo_nivel_educativo(
 	tpne_codigo serial NOT NULL,
 	tpne_nombre character varying(150) NOT NULL,
 	CONSTRAINT tipo_nivel_educativo_pk PRIMARY KEY (tpne_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".tipo_nivel_educativo IS 'Almacena los diferentes tipos de educación (basico, prescolar, primaria,etc...)';
+COMMENT ON TABLE public.tipo_nivel_educativo IS 'Almacena los diferentes tipos de educación (basico, prescolar, primaria,etc...)';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".tipo_nivel_educativo.tpne_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN public.tipo_nivel_educativo.tpne_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".tipo_nivel_educativo.tpne_nombre IS 'Nombre del tipo de nivel educativo';
+COMMENT ON COLUMN public.tipo_nivel_educativo.tpne_nombre IS 'Nombre del tipo de nivel educativo';
 -- ddl-end --
-ALTER TABLE "Educacion".tipo_nivel_educativo OWNER TO sirhuila;
+ALTER TABLE public.tipo_nivel_educativo OWNER TO sirhuila;
 -- ddl-end --
 
--- object: "Educacion".tipo_institucion_educativa | type: TABLE --
--- DROP TABLE IF EXISTS "Educacion".tipo_institucion_educativa CASCADE;
-CREATE TABLE "Educacion".tipo_institucion_educativa(
+-- object: public.tipo_institucion_educativa | type: TABLE --
+-- DROP TABLE IF EXISTS public.tipo_institucion_educativa CASCADE;
+CREATE TABLE public.tipo_institucion_educativa(
 	tpin_codigo serial NOT NULL,
 	tpin_nombre character varying(150) NOT NULL,
 	CONSTRAINT tipo_institucion_pk PRIMARY KEY (tpin_codigo)
 
 );
 -- ddl-end --
-COMMENT ON TABLE "Educacion".tipo_institucion_educativa IS 'Almacena los diferentes tipos de instituciones (oficiales, no oficiales)';
+COMMENT ON TABLE public.tipo_institucion_educativa IS 'Almacena los diferentes tipos de instituciones (oficiales, no oficiales)';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".tipo_institucion_educativa.tpin_codigo IS 'Llave primaria para la identificación única de cada registro.';
+COMMENT ON COLUMN public.tipo_institucion_educativa.tpin_codigo IS 'Llave primaria para la identificación única de cada registro.';
 -- ddl-end --
-COMMENT ON COLUMN "Educacion".tipo_institucion_educativa.tpin_nombre IS 'Nombre del tipo de plantel educativo';
+COMMENT ON COLUMN public.tipo_institucion_educativa.tpin_nombre IS 'Nombre del tipo de plantel educativo';
 -- ddl-end --
-ALTER TABLE "Educacion".tipo_institucion_educativa OWNER TO sirhuila;
+ALTER TABLE public.tipo_institucion_educativa OWNER TO sirhuila;
 -- ddl-end --
 
 -- object: "Educacion".poblacion_escolar | type: TABLE --
@@ -7606,7 +7606,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_instituciones_educativas_tp_plantel | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tp_plantel CASCADE;
 ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tp_plantel FOREIGN KEY (nine_tipo_plantel)
-REFERENCES "Educacion".tipo_plantel_educativo (tpe_codigo) MATCH FULL
+REFERENCES public.tipo_plantel_educativo (tpe_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -7620,7 +7620,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_instituciones_educativas_tipo_institucion | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".numero_instituciones_educativas DROP CONSTRAINT IF EXISTS fk_instituciones_educativas_tipo_institucion CASCADE;
 ALTER TABLE "Educacion".numero_instituciones_educativas ADD CONSTRAINT fk_instituciones_educativas_tipo_institucion FOREIGN KEY (nine_tipo_institucion)
-REFERENCES "Educacion".tipo_institucion_educativa (tpin_codigo) MATCH FULL
+REFERENCES public.tipo_institucion_educativa (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -7641,14 +7641,14 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_matriculas_tipo_institucion | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".matriculas DROP CONSTRAINT IF EXISTS fk_matriculas_tipo_institucion CASCADE;
 ALTER TABLE "Educacion".matriculas ADD CONSTRAINT fk_matriculas_tipo_institucion FOREIGN KEY (mat_tipo_institucion)
-REFERENCES "Educacion".tipo_institucion_educativa (tpin_codigo) MATCH FULL
+REFERENCES public.tipo_institucion_educativa (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_matriculas_tp_nivel_educativo | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".matriculas DROP CONSTRAINT IF EXISTS fk_matriculas_tp_nivel_educativo CASCADE;
 ALTER TABLE "Educacion".matriculas ADD CONSTRAINT fk_matriculas_tp_nivel_educativo FOREIGN KEY (mat_tipo_nivel_educativo)
-REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+REFERENCES public.tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -7683,7 +7683,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: "fk_Clasificacion_icfes_estab_edu_tp_institucion" | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos DROP CONSTRAINT IF EXISTS "fk_Clasificacion_icfes_estab_edu_tp_institucion" CASCADE;
 ALTER TABLE "Educacion".clasificacion_icfes_estab_educativos ADD CONSTRAINT "fk_Clasificacion_icfes_estab_edu_tp_institucion" FOREIGN KEY (cies_tipo_institucion)
-REFERENCES "Educacion".tipo_institucion_educativa (tpin_codigo) MATCH FULL
+REFERENCES public.tipo_institucion_educativa (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -7718,7 +7718,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_comportamiento_alumnos_tipo_institucion | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".comportamiento_alumnos DROP CONSTRAINT IF EXISTS fk_comportamiento_alumnos_tipo_institucion CASCADE;
 ALTER TABLE "Educacion".comportamiento_alumnos ADD CONSTRAINT fk_comportamiento_alumnos_tipo_institucion FOREIGN KEY (coal_tipo_institucion)
-REFERENCES "Educacion".tipo_institucion_educativa (tpin_codigo) MATCH FULL
+REFERENCES public.tipo_institucion_educativa (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -7739,7 +7739,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_docentes_universidades_nedusuperior | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".docentes_universidades DROP CONSTRAINT IF EXISTS fk_docentes_universidades_nedusuperior CASCADE;
 ALTER TABLE "Educacion".docentes_universidades ADD CONSTRAINT fk_docentes_universidades_nedusuperior FOREIGN KEY (dou_nivel_educacion_superior)
-REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+REFERENCES public.tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -7781,7 +7781,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_inst_educa_tipo | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".instituciones_educativas DROP CONSTRAINT IF EXISTS fk_inst_educa_tipo CASCADE;
 ALTER TABLE "Educacion".instituciones_educativas ADD CONSTRAINT fk_inst_educa_tipo FOREIGN KEY (ined_tipo_institucion)
-REFERENCES "Educacion".tipo_institucion_educativa (tpin_codigo) MATCH FULL
+REFERENCES public.tipo_institucion_educativa (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -8103,7 +8103,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_matriculas_tp_nivel_educacion_superior | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".matriculas_usco DROP CONSTRAINT IF EXISTS fk_matriculas_tp_nivel_educacion_superior CASCADE;
 ALTER TABLE "Educacion".matriculas_usco ADD CONSTRAINT fk_matriculas_tp_nivel_educacion_superior FOREIGN KEY (matu_tipo_nivel_educacion_superior)
-REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+REFERENCES public.tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -9930,7 +9930,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_registro_universidades_nedusuperior | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".registro_universidades DROP CONSTRAINT IF EXISTS fk_registro_universidades_nedusuperior CASCADE;
 ALTER TABLE "Educacion".registro_universidades ADD CONSTRAINT fk_registro_universidades_nedusuperior FOREIGN KEY (runi_nivel_educacion_superior)
-REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+REFERENCES public.tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -10077,14 +10077,14 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_adultos_tipo_institucion | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_tipo_institucion CASCADE;
 ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_tipo_institucion FOREIGN KEY (educ_tipo_institucion)
-REFERENCES "Educacion".tipo_institucion_educativa (tpin_codigo) MATCH FULL
+REFERENCES public.tipo_institucion_educativa (tpin_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: fk_adultos_nivel_educativo | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".educacion_adultos DROP CONSTRAINT IF EXISTS fk_adultos_nivel_educativo CASCADE;
 ALTER TABLE "Educacion".educacion_adultos ADD CONSTRAINT fk_adultos_nivel_educativo FOREIGN KEY (educ_nivel_educativo)
-REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+REFERENCES public.tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -10126,7 +10126,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: fk_pna_dato | type: CONSTRAINT --
 -- ALTER TABLE "Educacion".programa_nacional_alfabetizacion DROP CONSTRAINT IF EXISTS fk_pna_dato CASCADE;
 ALTER TABLE "Educacion".programa_nacional_alfabetizacion ADD CONSTRAINT fk_pna_dato FOREIGN KEY (pna_tipo_dato)
-REFERENCES "Educacion".tipo_nivel_educativo (tpne_codigo) MATCH FULL
+REFERENCES public.tipo_nivel_educativo (tpne_codigo) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
