@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,1901" last-zoom="0.9"
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,1076" last-zoom="0.9"
 	 default-owner="sirhuila">
 <role name="sirhuila"
       inherit="true"
@@ -1407,7 +1407,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	<comment><![CDATA[Esquema educación.]]></comment>
 </schema>
 
-<table name="numero_instituciones_educativas" hide-ext-attribs="true">
+<table name="numero_instituciones_educativas" hide-ext-attribs="true" faded-out="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Instituciones y centros educativos oficialesy sedes por areas y municipios en el departamento]]></comment>
@@ -1523,7 +1523,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="tipo_institucion" hide-ext-attribs="true" faded-out="true">
+<table name="tipo_institucion_educativa" hide-ext-attribs="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los diferentes tipos de instituciones (oficiales, no oficiales)]]></comment>
@@ -1536,7 +1536,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 		<type name="character varying" length="150"/>
 		<comment><![CDATA[Nombre del tipo de plantel educativo]]></comment>
 	</column>
-	<constraint name="tipo_institucion_pk" type="pk-constr" table="&quot;Educacion&quot;.tipo_institucion">
+	<constraint name="tipo_institucion_pk" type="pk-constr" table="&quot;Educacion&quot;.tipo_institucion_educativa">
 		<columns names="tpin_codigo" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -1744,7 +1744,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	</constraint>
 </table>
 
-<table name="instituciones_educativas" hide-ext-attribs="true">
+<table name="instituciones_educativas" hide-ext-attribs="true" faded-out="true">
 	<schema name="&quot;Educacion&quot;"/>
 	<role name="sirhuila"/>
 	<comment><![CDATA[Almacena los nombres de las diferentes instituciones educativas, colegios, escuelas,universidades.]]></comment>
@@ -8212,7 +8212,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_instituciones_educativas_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.numero_instituciones_educativas">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion_educativa" table="&quot;Educacion&quot;.numero_instituciones_educativas">
 	<columns names="nine_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -8230,7 +8230,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_matriculas_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.matriculas">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion_educativa" table="&quot;Educacion&quot;.matriculas">
 	<columns names="mat_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -8266,7 +8266,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_Clasificacion_icfes_estab_edu_tp_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion_educativa" table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos">
 	<columns names="cies_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -8296,7 +8296,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_comportamiento_alumnos_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.comportamiento_alumnos">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion_educativa" table="&quot;Educacion&quot;.comportamiento_alumnos">
 	<columns names="coal_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -8350,7 +8350,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_inst_educa_tipo" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.instituciones_educativas">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion_educativa" table="&quot;Educacion&quot;.instituciones_educativas">
 	<columns names="ined_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -10319,7 +10319,7 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 </constraint>
 
 <constraint name="fk_adultos_tipo_institucion" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion" table="&quot;Educacion&quot;.educacion_adultos">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="&quot;Educacion&quot;.tipo_institucion_educativa" table="&quot;Educacion&quot;.educacion_adultos">
 	<columns names="educ_tipo_institucion" ref-type="src-columns"/>
 	<columns names="tpin_codigo" ref-type="dst-columns"/>
 </constraint>
@@ -10661,27 +10661,27 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="&quot;Salud&quot;.tipo_organismos_salud"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_instituciones_Educativas_municipio&quot;" type="relfk"
+<relationship name="&quot;rel_instituciones_Educativas_municipio&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_instituciones_Educativas_tipo_plantel_educativo&quot;" type="relfk"
+<relationship name="&quot;rel_instituciones_Educativas_tipo_plantel_educativo&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="&quot;Educacion&quot;.tipo_plantel_educativo"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_instituciones_Educativas_area&quot;" type="relfk"
+<relationship name="&quot;rel_instituciones_Educativas_area&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="public.area"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_instituciones_Educativas_tipo_institucion&quot;" type="relfk"
 	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
-	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion_educativa"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_instituciones_Educativas_anio&quot;" type="relfk"
+<relationship name="&quot;rel_instituciones_Educativas_anio&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.numero_instituciones_educativas"
 	 dst-table="public.anio"
 	 src-required="false" dst-required="false"/>
@@ -10691,9 +10691,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_matriculas_tipo_institucion" type="relfk" faded-out="true"
+<relationship name="rel_matriculas_tipo_institucion" type="relfk"
 	 src-table="&quot;Educacion&quot;.matriculas"
-	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion_educativa"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_matriculas_tipo_nivel_educativo" type="relfk" faded-out="true"
@@ -10725,9 +10725,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_tipo_institucion&quot;" type="relfk" faded-out="true"
+<relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_tipo_institucion&quot;" type="relfk"
 	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
-	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion_educativa"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="&quot;rel_Clasificacion_icfes_estab_educativos_anio&quot;" type="relfk" faded-out="true"
@@ -10745,9 +10745,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_comportamiento_alumnos_tipo_institucion" type="relfk" faded-out="true"
+<relationship name="rel_comportamiento_alumnos_tipo_institucion" type="relfk"
 	 src-table="&quot;Educacion&quot;.comportamiento_alumnos"
-	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion_educativa"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_comportamiento_alumnos_anio" type="relfk" faded-out="true"
@@ -12415,25 +12415,25 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 
 <relationship name="&quot;rel_Instituciones_de_educacion_tipo_institucion&quot;" type="relfk"
 	 src-table="&quot;Educacion&quot;.instituciones_educativas"
-	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion_educativa"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_Instituciones_de_educacion_municipio&quot;" type="relfk"
+<relationship name="&quot;rel_Instituciones_de_educacion_municipio&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_Instituciones_de_educacion_area&quot;" type="relfk"
+<relationship name="&quot;rel_Instituciones_de_educacion_area&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.instituciones_educativas"
 	 dst-table="public.area"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="&quot;rel_clasificacion_icfes_estab_educativos_Instituciones_de_educa&quot;" type="relfk"
+<relationship name="&quot;rel_clasificacion_icfes_estab_educativos_Instituciones_de_educa&quot;" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.clasificacion_icfes_estab_educativos"
 	 dst-table="&quot;Educacion&quot;.instituciones_educativas"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_docentes_universidades_cp_instituciones_educativas" type="relfk"
+<relationship name="rel_docentes_universidades_cp_instituciones_educativas" type="relfk" faded-out="true"
 	 src-table="&quot;Educacion&quot;.registro_universidades"
 	 dst-table="&quot;Educacion&quot;.instituciones_educativas"
 	 src-required="false" dst-required="false"/>
@@ -12573,9 +12573,9 @@ DE OCURRENCIA EN EL DEPARTAMENTO]]></comment>
 	 dst-table="public.municipio"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_matriculas_cp_tipo_institucion" type="relfk" faded-out="true"
+<relationship name="rel_matriculas_cp_tipo_institucion" type="relfk"
 	 src-table="&quot;Educacion&quot;.educacion_adultos"
-	 dst-table="&quot;Educacion&quot;.tipo_institucion"
+	 dst-table="&quot;Educacion&quot;.tipo_institucion_educativa"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_matriculas_cp_tipo_nivel_educativo" type="relfk" faded-out="true"
