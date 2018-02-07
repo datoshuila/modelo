@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,807" last-zoom="0.9"
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,1518" last-zoom="0.9"
 	 default-owner="sirhuila">
 <role name="sirhuila"
       inherit="true"
